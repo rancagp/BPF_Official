@@ -12,11 +12,11 @@ export default function DaftarWakilPialang() {
 
     return (
         <PageTemplate title="Wakil Pialang - PT Solid Gold Berjangka">
-            <div className="my-10 mx-52">
+            <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title="AXA Tower - Jakarta">
-                    <div className="overflow-x-auto mx-22">
+                    <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden border bg-white">
-                            <thead className="bg-zinc-700 text-white">
+                            <thead className="bg-green-500 text-white">
                                 <tr>
                                     <th className="px-6 py-3 text-sm font-semibold uppercase tracking-wider">No</th>
                                     <th className="px-6 py-3 text-sm font-semibold uppercase tracking-wider">Nama</th>
@@ -26,7 +26,7 @@ export default function DaftarWakilPialang() {
                             </thead>
                             <tbody className="divide-y divide-gray-200">
                                 {dataWakil.map((wpb, index) => (
-                                    <tr key={index} className="bg-zinc-50 hover:bg-zinc-100 transition duration-200">
+                                    <tr key={index} className="bg-zinc-50 hover:bg-green-100 transition duration-200">
                                         <td className="px-6 py-4">{index + 1}</td>
                                         <td className="px-6 py-4">{wpb.nama}</td>
                                         <td className="px-6 py-4">{wpb.nomorIzin}</td>

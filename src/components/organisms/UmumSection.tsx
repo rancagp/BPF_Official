@@ -1,4 +1,4 @@
-import NewsCard2 from "@/components/moleculs/NewsCard2";
+import NewsCard from "@/components/moleculs/Newscard";
 
 export default function UmumSection() {
     const newsItems = [
@@ -19,14 +19,13 @@ export default function UmumSection() {
     ];
 
     return (
-        <div className="space-y-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {newsItems.map((item, index) => (
-                <NewsCard2
+                <NewsCard
                     key={index}
-                    img="https://placehold.co/400"
                     date={item.date}
                     title={item.title}
-                    content={item.content}
+                    excerpt={item.content}
                     link={item.link}
                 />
             ))}
