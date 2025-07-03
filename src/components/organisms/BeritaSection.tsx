@@ -1,5 +1,13 @@
+// BeritaSection.tsx
+
 import NewsCard from "@/components/moleculs/Newscard";
 import Header2 from "@/components/moleculs/Header2";
+
+interface BeritaSectionProps {
+    limit?: number;
+    showHeader?: boolean; // default false
+    className?: string; // optional class name for container
+}
 
 const beritaList = [
     {
@@ -32,12 +40,15 @@ const beritaList = [
     },
 ];
 
-export default function BeritaSection() {
+export default function BeritaSection({ className, limit, showHeader = true }: BeritaSectionProps) {
+    const data = typeof limit === "number" ? beritaList.slice(0, limit) : beritaList;
+
     return (
-        <div className="mx-auto flex flex-col gap-7 px-4">
-            <Header2 title="Berita Terbaru" />
+        <div className={`${className}`}>
+            {showHeader && <Header2 title="Berita Terbaru" />}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {beritaList.slice(0, 3).map((berita, index) => (
+                {data.map((berita, index) => (
                     <NewsCard key={index} {...berita} />
                 ))}
             </div>

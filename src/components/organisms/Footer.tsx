@@ -50,14 +50,14 @@ const Footer = () => {
                     <div className="flex flex-col gap-5">
                         <h1 className="text-xl font-bold">Download Aplikasi Pro Trader</h1>
                         <div className="flex items-center gap-5">
-                            <a href="">
+                            <a href="https://apps.apple.com/id/app/pro-trader-royalassetindo/id6502900138?l=id">
                                 <img
                                     src="/assets/download-on-the-app-store.svg"
                                     alt="Download on the App Store"
                                     className="h-12 transition-transform duration-300 hover:scale-110"
                                 />
                             </a>
-                            <a href="">
+                            <a href="https://play.google.com/store/apps/details?id=com.royalassetindo.protrader&hl=id">
                                 <img
                                     src="/assets/en_badge_web_generic.png"
                                     alt="Get it on Google Play"
@@ -83,9 +83,6 @@ const Footer = () => {
                         <strong>Telepn: </strong>(021) 30056300
                     </p>
                     <p className="text-sm md:text-base">
-                        <strong>Whatsapp: </strong>+6281210697841
-                    </p>
-                    <p className="text-sm md:text-base">
                         <strong>Layanan pengaduan: </strong>
                         corporate@rifan-financindo-berjangka.co.id
                     </p>
@@ -96,7 +93,7 @@ const Footer = () => {
             <div className="w-full h-1 bg-green-500"></div>
 
             <div>
-                © Copyright 2025, PT Rifan Financindo Berjangka. All Rights Reserved
+                &copy; Copyright 2025, PT Rifan Financindo Berjangka. All Rights Reserved
             </div>
         </footer>
     );

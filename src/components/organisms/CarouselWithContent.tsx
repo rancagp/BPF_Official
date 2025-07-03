@@ -27,112 +27,105 @@ const slides: Slide[] = [
 ];
 
 const totalSlides = slides.length;
+const fullSlides = [slides[totalSlides - 1], ...slides, slides[0]];
 
 export default function CarouselWithContent() {
-    const [index, setIndex] = useState(1); // Start from 1 (karena slide 0 adalah clone terakhir)
+    const [index, setIndex] = useState(1); // start dari 1 karena clone
     const [transitioning, setTransitioning] = useState(true);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-    const fullSlides = [
-        slides[slides.length - 1], // Clone last
-        ...slides,
-        slides[0], // Clone first
-    ];
 
     const goTo = (newIndex: number) => {
         setIndex(newIndex);
         setTransitioning(true);
     };
 
-    const goToNext = () => {
-        goTo(index + 1);
-    };
-
-    const goToPrev = () => {
-        goTo(index - 1);
-    };
+    const goToNext = () => goTo(index + 1);
+    const goToPrev = () => goTo(index - 1);
 
     const handleTransitionEnd = () => {
-        if (index === fullSlides.length - 1) {
-            setTransitioning(false);
-            setIndex(1);
-        }
         if (index === 0) {
+            // ke clone belakang → reset ke slide terakhir
             setTransitioning(false);
-            setIndex(totalSlides);
+            setTimeout(() => setIndex(totalSlides), 10); // delay 10ms
+        } else if (index === fullSlides.length - 1) {
+            // ke clone depan → reset ke slide pertama
+            setTransitioning(false);
+            setTimeout(() => setIndex(1), 10);
         }
     };
 
-    // Autoplay
+    // Autoplay hanya jika transitioning aktif
     useEffect(() => {
-        timeoutRef.current = setTimeout(() => {
-            goToNext();
-        }, 10000);
-        return () => {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        };
-    }, [index]);
+        if (!transitioning) return;
+
+        timeoutRef.current = setTimeout(goToNext, 20000);
+        return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+    }, [index, transitioning]);
 
     return (
-        <div className="relative w-full overflow-hidden py-10 text-white">
+        <div className="relative w-full overflow-hidden text-white">
             <div
-                className={`flex w-full`}
+                className="flex"
                 style={{
                     transform: `translateX(-${index * 100}%)`,
-                    transition: transitioning ? "transform 0.7s ease-in-out" : "none",
+                    transition: transitioning ? "transform 2s ease-in-out" : "none",
                 }}
                 onTransitionEnd={handleTransitionEnd}
             >
                 {fullSlides.map((slide, i) => (
                     <div
                         key={i}
-                        className="flex-shrink-0 w-full px-10 md:px-32 flex items-center justify-center gap-16"
+                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-12 md:px-32"
                     >
-                        {/* Text */}
-                        <div className="text-center">
-                            <h1 className="text-3xl font-bold mb-4">{slide.title}</h1>
-                            <p className="text-lg mb-6">{slide.description}</p>
-                            <div className="space-x-3">
-                                <a href="#" className="bg-white hover:bg-gray-100 transition-all ease-in text-green-700 rounded-full px-5 py-3 font-bold shadow">
-                                    Registrasi Akun Online
-                                </a>
-                                <a href="#" className="bg-white hover:bg-gray-100 transition-all ease-in text-green-700 rounded-full px-5 py-3 font-bold shadow">
-                                    Akun Demo
-                                </a>
-                                <a href="#" className="bg-white hover:bg-gray-100 transition-all ease-in text-green-700 rounded-full px-5 py-3 font-bold shadow">
-                                    Akun Real
-                                </a>
+                        {/* Teks */}
+                        <div className="text-center md:text-left max-w-xl">
+                            <h1 className="text-2xl md:text-4xl font-bold mb-4">{slide.title}</h1>
+                            <p className="text-base md:text-lg mb-6">{slide.description}</p>
+                            <div className="flex flex-col md:flex-row gap-3">
+                                {["Registrasi Akun Online", "Akun Demo", "Akun Real"].map((label, i) => (
+                                    <a
+                                        key={i}
+                                        href="#"
+                                        className="inline-block bg-white hover:bg-gray-100 transition text-green-800 rounded-full px-5 py-3 font-semibold shadow"
+                                    >
+                                        {label}
+                                    </a>
+                                ))}
                             </div>
                         </div>
+
                         {/* Gambar */}
-                        <div className="hidden md:block">
-                            <img src={slide.image} alt={slide.title} className="h-130 w-auto object-contain" />
+                        <div className="mt-8 md:mt-0">
+                            <img src={slide.image} alt={slide.title} className="h-100 md:h-120 w-auto object-contain" />
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* Dots */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                {slides.map((_, dotIndex) => (
+            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
+                {slides.map((_, i) => (
                     <button
-                        key={dotIndex}
-                        onClick={() => goTo(dotIndex + 1)}
-                        className={`h-2 w-2 rounded-full ${dotIndex + 1 === index ? "bg-white" : "bg-gray-400"}`}
+                        key={i}
+                        aria-label={`Slide ${i + 1}`}
+                        onClick={() => goTo(i + 1)}
+                        className={`h-3 w-3 rounded-full transition-all ${index === i + 1 ? "bg-white scale-110" : "bg-white/40"}`}
                     />
                 ))}
             </div>
 
             {/* Tombol Navigasi */}
             <button
+                aria-label="Previous Slide"
                 onClick={goToPrev}
-                className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/20 text-white px-3 py-2 rounded-full hover:bg-white/40"
+                className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white rounded-full p-2"
             >
                 &#10094;
             </button>
             <button
+                aria-label="Next Slide"
                 onClick={goToNext}
-                className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/20 text-white px-3 py-2 rounded-full hover:bg-white/40"
+                className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white rounded-full p-2"
             >
                 &#10095;
             </button>
