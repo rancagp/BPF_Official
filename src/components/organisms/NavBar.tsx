@@ -11,6 +11,8 @@ const menuItems = [
             { label: "Profil Perusahaan", href: "/profil/perusahaan" },
             { label: "Wakil Pialang", href: "/profil/wakil-pialang" },
             { label: "Legalitas", href: "/profil/legalitas" },
+            { label: "Umum", href: "/informasi/umum" },
+            { label: "Video Umum", href: "/informasi/video-umum" },
         ],
     },
     {
@@ -18,6 +20,9 @@ const menuItems = [
         submenu: [
             { label: "Produk Multilateral", href: "/produk/multilateral" },
             { label: "Produk Bilateral", href: "/produk/bilateral" },
+            { label: "Prosedur Registrasi Online", href: "/prosedur/registrasi-online" },
+            { label: "Prosedur Penarikan", href: "/prosedur/penarikan" },
+            { label: "Petunjuk Transaksi", href: "/prosedur/petunjuk-transaksi" },
         ],
     },
     {
@@ -29,21 +34,21 @@ const menuItems = [
             { label: "Pivot & Fibonacci", href: "/analisis/pivot-fibonacci" },
         ],
     },
-    {
-        label: "Prosedur Investasi",
-        submenu: [
-            { label: "Prosedur Registrasi Online", href: "/prosedur/registrasi-online" },
-            { label: "Prosedur Penarikan", href: "/prosedur/penarikan" },
-            { label: "Petunjuk Transaksi", href: "/prosedur/petunjuk-transaksi" },
-        ],
-    },
-    {
-        label: "Informasi",
-        submenu: [
-            { label: "Umum", href: "/informasi/umum" },
-            { label: "Video Umum", href: "/informasi/video-umum" },
-        ],
-    },
+    // {
+    //     label: "Prosedur Investasi",
+    //     submenu: [
+    //         { label: "Prosedur Registrasi Online", href: "/prosedur/registrasi-online" },
+    //         { label: "Prosedur Penarikan", href: "/prosedur/penarikan" },
+    //         { label: "Petunjuk Transaksi", href: "/prosedur/petunjuk-transaksi" },
+    //     ],
+    // },
+    // {
+    //     label: "Informasi",
+    //     submenu: [
+    //         { label: "Umum", href: "/informasi/umum" },
+    //         { label: "Video Umum", href: "/informasi/video-umum" },
+    //     ],
+    // },
     { label: "Hubungi Kami", href: "/hubungi-kami" },
 ];
 
