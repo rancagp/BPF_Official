@@ -1,6 +1,6 @@
 // Profil Perusahaan
 
-import ProfilContainer from "@/components/templates/PageContainer/ProfilContainer";
+import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
 
 export default function DaftarWakilPialang() {

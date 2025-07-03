@@ -42,7 +42,7 @@ const DateTimeDisplay = () => {
     return (
         <div className="w-full flex items-center justify-between bg-zinc-800 text-white px-3 py-1 text-sm">
             <div className="w-full flex items-center gap-5">
-                <p><i className="fa-solid fa-calendar-days"></i> {currentDate}</p>
+                <p className="hidden md:block"><i className="fa-solid fa-calendar-days"></i> {currentDate}</p>
                 <div className="flex items-center gap-3">
                     <p><strong>JKT</strong> {currentTimeJKT}</p>
                     <p><strong>TKY</strong> {currentTimeTKY}</p>
