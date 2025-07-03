@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import MarketUpdate from "./MarketUpdate";
 
 const menuItems = [
     { label: "Beranda", href: "/" },
@@ -86,7 +87,7 @@ export default function Navbar() {
     };
 
     return (
-        <header className="sticky top-0 z-50">
+        <header className="sticky top-0 z-40">
             {/* Navbar utama */}
             <div className="bg-zinc-800 text-white">
                 <div className="flex justify-between items-center px-3 md:px-22 py-3">
@@ -200,23 +201,7 @@ export default function Navbar() {
             </div>
 
             {/* Market Update */}
-            <div className="bg-zinc-800 text-white overflow-hidden">
-                <div className="flex items-center h-12">
-                    {/* Label */}
-                    <div className="bg-red-600 px-4 h-full flex items-center font-bold text-xs sm:text-sm md:text-base whitespace-nowrap">
-                        Market Update
-                    </div>
-
-                    {/* Marquee Text */}
-                    <div className="relative overflow-hidden w-full bg-green-600 h-full flex items-center min-w-0">
-                        <div className="animate-marquee whitespace-nowrap px-4 text-xs sm:text-sm md:text-base">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-                            rerum at architecto, deserunt magni tempora amet vitae magnam sit, enim
-                            quam nihil saepe fugiat dolor quod, laudantium et ipsum molestias.
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <MarketUpdate />
         </header>
     );
 }
