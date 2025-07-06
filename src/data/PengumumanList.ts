@@ -3,8 +3,7 @@ const pengumumanList = [
         title: "Libur Nasional 17 Agustus",
         date: "2025-08-17",
         content: `
-            <p>Dalam rangka memperingati <strong>Hari Kemerdekaan Republik Indonesia</strong>, seluruh aktivitas perdagangan akan <em>diliburkan</em> pada tanggal 17 Agustus 2025.</p>
-            <p>Aktivitas perdagangan akan kembali normal pada hari berikutnya sesuai dengan jadwal yang telah ditetapkan.</p>
+            <p>Dalam rangka memperingati <strong>Hari Kemerdekaan Republik Indonesia</strong>, seluruh aktivitas perdagangan akan <em>diliburkan</em> pada tanggal 17 Agustus 2025. Aktivitas perdagangan akan kembali normal pada hari berikutnya sesuai dengan jadwal yang telah ditetapkan.</p>
         `,
         slug: "libur-17-agustus",
     },
@@ -12,7 +11,7 @@ const pengumumanList = [
         title: "Pemeliharaan Sistem",
         date: "2025-07-15",
         content: `
-            <p>Sehubungan dengan <strong>pemeliharaan sistem berkala</strong>, layanan transaksi akan <em>tidak tersedia</em> pada:</p>
+            <p>Sehubungan dengan <strong>pemeliharaan sistem berkala</strong>, layanan transaksi akan <em><strong>tidak tersedia</strong></em> pada:</p>
             <ul class="list-disc pl-5">
                 <li>Hari: Minggu</li>
                 <li>Waktu: 00:00 - 06:00 WIB</li>

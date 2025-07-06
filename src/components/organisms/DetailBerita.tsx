@@ -27,7 +27,7 @@ export default function DetailBerita({ date, title, img, content }: DetailBerita
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="bg-zinc-100 w-fit px-3 py-1 rounded mb-4" >
                 <p className="text-base text-gray-500">{formatDate(date)}</p>
             </div>
 

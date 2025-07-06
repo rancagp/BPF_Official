@@ -23,13 +23,16 @@ export default function PengumumanDetail() {
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title={data.title}>
                     <div className="space-y-5">
-                        <p className="text-gray-500">
-                            {new Date(data.date).toLocaleDateString("id-ID", {
-                                day: "2-digit",
-                                month: "long",
-                                year: "numeric"
-                            })}
-                        </p>
+                        <div className="bg-zinc-100 w-fit px-3 py-1 rounded">
+                            <p className="text-gray-500">
+                                {new Date(data.date).toLocaleDateString("id-ID", {
+                                    weekday: "long",
+                                    day: "2-digit",
+                                    month: "long",
+                                    year: "numeric"
+                                })}
+                            </p>
+                        </div>
 
                         <div
                             className="text-lg leading-relaxed text-gray-700"
