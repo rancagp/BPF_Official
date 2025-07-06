@@ -12,7 +12,7 @@ const menuItems = [
             { label: "Wakil Pialang", href: "/profil/wakil-pialang" },
             { label: "Legalitas", href: "/profil/legalitas" },
             { label: "Fasilitas & Layanan", href: "/informasi/fasilitas-layanan" },
-            { label: "Umum", href: "/informasi/umum" },
+            { label: "Informasi Umum", href: "/informasi/umum" },
             { label: "Video Umum", href: "/informasi/video-umum" },
         ],
     },

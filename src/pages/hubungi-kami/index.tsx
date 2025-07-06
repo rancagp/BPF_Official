@@ -99,6 +99,7 @@ export default function HubungiKami() {
                                 <a href="https://maps.google.com/?q=AXA+Tower+Kuningan+City+Lt.+23%2C+25%2C+30+%26+35%0D%0AJl.+Prof.+DR.+Satrio+Kav.+18%2C+Kuningan+Setiabudi%2C+Jakarta+12940"
                                     className="hover:underline hover:text-green-500 text-base md:text-lg">AXA Tower Kuningan City Lt. 23, 25, 30 & 35 Jl. Prof. DR. Satrio Kav. 18, Kuningan Setiabudi, Jakarta 12940</a>
                                 <p><strong>Telepon:</strong> (021) 30056300</p>
+                                <p><strong>Fax (AXA Tower): </strong> +62 21 3005 8500</p>
                                 <p><strong>Email:</strong> <a href="mailto:info@rfb.co.id">corporate@rifan-financindo-berjangka.co.id</a></p>
                             </div>
                         </div>

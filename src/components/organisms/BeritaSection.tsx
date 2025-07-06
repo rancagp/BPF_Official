@@ -16,7 +16,13 @@ export default function BeritaSection({ className, limit, showHeader = true }: B
             {showHeader && <Header2 title="Berita Terbaru" />}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {data.map((berita, index) => (
-                    <NewsCard key={index} {...berita} />
+                    <NewsCard
+                        key={index}
+                        title={berita.title}
+                        date={berita.date}
+                        content={berita.content ?? ""}   // ← pastikan content selalu string
+                        slug={berita.slug}
+                    />
                 ))}
             </div>
         </div>

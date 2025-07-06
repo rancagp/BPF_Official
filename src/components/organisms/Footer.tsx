@@ -18,6 +18,7 @@ const Footer = () => {
                         Account) guna melaksanakan transaksi Perdagangan Berjangka adalah
                         atas nama PT Rifan Financindo Berjangka, bukan atas nama individu.
                     </p>
+                    <div className="md:hidden w-full h-1 bg-green-500"></div>
                 </div>
 
                 {/* Section 2 - Useful Links */}
@@ -80,7 +81,11 @@ const Footer = () => {
                         corporate@rifan-financindo-berjangka.co.id
                     </p>
                     <p className="text-sm md:text-base">
-                        <strong>Telepn: </strong>(021) 30056300
+                        <strong>Telepon: </strong>(021) 30056300
+                    </p>
+                    <p className="text-sm md:text-base">
+                        <strong>Fax (AXA Tower): </strong>
+                        +62 21 3005 8500
                     </p>
                     <p className="text-sm md:text-base">
                         <strong>Layanan pengaduan: </strong>
@@ -112,7 +117,7 @@ const Footer = () => {
             {/* Footer Divider */}
             <div className="w-full h-1 bg-green-500"></div>
 
-            <div>
+            <div className="text-center">
                 &copy; Copyright 2025, PT Rifan Financindo Berjangka. All Rights Reserved
             </div>
         </footer >
