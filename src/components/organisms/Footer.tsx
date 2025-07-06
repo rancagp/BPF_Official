@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
     return (
         /* Footer */
-        <footer className="flex flex-col justify-between items-center gap-10 bg-zinc-800 text-white px-10 md:px-22 py-10">
+        <footer className="flex flex-col justify-between items-center gap-10 bg-zinc-800 text-white px-10 md:px-10 lg-22 py-10">
             <div className="flex flex-col md:flex-row gap-10 md:gap-20 w-full">
                 {/* Section 1 - Attention */}
                 <div className="flex-1 text-center space-y-5">
@@ -86,6 +86,26 @@ const Footer = () => {
                         <strong>Layanan pengaduan: </strong>
                         corporate@rifan-financindo-berjangka.co.id
                     </p>
+                    <div className="flex items-center gap-3">
+                        <a href="https://www.komdigi.go.id/">
+                            <div className="bg-gradient-to-br from-white via-zinc-100 to-zinc-200 p-3 rounded-2xl shadow-xl border border-zinc-300 w-fit hover:scale-105 hover:shadow-2xl transition transform duration-300 ease-in-out">
+                                <img
+                                    src="/assets/BrandLogo.org-KOMDIGI-Logo-2024.png"
+                                    alt="Logo Komdigi"
+                                    className="h-10 drop-shadow-lg"
+                                />
+                            </div>
+                        </a>
+                        <a>
+                            <div className="bg-gradient-to-br from-white via-zinc-100 to-zinc-200 p-3 rounded-2xl shadow-xl border border-zinc-300 w-fit hover:scale-105 hover:shadow-2xl transition transform duration-300 ease-in-out">
+                                <img
+                                    src="/assets/iso.png"
+                                    alt="Logo Komdigi"
+                                    className="h-10 drop-shadow-lg"
+                                />
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -95,7 +115,7 @@ const Footer = () => {
             <div>
                 &copy; Copyright 2025, PT Rifan Financindo Berjangka. All Rights Reserved
             </div>
-        </footer>
+        </footer >
     );
 };
 

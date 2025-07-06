@@ -5,12 +5,12 @@ import CarouselWithContent from "@/components/organisms/CarouselWithContent";
 import ProdukContainer from "@/components/organisms/ProdukContainer";
 import BeritaSection from "@/components/organisms/BeritaSection";
 import AboutUs from "@/components/organisms/AboutUs";
-import Iso from "@/components/organisms/Iso";
+import Iso from "@/components/organisms/Market";
 import Pengumuman from "@/components/organisms/Pengumuman";
 
 export default function HomePage() {
   return (
-    <PageTemplate title="Home - PT Solid Gold Berjangka">
+    <PageTemplate title="">
       {/* Carousel */}
       <CarouselWithContent />
 

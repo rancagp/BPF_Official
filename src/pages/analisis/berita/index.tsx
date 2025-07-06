@@ -6,7 +6,7 @@ import PageTemplate from "@/components/templates/PageTemplate";
 
 export default function Multilateral() {
     return (
-        <PageTemplate title="Hubungi Kami - PT Solid Gold Berjangka">
+        <PageTemplate title="Berita Terbaru">
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title="Berita Terbaru">
                     <BeritaSection showHeader={false} />
