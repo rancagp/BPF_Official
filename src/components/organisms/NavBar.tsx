@@ -19,8 +19,8 @@ const menuItems = [
     {
         label: "Produk",
         submenu: [
-            { label: "Produk Multilateral", href: "/produk/multilateral" },
-            { label: "Produk Bilateral", href: "/produk/bilateral" },
+            { label: "Produk Multilateral (JFX)", href: "/produk/JFX" },
+            { label: "Produk Bilateral (SPA)", href: "/produk/SPA" },
             { label: "Prosedur Registrasi Online", href: "/prosedur/registrasi-online" },
             { label: "Prosedur Penarikan", href: "/prosedur/penarikan" },
             { label: "Petunjuk Transaksi", href: "/prosedur/petunjuk-transaksi" },

@@ -1,6 +1,7 @@
 interface DetailBeritaProps {
     date: string;
     title: string;
+    kategori: string;
     img: string;
     content: string;
 }
@@ -16,7 +17,7 @@ const formatDate = (inputDate: string) => {
     return parsedDate.toLocaleDateString("id-ID", options);
 };
 
-export default function DetailBerita({ date, title, img, content }: DetailBeritaProps) {
+export default function DetailBerita({ date, title, img, content, kategori }: DetailBeritaProps) {
     return (
         <div>
             <div className="mb-6 flex justify-center" >
@@ -27,8 +28,14 @@ export default function DetailBerita({ date, title, img, content }: DetailBerita
                 />
             </div>
 
-            <div className="bg-zinc-100 w-fit px-3 py-1 rounded mb-4" >
-                <p className="text-base text-gray-500">{formatDate(date)}</p>
+            <div className="flex items-center gap-4 mb-4">
+                <div className="bg-zinc-100 w-fit px-3 py-1 rounded" >
+                    <p className="text-base text-gray-500">{formatDate(date)}</p>
+                </div>
+                <i className="fa-solid fa-grip-lines-vertical"></i>
+                <div className="bg-zinc-100 w-fit px-3 py-1 rounded" >
+                    <p className="text-base text-gray-500">{kategori}</p>
+                </div>
             </div>
 
             <div
