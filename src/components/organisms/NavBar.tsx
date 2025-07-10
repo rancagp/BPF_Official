@@ -6,11 +6,12 @@ import MarketUpdate from "./MarketUpdate";
 const menuItems = [
     { label: "Beranda", href: "/" },
     {
-        label: "Profil",
+        label: "Tentang Kami",
         submenu: [
             { label: "Profil Perusahaan", href: "/profil/perusahaan" },
+            { label: "Legalitas Bisnis", href: "/profil/legalitas-bisnis" },
             { label: "Wakil Pialang", href: "/profil/wakil-pialang" },
-            { label: "Legalitas", href: "/profil/legalitas" },
+            { label: "Badan Regulasi", href: "/profil/legalitas" },
             { label: "Fasilitas & Layanan", href: "/informasi/fasilitas-layanan" },
             { label: "Informasi Umum", href: "/informasi/umum" },
             { label: "Video Umum", href: "/informasi/video-umum" },
@@ -35,21 +36,6 @@ const menuItems = [
             { label: "Pivot & Fibonacci", href: "/analisis/pivot-fibonacci" },
         ],
     },
-    // {
-    //     label: "Prosedur Investasi",
-    //     submenu: [
-    //         { label: "Prosedur Registrasi Online", href: "/prosedur/registrasi-online" },
-    //         { label: "Prosedur Penarikan", href: "/prosedur/penarikan" },
-    //         { label: "Petunjuk Transaksi", href: "/prosedur/petunjuk-transaksi" },
-    //     ],
-    // },
-    // {
-    //     label: "Informasi",
-    //     submenu: [
-    //         { label: "Umum", href: "/informasi/umum" },
-    //         { label: "Video Umum", href: "/informasi/video-umum" },
-    //     ],
-    // },
     { label: "Hubungi Kami", href: "/hubungi-kami" },
 ];
 
@@ -95,12 +81,11 @@ export default function Navbar() {
     return (
         <header className="sticky top-0 z-40">
             {/* Navbar utama */}
-            <div className="bg-zinc-800 text-white">
+            <div className="bg-gray-900 text-white">
                 <div className="flex justify-between items-center px-3 md:px-10 lg:px-22 py-3">
                     {/* Logo */}
                     <a href="/" className="flex items-center gap-3 text-base sm:text-lg lg:text-xl font-bold">
-                        <img src="/assets/logo-rfb.png" alt="Logo RFB" className="h-6 md:h-10" />
-                        <span>Rifan Financindo Berjangka</span>
+                        <img src="/assets/logo-kpf-full.png" alt="Logo KPF" className="h-6 md:h-10" />
                     </a>
 
                     {/* Mobile menu toggle */}
@@ -205,8 +190,6 @@ export default function Navbar() {
                     </nav>
                 )}
             </div>
-
-            {/* Market Update */}
             <MarketUpdate />
         </header>
     );

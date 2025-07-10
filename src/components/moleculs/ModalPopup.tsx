@@ -22,11 +22,11 @@ export default function ModalPopup({ isOpen, onClose, children }) {
 
     return (
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-3 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
-                }`}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-3 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}
+                `}
         >
             <div
-                className={`bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                className={`bg-gray-900 rounded-lg shadow-lg max-w-md w-full p-6 relative transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                     }`}
             >
                 <button

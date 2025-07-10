@@ -17,15 +17,13 @@ export default function PageTemplate({ title, children }: PageTemplateProps) {
     return (
         <>
             <Head>
-                <title>{title ? `${title} - PT. Rifan Financindo Berjangka` : "PT. Rifan Financindo Berjangka"}</title>
+                <title>{title ? `${title} - PT. Kontak Perkasa Futures` : "PT. Kontak Perkasa Futures"}</title>
 
                 {/* Favicon & Icons */}
-                <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
-                <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-                <link rel="shortcut icon" href="/favicon/favicon.ico" />
-                <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-                <meta name="apple-mobile-web-app-title" content="RFB" />
-                <link rel="manifest" href="/favicon/site.webmanifest" />
+                <link rel="icon" href="/assets/logo-kpf.png" type="image/png" />
+                <link rel="shortcut icon" href="/assets/logo-kpf.png" type="image/png" />
+                <link rel="apple-touch-icon" href="/assets/logo-kpf.png" />
+                <meta name="apple-mobile-web-app-title" content="KPF" />
 
                 {/* Font: Montserrat */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />

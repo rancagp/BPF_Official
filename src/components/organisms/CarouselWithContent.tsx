@@ -10,26 +10,26 @@ interface Slide {
 
 const slides: Slide[] = [
     {
-        title: "Selamat Datang di PT. Solid Gold Berjangka",
-        description: "Pialang berjangka terpercaya untuk masa depan keuangan Anda.",
+        title: "Real Time Online Trading",
+        description: "Bergabunglah dan cobalah alat perdagangan online kami di manapun Anda berada. Hubungi marketing kami untuk memulai panduan yang tepat tentang online trading kami",
         image: "/assets/corousel-1.png",
     },
     {
-        title: "Solusi Investasi Profesional",
-        description: "Kami hadir untuk membantu Anda meraih masa depan finansial yang lebih baik.",
+        title: "Layanan Terbaik",
+        description: "Kami akan selalu memberikan layanan terbaik bagi seluruh calon nasabah dan nasabah terutama dalam hal kemudahan bertransaksi real account maupun demo account didukung oleh SDM berkualitas yang telah resmi menjadi wakil pialang berjangka melalui fit dan proper test dari Bappebti.",
         image: "/assets/corousel-2.png",
     },
-    {
-        title: "Layanan Konsultasi Eksklusif",
-        description: "Didukung oleh analis berpengalaman dan teknologi modern.",
-        image: "/assets/corousel-3.png",
-    },
+    //{
+       // title: "Layanan Konsultasi Eksklusif",
+        //description: "Didukung oleh analis berpengalaman dan teknologi modern.",
+        //image: "/assets/corousel-3.png",
+    //},
 ];
 
 const items = [
-    { label: "Registrasi Akun Online", link: "https://regol.rifan-financindo-berjangka.co.id/" },
-    { label: "Akun Demo", link: "https://demo.rifanberjangka.com/login" },
-    { label: "Akun Real", link: "https://etrade.rifanberjangka.com/login" },
+    { label: "Daftar Sekarang", link: "https://regol.kontak-perkasa-futures.co.id/" },
+    { label: "Demo", link: "https://demo.kontakperkasafutures.com/login" },
+    { label: "Live", link: "https://etrade.kontakperkasafutures.com/login" },
 ];
 
 const totalSlides = slides.length;
