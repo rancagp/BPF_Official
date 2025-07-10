@@ -5,7 +5,7 @@ export default function LoadingScreen({ show }) {
 
     useEffect(() => {
         if (!show) {
-            const timeout = setTimeout(() => setVisible(false), 500);  // Delay hilang komponen
+            const timeout = setTimeout(() => setVisible(false), 500);
             return () => clearTimeout(timeout);
         } else {
             setVisible(true);
@@ -14,9 +14,11 @@ export default function LoadingScreen({ show }) {
 
     return visible ? (
         <div className={`fixed inset-0 bg-white z-[9999] flex items-center justify-center transition-opacity duration-500 ${show ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="flex flex-col items-center gap-4 animate-pulse">
-                <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-lg font-semibold text-gray-700">Loading...</p>
+            <div className="flex flex-col items-center gap-4">
+                <div className="animate-bounce-slow">
+                    <img src="/assets/logo-rfb.png" alt="Loading" className="w-24 h-24" />
+                </div>
+                <p className="text-lg font-semibold text-green-800">Memuat...</p>
             </div>
         </div>
     ) : null;
