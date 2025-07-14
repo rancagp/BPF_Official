@@ -98,7 +98,7 @@ export default function WakilPialang() {
                                         <h3 className="text-lg font-semibold text-gray-800">
                                             {item.nama_kategori}
                                         </h3>
-                                        <p className="mt-2 text-blue-600">Lihat detail →</p>
+                                        <p className="mt-2 text-green-600">Lihat detail →</p>
                                     </div>
                                 </Link>
                             ))}

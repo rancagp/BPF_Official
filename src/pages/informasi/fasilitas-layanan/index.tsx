@@ -71,8 +71,7 @@ export default function FasilitasLayanan() {
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title="Fasilitas & Layanan">
           <div className="space-y-12">
-            <div className="text-center max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Layanan Unggulan untuk Kenyamanan Anda</h2>
+            <div className="max-w-4xl mx-auto">
               <p className="text-lg text-gray-600">
                 PT. Kontakperkasa Futures menyediakan berbagai fasilitas dan layanan terbaik untuk mendukung aktivitas trading Anda dengan aman dan nyaman.
               </p>

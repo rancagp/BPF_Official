@@ -1,13 +1,16 @@
-import VideoSection from "@/components/organisms/VideoSection";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
 
-export default function Video() {
+export default function Penarikan() {
     return (
-        <PageTemplate title="Video">
+        <PageTemplate title="Ilustrasi Transaksi">
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Video Umum">
-                    <VideoSection />
+                <ProfilContainer title="Ilustrasi Transaksi">
+                    <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed">
+
+                        
+
+                    </div>
                 </ProfilContainer>
             </div>
         </PageTemplate>

@@ -5,168 +5,138 @@ import Image from "next/image";
 export default function LegalitasBisnis() {
     const legalitasItems = [
         {
-            title: "Dasar Hukum",
-            description: "Berdasarkan Undang-Undang RI No. 32 Tahun 1997 tentang Perdagangan Berjangka Komoditi yang telah diubah dengan Undang-Undang No. 10 Tahun 2011.",
+            title: "Surat Persetujuan Anggota Bursa (SPAB)",
+            description: "Surat Persetujuan Anggota Bursa (SPAB) di Bursa Berjangka Jakarta (Nomor: SPAB-002/BBJ/09/00).",
             icon: "📜"
         },
         {
-            title: "Izin Usaha",
-            description: "Keputusan Kepala Bappebti No. 41/BAPPEBTI/SI/XXI/2000 tentang Izin Usaha Pialang Berjangka.",
-            icon: "🏛️"
-        },
-        {
-            title: "Keanggotaan Bursa",
-            description: "Surat Persetujuan Anggota Bursa (SPAB) di Bursa Berjangka Jakarta No. SPAB-002/BBJ/09/00.",
+            title: "Surat Persetujuan Pengalihan Keanggotaan Bursa (SPPKB)",
+            description: "Surat Persetujuan Pengalihan Keanggotaan Bursa (SPPKB) di Bursa Berjangka Jakarta (Nomor: SPPKB-006/BBJ/12/00).",
             icon: "📋"
         },
         {
-            title: "Pengakuan Hukum",
-            description: "Pengesahan Departemen Kehakiman dan HAM No. C-16764 HT.01.04.TH.2002.",
+            title: "Izin Usaha Pialang Berjangka",
+            description: "Keputusan Kepala Bappebti (Nomor: 41/BAPPEBTI/SI/XXI/2000).",
+            icon: "🏛️"
+        },
+        {
+            title: "Keanggotaan Kliring Berjangka Indonesia",
+            description: "Keanggotaan Kliring Berjangka Indonesia (Nomor: 08/AK-KJBK/XII/2000).",
+            icon: "🔗"
+        },
+        {
+            title: "Pengesahan Departemen Kehakiman dan HAM",
+            description: "Pengesahan Departemen Kehakiman dan HAM: C-16764 HT.01.04.TH.2002.",
             icon: "⚖️"
         },
         {
-            title: "Perdagangan Elektronik",
-            description: "Penetapan sebagai Pialang Berjangka yang melakukan Penerimaan Nasabah secara Elektronik On-Line No. 25/BAPPEBTI/KEP-PBK/08/2014.",
+            title: "Akta Berita Acara Rapat",
+            description: "Akta berita acara rapat: No. 161 Tanggal 19 Juli 2002 oleh Notaris Noor Irawati SH, PT Kontakperkasa Futures.",
+            icon: "📄"
+        },
+        {
+            title: "Peserta Sistem Perdagangan Alternatif (SPA)",
+            description: "SK Bappebti (Nomor: 1145/BAPPEBTI/SP3/2007) tentang Pemberian Persetujuan sebagai peserta Sistem Perdagangan Alternatif (SPA) kepada PT Kontakperkasa Futures.",
+            icon: "💼"
+        },
+        {
+            title: "Keanggotaan ASPEBTINDO",
+            description: "Keanggotaan ASPEBTINDO (Nomor: 0040/ASPEBTINDO/AANG-B/7/2015).",
+            icon: "🏢"
+        },
+        {
+            title: "Penerimaan Nasabah Elektronik On-Line",
+            description: "Penetapan Sebagai Pialang Berjangka yang melakukan Kegiatan Penerimaan Nasabah secara Elektronik On-Line di Bidang Perdagangan Berjangka Komoditi kepada PT Kontakperkasa Futures (Nomor: 25/BAPPEBTI/KEP-PBK/08/2014).",
             icon: "💻"
-        },
-        {
-            title: "Keanggotaan Asosiasi",
-            description: "Anggota ASPEBTINDO No. 0040/ASPEBTINDO/AANG-B/7/2015.",
-            icon: "🤝"
-        }
-    ];
-
-    const dokumenPendukung = [
-        {
-            nomor: "SPPKB-006/BBJ/12/00",
-            judul: "Surat Persetujuan Pengalihan Keanggotaan Bursa"
-        },
-        {
-            nomor: "1145/BAPPEBTI/SP3/2007",
-            judul: "Persetujuan sebagai Peserta Sistem Perdagangan Alternatif (SPA)"
-        },
-        {
-            nomor: "No. 161",
-            tanggal: "19 Juli 2002",
-            judul: "Akta Berita Acara Rapat oleh Notaris Noor Irawati SH"
-        },
-        {
-            nomor: "08/AK-KJBK/XII/2000",
-            judul: "Keanggotaan Kliring Berjangka Indonesia"
         }
     ];
 
     return (
         <PageTemplate title="Legalitas Bisnis">
-            <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Legalitas Bisnis">
-                    <div className="space-y-8 text-justify">
-                        <div className="space-y-5">
-                            <div className="space-y-4 text-gray-700">
-                                <p>
-                                    PT Kontakperkasa Futures merupakan pialang berjangka yang telah mendapatkan izin usaha sebagai pialang berjangka dari BAPPEBTI, sesuai dengan Undang-Undang RI No. 32 Tahun 1997 tentang Perdagangan Berjangka Komoditi yang telah diubah dengan Undang-Undang No. 10 Tahun 2011.
-                                </p>
-                            </div>
-                        </div>
+            
 
-                        {/* Daftar Legalitas */}
-                        <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <div className="px-4 sm:px-6 lg:px-8 py-12 max-w-4xl mx-auto">
+                <ProfilContainer title="Legalitas Bisnis">
+                    {/* Introduction */}
+                    <div className="bg-white rounded-xl shadow-md p-8 mb-12 relative overflow-hidden">
+                        <div className="absolute -right-10 -top-10 w-40 h-40 bg-green-100 rounded-full opacity-20"></div>
+                        <div className="relative z-10">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-6">Tentang Legalitas Kami</h2>
+                            <p className="text-gray-600 leading-relaxed mb-6">
+                                PT Kontakperkasa Futures merupakan pialang berjangka yang telah mendapatkan izin usaha dari BAPPEBTI, sesuai dengan Undang-Undang RI No. 32 Tahun 1997 tentang Perdagangan Berjangka Komoditi yang telah diubah dengan Undang-Undang No. 10 Tahun 2011.
+                            </p>
+                            <div className="h-1 w-24 bg-green-500 my-6"></div>
+                        </div>
+                    </div>
+
+                    {/* Legal Documents Grid */}
+                    <div className="mb-16">
+                        <h2 className="text-2xl font-bold text-center text-gray-800 mb-12 relative">
+                            <span className="relative z-10 px-4 bg-white">Dokumen Legalitas</span>
+                            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-0"></div>
+                        </h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {legalitasItems.map((item, index) => (
-                                <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                                    <div className="flex items-start gap-4">
-                                        <span className="text-3xl">{item.icon}</span>
-                                        <div>
-                                            <h4 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h4>
-                                            <p className="text-gray-700">{item.description}</p>
+                                <div 
+                                    key={index} 
+                                    className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
+                                >
+                                    <div className="p-6">
+                                        <div className="w-12 h-12 rounded-lg bg-green-50 text-green-600 text-2xl flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors duration-300">
+                                            {item.icon}
                                         </div>
+                                        <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition-colors duration-300">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            {item.description}
+                                        </p>
                                     </div>
                                 </div>
                             ))}
                         </div>
+                    </div>
 
-                        {/* Daftar Dokumen */}
-                        <div className="mt-12">
-                            <h3 className="text-xl font-semibold mb-6 text-center">Daftar Dokumen Pendukung</h3>
-                            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                                <table className="min-w-full divide-y divide-gray-200">
-                                    <thead className="bg-gray-50">
-                                        <tr>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Dokumen</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keterangan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="bg-white divide-y divide-gray-200">
-                                        {dokumenPendukung.map((doc, idx) => (
-                                            <tr key={idx} className="hover:bg-gray-50">
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{idx + 1}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {doc.nomor}
-                                                    {doc.tanggal && (
-                                                        <span className="block text-xs text-gray-500">{doc.tanggal}</span>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm text-gray-900">{doc.judul}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    {/* Important Notice */}
+                    <div className="p-4 border-l-4 border-yellow-500 bg-yellow-50 text-yellow-800 mb-16">
+                        <p className="font-bold">Informasi Penting:</p>
+                        <p className="mt-1">
+                            PT Kontakperkasa Futures berkomitmen untuk selalu beroperasi sesuai dengan peraturan perundang-undangan yang berlaku dan menjaga kepercayaan nasabah dengan menjunjung tinggi prinsip kehati-hatian dan profesionalisme.
+                        </p>
+                    </div>
 
-                        {/* Dokumen Pendukung */}
-                        <div className="mt-12">
-                            <h3 className="text-xl font-semibold mb-6 text-center">Dokumen Pendukung</h3>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
-                                <div className="text-center">
-                                    <div className="bg-gray-100 p-4 rounded-lg h-32 flex items-center justify-center">
-                                        <Image 
-                                            src="/assets/logo-bappebti.png" 
-                                            alt="BAPPEBTI" 
-                                            width={120} 
-                                            height={80}
-                                            className="object-contain h-full"
-                                        />
+                    {/* Supporting Documents */}
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold text-center text-gray-800 mb-12 relative">
+                            <span className="relative z-10 px-4 bg-white">Mitra & Lembaga Terkait</span>
+                            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-0"></div>
+                        </h2>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            {[
+                                { name: "BAPPEBTI", logo: "/assets/logo-bappebti.png" },
+                                { name: "Jakarta Futures Exchange", logo: "/assets/logo-jfx.png" },
+                                { name: "Kliring Berjangka Indonesia", logo: "/assets/logo-kbi.png" },
+                                { name: "ASPEBTINDO", logo: "/assets/logo-aspebtindo.png" }
+                            ].map((org, index) => (
+                                <div 
+                                    key={index}
+                                    className="group bg-white rounded-xl shadow-sm p-6 text-center hover:shadow-lg transition-shadow duration-300 border border-gray-100 hover:border-green-100"
+                                >
+                                    <div className="h-20 flex items-center justify-center mb-4">
+                                        <div className="relative w-full h-full">
+                                            <Image 
+                                                src={org.logo} 
+                                                alt={org.name} 
+                                                fill
+                                                className="object-contain p-2 transition-all duration-300 group-hover:scale-105"
+                                            />
+                                        </div>
                                     </div>
-                                    <p className="mt-2 text-sm">BAPPEBTI</p>
+                                    <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors duration-300">
+                                        {org.name}
+                                    </p>
                                 </div>
-                                <div className="text-center">
-                                    <div className="bg-gray-100 p-4 rounded-lg h-32 flex items-center justify-center">
-                                        <Image 
-                                            src="/assets/logo-jfx.png" 
-                                            alt="JFX" 
-                                            width={120} 
-                                            height={80}
-                                            className="object-contain h-full"
-                                        />
-                                    </div>
-                                    <p className="mt-2 text-sm">Jakarta Futures Exchange</p>
-                                </div>
-                                <div className="text-center">
-                                    <div className="bg-gray-100 p-4 rounded-lg h-32 flex items-center justify-center">
-                                        <Image 
-                                            src="/assets/logo-kbi.png" 
-                                            alt="KBI" 
-                                            width={120} 
-                                            height={80}
-                                            className="object-contain h-full"
-                                        />
-                                    </div>
-                                    <p className="mt-2 text-sm">Kliring Berjangka Indonesia</p>
-                                </div>
-                                <div className="text-center">
-                                    <div className="bg-gray-100 p-4 rounded-lg h-32 flex items-center justify-center">
-                                        <Image 
-                                            src="/assets/logo-aspebtindo.png" 
-                                            alt="ASPEBTINDO" 
-                                            width={120} 
-                                            height={80}
-                                            className="object-contain h-full"
-                                        />
-                                    </div>
-                                    <p className="mt-2 text-sm">ASPEBTINDO</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </ProfilContainer>

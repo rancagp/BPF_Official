@@ -57,7 +57,7 @@ export default function MarketUpdate() {
 
     return (
         <div className="bg-zinc-900 text-white overflow-hidden shadow group">
-            <div className="flex items-center h-12">
+            <div className="flex items-center h-10">
                 <div className="bg-red-600 px-4 h-full flex items-center font-bold text-xs sm:text-sm md:text-base whitespace-nowrap">
                     Market Update
                 </div>

@@ -71,8 +71,9 @@ export default function Market() {
     };
 
     return (
-        <div className="w-full bg-zinc-500 py-10 flex flex-col items-center space-y-4">
-            <Header1 title="Market" className="text-white text-2xl md:text-3xl" />
+        <div className="w-full bg-stone-50 py-10 flex flex-col items-center space-y-4">
+            <Header1 title="Market" className="text-black text-2xl md:text-3xl" />
+            <div className="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
 
             <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52 w-full">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">

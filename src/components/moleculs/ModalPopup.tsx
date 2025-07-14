@@ -26,7 +26,7 @@ export default function ModalPopup({ isOpen, onClose, children }) {
                 `}
         >
             <div
-                className={`bg-gray-900 rounded-lg shadow-lg max-w-md w-full p-6 relative transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                className={`bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                     }`}
             >
                 <button

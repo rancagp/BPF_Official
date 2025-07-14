@@ -23,6 +23,7 @@ export default function HomePage() {
 
   return (
     <PageTemplate>
+      
       <ModalPopup isOpen={showModal} onClose={handleCloseModal}>
         <div className="relative p-1 text-center max-w-2xl w-full">
           {/* Decorative elements */}
@@ -32,7 +33,7 @@ export default function HomePage() {
           {/* Logo with gradient border */}
           <div className="mb-6">
             <div className="mx-auto w-32 h-32 p-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl shadow-lg">
-              <div className="bg-gray-900 p-4 rounded-xl h-full flex items-center justify-center">
+              <div className="bg-white p-4 rounded-xl h-full flex items-center justify-center">
                 <img 
                   src="/assets/logo-kpf.png" 
                   alt="KontakPerkasa Futures" 
@@ -47,7 +48,7 @@ export default function HomePage() {
             Welcome to PT KontakPerkasa Futures
           </h1>
           
-          <p className="text-white text-lg mb-8 max-w-lg mx-auto">
+          <p className="text-black text-lg mb-8 max-w-lg mx-auto">
             Join thousands of traders and start your journey in the world of futures trading with Indonesia's trusted broker.
           </p>
           
@@ -74,26 +75,26 @@ export default function HomePage() {
       {/* Content */}
       <div className="py-10 bg-white space-y-10">
         <div className="space-y-10 mb-20">
-          <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
+          <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
             <AboutUs />
           </div>
 
           <hr className="border-gray-200" />
 
-          <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
+          <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
             <ProdukContainer />
           </div>
 
           <hr className="border-gray-200" />
 
-          <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
+          <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
             <BeritaSection limit={3} className="mx-auto flex flex-col gap-7 px-4  lg:px-16" />
           </div>
         </div>
 
         <Iso />
 
-        <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52 my-20">
+        <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52 my-20">
           <Pengumuman showHeader={true} className="mx-auto px-4" />
         </div>
       </div>

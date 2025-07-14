@@ -11,7 +11,7 @@ export default function HistoricalData() {
     return (
         <PageTemplate title="Pivot & Fibonacci">
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Pivot & Fibonacci" hideTitle={true}>
+                <ProfilContainer title="Pivot & Fibonacci">
                     <div className="space-y-6">
                         {/* Tabs */}
                         <div className="flex border-b space-x-4">

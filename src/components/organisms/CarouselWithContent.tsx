@@ -81,7 +81,7 @@ export default function CarouselWithContent() {
                 {fullSlides.map((slide, i) => (
                     <div
                         key={i}
-                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-12 md:px-32"
+                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-1 md:px-32"
                     >
                         {/* Teks */}
                         <div className="text-center md:text-left max-w-xl">

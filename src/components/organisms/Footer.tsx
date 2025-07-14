@@ -41,159 +41,236 @@ const Icons = {
 };
 
 const Footer = () => {
+    const currentYear = new Date().getFullYear();
+    
     return (
-        <footer className="bg-gray-900 text-gray-300 pt-12 pb-6 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+        <footer className="bg-gray-900 text-gray-300 relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute inset-0 opacity-5">
+                <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] bg-repeat"></div>
+            </div>
+            
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
                 {/* Top Section - Warning */}
-                <div className="bg-yellow-900/30 border-l-4 border-yellow-500 p-6 mb-10 rounded-r-lg">
+                <div className="bg-gradient-to-r from-yellow-900/40 to-amber-900/20 border-l-4 border-yellow-500 p-6 mb-12 rounded-r-lg transform transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
                     <div className="flex items-start">
-                        <Icons.Warning />
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3">PERHATIAN!</h3>
-                            <p className="text-sm leading-relaxed">
-                            Managemen PT. Kontakperkasa Futures menghimbau kepada seluruh masyarakat untuk lebih berhati-hati terhadap beberapa bentuk penipuan yang berkedok investasi mengatasnamakan PT. Kontakperkasa Futures dengan menggunakan media elektronik ataupun sosial media. Untuk itu harus dipastikan bahwa transfer dana ke rekening tujuan (Segregated Account) guna melaksanakan transaksi Perdagangan Berjangka adalah atas nama PT Kontakperkasa Futures, bukan atas nama individu.
+                        <div className="flex-shrink-0">
+                            
+                        </div>
+                        <div className="ml-3">
+                            <h3 className="text-xl font-bold text-white mb-3 flex items-center">
+                            <Icons.Warning /> PERHATIAN!
+                            </h3>
+                            <p className="text-sm leading-relaxed text-gray-200">
+                                Managemen PT. Kontakperkasa Futures menghimbau kepada seluruh masyarakat untuk lebih berhati-hati terhadap beberapa bentuk penipuan yang berkedok investasi mengatasnamakan PT. Kontakperkasa Futures dengan menggunakan media elektronik ataupun sosial media. Untuk itu harus dipastikan bahwa transfer dana ke rekening tujuan (Segregated Account) guna melaksanakan transaksi Perdagangan Berjangka adalah atas nama PT Kontakperkasa Futures, bukan atas nama individu.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 {/* Main Content */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                     {/* Useful Links */}
                     <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-white border-b border-gray-700 pb-2">Tautan Cepat</h3>
+                        <h3 className="text-lg font-semibold text-white border-l-4 border-green-500 pl-3 py-1">Tautan Cepat</h3>
                         <ul className="space-y-3">
-                            <li>
-                                <a href="#" className="flex items-center hover:text-white transition-colors duration-200">
-                                    <Icons.Home />
-                                    Beranda
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="flex items-center hover:text-white transition-colors duration-200">
-                                    <Icons.Cube />
-                                    Lihat Produk
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="flex items-center hover:text-white transition-colors duration-200">
-                                    <Icons.Envelope />
-                                    Kontak
-                                </a>
-                            </li>
+                            {[
+                                { icon: <Icons.Home />, text: 'Beranda', href: '/' },
+                                { icon: <Icons.Cube />, text: 'Lihat Produk', href: '/produk' },
+                                { icon: <Icons.Envelope />, text: 'Kontak', href: '/hubungi-kami' }
+                            ].map((item, index) => (
+                                <li key={index}>
+                                    <a 
+                                        href={item.href} 
+                                        className="flex items-center group transition-all duration-300 hover:translate-x-1"
+                                    >
+                                        <span className="text-green-500 group-hover:text-green-400 transition-colors mr-3">
+                                            {item.icon}
+                                        </span>
+                                        <span className="text-gray-300 group-hover:text-white transition-colors">
+                                            {item.text}
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
 
                         {/* Download App */}
-                        <div className="pt-4">
-                            <h3 className="text-lg font-semibold text-white mb-3 border-b border-gray-700 pb-2">Unduh Aplikasi</h3>
-                            <div className="flex flex-col space-y-3">
-                                <a href="https://apps.apple.com/id/app/pro-trader-royalassetindo/id6502900138?l=id" className="block w-full max-w-[180px]">
-                                    <img 
-                                        src="/assets/download-on-the-app-store.svg" 
-                                        alt="Download on App Store" 
-                                        className="h-12 w-full object-contain hover:opacity-90 transition-opacity"
-                                    />
-                                </a>
-                                <a href="https://play.google.com/store/apps/details?id=com.royalassetindo.protrader&hl=id" className="block w-full max-w-[180px]">
-                                    <img 
-                                        src="/assets/en_badge_web_generic.png" 
-                                        alt="Get it on Google Play" 
-                                        className="h-16 w-full object-contain hover:opacity-90 transition-opacity"
-                                    />
-                                </a>
+                        <div className="pt-6">
+                            <h3 className="text-lg font-semibold text-white mb-4 border-l-4 border-green-500 pl-3 py-1">Unduh Aplikasi</h3>
+                            <div className="space-y-4">
+                                {[
+                                    {
+                                        href: "https://apps.apple.com/id/app/pro-trader-royalassetindo/id6502900138?l=id",
+                                        src: "/assets/download-on-the-app-store.svg",
+                                        alt: "Download on App Store",
+                                        className: "h-12"
+                                    },
+                                    {
+                                        href: "https://play.google.com/store/apps/details?id=com.royalassetindo.protrader&hl=id",
+                                        src: "/assets/en_badge_web_generic.png",
+                                        alt: "Get it on Google Play",
+                                        className: "h-16"
+                                    }
+                                ].map((app, index) => (
+                                    <a 
+                                        key={index} 
+                                        href={app.href} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="block w-full max-w-[180px] transform transition-transform duration-300 hover:scale-105"
+                                    >
+                                        <img 
+                                            src={app.src}
+                                            alt={app.alt}
+                                            className={`w-full object-contain ${app.className}`}
+                                        />
+                                    </a>
+                                ))}
                             </div>
                         </div>
                     </div>
 
                     {/* Company Info */}
                     <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-white border-b border-gray-700 pb-2">Kontak Kami</h3>
-                        <div className="space-y-4">
-                            <div className="flex items-start">
-                                <Icons.MapPin />
-                                <p className="text-sm">
-                                Sudirman Plaza, Gedung Plaza Marein Lt. 7 & 19<br />
-                                Jl. Jend. Sudirman Kav. 76-78, Jakarta 12910
-                                </p>
-                            </div>
-                            <div className="flex items-center">
-                                <Icons.Envelope />
-                                <a href="mailto:corporate@rifan-financindo-berjangka.co.id" className="hover:text-white transition-colors duration-200 text-sm">
-                                    corporate@rifan-financindo-berjangka.co.id
-                                </a>
-                            </div>
-                            <div className="flex items-center">
-                                <Icons.Phone />
-                                <a href="tel:02157936555" className="hover:text-white transition-colors duration-200 text-sm">
-                                (021) 5793 6555
-                                </a>
-                            </div>
-                            <div className="flex items-center">
-                                <Icons.Document />
-                                <span className="text-sm">(021) 5793 6550</span>
-                            </div>
-                            <div className="flex items-start">
-                                <Icons.Envelope />
-                                <a href="mailto:corporate@kontak-perkasa-futures.co.id" className="hover:text-white transition-colors duration-200 text-sm">
-                                    Layanan pengaduan: corporate@kontak-perkasa-futures.co.id
-                                </a>
-                            </div>
+                        <h3 className="text-lg font-semibold text-white border-l-4 border-green-500 pl-3 py-1">Kontak Kami</h3>
+                        <div className="space-y-5">
+                            {[
+                                {
+                                    icon: <Icons.MapPin />,
+                                    content: (
+                                        <p className="text-sm text-gray-200">
+                                            <span className="font-medium text-white">Kantor Pusat</span><br />
+                                            Sudirman Plaza, Gedung Plaza Marein Lt. 7 & 19<br />
+                                            Jl. Jend. Sudirman Kav. 76-78, Jakarta 12910
+                                        </p>
+                                    )
+                                },
+                                {
+                                    icon: <Icons.Envelope />,
+                                    content: (
+                                        <a 
+                                            href="mailto:corporate@rifan-financindo-berjangka.co.id" 
+                                            className="text-sm text-gray-300 hover:text-white transition-colors duration-200 group"
+                                        >
+                                            <span className="block group-hover:underline">corporate@rifan-financindo-berjangka.co.id</span>
+                                        </a>
+                                    )
+                                },
+                                // Phone numbers section
+                                {
+                                    icon: <Icons.Phone />,
+                                    content: (
+                                        <a 
+                                            href="tel:02157936555" 
+                                            className="text-sm text-gray-300 hover:text-white transition-colors duration-200 group"
+                                        >
+                                            <span className="group-hover:underline">(021) 5793 6555</span>
+                                        </a>
+                                    )
+                                },
+                                // Document number section
+                                {
+                                    icon: <Icons.Document />,
+                                    content: (
+                                        <span className="text-sm text-gray-300">
+                                            (021) 5793 6550
+                                        </span>
+                                    )
+                                },
+                                {
+                                    icon: <Icons.Envelope />,
+                                    content: (
+                                        <a 
+                                            href="mailto:corporate@kontak-perkasa-futures.co.id" 
+                                            className="text-sm text-gray-300 hover:text-white transition-colors duration-200 group"
+                                        >
+                                            <span className="font-medium text-white">Layanan Pengaduan:</span><br />
+                                            <span className="group-hover:underline">corporate@kontak-perkasa-futures.co.id</span>
+                                        </a>
+                                    )
+                                }
+                            ].map((item, index) => (
+                                <div key={index} className="flex items-start group">
+                                    <div className="text-green-500 group-hover:text-green-400 transition-colors mt-1 mr-3">
+                                        {item.icon}
+                                    </div>
+                                    {item.content}
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Additional Info */}
+                    {/* Legal & Certifications */}
                     <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-white border-b border-gray-700 pb-2">Legalitas</h3>
-                        <div className="space-y-4">
-                            <div className="bg-white/5 p-4 rounded-lg">
-                                <a href="https://www.komdigi.go.id/" target="_blank" rel="noopener noreferrer">
-                                    <img 
-                                        src="/assets/BrandLogo.org-KOMDIGI-Logo-2024.png" 
-                                        alt="Kementerian Komunikasi dan Informatika" 
-                                        className="h-16 mx-auto hover:opacity-90 transition-opacity"
-                                    />
-                                </a>
-                                <p className="text-xs text-center mt-3 text-gray-400">
-                                    Terdaftar dan diawasi oleh Kementerian Komunikasi dan Informatika Republik Indonesia
-                                </p>
-                            </div>
-                            <div className="bg-white/5 p-4 rounded-lg">
-                                <img
-                                    src="/assets/iso.png"
-                                    alt="ISO Certification"
-                                    className="h-16 mx-auto hover:opacity-90 transition-opacity"
-                                />
-                                <p className="text-xs text-center mt-3 text-gray-400">
-                                    Bersertifikat ISO 9001:2015
-                                </p>
-                            </div>
+                        <h3 className="text-lg font-semibold text-white border-l-4 border-green-500 pl-3 py-1">Legalitas</h3>
+                        <div className="grid grid-cols-1 gap-5">
+                            {[
+                                {
+                                    href: "https://www.komdigi.go.id/",
+                                    src: "/assets/BrandLogo.org-KOMDIGI-Logo-2024.png",
+                                    alt: "Kementerian Komunikasi dan Informatika",
+                                    description: "Terdaftar dan diawasi oleh Kementerian Komunikasi dan Informatika Republik Indonesia",
+                                    className: "h-16"
+                                },
+                                {
+                                    src: "/assets/iso.png",
+                                    alt: "ISO Certification",
+                                    description: "Bersertifikat ISO 9001:2015",
+                                    className: "h-16"
+                                }
+                            ].map((item, index) => (
+                                <div 
+                                    key={index} 
+                                    className="bg-gradient-to-br from-white/5 to-white/[0.02] p-5 rounded-xl border border-white/5 hover:border-green-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/5"
+                                >
+                                    {item.href ? (
+                                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="block">
+                                            <img 
+                                                src={item.src} 
+                                                alt={item.alt} 
+                                                className={`mx-auto ${item.className} transition-transform duration-300 hover:scale-105`}
+                                            />
+                                        </a>
+                                    ) : (
+                                        <img 
+                                            src={item.src} 
+                                            alt={item.alt} 
+                                            className={`mx-auto ${item.className} transition-transform duration-300 hover:scale-105`}
+                                        />
+                                    )}
+                                    <p className="text-xs text-center mt-4 text-gray-400 leading-relaxed">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="border-t border-gray-800 pt-6">
+                <div className="border-t border-gray-700/50 pt-8 mt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center">
-                        <p className="text-sm text-gray-500 text-center md:text-left mb-4 md:mb-0">
-                            &copy; {new Date().getFullYear()} PT Kontak Perkasa Futures. All Rights Reserved
+                        <p className="text-sm text-gray-500 text-center md:text-left mb-6 md:mb-0">
+                            &copy; {currentYear} PT Kontak Perkasa Futures. All Rights Reserved
                         </p>
-                        <div className="flex space-x-6">
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                                <span className="sr-only">Facebook</span>
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                                <span className="sr-only">Twitter</span>
-                                <i className="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                                <span className="sr-only">Instagram</span>
-                                <i className="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                                <span className="sr-only">LinkedIn</span>
-                                <i className="fab fa-linkedin-in"></i>
-                            </a>
+                        <div className="flex items-center space-x-1">
+                            {[
+                                { icon: 'facebook-f', label: 'Facebook', href: '#' },
+                                { icon: 'twitter', label: 'Twitter', href: '#' },
+                                { icon: 'instagram', label: 'Instagram', href: '#' },
+                                { icon: 'linkedin-in', label: 'LinkedIn', href: '#' },
+                                { icon: 'youtube', label: 'YouTube', href: '#' }
+                            ].map((social, index) => (
+                                <a 
+                                    key={index}
+                                    href={social.href}
+                                    className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
+                                    aria-label={social.label}
+                                >
+                                    <i className={`fab fa-${social.icon} text-lg`}></i>
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>
