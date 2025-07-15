@@ -28,22 +28,24 @@ export default function Legalitas() {
         <PageTemplate title="Badan Regulasi">
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title="Badan Regulasi">
-                    <div className="space-y-12">
-                        {legalitasData.map((item) => (
-                            <div key={item.id} className="mb-12">
-                                <h3 className="text-xl font-semibold mb-4 text-center">{item.title}</h3>
-                                <div className="flex flex-col items-center">
-                                    <div className="max-w-2xl w-full mb-4">
-                                        <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden">
-                                            <Image
-                                                src={item.image}
-                                                alt={item.title}
-                                                fill
-                                                className="object-contain p-4"
-                                            />
-                                        </div>
+                    <div className="space-y-16">
+                        {legalitasData.map((item, index) => (
+                            <div key={item.id} className="flex flex-col md:flex-row items-center gap-8">
+                                {/* Image Container */}
+                                <div className="md:w-1/3 flex-shrink-0 w-full">
+                                    <div className="relative aspect-video bg-white rounded-lg overflow-hidden shadow-md p-4">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.title}
+                                            fill
+                                            className="object-contain"
+                                        />
                                     </div>
-                                    <p className="text-gray-700 text-center max-w-3xl">
+                                </div>
+                                {/* Text Content */}
+                                <div className="md:w-2/3">
+                                    <h3 className="text-2xl font-bold text-gray-800 mb-3">{item.title}</h3>
+                                    <p className="text-gray-600 text-base leading-relaxed text-justify">
                                         {item.description}
                                     </p>
                                 </div>

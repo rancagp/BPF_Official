@@ -5,7 +5,7 @@ export default function KeunggulanProduk() {
     return (
         <PageTemplate title="Keunggulan Produk">
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="KEUNGGULAN PRODUK PT. KONTAKPERKASA FUTURES">
+                <ProfilContainer title="Keunggulan Produk">
                     <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed text-justify">
 
                         <p>

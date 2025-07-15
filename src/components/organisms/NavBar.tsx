@@ -12,7 +12,7 @@ const menuItems = [
             { label: "Profil Perusahaan", href: "/profil/perusahaan" },
             { label: "Legalitas Bisnis", href: "/profil/legalitas-bisnis" },
             { label: "Wakil Pialang", href: "/profil/wakil-pialang" },
-            { label: "Badan Regulasi", href: "/profil/legalitas" },
+            { label: "Badan Regulasi", href: "/profil/badan-regulasi" },
             { label: "Fasilitas & Layanan", href: "/informasi/fasilitas-layanan" },
             {
                 label: "Pencapaian",
@@ -24,7 +24,7 @@ const menuItems = [
             {
                 label: "Umum",
                 submenu: [
-                    { label: "Informasi", href: "/informasi/umum" },
+                    { label: "Informasi", href: "/informasi/informasi-umum" },
                     { label: "Video", href: "/informasi/video-umum" },
                 ],
             },
@@ -52,7 +52,6 @@ const menuItems = [
             { label: "Prosedur Registrasi Online", href: "/prosedur/registrasi-online" },
             { label: "Prosedur Penarikan", href: "/prosedur/penarikan" },
             { label: "Petunjuk Transaksi", href: "/prosedur/petunjuk-transaksi" },
-            { label: "Specimen Agreement", href: "/prosedur/specimen-agreement" },
         ],
     },
     {
@@ -68,7 +67,6 @@ const menuItems = [
         label: "Edukasi",
         submenu: [
             { label: "Mekanisme Perdagangan", href: "/edukasi/mekanisme-perdagangan" },
-            { label: "Glosari", href: "/edukasi/glosari" },
             { label: "Symbol Indeks", href: "/edukasi/symbol-indeks" },
             { label: "Loco London Gold", href: "/edukasi/loco-london-gold" },
             { label: "Summer & Winter", href: "/edukasi/summer-winter" },

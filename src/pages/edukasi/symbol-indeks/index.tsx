@@ -46,8 +46,6 @@ const SymbolIndeksPage = () => {
                     <div className="space-y-12">
                         {/* Symbol Index Section */}
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-2">Simbol Indeks</h2>
-                            <div className="w-20 h-1 bg-green-500 mb-6"></div>
                             <ul className="list-disc list-inside space-y-2 text-gray-700">
                                 {symbolIndexData.map(item => (
                                     <li key={item.symbol}>

@@ -66,11 +66,11 @@ const MekanismePerdaganganPage = () => {
                         <div className="w-20 h-1 bg-green-500 mx-auto mb-8"></div>
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">Alur Multilateral</h3>
+                                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">Multilateral</h3>
                                 <Image src="/assets/alur-perdagangan-multi.jpg" alt="Alur Perdagangan Multilateral" width={800} height={600} layout="responsive" className="rounded-md" />
                             </div>
                             <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">Alur Bilateral</h3>
+                                <h3 className="text-xl font-bold text-center text-gray-800 mb-4">Bilateral</h3>
                                 <Image src="/assets/alur-perdagangan-bila.jpg" alt="Alur Perdagangan Bilateral" width={800} height={600} layout="responsive" className="rounded-md" />
                             </div>
                         </div>

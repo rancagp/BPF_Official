@@ -94,7 +94,7 @@ export default function WakilPialang() {
                                     href={`/profil/wakil-pialang/${item.slug}`}
                                     className="block hover:opacity-90 transition-opacity"
                                 >
-                                    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow h-full">
+                                    <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow h-full">
                                         <h3 className="text-lg font-semibold text-gray-800">
                                             {item.nama_kategori}
                                         </h3>

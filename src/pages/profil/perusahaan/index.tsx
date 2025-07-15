@@ -8,7 +8,7 @@ const visiMisiItems = [
         icon: <FaBullseye className="text-3xl text-blue-600" />,
         title: "Visi",
         description: "Mengembangkan dan memajukan Perdagangan Berjangka Komoditi serta memberikan dampak positif untuk perekonomian di Indonesia.",
-        bgColor: "bg-blue-50"
+        bgColor: "bg-gray-50"
     },
     {
         icon: <FaChartLine className="text-3xl text-green-600" />,
@@ -20,7 +20,7 @@ const visiMisiItems = [
             "Meningkatkan aspek kepatuhan peraturan yang berlaku",
             "Menyiapkan SDM berkualitas melalui program pelatihan"
         ],
-        bgColor: "bg-green-50"
+        bgColor: "bg-gray-50"
     }
 ];
 
@@ -106,7 +106,7 @@ export default function ProfilPerusahaan() {
                         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Nilai-Nilai Perusahaan</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {nilaiPerusahaan.map((nilai, index) => (
-                                <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+                                <div key={index} className="bg-gray-50 rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
                                     <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                         {nilai.icon}
                                     </div>
