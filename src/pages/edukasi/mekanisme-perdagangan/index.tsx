@@ -23,7 +23,7 @@ const MekanismePerdaganganPage = () => {
                     {/* Explanation Section */}
                     <div className="grid md:grid-cols-2 gap-8 text-base">
                         <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-3">Multilateral</h2>
+                            <h2 className="text-2xl font-bold text-gray-800 mb-3">Multilateral (JFX)</h2>
                             <p className="text-gray-700">
                                 Mekanisme transaksi antara banyak pihak dengan sistem tawar-menawar terbuka di bursa. Bertujuan untuk pembentukan harga (price discovery), lindung nilai (hedging), dan dapat melibatkan serah terima fisik komoditi.
                             </p>

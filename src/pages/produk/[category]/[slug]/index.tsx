@@ -82,7 +82,7 @@ export default function ProductDetail() {
                             {/* Gambar Produk */}
                             <div className="w-full md:w-1/2 flex justify-center">
                                 <img
-                                    src={`http://rfb-backpanel.test/img/produk/${product.image}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
                                     alt={product.name}
                                     className="w-full max-w-md h-auto object-cover rounded-2xl shadow-lg"
                                 />

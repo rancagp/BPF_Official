@@ -150,10 +150,10 @@ const Footer = () => {
                                     icon: <Icons.Envelope />,
                                     content: (
                                         <a 
-                                            href="mailto:corporate@rifan-financindo-berjangka.co.id" 
+                                            href="mailto:corporate@kontak-perkasa-futures.co.id" 
                                             className="text-sm text-gray-300 hover:text-white transition-colors duration-200 group"
                                         >
-                                            <span className="block group-hover:underline">corporate@rifan-financindo-berjangka.co.id</span>
+                                            <span className="block group-hover:underline">corporate@kontak-perkasa-futures.co.id</span>
                                         </a>
                                     )
                                 },

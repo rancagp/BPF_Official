@@ -24,8 +24,8 @@ const menuItems = [
             {
                 label: "Umum",
                 submenu: [
-                    { label: "Informasi", href: "/informasi/informasi-umum" },
-                    { label: "Video", href: "/informasi/video-umum" },
+                    { label: "Informasi", href: "/umum/informasi" },
+                    { label: "Video", href: "/umum/video" },
                 ],
             },
         ],
@@ -35,12 +35,16 @@ const menuItems = [
         submenu: [
             { label: "Multilateral (JFX)",
                 submenu: [
-                    { label: "Kontrak Berjangka Olein (OLE)", href: "/produk/kontrak berjangka olein" },
-                    { label: "Kontrak Berjangka Emas (GOL)", href: "/produk/kontrak berjangka emas" },
-                    { label: "Kontrak Berjangka Emas 250gr (GOL 250)", href: "/produk/kontrak berjangka emas 250gr" },
+                    { label: "Kontrak Berjangka Olein (OLE)", href: "/produk/kontrak-berjangka-olein" },
+                    { label: "Kontrak Berjangka Emas (GOL)", href: "/produk/kontrak-berjangka-emas" },
+                    { label: "Kontrak Berjangka Emas 250gr (GOL 250)", href: "/produk/kontrak-berjangka-emas-250gr" },
                 ]
             },
-            { label: "Bilateral (SPA)", href: "/produk/SPA" },
+            { label: "Bilateral (SPA)",
+                submenu: [
+                    { label: "Kontrak Berjangka Olein (OLE)", href: "/produk/kontrak-berjangka-olein-ole" }
+                ]
+            },
             { label: "Keunggulan Produk", href: "/produk/keunggulan-produk" },
             { label: "Ilustrasi Transaksi", href: "/prosedur/ilustrasi-transaksi" },
         ],
@@ -76,6 +80,13 @@ const menuItems = [
     },
 ];
 
+// Definisikan tipe untuk item menu agar lebih aman
+interface MenuItem {
+    label: string;
+    href?: string;
+    submenu?: MenuItem[];
+}
+
 export default function Navbar() {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null);
@@ -97,45 +108,35 @@ export default function Navbar() {
     };
 
     const handleMouseEnter = (label: string) => {
-        if (!isMobile) {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-            setOpenDropdown(label);
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
         }
+        setOpenDropdown(label);
     };
 
     const handleMouseLeave = () => {
-        if (!isMobile) {
-            timeoutRef.current = setTimeout(() => {
-                setOpenDropdown(null);
-            }, 200); // delay close
-        }
+        timeoutRef.current = setTimeout(() => {
+            setOpenDropdown(null);
+            setOpenSubDropdown(null);
+        }, 200); // Sedikit jeda sebelum menutup
     };
 
     const closeAllMenus = () => {
-        setOpenDropdown(null);
         setMenuOpen(false);
+        setOpenDropdown(null);
+        setOpenSubDropdown(null);
     };
 
     return (
-        <header className="sticky top-0 z-40">
-            <style jsx global>{`
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(-10px); }
-                    to { opacity: 1; transform: translateY(0); }
+        <header className="sticky top-0 z-50 bg-white">
+            <style>{`
+                .animate-slideDown {
+                    animation: slideDown 0.3s ease-in-out;
                 }
                 @keyframes slideDown {
                     from { opacity: 0; transform: translateY(-10px); }
                     to { opacity: 1; transform: translateY(0); }
                 }
-                .animate-fadeIn {
-                    animation: fadeIn 0.2s ease-out forwards;
-                }
-                .animate-slideDown {
-                    animation: slideDown 0.25s ease-out forwards;
-                }
-                /* Pastikan dropdown kanan tidak terpotong */
-                .navbar-dropdown-parent { overflow: visible !important; }
-                .navbar-dropdown-sub { left: 100% !important; top: 0 !important; min-width: 14rem; }
             `}</style>
 
             {/* Navbar utama */}
@@ -154,7 +155,7 @@ export default function Navbar() {
 
                     {/* Mobile menu toggle */}
                     <button
-                        className="md:hidden text-gray-800 hover:text-green-700 text-2xl transition-colors p-2 rounded-full hover:bg-gray-100"
+                        className="md:hidden ml-auto text-gray-800 hover:text-green-700 text-2xl transition-colors p-2 rounded-full hover:bg-gray-100"
                         onClick={() => setMenuOpen(!menuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -162,7 +163,7 @@ export default function Navbar() {
                     </button>
 
                     {/* Menu Desktop */}
-                    <nav className="hidden md:flex items-center space-x-4 ml-6">
+                                        <nav className="hidden md:flex items-center space-x-4 ml-6">
                         {menuItems.map((item) => (
                             <div
                                 key={item.label}
@@ -172,54 +173,54 @@ export default function Navbar() {
                             >
                                 {item.submenu ? (
                                     <>
-                                        <button
-                                            onClick={() => isMobile && toggleDropdown(item.label)}
-                                            className="flex items-center gap-1.5 px-4 py-3 rounded-lg text-gray-800 hover:text-green-700 font-medium transition-all duration-300 hover:bg-gray-50 group"
-                                        >
+                                        <button className="px-4 py-3 rounded-lg text-gray-800 hover:text-green-700 font-medium transition-all duration-300 hover:bg-gray-50 group flex items-center gap-2">
                                             <span className="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-green-600 after:transition-all after:duration-300 group-hover:after:w-full">
                                                 {item.label}
                                             </span>
-                                            <i className="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180" />
+                                            <i className={`fa-solid fa-chevron-down text-xs transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                                         </button>
                                         {openDropdown === item.label && (
-                                            <div className="absolute top-full left-0 w-56 mt-2 z-50" onMouseEnter={() => handleMouseEnter(item.label)} onMouseLeave={handleMouseLeave}>
-                                                <ul className="bg-white text-black rounded-lg shadow-lg border border-gray-100 overflow-hidden py-1 animate-fadeIn navbar-dropdown-parent">
+                                            <div className="absolute left-0 mt-1 w-64 bg-white rounded-lg shadow-xl py-2 z-20 border border-gray-100">
+                                                <ul>
                                                     {item.submenu.map((sub) => (
-    <li key={sub.label} className="relative group">
-        {sub.submenu ? (
-            <>
-                <button
-                    type="button"
-                    className="flex items-center w-full px-6 py-3 hover:bg-green-50 text-gray-700 hover:text-green-700 transition-colors duration-200"
-                    tabIndex={0}
-                    onClick={e => e.preventDefault()}
-                >
-                    {sub.label}
-                    <i className="fa-solid fa-chevron-right ml-2 text-xs" />
-                </button>
-                <ul className="absolute navbar-dropdown-sub bg-white text-black rounded-lg shadow-lg border border-gray-100 overflow-hidden py-1 animate-fadeIn hidden group-hover:block group-focus-within:block z-50">
-                    {sub.submenu.map((child) => (
-                        <li key={child.href}>
-                            <a
-                                href={child.href}
-                                className="block px-6 py-3 hover:bg-green-50 text-gray-700 hover:text-green-700 transition-colors duration-200 whitespace-nowrap"
-                            >
-                                {child.label}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </>
-        ) : (
-            <a
-                href={sub.href}
-                className="block px-6 py-3 hover:bg-green-50 text-gray-700 hover:text-green-700 transition-colors duration-200"
-            >
-                {sub.label}
-            </a>
-        )}
-    </li>
-))}
+                                                        <li key={sub.label}>
+                                                            {sub.submenu ? (
+                                                                <div 
+                                                                    className="relative"
+                                                                    onMouseEnter={() => setOpenSubDropdown(sub.label)}
+                                                                    onMouseLeave={() => setOpenSubDropdown(null)}
+                                                                >
+                                                                    <button className="w-full text-left flex justify-between items-center px-6 py-3 hover:bg-green-50 text-gray-700 hover:text-green-700 transition-colors duration-200">
+                                                                        {sub.label}
+                                                                        <i className="fa-solid fa-chevron-right text-xs" />
+                                                                    </button>
+                                                                    {openSubDropdown === sub.label && (
+                                                                        <div className="absolute left-full -top-1 mt-0 w-64 bg-white rounded-lg shadow-xl py-2 z-30 border border-gray-100">
+                                                                            <ul>
+                                                                                {sub.submenu.map((child) => (
+                                                                                    <li key={child.href}>
+                                                                                        <a
+                                                                                            href={child.href}
+                                                                                            className="block px-6 py-3 hover:bg-green-50 text-gray-700 hover:text-green-700 transition-colors duration-200"
+                                                                                        >
+                                                                                            {child.label}
+                                                                                        </a>
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            ) : (
+                                                                <a
+                                                                    href={sub.href}
+                                                                    className="block px-6 py-3 hover:bg-green-50 text-gray-700 hover:text-green-700 transition-colors duration-200"
+                                                                >
+                                                                    {sub.label}
+                                                                </a>
+                                                            )}
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         )}
@@ -239,81 +240,66 @@ export default function Navbar() {
                     </nav>
                 </div>
 
-                {/* Menu Mobile */}
+                {/* Mobile Menu (Dropdown with Scroll) */}
                 {menuOpen && (
-    <nav className="md:hidden px-6 py-4 space-y-2 text-base bg-white border-t border-gray-100 shadow-inner animate-slideDown">
-        {menuItems.map((item) => (
-            <div key={item.label}>
-                {item.submenu ? (
-                    <>
-                        <button
-                            onClick={() => {
-                                setOpenDropdown(openDropdown === item.label ? null : item.label);
-                                setOpenSubDropdown(null); // Tutup sub-submenu jika ganti menu utama
-                            }}
-                            className="w-full flex justify-between items-center py-3 px-4 rounded-lg text-gray-800 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
-                        >
-                            {item.label}
-                            <i
-                                className={`fa-solid fa-chevron-down transition-transform ${openDropdown === item.label ? "rotate-180" : ""}`}
-                            />
-                        </button>
-                        {openDropdown === item.label && (
-                            <ul className="pl-4">
-                                {item.submenu.map((sub) => (
-                                    <li key={sub.label}>
-                                        {sub.submenu ? (
-                                            <>
-                                                <button
-                                                    onClick={() => setOpenSubDropdown(openSubDropdown === sub.label ? null : sub.label)}
-                                                    className="w-full flex justify-between items-center py-2.5 px-6 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
-                                                >
-                                                    {sub.label}
-                                                    <i className={`fa-solid fa-chevron-down transition-transform ${openSubDropdown === sub.label ? "rotate-180" : ""}`} />
-                                                </button>
-                                                {openSubDropdown === sub.label && (
-                                                    <ul className="pl-4 border-l border-gray-200 ml-2">
-                                                        {sub.submenu.map((child) => (
-                                                            <li key={child.href}>
-                                                                <a
-                                                                    href={child.href}
-                                                                    className="block py-2.5 px-6 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
-                                                                    onClick={closeAllMenus}
-                                                                >
-                                                                    {child.label}
-                                                                </a>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <a
-                                                href={sub.href}
-                                                className="block py-2.5 px-6 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
-                                                onClick={closeAllMenus}
+                    <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg animate-slideDown">
+                        <nav className="px-4 pt-2 pb-4 max-h-[70vh] overflow-y-auto">
+                            {menuItems.map((item) => (
+                                <div key={item.label} className="py-1 border-b border-gray-100 last:border-b-0">
+                                    {item.submenu ? (
+                                        <>
+                                            <button
+                                                onClick={() => toggleDropdown(item.label)}
+                                                className="w-full flex justify-between items-center py-3 px-2 rounded-lg text-gray-800 hover:bg-green-50 hover:text-green-700 transition-colors duration-200 font-medium"
                                             >
-                                                {sub.label}
-                                            </a>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </>
-                ) : (
-                    <a
-                        href={item.href}
-                        className="block py-3 px-4 rounded-lg text-gray-800 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
-                        onClick={closeAllMenus}
-                    >
-                        {item.label}
-                    </a>
+                                                {item.label}
+                                                <i className={`fa-solid fa-chevron-down text-sm transition-transform ${openDropdown === item.label ? "rotate-180" : ""}`} />
+                                            </button>
+                                            {openDropdown === item.label && (
+                                                <ul className="pl-4 pt-2 pb-2 border-l border-green-200 ml-2">
+                                                    {item.submenu.map((sub) => (
+                                                        <li key={sub.label} className="py-1">
+                                                            {sub.submenu ? (
+                                                                <>
+                                                                    <button
+                                                                        onClick={() => setOpenSubDropdown(openSubDropdown === sub.label ? null : sub.label)}
+                                                                        className="w-full flex justify-between items-center py-2 px-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-green-600 transition-colors duration-200 text-left"
+                                                                    >
+                                                                        {sub.label}
+                                                                        <i className={`fa-solid fa-chevron-down text-xs transition-transform ${openSubDropdown === sub.label ? "rotate-180" : ""}`} />
+                                                                    </button>
+                                                                    {openSubDropdown === sub.label && (
+                                                                        <ul className="pl-4 pt-2 pb-1 border-l border-gray-200 ml-2">
+                                                                            {sub.submenu.map((child) => (
+                                                                                <li key={child.href}>
+                                                                                    <a href={child.href} onClick={closeAllMenus} className="block py-2 px-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-green-600 transition-colors duration-200">
+                                                                                        {child.label}
+                                                                                    </a>
+                                                                                </li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    )}
+                                                                </>
+                                                            ) : (
+                                                                <a href={sub.href} onClick={closeAllMenus} className="block py-2 px-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-green-600 transition-colors duration-200">
+                                                                    {sub.label}
+                                                                </a>
+                                                            )}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <a href={item.href} onClick={closeAllMenus} className="block py-3 px-2 rounded-lg text-gray-800 hover:bg-green-50 hover:text-green-700 transition-colors duration-200 font-medium">
+                                            {item.label}
+                                        </a>
+                                    )}
+                                </div>
+                            ))}
+                        </nav>
+                    </div>
                 )}
-            </div>
-        ))}
-    </nav>
-)}
             </div>
             <MarketUpdate />
         </header>

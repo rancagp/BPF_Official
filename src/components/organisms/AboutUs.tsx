@@ -11,13 +11,13 @@ export default function AboutUs() {
             </div>
 
             {/* Konten */}
-            <div className="space-y-4 text-justify">
-            <h1 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold text-green-800 whitespace-nowrap">
+            <div className="space-y-4">
+            <h1 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold text-green-800 text-left md:text-justify">
             Selamat Datang di KONTAKPERKASA FUTURES
 </h1>
 
 
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed text-justify">
                 PT. Kontakperkasa Futures, selaku anggota dari Bursa Berjangka Jakarta dan anggota Kliring Berjangka Indonesia, berbekal pengalaman dan kemampuan dalam mengembangkan perdagangan berjangka komoditi di tanah air, dengan menyediakan layanan transaksi derivatif lainnya yang sangat diminati investor yaitu transaksi derivatif indeks saham selain transaksi derivatif komoditi yang telah ada.
                 </p>
             </div>

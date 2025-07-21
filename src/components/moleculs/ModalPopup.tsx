@@ -6,7 +6,7 @@ interface ModalPopupProps {
     children: React.ReactNode;
 }
 
-export default function ModalPopup({ isOpen, onClose, children }) {
+export default function ModalPopup({ isOpen, onClose, children }: ModalPopupProps) {
     const [visible, setVisible] = useState(isOpen);
 
     useEffect(() => {
@@ -22,12 +22,12 @@ export default function ModalPopup({ isOpen, onClose, children }) {
 
     return (
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-3 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}
-                `}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-3 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+            onClick={onClose}
         >
             <div
-                className={`bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                    }`}
+                className={`bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+                onClick={(e) => e.stopPropagation()}
             >
                 <button
                     className="absolute top-3 right-3 text-gray-500 hover:text-black text-2xl"

@@ -12,7 +12,7 @@ export default async function handler(
     res: NextApiResponse<Category[] | { message: string }>
 ) {
     try {
-        const response = await fetch('http://rfb-backpanel.test/api/kategori-wakil-pialang');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kategori-wakil-pialang`);
 
         if (!response.ok) {
             return res.status(response.status).json({ message: 'Gagal memuat data kategori' });

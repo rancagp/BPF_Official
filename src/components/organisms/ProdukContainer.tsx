@@ -77,7 +77,7 @@ export default function ProdukContainer() {
                         >
                             <ProductCard
                                 title={product.name}
-                                image={`http://rfb-backpanel.test/img/produk/${product.image}`}
+                                image={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
                                 category={product.category}
                                 slug={`${product.slug}`}
                             />

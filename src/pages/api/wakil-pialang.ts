@@ -18,7 +18,7 @@ export default async function handler(
     res: NextApiResponse<WakilPialang[] | { message: string }>
 ) {
     try {
-        const response = await fetch('http://rfb-backpanel.test/api/wakil-pialang');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/wakil-pialang`);
 
         if (!response.ok) {
             return res.status(response.status).json({ message: 'Gagal memuat data Wakil Pialang' });
