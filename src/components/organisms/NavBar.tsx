@@ -33,18 +33,9 @@ const menuItems = [
     {
         label: "Produk",
         submenu: [
-            { label: "Multilateral (JFX)",
-                submenu: [
-                    { label: "Kontrak Berjangka Olein (OLE)", href: "/produk/kontrak-berjangka-olein" },
-                    { label: "Kontrak Berjangka Emas (GOL)", href: "/produk/kontrak-berjangka-emas" },
-                    { label: "Kontrak Berjangka Emas 250gr (GOL 250)", href: "/produk/kontrak-berjangka-emas-250gr" },
-                ]
-            },
-            { label: "Bilateral (SPA)",
-                submenu: [
-                    { label: "Kontrak Berjangka Olein (OLE)", href: "/produk/kontrak-berjangka-olein-ole" }
-                ]
-            },
+            { label: "Semua Produk", href: "/produk" },
+            { label: "Produk JFX", href: "/produk/jfx" },
+            { label: "Produk SPA", href: "/produk/spa" },
             { label: "Keunggulan Produk", href: "/produk/keunggulan-produk" },
             { label: "Ilustrasi Transaksi", href: "/prosedur/ilustrasi-transaksi" },
         ],

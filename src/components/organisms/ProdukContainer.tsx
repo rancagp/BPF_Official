@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import ProductCard from "@/components/moleculs/ProductCard";
 import Header1 from "@/components/moleculs/Header1";
 
@@ -13,8 +14,13 @@ type Product = {
 };
 
 export default function ProdukContainer() {
+    const router = useRouter();
     const [productList, setProductList] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const handleProductClick = (category: string, slug: string) => {
+        router.push(`/produk/${category.toLowerCase()}/${slug}`);
+    };
 
     useEffect(() => {
         async function fetchProducts() {
@@ -73,13 +79,22 @@ export default function ProdukContainer() {
                     {productList.map((product) => (
                         <div 
                             key={`${product.category}-${product.id}`}
-                            className="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100"
+                            className="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer"
+                            onClick={() => handleProductClick(product.category, product.slug)}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    handleProductClick(product.category, product.slug);
+                                }
+                            }}
                         >
                             <ProductCard
                                 title={product.name}
                                 image={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
                                 category={product.category}
-                                slug={`${product.slug}`}
+                                slug={product.slug}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                                 <span className="text-white text-sm font-medium">Lihat Detail</span>
