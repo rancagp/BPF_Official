@@ -1,6 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { getBanners } from "@/services/bannerService";
+
+interface Banner {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    order: number;
+    is_active: boolean;
+    created_at?: string;
+    updated_at?: string;
+}
+
+interface CTAButton {
+    label: string;
+    link: string;
+}
 
 interface Slide {
     title: string;
@@ -8,37 +25,141 @@ interface Slide {
     image: string;
 }
 
-const slides: Slide[] = [
+const defaultBanners: Banner[] = [
     {
+        id: 1,
         title: "Real Time Online Trading",
         description: "Bergabunglah dan cobalah alat perdagangan online kami di manapun Anda berada. Hubungi marketing kami untuk memulai panduan yang tepat tentang online trading kami",
         image: "/assets/corousel-1.png",
+        order: 1,
+        is_active: true
     },
     {
+        id: 2,
         title: "Layanan Terbaik",
         description: "Kami akan selalu memberikan layanan terbaik bagi seluruh calon nasabah dan nasabah terutama dalam hal kemudahan bertransaksi real account maupun demo account didukung oleh SDM berkualitas yang telah resmi menjadi wakil pialang berjangka melalui fit dan proper test dari Bappebti.",
         image: "/assets/corousel-2.png",
-    },
-    //{
-       // title: "Layanan Konsultasi Eksklusif",
-        //description: "Didukung oleh analis berpengalaman dan teknologi modern.",
-        //image: "/assets/corousel-3.png",
-    //},
+        order: 2,
+        is_active: true
+    }
 ];
 
-const items = [
+const CTA_ITEMS = [
     { label: "Daftar Sekarang", link: "https://regol.kontak-perkasa-futures.co.id/" },
     { label: "Demo", link: "https://demo.kontakperkasafutures.com/login" },
     { label: "Live", link: "https://etrade.kontakperkasafutures.com/login" },
 ];
 
-const totalSlides = slides.length;
-const fullSlides = [slides[totalSlides - 1], ...slides, slides[0]];
-
 export default function CarouselWithContent() {
+    const [banners, setBanners] = useState<Banner[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [index, setIndex] = useState(1); // start dari 1 karena clone
     const [transitioning, setTransitioning] = useState(true);
+    
+    // Refs
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const isMounted = useRef(true);
+    
+    // Fungsi untuk memuat banner
+    const fetchBanners = useCallback(async () => {
+        try {
+            setLoading(true);
+            const data = await getBanners();
+            console.log('Data banner yang diterima:', data);
+            
+            if (!isMounted.current) return;
+            
+            // Filter hanya banner yang aktif
+            const activeBanners = data.filter(banner => banner.is_active);
+            console.log('Active banners:', activeBanners);
+            
+            // Pastikan URL gambar lengkap
+            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+            const bannersWithFullUrls = activeBanners.map(banner => {
+                // Jika gambar sudah URL lengkap, gunakan langsung
+                if (banner.image.startsWith('http')) {
+                    return banner;
+                }
+                
+                // Jika gambar dimulai dengan /storage, tambahkan base URL
+                if (banner.image.startsWith('/storage/')) {
+                    return {
+                        ...banner,
+                        image: `${baseUrl}${banner.image}`
+                    };
+                }
+                
+                // Jika tidak, tambahkan base URL dengan format yang benar
+                return {
+                    ...banner,
+                    image: `${baseUrl}${banner.image.startsWith('/') ? '' : '/'}${banner.image}`
+                };
+            });
+            
+            console.log('Banners with full URLs:', bannersWithFullUrls);
+            
+            // Urutkan berdasarkan order
+            const sortedBanners = [...bannersWithFullUrls].sort((a, b) => a.order - b.order);
+            console.log('Sorted banners:', sortedBanners);
+            
+            setBanners(sortedBanners);
+            setError(null);
+        } catch (err) {
+            console.error('Gagal mengambil data banner:', err);
+            if (isMounted.current) {
+                setError('Gagal memuat banner. Menampilkan banner default.');
+                setBanners(defaultBanners);
+            }
+        } finally {
+            if (isMounted.current) {
+                setLoading(false);
+            }
+        }
+    }, []);
+    
+    // Ambil data banner dari API
+    useEffect(() => {
+        fetchBanners();
+        
+        // Cleanup function
+        return () => {
+            isMounted.current = false;
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [fetchBanners]);
+
+    // Inisialisasi slides dari data banner
+    const slides: Slide[] = banners.map(banner => {
+        // Pastikan URL gambar valid
+        let imageUrl = banner.image;
+        
+        // Jika URL relatif, tambahkan base URL
+        if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('//')) {
+            // Hapus slash di awal jika ada
+            imageUrl = imageUrl.replace(/^\//, '');
+            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+            imageUrl = `${baseUrl}/${imageUrl}`;
+        }
+        
+        console.log('Processing banner image:', {
+            original: banner.image,
+            processed: imageUrl
+        });
+        
+        return {
+            title: banner.title,
+            description: banner.description,
+            image: imageUrl
+        };
+    });
+
+    const totalSlides = slides.length;
+    const fullSlides = totalSlides > 0 
+        ? [slides[totalSlides - 1], ...slides, slides[0]] 
+        : [];
 
     const goTo = (newIndex: number) => {
         setIndex(newIndex);
@@ -65,8 +186,28 @@ export default function CarouselWithContent() {
         if (!transitioning) return;
 
         timeoutRef.current = setTimeout(goToNext, 20000);
-        return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-    }, [index, transitioning]);
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [index, transitioning, goToNext]);
+
+    if (loading && banners.length === 0) {
+        return (
+            <div className="relative w-full h-96 bg-gray-200 flex items-center justify-center text-gray-500">
+                <div className="animate-pulse">Memuat banner...</div>
+            </div>
+        );
+    }
+
+    if (error || totalSlides === 0) {
+        return (
+            <div className="relative w-full h-96 bg-gray-200 flex items-center justify-center text-red-500">
+                {error || 'Tidak ada banner yang tersedia'}
+            </div>
+        );
+    }
 
     return (
         <div className="relative w-full overflow-hidden text-white">
@@ -88,7 +229,7 @@ export default function CarouselWithContent() {
                             <h1 className="text-2xl md:text-4xl font-bold mb-4">{slide.title}</h1>
                             <p className="text-base md:text-lg mb-6">{slide.description}</p>
                             <div className="flex flex-col md:flex-row gap-3">
-                                {items.map((item, i) => (
+                                {CTA_ITEMS.map((item: CTAButton, i: number) => (
                                     <a
                                         key={i}
                                         href={item.link}
@@ -103,7 +244,23 @@ export default function CarouselWithContent() {
 
                         {/* Gambar */}
                         <div className="mt-8 md:mt-0">
-                            <img src={slide.image} alt={slide.title} className="h-100 md:h-120 w-auto object-contain" />
+                            <div className="h-100 md:h-120 w-full">
+                                <img 
+                                    src={slide.image} 
+                                    alt={slide.title} 
+                                    className="w-full h-full object-contain"
+                                    onError={(e) => {
+                                        console.error('Gagal memuat gambar:', {
+                                            imageUrl: slide.image,
+                                            error: e,
+                                            timestamp: new Date().toISOString()
+                                        });
+                                        // Coba fallback ke placeholder yang ada di public folder
+                                        e.currentTarget.src = '/placeholder.jpg';
+                                        e.currentTarget.alt = 'Gambar tidak tersedia';
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}
