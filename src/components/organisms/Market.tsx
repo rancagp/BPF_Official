@@ -2,36 +2,74 @@ import { useEffect, useState, useRef } from "react";
 import MarketCard from "../moleculs/MarketCard";
 import Header1 from "../moleculs/Header1";
 
+type Direction = 'up' | 'down' | 'neutral';
+
+interface MarketItem {
+  symbol: string;
+  last: number;
+  percentChange: number;
+  direction?: Direction;
+}
+
 export default function Market() {
-    const [marketData, setMarketData] = useState([]);
-    const [errorMessage, setErrorMessage] = useState("");
-    const prevDataRef = useRef([]);
+    const [marketData, setMarketData] = useState<MarketItem[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const prevDataRef = useRef<MarketItem[]>([]);
 
     useEffect(() => {
         const fetchMarketData = async () => {
+            console.log('Fetching market data...');
             try {
                 const res = await fetch('/api/market');
+                console.log('API Response status:', res.status);
 
                 if (!res.ok) {
-                    const errorText = `${res.status} ${res.statusText}`;
-                    setErrorMessage(errorText);
+                    const errorText = await res.text();
+                    console.error('API Error:', {
+                        status: res.status,
+                        statusText: res.statusText,
+                        errorText
+                    });
+                    setErrorMessage(`Error: ${res.status} - ${res.statusText}`);
                     setMarketData([]);
                     return;
                 }
 
-                const data = await res.json();
+                let data;
+                try {
+                    data = await res.json();
+                    console.log('API Response data:', data);
+                } catch (parseError) {
+                    console.error('Error parsing JSON:', parseError);
+                    setErrorMessage('Error parsing market data');
+                    setMarketData([]);
+                    return;
+                }
+
+                if (!Array.isArray(data)) {
+                    console.error('Expected array but got:', typeof data);
+                    setErrorMessage('Invalid data format from server');
+                    setMarketData([]);
+                    return;
+                }
 
                 const filteredData = data
-                    .filter(item => item.symbol && typeof item.last === 'number')
-                    .map(item => ({
-                        symbol: item.symbol,
-                        last: item.last,
-                        percentChange: item.percentChange,
+                    .filter((item: any) => {
+                        const isValid = item?.symbol && (item.last !== null && item.last !== undefined);
+                        if (!isValid) {
+                            console.warn('Skipping invalid item:', item);
+                        }
+                        return isValid;
+                    })
+                    .map((item: any): MarketItem => ({
+                        symbol: String(item.symbol),
+                        last: Number(item.last),
+                        percentChange: Number(item.percentChange) || 0,
                     }));
 
-                const updatedData = filteredData.map(item => {
+                const updatedData = filteredData.map((item: MarketItem): MarketItem & { direction: Direction } => {
                     const prevItem = prevDataRef.current.find(p => p.symbol === item.symbol);
-                    let direction;
+                    let direction: Direction = 'neutral';
 
                     if (prevItem) {
                         if (item.last > prevItem.last) direction = 'up';
@@ -47,8 +85,8 @@ export default function Market() {
                 setMarketData(updatedData);
                 prevDataRef.current = filteredData;
                 setErrorMessage("");
-            } catch (error) {
-                setErrorMessage(error.message || "Gagal memuat data");
+            } catch (error: any) {
+                setErrorMessage(error?.message || "Gagal memuat data");
                 setMarketData([]);
             }
         };
@@ -58,14 +96,16 @@ export default function Market() {
         return () => clearInterval(interval);
     }, []);
 
-    const formatPrice = (symbol, price) => {
+    const formatPrice = (symbol: string, price: number): string => {
+        if (!price && price !== 0) return '-';
         if (symbol.includes('IDR')) return `Rp${price.toLocaleString('id-ID')}`;
         if (symbol.includes('BTC')) return `$${price.toLocaleString('en-US')}`;
         return `$${price.toFixed(2)}`;
     };
 
-    const formatPercent = (percent) => {
-        const formatted = percent?.toFixed(2);
+    const formatPercent = (percent: number): string => {
+        if (percent === null || percent === undefined) return '0.00%';
+        const formatted = Number(percent).toFixed(2);
         const sign = percent > 0 ? '+' : '';
         return `${sign}${formatted}%`;
     };
@@ -86,13 +126,13 @@ export default function Market() {
                             Memuat data pasar...
                         </div>
                     ) : (
-                        marketData.map((item, index) => (
+                        marketData.map((item: MarketItem, index: number) => (
                             <MarketCard
-                                key={index}
+                                key={`${item.symbol}-${index}`}
                                 symbol={item.symbol}
                                 last={formatPrice(item.symbol, item.last)}
                                 percentChange={formatPercent(item.percentChange)}
-                                direction={item.direction}
+                                direction={item.direction || 'neutral'}
                             />
                         ))
                     )}

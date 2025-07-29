@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 
+interface MarketItem {
+  symbol: string;
+  last: number;
+  percentChange: number;
+}
+
 export default function MarketUpdate() {
-    const [marketData, setMarketData] = useState([]);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [marketData, setMarketData] = useState<MarketItem[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     useEffect(() => {
         const fetchMarketData = async () => {
@@ -20,18 +26,18 @@ export default function MarketUpdate() {
                 const data = await res.json();
 
                 const filteredData = data
-                    .filter(item => item.symbol && typeof item.last === 'number')
-                    .map(item => ({
-                        symbol: item.symbol,
-                        last: item.last,
-                        percentChange: item.percentChange,
+                    .filter((item: any) => item?.symbol && typeof item.last === 'number')
+                    .map((item: any): MarketItem => ({
+                        symbol: String(item.symbol),
+                        last: Number(item.last),
+                        percentChange: Number(item.percentChange) || 0,
                     }));
 
                 setMarketData(filteredData);
                 setErrorMessage(""); // clear error
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Fetch gagal:', error);
-                setErrorMessage(error.message || "Gagal memuat data");
+                setErrorMessage(error?.message || "Gagal memuat data");
                 setMarketData([]);
             }
         };
@@ -43,14 +49,16 @@ export default function MarketUpdate() {
         return () => clearInterval(interval);
     }, []);
 
-    const formatPrice = (symbol, price) => {
+    const formatPrice = (symbol: string, price: number): string => {
+        if (!price && price !== 0) return '-';
         if (symbol.includes('IDR')) return `Rp${price.toLocaleString('id-ID')}`;
         if (symbol.includes('BTC')) return `$${price.toLocaleString('en-US')}`;
         return `$${price.toFixed(2)}`;
     };
 
-    const formatPercent = (percent) => {
-        const formatted = percent?.toFixed(2);
+    const formatPercent = (percent: number): string => {
+        if (percent === null || percent === undefined) return '0.00%';
+        const formatted = Number(percent).toFixed(2);
         const sign = percent > 0 ? '+' : '';
         return `${sign}${formatted}%`;
     };
@@ -73,13 +81,13 @@ export default function MarketUpdate() {
                         </div>
                     ) : (
                         <div className="flex animate-marquee whitespace-nowrap items-center text-xs sm:text-sm md:text-base group-hover:[animation-play-state:paused]">
-                            {[...marketData, ...marketData].map((item, idx) => (
-                                <div key={idx} className="flex items-center">
+                            {[...marketData, ...marketData].map((item: MarketItem, idx: number) => (
+                                <div key={`${item.symbol}-${idx}`} className="flex items-center">
                                     <div className="flex items-center gap-2 px-4">
                                         <span className="font-semibold">{item.symbol}:</span>
                                         <span>{formatPrice(item.symbol, item.last)}</span>
-                                        <span className={`font-medium ${item.percentChange > 0 ? 'text-green-800' :
-                                                item.percentChange < 0 ? 'text-red-500' :
+                                        <span className={`font-medium ${item.percentChange > 0 ? 'text-green-300' :
+                                                item.percentChange < 0 ? 'text-red-400' :
                                                     'text-white/60'
                                             }`}>
                                             ({formatPercent(item.percentChange)})
