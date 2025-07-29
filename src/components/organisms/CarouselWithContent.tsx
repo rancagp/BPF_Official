@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { getBanners } from "@/services/bannerService";
+import { debounce } from "@/utils/debounce";
 
 interface Banner {
     id: number;
@@ -56,10 +57,12 @@ export default function CarouselWithContent() {
     const [error, setError] = useState<string | null>(null);
     const [index, setIndex] = useState(1); // start dari 1 karena clone
     const [transitioning, setTransitioning] = useState(true);
+    const [isTabActive, setIsTabActive] = useState(true);
     
     // Refs
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const isMounted = useRef(true);
+    const isTransitioningRef = useRef(false);
     
     // Fungsi untuk memuat banner
     const fetchBanners = useCallback(async () => {
@@ -128,70 +131,202 @@ export default function CarouselWithContent() {
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
             }
+            if (navigationCooldown.current) {
+                clearTimeout(navigationCooldown.current);
+            }
         };
     }, [fetchBanners]);
 
     // Inisialisasi slides dari data banner
-    const slides: Slide[] = banners.map(banner => {
-        // Pastikan URL gambar valid
-        let imageUrl = banner.image;
+    const slides: Slide[] = useMemo(() => {
+        if (!banners || banners.length === 0) return [];
         
-        // Jika URL relatif, tambahkan base URL
-        if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('//')) {
-            // Hapus slash di awal jika ada
-            imageUrl = imageUrl.replace(/^\//, '');
-            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
-            imageUrl = `${baseUrl}/${imageUrl}`;
+        return banners.map(banner => {
+            try {
+                // Pastikan URL gambar valid
+                let imageUrl = banner.image?.trim() || '';
+                
+                // Jika URL relatif, tambahkan base URL
+                if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('//')) {
+                    // Hapus slash di awal jika ada
+                    imageUrl = imageUrl.replace(/^\/+/, '');
+                    const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
+                    imageUrl = `${baseUrl}/${imageUrl}`;
+                }
+                
+                if (!imageUrl) {
+                    console.warn('Empty image URL for banner:', banner.id);
+                    return null;
+                }
+                
+                return {
+                    title: banner.title || 'No Title',
+                    description: banner.description || '',
+                    image: imageUrl
+                };
+            } catch (error) {
+                console.error('Error processing banner:', banner.id, error);
+                return null;
+            }
+        }).filter(Boolean) as Slide[]; // Filter out any null entries
+    }, [banners]);
+
+    const totalSlides = Math.max(0, slides.length);
+    
+    // Buat array slides dengan kloning untuk infinite loop
+    const fullSlides = useMemo(() => {
+        if (totalSlides === 0) return [];
+        if (totalSlides === 1) return [...slides]; // Tidak perlu kloning jika hanya 1 slide
+        
+        // Kloning slide terakhir di awal dan slide pertama di akhir
+        return [
+            slides[totalSlides - 1], // Kloning slide terakhir
+            ...slides,                // Semua slide asli
+            slides[0]                 // Kloning slide pertama
+        ];
+    }, [slides, totalSlides]);
+
+    const goTo = useCallback((newIndex: number) => {
+        // Pastikan index tidak melebihi batas
+        if (newIndex < 0 || newIndex >= fullSlides.length) {
+            console.warn('Index out of bounds:', newIndex);
+            return;
         }
-        
-        console.log('Processing banner image:', {
-            original: banner.image,
-            processed: imageUrl
-        });
-        
-        return {
-            title: banner.title,
-            description: banner.description,
-            image: imageUrl
-        };
-    });
-
-    const totalSlides = slides.length;
-    const fullSlides = totalSlides > 0 
-        ? [slides[totalSlides - 1], ...slides, slides[0]] 
-        : [];
-
-    const goTo = (newIndex: number) => {
         setIndex(newIndex);
         setTransitioning(true);
-    };
+    }, [fullSlides.length]);
 
-    const goToNext = () => goTo(index + 1);
-    const goToPrev = () => goTo(index - 1);
+    const [canNavigate, setCanNavigate] = useState(true);
+    const navigationCooldown = useRef<NodeJS.Timeout | null>(null);
 
-    const handleTransitionEnd = () => {
+    // Reset navigation cooldown
+    const resetNavigationCooldown = useCallback(() => {
+        if (navigationCooldown.current) {
+            clearTimeout(navigationCooldown.current);
+        }
+        navigationCooldown.current = setTimeout(() => {
+            setCanNavigate(true);
+        }, 800); // 800ms cooldown between navigations
+    }, []);
+
+    const goToNext = useCallback(() => {
+        if (isTransitioningRef.current || !canNavigate) return;
+        
+        setCanNavigate(false);
+        isTransitioningRef.current = true;
+        goTo(index + 1);
+        resetNavigationCooldown();
+    }, [goTo, index, canNavigate, resetNavigationCooldown]);
+
+    const goToPrev = useCallback(() => {
+        if (isTransitioningRef.current || !canNavigate) return;
+        
+        setCanNavigate(false);
+        isTransitioningRef.current = true;
+        goTo(index - 1);
+        resetNavigationCooldown();
+    }, [goTo, index, canNavigate, resetNavigationCooldown]);
+
+    const handleTransitionEnd = useCallback(() => {
+        // Pastikan fullSlides memiliki konten yang valid
+        if (fullSlides.length <= 1) {
+            setTransitioning(false);
+            return;
+        }
+
+        // Reset index jika mencapai ujung carousel
         if (index === 0) {
             // ke clone belakang → reset ke slide terakhir
             setTransitioning(false);
-            setTimeout(() => setIndex(totalSlides), 10); // delay 10ms
+            requestAnimationFrame(() => {
+                setIndex(totalSlides);
+                requestAnimationFrame(() => {
+                    setTransitioning(true);
+                });
+            });
         } else if (index === fullSlides.length - 1) {
             // ke clone depan → reset ke slide pertama
             setTransitioning(false);
-            setTimeout(() => setIndex(1), 10);
+            requestAnimationFrame(() => {
+                setIndex(1);
+                requestAnimationFrame(() => {
+                    setTransitioning(true);
+                });
+            });
+        } else {
+            setTransitioning(false);
         }
-    };
+    }, [index, totalSlides, fullSlides.length]);
 
-    // Autoplay hanya jika transitioning aktif
+    // Handle tab visibility changes
     useEffect(() => {
-        if (!transitioning) return;
+        const handleVisibilityChange = () => {
+            const isVisible = !document.hidden;
+            setIsTabActive(isVisible);
+            
+            if (isVisible && transitioning) {
+                // Reset timer when tab becomes visible
+                if (timeoutRef.current) {
+                    clearTimeout(timeoutRef.current);
+                }
+                timeoutRef.current = setTimeout(goToNext, 8000);
+            }
+        };
 
-        timeoutRef.current = setTimeout(goToNext, 20000);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [transitioning, goToNext]);
+
+    // Autoplay
+    useEffect(() => {
+        if (!isTabActive || fullSlides.length <= 1) return;
+        
+        const startAutoplay = () => {
+            if (isTransitioningRef.current) return;
+            
+            timeoutRef.current = setTimeout(() => {
+                if (isTabActive && !isTransitioningRef.current && fullSlides.length > 1) {
+                    // Pastikan index berikutnya valid
+                    const nextIndex = index + 1;
+                    if (nextIndex < fullSlides.length) {
+                        goToNext();
+                    } else {
+                        // Reset ke slide pertama jika sudah di akhir
+                        setIndex(1);
+                        setTransitioning(true);
+                    }
+                }
+            }, 5000); // 5 detik delay antar slide
+        };
+
+        // Mulai autoplay setelah transisi selesai
+        if (transitioning) {
+            const timer = setTimeout(() => {
+                isTransitioningRef.current = false;
+                // Jangan mulai autoplay jika ini adalah slide kloning
+                if (index > 0 && index < fullSlides.length - 1) {
+                    startAutoplay();
+                }
+            }, 1000); // Sesuaikan dengan durasi transisi CSS
+            
+            return () => clearTimeout(timer);
+        } else if (index > 0 && index < fullSlides.length - 1) {
+            // Hanya mulai autoplay jika bukan slide kloning
+            startAutoplay();
+        }
+
         return () => {
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, [index, transitioning, goToNext]);
+    }, [index, transitioning, isTabActive, goToNext]);
+
+    // Debounced navigation handlers
+    const debouncedGoToNext = useCallback(debounce(goToNext, 300), [goToNext]);
+    const debouncedGoToPrev = useCallback(debounce(goToPrev, 300), [goToPrev]);
 
     if (loading && banners.length === 0) {
         return (
@@ -219,7 +354,7 @@ export default function CarouselWithContent() {
                 }}
                 onTransitionEnd={handleTransitionEnd}
             >
-                {fullSlides.map((slide, i) => (
+                {fullSlides.map((slide: Slide, i: number) => (
                     <div
                         key={i}
                         className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-1 md:px-32"
@@ -281,15 +416,25 @@ export default function CarouselWithContent() {
             {/* Tombol Navigasi */}
             <button
                 aria-label="Previous Slide"
-                onClick={goToPrev}
-                className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white rounded-full p-2"
+                onClick={debouncedGoToPrev}
+                disabled={!canNavigate}
+                className={`absolute top-1/2 left-4 -translate-y-1/2 text-white rounded-full p-2 transition-all duration-300 ${
+                    canNavigate 
+                        ? 'bg-white/30 hover:bg-white/50 cursor-pointer' 
+                        : 'bg-white/20 cursor-not-allowed opacity-70'
+                }`}
             >
                 &#10094;
             </button>
             <button
                 aria-label="Next Slide"
-                onClick={goToNext}
-                className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white rounded-full p-2"
+                onClick={debouncedGoToNext}
+                disabled={!canNavigate}
+                className={`absolute top-1/2 right-4 -translate-y-1/2 text-white rounded-full p-2 transition-all duration-300 ${
+                    canNavigate 
+                        ? 'bg-white/30 hover:bg-white/50 cursor-pointer' 
+                        : 'bg-white/20 cursor-not-allowed opacity-70'
+                }`}
             >
                 &#10095;
             </button>

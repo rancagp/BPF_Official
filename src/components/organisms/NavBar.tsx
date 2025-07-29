@@ -133,7 +133,7 @@ export default function Navbar() {
             {/* Navbar utama */}
             <div className="bg-white text-black shadow-sm">
                 
-                <div className="flex justify-between items-center px-4 md:px-4 lg:px-8 py-3 max-w-7xl mx-auto w-full">
+                <div className="flex justify-start items-center px-4 md:px-4 lg:px-8 py-3 max-w-7xl mx-auto w-full">
                     
                     {/* Logo */}
                     <a href="/" className="flex items-center gap-1 group">
