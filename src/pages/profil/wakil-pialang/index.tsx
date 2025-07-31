@@ -28,26 +28,37 @@ export default function WakilPialang() {
     useEffect(() => {
         const ambilKategori = async () => {
             try {
-                // Gunakan data dummy untuk sementara
-                setKategori(dataDummy);
-                setSedangMemuat(false);
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/kategori-wakil-pialang`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    // credentials: 'include', // Uncomment ini jika menggunakan session/cookie
+                });
                 
-                // Jika ingin menggunakan API, aktifkan kode di bawah ini
-                /*
-                const response = await fetch("/api/kategori-pialang");
                 if (!response.ok) {
-                    throw new Error(`Terjadi kesalahan: ${response.status}`);
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('Error response:', errorData);
+                    throw new Error(`Terjadi kesalahan: ${response.status} - ${response.statusText}`);
                 }
+                
                 const data = await response.json();
+                console.log('Data diterima:', data);
+                
                 if (Array.isArray(data)) {
                     setKategori(data);
                 } else {
+                    console.error('Format data tidak valid:', data);
                     throw new Error("Format data tidak valid");
                 }
-                */
-            } catch (err) {
-                console.error("Gagal memuat kategori:", err);
-                setError("Gagal memuat data. Silakan coba lagi nanti.");
+            } catch (err: unknown) {
+                const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan yang tidak diketahui';
+                console.error("Gagal memuat kategori:", errorMessage);
+                setError(`Gagal memuat data: ${errorMessage}. Menggunakan data dummy...`);
+                // Fallback ke data dummy jika API error
+                setKategori(dataDummy);
             } finally {
                 setSedangMemuat(false);
             }
@@ -87,22 +98,36 @@ export default function WakilPialang() {
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title="Daftar Wakil Pialang">
                     {kategori.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {kategori.map((item) => (
-                                <Link 
-                                    key={item.id} 
-                                    href={`/profil/wakil-pialang/${item.slug}`}
-                                    className="block hover:opacity-90 transition-opacity"
-                                >
-                                    <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow h-full">
-                                        <h3 className="text-lg font-semibold text-gray-800">
+                        <div className="space-y-4">
+                        {kategori.map((item) => (
+                            <Link 
+                                key={item.id} 
+                                href={`/profil/wakil-pialang/${item.slug}`}
+                                className="block group"
+                            >
+                                <div className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <h3 className="text-base font-medium text-gray-900 truncate">
                                             {item.nama_kategori}
                                         </h3>
-                                        <p className="mt-2 text-green-600">Lihat detail →</p>
+                                        <p className="text-sm text-gray-500">
+                                            Lihat daftar lengkap wakil pialang
+                                        </p>
                                     </div>
-                                </Link>
-                            ))}
-                        </div>
+                                    <div className="ml-4 text-gray-400 group-hover:text-green-500 transition-colors">
+                                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                     ) : (
                         <div className="text-center py-10 text-gray-500">
                             Tidak ada data wakil pialang yang tersedia.

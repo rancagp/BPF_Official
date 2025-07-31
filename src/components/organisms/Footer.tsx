@@ -116,8 +116,7 @@ const Footer = () => {
                                 <Icons.MapPin className="flex-shrink-0 mt-1 mr-2 text-green-500" />
                                 <div>
                                     <p className="text-xs font-medium text-gray-900">Kantor Pusat</p>
-                                    <p className="text-xs text-gray-600">Sudirman Plaza, Gedung Plaza Marein Lt. 7 & 19</p>
-                                    <p className="text-xs text-gray-600">Jl. Jend. Sudirman Kav. 76-78, Jakarta 12910</p>
+                                    <p className="text-xs text-gray-600">Sudirman Plaza, Gedung Plaza Marein Lt. 7 & 19, Jl. Jend. Sudirman Kav. 76-78, Jakarta 12910</p>
                                 </div>
                             </div>
                             <div className="flex items-center">

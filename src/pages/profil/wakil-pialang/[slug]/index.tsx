@@ -5,10 +5,10 @@ import PageTemplate from "@/components/templates/PageTemplate";
 
 interface WakilPialang {
     id: number;
-    nama: string;
+    name: string;  // Diubah dari 'nama' menjadi 'name' untuk konsistensi dengan backend
     nomor_izin: string;
     status: string;
-    kategori_wakil_pialang: {
+    kategori_wakil_pialang?: {
         id: number;
         slug: string;
         nama_kategori: string;
@@ -26,28 +26,70 @@ export default function WakilPialangBySlug() {
     useEffect(() => {
         if (!slug) return;
 
-        const fetchWakilPialang = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch("/api/wakil-pialang");
-                const data = await response.json();
-
-                const filtered = data.filter((item: WakilPialang) => item.kategori_wakil_pialang?.slug === slug);
-
-                setWakilList(filtered);
-
-                if (filtered.length > 0) {
-                    setKategoriNama(filtered[0].kategori_wakil_pialang.nama_kategori);
-                } else {
-                    setKategoriNama("Kategori Tidak Ditemukan");
+                setLoading(true);
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                
+                // Ambil detail kategori
+                const kategoriResponse = await fetch(`${apiUrl}/api/kategori-wakil-pialang/${slug}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    // credentials: 'include', // Uncomment ini jika menggunakan session/cookie
+                });
+                
+                if (!kategoriResponse.ok) {
+                    throw new Error('Gagal memuat detail kategori');
                 }
-            } catch (error) {
-                console.error("Gagal memuat data:", error);
+                
+                const kategoriData = await kategoriResponse.json();
+                console.log('Detail kategori:', kategoriData);
+                
+                if (kategoriData.success && kategoriData.data) {
+                    setKategoriNama(kategoriData.data.nama_kategori);
+                } else {
+                    throw new Error('Data kategori tidak valid');
+                }
+
+                // Ambil daftar wakil pialang berdasarkan kategori
+                const wakilResponse = await fetch(`${apiUrl}/api/kategori-wakil-pialang/${slug}/wakil`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    // credentials: 'include', // Uncomment ini jika menggunakan session/cookie
+                });
+                
+                const wakilData = await wakilResponse.json();
+                console.log('Daftar wakil pialang:', wakilData);
+                
+                if (!wakilData.success) {
+                    throw new Error(wakilData.message || 'Gagal memuat daftar wakil pialang');
+                }
+                
+                // Pastikan data adalah array, jika tidak gunakan array kosong
+                const wakilList = Array.isArray(wakilData.data) ? wakilData.data : [];
+                setWakilList(wakilList);
+                
+                // Jika tidak ada data, tampilkan pesan
+                if (wakilList.length === 0) {
+                    console.log('Tidak ada data wakil pialang untuk kategori ini');
+                }
+            } catch (error: unknown) {
+                const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan yang tidak diketahui';
+                console.error("Gagal memuat data:", errorMessage);
+                setKategoriNama(`Error: ${errorMessage}`);
+                setWakilList([]);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchWakilPialang();
+        fetchData();
     }, [slug]);
 
     return (
@@ -73,7 +115,7 @@ export default function WakilPialangBySlug() {
                                     {wakilList.map((wpb, index) => (
                                         <tr key={wpb.id} className="bg-zinc-50 hover:bg-green-100 transition duration-200">
                                             <td className="px-6 py-4 text-center">{index + 1}</td>
-                                            <td className="px-6 py-4 text-center">{wpb.nama}</td>
+                                            <td className="px-6 py-4 text-center">{wpb.name}</td>
                                             <td className="px-6 py-4 text-center">{wpb.nomor_izin}</td>
                                             <td className="px-6 py-4 text-center">
                                                 <span
