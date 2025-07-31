@@ -73,7 +73,7 @@ export default function HomePage() {
       <CarouselWithContent />
 
       {/* Content */}
-      <div className="py-10 bg-white space-y-10">
+      <div className="py-10 bg-gray-50 space-y-10">
         <div className="space-y-10 mb-20">
           <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
             <AboutUs />
@@ -92,9 +92,13 @@ export default function HomePage() {
           </div>
         </div>
 
+        <hr className="border-gray-200 " />
+
         <Iso />
 
-        <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52 my-20">
+        <hr className="border-gray-200" />
+
+        <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52 my-5">
           <Pengumuman showHeader={true} className="mx-auto px-4" />
         </div>
       </div>
