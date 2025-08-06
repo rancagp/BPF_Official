@@ -13,7 +13,7 @@ const menuItems = [
             { label: "Legalitas Bisnis", href: "/profil/legalitas-bisnis" },
             { label: "Wakil Pialang", href: "/profil/wakil-pialang" },
             { label: "Badan Regulasi", href: "/profil/badan-regulasi" },
-            { label: "Fasilitas & Layanan", href: "/informasi/fasilitas-layanan" },
+            { label: "Fasilitas & Layanan", href: "/umum/fasilitas-layanan" },
             {
                 label: "Pencapaian",
                 submenu: [
