@@ -74,7 +74,6 @@ const DateTimeDisplay = () => {
                             <select className="appearance-none bg-transparent border-0 text-gray-500 focus:outline-none focus:ring-0 py-1 pr-6 pl-2 cursor-pointer text-xs border border-gray-200 rounded">
                                 <option value="id">ID</option>
                                 <option value="en">EN</option>
-                                <option value="cn">CN</option>
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-gray-500">
                                 <i className="fas fa-chevron-down text-xs"></i>
