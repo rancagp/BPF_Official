@@ -53,8 +53,17 @@ const CTA_ITEMS = [
 
 export default function CarouselWithContent() {
     const [banners, setBanners] = useState<Banner[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    
+    // Gunakan ref untuk melacak perubahan state banners
+    const bannersRef = useRef<Banner[]>([]);
+    
+    // Update ref ketika state banners berubah
+    useEffect(() => {
+        console.log('State banners berubah:', banners);
+        bannersRef.current = banners;
+    }, [banners]);
     const [index, setIndex] = useState(1); // start dari 1 karena clone
     const [transitioning, setTransitioning] = useState(true);
     const [isTabActive, setIsTabActive] = useState(true);
@@ -66,55 +75,117 @@ export default function CarouselWithContent() {
     
     // Fungsi untuk memuat banner
     const fetchBanners = useCallback(async () => {
+        // Set isMounted ke true saat memulai
+        isMounted.current = true;
+        console.log('Memulai pengambilan banner...');
+        setLoading(true);
+        
         try {
-            setLoading(true);
-            const data = await getBanners();
-            console.log('Data banner yang diterima:', data);
+            console.log('Mengambil data dari API...');
+            const response = await getBanners();
             
-            if (!isMounted.current) return;
+            // Periksa apakah komponen masih terpasang
+            if (!isMounted.current) {
+                console.log('Komponen sudah tidak terpasang, hentikan proses');
+                return;
+            }
+            
+            console.log('Response dari API:', response);
+            
+            // Pastikan data yang diterima adalah array
+            if (!Array.isArray(response)) {
+                console.error('Format data banner tidak valid:', response);
+                throw new Error('Format data banner tidak valid');
+            }
+            
+            // Buat salinan data untuk menghindari mutasi
+            const data = JSON.parse(JSON.stringify(response));
+            
+            console.log('Data banner yang akan diproses:', data);
             
             // Filter hanya banner yang aktif
-            const activeBanners = data.filter(banner => banner.is_active);
-            console.log('Active banners:', activeBanners);
+            const activeBanners = data.filter((banner: any) => banner?.is_active);
+            console.log('Jumlah banner aktif:', activeBanners.length, activeBanners);
+            
+            // Jika tidak ada banner aktif, gunakan default
+            if (activeBanners.length === 0) {
+                console.log('Tidak ada banner aktif, menggunakan banner default');
+                setBanners(defaultBanners);
+                setLoading(false);
+                return;
+            }
             
             // Pastikan URL gambar lengkap
-            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
-            const bannersWithFullUrls = activeBanners.map(banner => {
-                // Jika gambar sudah URL lengkap, gunakan langsung
-                if (banner.image.startsWith('http')) {
-                    return banner;
-                }
-                
-                // Jika gambar dimulai dengan /storage, tambahkan base URL
-                if (banner.image.startsWith('/storage/')) {
+            const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
+            console.log('Menggunakan base URL:', baseUrl);
+            
+            // Proses banner
+            const processedBanners = activeBanners.map((banner: any) => {
+                try {
+                    if (!banner) {
+                        console.warn('Banner null/undefined ditemukan');
+                        return null;
+                    }
+                    
+                    // Pastikan banner memiliki properti yang diperlukan
+                    if (!banner.id || !banner.title || !banner.image) {
+                        console.warn('Banner tidak valid - properti penting hilang:', banner);
+                        return null;
+                    }
+                    
+                    let imageUrl = banner.image?.toString().trim() || '';
+                    
+                    // Jika gambar sudah URL lengkap, gunakan langsung
+                    if (imageUrl.startsWith('http')) {
+                        return banner;
+                    }
+                    
+                    // Tambahkan base URL jika diperlukan
+                    if (imageUrl.startsWith('/')) {
+                        imageUrl = imageUrl.substring(1); // Hapus slash di depan
+                    }
+                    
+                    const fullImageUrl = `${baseUrl}/${imageUrl}`;
+                    
                     return {
                         ...banner,
-                        image: `${baseUrl}${banner.image}`
+                        image: fullImageUrl
                     };
+                } catch (err) {
+                    console.error('Error memproses banner:', banner?.id, err);
+                    return null;
                 }
-                
-                // Jika tidak, tambahkan base URL dengan format yang benar
-                return {
-                    ...banner,
-                    image: `${baseUrl}${banner.image.startsWith('/') ? '' : '/'}${banner.image}`
-                };
-            });
+            }).filter(Boolean); // Hapus null entries
             
-            console.log('Banners with full URLs:', bannersWithFullUrls);
+            console.log('Banner setelah diproses:', processedBanners);
             
             // Urutkan berdasarkan order
-            const sortedBanners = [...bannersWithFullUrls].sort((a, b) => a.order - b.order);
-            console.log('Sorted banners:', sortedBanners);
+            const sortedBanners = [...processedBanners].sort((a: any, b: any) => 
+                (a.order || 0) - (b.order || 0)
+            );
             
-            setBanners(sortedBanners);
-            setError(null);
+            console.log('Banner setelah diurutkan:', sortedBanners);
+            
+            // Update state hanya jika komponen masih terpasang
+            if (isMounted.current) {
+                console.log('Mengupdate state banners dengan:', sortedBanners);
+                setBanners(sortedBanners as Banner[]);
+                setError(null);
+                setLoading(false);
+                console.log('State setelah update - loading:', false, 'banners:', sortedBanners);
+            } else {
+                console.log('Komponen sudah tidak terpasang, batalkan update state');
+            }
         } catch (err) {
             console.error('Gagal mengambil data banner:', err);
             if (isMounted.current) {
+                const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan saat memuat banner';
+                console.log('Menampilkan banner default karena error:', errorMessage);
                 setError('Gagal memuat banner. Menampilkan banner default.');
                 setBanners(defaultBanners);
             }
         } finally {
+            console.log('Mengubah status loading menjadi false');
             if (isMounted.current) {
                 setLoading(false);
             }
@@ -123,28 +194,52 @@ export default function CarouselWithContent() {
     
     // Ambil data banner dari API
     useEffect(() => {
-        fetchBanners();
+        console.log('Komponen Carousel dipasang, memulai fetchBanners');
+        fetchBanners().catch(err => {
+            console.error('Error dalam fetchBanners:', err);
+            if (isMounted.current) {
+                setError('Terjadi kesalahan saat memuat banner');
+                setBanners(defaultBanners);
+                setLoading(false);
+            }
+        });
         
         // Cleanup function
         return () => {
+            console.log('Komponen Carousel dilepas, membersihkan resource');
             isMounted.current = false;
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
+                timeoutRef.current = null;
             }
             if (navigationCooldown.current) {
                 clearTimeout(navigationCooldown.current);
+                navigationCooldown.current = null;
             }
         };
-    }, [fetchBanners]);
+    }, []); // Hanya dijalankan sekali saat komponen dipasang
 
     // Inisialisasi slides dari data banner
     const slides: Slide[] = useMemo(() => {
-        if (!banners || banners.length === 0) return [];
+        // Gunakan ref untuk mendapatkan nilai terbaru dari banners
+        const currentBanners = bannersRef.current;
+        console.log('Menginisialisasi slides dari banners:', currentBanners);
         
-        return banners.map(banner => {
+        if (!currentBanners || currentBanners.length === 0) {
+            console.log('Tidak ada banner yang tersedia');
+            return [];
+        }
+        
+        const processedSlides = currentBanners.map(banner => {
             try {
+                if (!banner) {
+                    console.warn('Banner null/undefined ditemukan');
+                    return null;
+                }
+                
                 // Pastikan URL gambar valid
                 let imageUrl = banner.image?.trim() || '';
+                console.log('Memproses banner:', banner.id, 'dengan image:', imageUrl);
                 
                 // Jika URL relatif, tambahkan base URL
                 if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('//')) {
@@ -155,20 +250,26 @@ export default function CarouselWithContent() {
                 }
                 
                 if (!imageUrl) {
-                    console.warn('Empty image URL for banner:', banner.id);
+                    console.warn('URL gambar kosong untuk banner:', banner.id);
                     return null;
                 }
                 
-                return {
+                const slide = {
                     title: banner.title || 'No Title',
                     description: banner.description || '',
                     image: imageUrl
                 };
+                
+                console.log('Banner berhasil diproses:', banner.id, slide);
+                return slide as Slide;
             } catch (error) {
-                console.error('Error processing banner:', banner.id, error);
+                console.error('Error memproses banner:', banner?.id, error);
                 return null;
             }
-        }).filter(Boolean) as Slide[]; // Filter out any null entries
+        }).filter(Boolean) as Slide[]; // Hapus entri null
+        
+        console.log('Total slide yang diproses:', processedSlides.length, processedSlides);
+        return processedSlides;
     }, [banners]);
 
     const totalSlides = Math.max(0, slides.length);
@@ -177,6 +278,9 @@ export default function CarouselWithContent() {
     const fullSlides = useMemo(() => {
         if (totalSlides === 0) return [];
         if (totalSlides === 1) return [...slides]; // Tidak perlu kloning jika hanya 1 slide
+        
+        // Pastikan slides memiliki isi sebelum mengakses indeks
+        if (!slides || slides.length === 0) return [];
         
         // Kloning slide terakhir di awal dan slide pertama di akhir
         return [
@@ -187,14 +291,22 @@ export default function CarouselWithContent() {
     }, [slides, totalSlides]);
 
     const goTo = useCallback((newIndex: number) => {
-        // Pastikan index tidak melebihi batas
-        if (newIndex < 0 || newIndex >= fullSlides.length) {
-            console.warn('Index out of bounds:', newIndex);
+        // Pastikan fullSlides sudah terisi
+        if (!fullSlides || fullSlides.length === 0) {
+            console.warn('No slides available');
             return;
         }
-        setIndex(newIndex);
+        
+        // Pastikan index tidak melebihi batas
+        const safeIndex = Math.max(0, Math.min(newIndex, fullSlides.length - 1));
+        
+        if (newIndex !== safeIndex) {
+            console.warn('Adjusted index from', newIndex, 'to', safeIndex);
+        }
+        
+        setIndex(safeIndex);
         setTransitioning(true);
-    }, [fullSlides.length]);
+    }, [fullSlides]);
 
     const [canNavigate, setCanNavigate] = useState(true);
     const navigationCooldown = useRef<NodeJS.Timeout | null>(null);
@@ -209,23 +321,23 @@ export default function CarouselWithContent() {
         }, 800); // 800ms cooldown between navigations
     }, []);
 
-    const goToNext = useCallback(() => {
-        if (isTransitioningRef.current || !canNavigate) return;
-        
+    // Fungsi untuk navigasi ke slide berikutnya
+    const next = useCallback(() => {
+        if (!canNavigate || fullSlides.length <= 1) return;
         setCanNavigate(false);
-        isTransitioningRef.current = true;
-        goTo(index + 1);
+        const newIndex = (index + 1) % fullSlides.length;
+        goTo(newIndex);
         resetNavigationCooldown();
-    }, [goTo, index, canNavigate, resetNavigationCooldown]);
+    }, [index, canNavigate, goTo, resetNavigationCooldown, fullSlides.length]);
 
-    const goToPrev = useCallback(() => {
-        if (isTransitioningRef.current || !canNavigate) return;
-        
+    // Fungsi untuk navigasi ke slide sebelumnya
+    const prev = useCallback(() => {
+        if (!canNavigate || fullSlides.length <= 1) return;
         setCanNavigate(false);
-        isTransitioningRef.current = true;
-        goTo(index - 1);
+        const newIndex = (index - 1 + fullSlides.length) % fullSlides.length;
+        goTo(newIndex);
         resetNavigationCooldown();
-    }, [goTo, index, canNavigate, resetNavigationCooldown]);
+    }, [index, canNavigate, goTo, resetNavigationCooldown, fullSlides.length]);
 
     const handleTransitionEnd = useCallback(() => {
         // Pastikan fullSlides memiliki konten yang valid
@@ -269,7 +381,7 @@ export default function CarouselWithContent() {
                 if (timeoutRef.current) {
                     clearTimeout(timeoutRef.current);
                 }
-                timeoutRef.current = setTimeout(goToNext, 8000);
+                timeoutRef.current = setTimeout(next, 8000);
             }
         };
 
@@ -277,7 +389,7 @@ export default function CarouselWithContent() {
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, [transitioning, goToNext]);
+    }, [transitioning, next]);
 
     // Autoplay
     useEffect(() => {
@@ -288,15 +400,8 @@ export default function CarouselWithContent() {
             
             timeoutRef.current = setTimeout(() => {
                 if (isTabActive && !isTransitioningRef.current && fullSlides.length > 1) {
-                    // Pastikan index berikutnya valid
-                    const nextIndex = index + 1;
-                    if (nextIndex < fullSlides.length) {
-                        goToNext();
-                    } else {
-                        // Reset ke slide pertama jika sudah di akhir
-                        setIndex(1);
-                        setTransitioning(true);
-                    }
+                    // Gunakan fungsi next yang sudah didefinisikan
+                    next();
                 }
             }, 5000); // 5 detik delay antar slide
         };
@@ -322,16 +427,28 @@ export default function CarouselWithContent() {
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, [index, transitioning, isTabActive, goToNext]);
+    }, [index, transitioning, isTabActive, next]);
 
     // Debounced navigation handlers
-    const debouncedGoToNext = useCallback(debounce(goToNext, 300), [goToNext]);
-    const debouncedGoToPrev = useCallback(debounce(goToPrev, 300), [goToPrev]);
+    const debouncedGoToNext = useCallback(debounce(next, 300), [next]);
+    const debouncedGoToPrev = useCallback(debounce(prev, 300), [prev]);
 
+    // Tampilkan loading hanya jika benar-benar loading dan belum ada banner
     if (loading && banners.length === 0) {
+        console.log('Menampilkan loading state');
         return (
             <div className="relative w-full h-96 bg-gray-200 flex items-center justify-center text-gray-500">
                 <div className="animate-pulse">Memuat banner...</div>
+            </div>
+        );
+    }
+    
+    // Jika tidak loading tapi tidak ada banner, tampilkan pesan
+    if (banners.length === 0) {
+        console.log('Tidak ada banner yang tersedia untuk ditampilkan');
+        return (
+            <div className="relative w-full h-96 bg-gray-200 flex items-center justify-center text-red-500">
+                Tidak ada banner yang tersedia
             </div>
         );
     }

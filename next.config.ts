@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
+import nextI18nConfig from './next-i18next.config';
 
 const nextConfig: NextConfig = {
+  i18n: nextI18nConfig.i18n,
   // Environment variables
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://kpf-backend.test',

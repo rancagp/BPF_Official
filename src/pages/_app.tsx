@@ -2,9 +2,11 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { appWithTranslation } from 'next-i18next';
+import nextI18NextConfig from '../../next-i18next.config';
 import LoadingScreen from "@/components/organisms/LoadingScreen";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -31,7 +33,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <LoadingScreen show={loading} />
-      <Component {...pageProps} />
+      {!loading && <Component {...pageProps} />}
     </>
   );
 }
+
+// @ts-ignore
+const MyApp = appWithTranslation(App, nextI18NextConfig);
+
+export default MyApp;

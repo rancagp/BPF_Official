@@ -1,0 +1,11 @@
+{
+  "timezones": {
+    "jakarta": "WIB",
+    "tokyo": "JST",
+    "hongkong": "HKT",
+    "newyork": "EDT"
+  },
+  "lastUpdate": "Update terakhir",
+  "toggleTimeButton": "Tampilkan Waktu Lainnya",
+  "hide": "Sembunyikan"
+}

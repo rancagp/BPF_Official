@@ -1,30 +1,46 @@
 "use client";
 
-"use client";
-
 import { useEffect, useState } from "react";
+import { useTranslation } from 'next-i18next';
 
 const DateTimeDisplay = () => {
+    const { t, i18n } = useTranslation('common');
     const [currentDate, setCurrentDate] = useState("");
     const [currentTimeJKT, setCurrentTimeJKT] = useState("");
     const [currentTimeTKY, setCurrentTimeTKY] = useState("");
     const [currentTimeHK, setCurrentTimeHK] = useState("");
     const [currentTimeNY, setCurrentTimeNY] = useState("");
     const [showTime, setShowTime] = useState(false);
+    
+    // Dapatkan terjemahan untuk timezone
+    interface Timezones {
+        jakarta: string;
+        tokyo: string;
+        hongkong: string;
+        newyork: string;
+        [key: string]: string; // Index signature
+    }
+    
+    const timezones = t('timezones', { returnObjects: true }) as Timezones;
 
     const updateDateTime = () => {
         const now = new Date();
-        const daysOfWeek = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         
-        const formattedDate = `${daysOfWeek[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+        // Format tanggal sesuai dengan locale yang aktif
+        const formattedDate = new Intl.DateTimeFormat(i18n.language, {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        }).format(now);
+        
         setCurrentDate(formattedDate);
 
         const formatTime = (timezone: string) => {
-            return new Intl.DateTimeFormat("en-GB", {
+            return new Intl.DateTimeFormat(i18n.language, {
                 timeZone: timezone,
-                hour: "2-digit",
-                minute: "2-digit",
+                hour: '2-digit',
+                minute: '2-digit',
                 hour12: false
             }).format(now);
         };
@@ -81,36 +97,19 @@ const DateTimeDisplay = () => {
                         </div>
 
                         {/* Mobile Toggle */}
-                        <button 
-                            className="md:hidden flex items-center text-gray-500 hover:text-gray-700"
-                            onClick={() => setShowTime(!showTime)}
-                            aria-label="Toggle time zones"
-                        >
-                            <i className="far fa-clock mr-1"></i>
-                            <i className={`fas fa-chevron-${showTime ? 'up' : 'down'} text-xs`}></i>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Time Zones Dropdown */}
-                {showTime && (
-                    <div className="md:hidden py-2 border-t border-gray-100">
-                        <div className="grid grid-cols-2 gap-2">
-                            {[
-                                { code: 'JAKARTA', time: currentTimeJKT, tz: 'WIB', color: 'text-green-500' },
-                                { code: 'TOKYO', time: currentTimeTKY, tz: 'JST', color: 'text-amber-500' },
-                                { code: 'HONG KONG', time: currentTimeHK, tz: 'HKT', color: 'text-blue-500' },
-                                { code: 'NEW YORK', time: currentTimeNY, tz: 'EST', color: 'text-red-500' }
-                            ].map((zone, index) => (
-                                <div key={index} className="flex items-center justify-between px-1 py-0.5">
-                                    <span className="text-gray-500">{zone.code}</span>
-                                    <span className="font-mono">{zone.time}</span>
-                                    <span className={zone.color}>{zone.tz}</span>
-                                </div>
-                            ))}
+                        <div className="flex items-center justify-between">
+                            <div className="text-xs text-gray-400">{t('lastUpdate')}: {currentDate}</div>
+                            <button 
+                                onClick={() => setShowTime(!showTime)}
+                                className="text-xs text-blue-500 hover:underline flex items-center gap-1"
+                                aria-label={showTime ? t('hide') : t('toggleTimeButton')}
+                            >
+                                <span>{showTime ? t('hide') : t('toggleTimeButton')}</span>
+                                <span className="text-xs">{showTime ? '▲' : '▼'}</span>
+                            </button>
                         </div>
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );

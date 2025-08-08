@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-export default function LoadingScreen({ show }) {
+interface LoadingScreenProps {
+  show: boolean;
+}
+
+export default function LoadingScreen({ show }: LoadingScreenProps) {
     const [visible, setVisible] = useState(show);
 
     useEffect(() => {
