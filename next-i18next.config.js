@@ -8,19 +8,36 @@ module.exports = {
     localeDetection: false,
     localePath: path.resolve('./public/locales'),
   },
+  // Daftar namespace yang digunakan
   ns: ['common', 'aboutus'],
   defaultNS: 'common',
+  
+  // Konfigurasi React
   react: {
     useSuspense: true,
   },
+  
+  // Mode development
   reloadOnPrerender: process.env.NODE_ENV === 'development',
   debug: process.env.NODE_ENV === 'development',
+  
+  // Konfigurasi dasar
   serializeConfig: true,
   preload: ['id', 'en'],
   fallbackLng: 'id',
+  
+  // Pemisah untuk namespace dan key
   nsSeparator: '.',
-  keySeparator: '.',
+  keySeparator: '_',
+  
+  // Pengaturan loading
   load: 'all',
+  
+  // Pastikan semua namespace dimuat
+  initImmediate: false,
+  
+  // Nonaktifkan debug untuk menghindari log yang berlebihan
+  debug: false,
   interpolation: {
     escapeValue: false,
   },

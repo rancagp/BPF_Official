@@ -1,8 +1,12 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { i18n } from 'next-i18next';
 
 export default function Document() {
+  // Gunakan bahasa dari i18n atau default ke 'id'
+  const lang = i18n?.language || 'id';
+  
   return (
-    <Html lang="id">
+    <Html lang={lang}>
       <Head>
         {/* Favicon */}
         <link rel="shortcut icon" href="/assets/logo-kpf.png" type="image/png" />

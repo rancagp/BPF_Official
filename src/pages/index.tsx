@@ -11,7 +11,6 @@ import AboutUs from "@/components/organisms/AboutUs";
 import Iso from "@/components/organisms/Market";
 import Pengumuman from "@/components/organisms/Pengumuman";
 import ModalPopup from "@/components/moleculs/ModalPopup";
-import LanguageSwitcher from "@/components/atoms/LanguageSwitcher";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
@@ -35,7 +34,6 @@ export default function HomePage() {
   return (
     <PageTemplate>
       <div className="fixed top-4 right-4 z-50">
-        <LanguageSwitcher />
       </div>
       
       <ModalPopup isOpen={showModal} onClose={handleCloseModal}>
