@@ -7,15 +7,48 @@ export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const { pathname, asPath, query } = router;
   const [isClient, setIsClient] = useState(false);
+  const currentLocale = i18n.language;
 
   useEffect(() => {
     // Pastikan komponen sudah di-mount di client
     setIsClient(true);
   }, []);
 
-  const changeLanguage = (locale: string) => {
-    // Update URL dengan locale baru
-    router.push({ pathname, query }, asPath, { locale, scroll: false });
+  const changeLanguage = async (newLocale: string) => {
+    // Jangan lakukan apa-apa jika locale sama
+    if (newLocale === currentLocale) return;
+    
+    // Dapatkan path saat ini tanpa locale prefix
+    let cleanPath = asPath;
+    if (currentLocale) {
+      const localeRegex = new RegExp(`^\/${currentLocale}(\/|$)`);
+      cleanPath = asPath.replace(localeRegex, '/') || '/';
+    }
+    
+    // Buat path baru berdasarkan locale yang dipilih
+    let newPath = cleanPath;
+    
+    // Tambahkan prefix locale untuk non-default language
+    if (newLocale !== 'id') {
+      newPath = `/${newLocale}${cleanPath === '/' ? '' : cleanPath}`;
+    }
+    
+    // Pastikan path tidak diawali dengan double slash
+    newPath = newPath.replace(/^\/\//, '/');
+    
+    try {
+      // Update URL dengan locale baru
+      await router.push(
+        newPath,
+        undefined,
+        { locale: newLocale, scroll: false }
+      );
+      
+      // Update bahasa di i18n
+      await i18n.changeLanguage(newLocale);
+    } catch (error) {
+      console.error('Error changing language:', error);
+    }
   };
 
   // Tampilkan loading sederhana di server

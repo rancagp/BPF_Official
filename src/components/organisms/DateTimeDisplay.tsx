@@ -67,22 +67,6 @@ const DateTimeDisplay = () => {
                         <span>{currentDate}</span>
                     </div>
 
-                    {/* Time Zones - Desktop */}
-                    <div className="hidden md:flex items-center space-x-4">
-                        {[
-                            { code: 'JKT', time: currentTimeJKT, tz: 'WIB', color: 'text-green-500' },
-                            { code: 'TKY', time: currentTimeTKY, tz: 'JST', color: 'text-amber-500' },
-                            { code: 'HKG', time: currentTimeHK, tz: 'HKT', color: 'text-blue-500', className: 'lg:flex hidden' },
-                            { code: 'NYC', time: currentTimeNY, tz: 'EST', color: 'text-red-500', className: 'xl:flex hidden' }
-                        ].map((zone, index) => (
-                            <div key={index} className={`flex items-center ${zone.className || ''}`}>
-                                <span className="text-gray-400 mr-1">{zone.code}:</span>
-                                <span className="font-mono">{zone.time}</span>
-                                <span className={`ml-1 ${zone.color}`}>{zone.tz}</span>
-                            </div>
-                        ))}
-                    </div>
-
                     {/* Language Selector */}
                     <div className="flex items-center space-x-3">
                         {/* Language Selector - Mobile & Desktop */}
@@ -95,19 +79,7 @@ const DateTimeDisplay = () => {
                                 <i className="fas fa-chevron-down text-xs"></i>
                             </div>
                         </div>
-
-                        {/* Mobile Toggle */}
-                        <div className="flex items-center justify-between">
-                            <div className="text-xs text-gray-400">{t('lastUpdate')}: {currentDate}</div>
-                            <button 
-                                onClick={() => setShowTime(!showTime)}
-                                className="text-xs text-blue-500 hover:underline flex items-center gap-1"
-                                aria-label={showTime ? t('hide') : t('toggleTimeButton')}
-                            >
-                                <span>{showTime ? t('hide') : t('toggleTimeButton')}</span>
-                                <span className="text-xs">{showTime ? '▲' : '▼'}</span>
-                            </button>
-                        </div>
+          
                     </div>
                 </div>
             </div>

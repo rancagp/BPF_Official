@@ -2,7 +2,32 @@ import type { NextConfig } from "next";
 import nextI18nConfig from './next-i18next.config';
 
 const nextConfig: NextConfig = {
-  i18n: nextI18nConfig.i18n,
+  // Konfigurasi i18n
+  i18n: {
+    ...nextI18nConfig.i18n,
+    // Pastikan localeDetection false
+    localeDetection: false,
+  },
+  // Nonaktifkan trailing slash untuk konsistensi
+  trailingSlash: false,
+  // Pastikan URL selalu memiliki locale untuk non-default
+  async redirects() {
+    return [
+      {
+        source: '/',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: 'en',
+          },
+        ],
+        destination: '/en',
+        permanent: false,
+        locale: false,
+      },
+    ];
+  },
   // Environment variables
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://kpf-backend.test',

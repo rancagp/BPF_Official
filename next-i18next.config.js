@@ -5,47 +5,56 @@ module.exports = {
   i18n: {
     defaultLocale: 'id',
     locales: ['id', 'en'],
+    localeDetection: false,
     localePath: path.resolve('./public/locales'),
   },
-  // Namespace yang digunakan
-  ns: ['aboutus', 'common'],
-  defaultNS: 'aboutus',
-  // Konfigurasi React
+  ns: ['common', 'aboutus'],
+  defaultNS: 'common',
   react: {
-    useSuspense: false,
+    useSuspense: true,
   },
-  // Hanya reload di development
   reloadOnPrerender: process.env.NODE_ENV === 'development',
-  // Debug di development
   debug: process.env.NODE_ENV === 'development',
-  // Opsi tambahan
-  serializeConfig: false,
-  // Preload bahasa yang diperlukan
+  serializeConfig: true,
   preload: ['id', 'en'],
-  // Fallback ke bahasa default jika terjemahan tidak ditemukan
   fallbackLng: 'id',
-  // Format namespace
   nsSeparator: '.',
   keySeparator: '.',
-  // Load semua namespace secara default
   load: 'all',
-  // Interpolasi
   interpolation: {
-    escapeValue: false, // React sudah melakukan escape
+    escapeValue: false,
   },
-  // Nonaktifkan default locale dalam URL untuk bahasa default
   returnNull: false,
-  // Nonaktifkan default locale dalam URL
   trailingSlash: false,
-  // Nonaktifkan locale detection bawaan next-i18next
-  // karena kita menggunakan bawaan Next.js
-  localeDetection: false,
-  // Pastikan path ke file terjemahan benar
   localeExtension: 'json',
-  // Nonaktifkan default locale dalam path
   localeStructure: '{{lng}}/{{ns}}',
-  // Nonaktifkan default locale dalam path
-  defaultNS: 'common',
-  // Pastikan konfigurasi kompatibel dengan Next.js
   compatibilityJSON: 'v3',
+  // Pastikan locale selalu ada di URL untuk non-default
+  localeSubpaths: {
+    en: 'en'
+  },
+  // Pastikan URL selalu memiliki locale untuk non-default
+  defaultNS: 'common',
+  localePath: path.resolve('./public/locales'),
+  // Nonaktifkan deteksi browser language
+  detection: {
+    order: ['path', 'cookie', 'htmlTag'],
+    caches: ['cookie'],
+  },
+  // Selalu gunakan subpath untuk bahasa non-default
+  use: [],
+  initImmediate: false,
+  // Pastikan tidak ada redirect otomatis
+  saveMissing: false,
+  saveMissingTo: 'all',
+  missingKeyHandler: false,
+  // Nonaktifkan fallback ke default locale
+  nonExplicitSupportedLngs: false,
+  // Pastikan tidak ada redirect yang tidak diinginkan
+  browserLanguageDetection: false,
+  serverLanguageDetection: false,
+  // Pastikan URL selalu konsisten
+  cleanCode: true,
+  // Nonaktifkan deteksi bahasa dari browser
+  ignoreRoutes: ['/_next/', '/static/', '/public/', '/api/'],
 };
