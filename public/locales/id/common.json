@@ -33,5 +33,11 @@
   "education_locoLondonGold": "Loco London Gold",
   "education_summerWinter": "Summer & Winter",
   "education_articles": "Artikel",
-  "education_marketingTools": "Alat Pemasaran"
+  "education_marketingTools": "Alat Pemasaran",
+  "timezones": {
+    "jakarta": "Jakarta",
+    "tokyo": "Tokyo",
+    "hongkong": "Hongkong",
+    "newyork": "New York"
+  }
 }

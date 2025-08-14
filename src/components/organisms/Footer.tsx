@@ -99,9 +99,9 @@ const Footer = () => {
                         <h3 className="text-sm font-semibold text-gray-800 mb-4">{quickLinks}</h3>
                         <ul className="space-y-2">
                             {[
-                                { icon: <Icons.Home />, text: 'Beranda', href: '/' },
-                                { icon: <Icons.Cube />, text: 'Lihat Produk', href: '/products' },
-                                { icon: <Icons.Envelope />, text: 'Kontak', href: '/contact' }
+                                { icon: <Icons.Home />, text: t('home', 'Beranda'), href: '/' },
+                                { icon: <Icons.Cube />, text: t('viewProducts', 'Lihat Produk'), href: '/products' },
+                                { icon: <Icons.Envelope />, text: t('contact', 'Kontak'), href: '/contact' }
                             ].map((item, index) => (
                                 <li key={index}>
                                     <a href={item.href} className="flex items-center text-sm text-gray-600 hover:text-green-600">

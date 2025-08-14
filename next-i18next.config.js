@@ -6,19 +6,16 @@ module.exports = {
     defaultLocale: 'id',
     locales: ['id', 'en'],
     localeDetection: true,
-    localePath: path.resolve('./public/locales'),
-    // Force locale in URL
-    localeSubpaths: {
-      en: 'en'
-    },
+    localePath: path.resolve('./public/locales')
   },
-  // Daftar namespace yang digunakan
+  
+  // Namespace yang digunakan
   ns: ['common', 'aboutus', 'footer'],
-  defaultNS: 'common',
+  defaultNS: 'aboutus',
   
   // Konfigurasi React
   react: {
-    useSuspense: true,
+    useSuspense: false
   },
   
   // Mode development
@@ -26,56 +23,28 @@ module.exports = {
   debug: process.env.NODE_ENV === 'development',
   
   // Konfigurasi dasar
-  serializeConfig: true,
-  preload: ['id', 'en'],
   fallbackLng: 'id',
   
   // Pemisah untuk namespace dan key
-  nsSeparator: '.',
-  keySeparator: '_',
+  nsSeparator: '::',
+  keySeparator: '.',
   
-  // Pengaturan loading
-  load: 'all',
-  
-  // Pastikan semua namespace dimuat
-  initImmediate: false,
-  
-  // Nonaktifkan debug untuk menghindari log yang berlebihan
-  debug: false,
+  // Pengaturan interpolation
   interpolation: {
-    escapeValue: false,
+    escapeValue: false
   },
-  returnNull: false,
-  trailingSlash: false,
-  localeExtension: 'json',
-  localeStructure: '{{lng}}/{{ns}}',
-  compatibilityJSON: 'v3',
-  // Pastikan locale selalu ada di URL untuk non-default
-  localeSubpaths: {
-    en: 'en'
-  },
-  // Pastikan URL selalu memiliki locale untuk non-default
-  defaultNS: 'common',
-  localePath: path.resolve('./public/locales'),
-  // Nonaktifkan deteksi browser language
-  detection: {
-    order: ['path', 'cookie', 'htmlTag'],
-    caches: ['cookie'],
-  },
-  // Selalu gunakan subpath untuk bahasa non-default
-  use: [],
-  initImmediate: false,
-  // Pastikan tidak ada redirect otomatis
+  
+  // Preload bahasa
+  preload: ['id', 'en'],
+  
+  // Pengaturan tambahan
   saveMissing: false,
-  saveMissingTo: 'all',
-  missingKeyHandler: false,
-  // Nonaktifkan fallback ke default locale
-  nonExplicitSupportedLngs: false,
-  // Pastikan tidak ada redirect yang tidak diinginkan
-  browserLanguageDetection: false,
-  serverLanguageDetection: false,
-  // Pastikan URL selalu konsisten
-  cleanCode: true,
+  returnObjects: false,
+  
   // Nonaktifkan deteksi bahasa dari browser
-  ignoreRoutes: ['/_next/', '/static/', '/public/', '/api/'],
+  detection: {
+    order: ['path'],
+    lookupFromPathIndex: 0,
+    caches: []
+  }
 };

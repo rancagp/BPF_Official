@@ -1,36 +1,30 @@
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-export default function AboutUs() {
-    const { t } = useTranslation('aboutus');
+// Daftar fitur sudah tidak digunakan karena akan ditulis langsung
+
+function AboutUs() {
+    const { t, i18n, ready } = useTranslation('aboutus');
     const router = useRouter();
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        // Pastikan komponen sudah di-mount di client
-        setIsClient(true);
-    }, []);
-
-    // Gunakan nilai default langsung tanpa menunggu ready
-    // untuk menghindari masalah hydration
-    const title = t('title', 'Tentang Kami');
-    const description = t('description', 'Kami adalah perusahaan terkemuka di industri ini');
-    const welcomeText = t('welcome', 'Selamat Datang di');
-    const companyName = t('companyName', 'KONTAKPERKASA FUTURES');
-    const aboutText = t('aboutText', 'PT. Kontakperkasa Futures, selamat anggota dari Bursa Berjangka Jakarta dan anggota Kliring Berjangka Indonesia, berbekal pengalaman dan kemampuan dalam mengembangkan perdagangan berjangka komoditi di tanah air.');
-    const learnMore = t('learnMore', 'Pelajari Lebih Lanjut');
+    const { locale } = router;
     
-    const features = [
-        t('features.derivative', 'Layanan transaksi derivatif indeks saham yang lengkap'),
-        t('features.team', 'Didukung oleh tim profesional yang berpengalaman'),
-        t('features.platform', 'Platform trading yang canggih dan aman')
-    ];
+    // Sinkronkan i18n.language dengan locale dari router
+    useEffect(() => {
+        if (i18n.language !== locale) {
+            i18n.changeLanguage(locale);
+        }
+    }, [locale, i18n]);
 
-    // Tampilkan loading sederhana di server
-    if (!isClient) {
+    // Dapatkan semua terjemahan dengan fallback
+    const getTranslation = (key: string, fallback: string) => {
+        return t(key, { ns: 'aboutus', defaultValue: fallback });
+    };
+
+    // Tampilkan loading jika i18n belum siap
+    if (!ready) {
         return (
             <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
@@ -42,6 +36,24 @@ export default function AboutUs() {
             </div>
         );
     }
+
+    // Dapatkan terjemahan
+    const translations = {
+      title: getTranslation('title', 'Tentang Kami'),
+      description: getTranslation('description', 'Kami adalah perusahaan terkemuka di industri ini'),
+      welcome: getTranslation('welcome', 'Selamat Datang di'),
+      companyName: getTranslation('companyName', 'KONTAKPERKASA FUTURES'),
+      aboutText: getTranslation('aboutText', 'PT. Kontakperkasa Futures, selamat anggota dari Bursa Berjangka Jakarta dan anggota Kliring Berjangka Indonesia, berbekal pengalaman dan kemampuan dalam mengembangkan perdagangan berjangka komoditi di tanah air.'),
+      learnMore: getTranslation('learnMore', 'Pelajari Lebih Lanjut'),
+      features: {
+        derivative: getTranslation('features.derivative', 'Layanan transaksi derivatif indeks saham yang lengkap'),
+        team: getTranslation('features.team', 'Didukung oleh tim profesional yang berpengalaman'),
+        platform: getTranslation('features.platform', 'Platform trading yang canggih dan aman')
+      }
+    };
+    
+    // Destructure untuk memudahkan penggunaan
+    const { title, description, welcome: welcomeText, companyName, aboutText, learnMore, features } = translations;
 
     return (
         <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -82,14 +94,24 @@ export default function AboutUs() {
                         </p>
                         
                         <div className="space-y-4">
-                            {features.map((feature, index) => (
-                                <div key={index} className="flex items-start">
-                                    <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
-                                    <p className="ml-3 text-gray-700">
-                                        {feature}
-                                    </p>
-                                </div>
-                            ))}
+                            <div className="flex items-start">
+                                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
+                                <p className="ml-3 text-gray-700">
+                                    {features.derivative}
+                                </p>
+                            </div>
+                            <div className="flex items-start">
+                                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
+                                <p className="ml-3 text-gray-700">
+                                    {features.team}
+                                </p>
+                            </div>
+                            <div className="flex items-start">
+                                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
+                                <p className="ml-3 text-gray-700">
+                                    {features.platform}
+                                </p>
+                            </div>
                         </div>
                         
                         <div className="pt-4">
@@ -107,3 +129,5 @@ export default function AboutUs() {
         </div>
     );
 }
+
+export default AboutUs;
