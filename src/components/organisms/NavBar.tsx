@@ -360,24 +360,30 @@ const NavBar: React.FC = () => {
                         <div className="hidden md:flex items-center space-x-1">
                             {menuItems.map((item, index) => (
                                 <div key={item.key} className="relative">
-                                    <div className="relative group">
+                                    <div 
+                                        className="relative group"
+                                        onMouseEnter={() => item.submenu && setOpenDropdown(item.key)}
+                                        onMouseLeave={() => item.submenu && setOpenDropdown(null)}
+                                    >
                                         <Link 
                                             href={item.href || '#'} 
                                             locale={i18n.language}
                                             className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors flex items-center"
-                                            onClick={(e) => item.submenu && toggleDropdown(e, item.key)}
                                         >
                                             {item.label}
                                             {item.submenu && (
-                                                <i className={`fas fa-chevron-down text-xs ml-1 ${openDropdown === item.key ? 'transform rotate-180' : ''}`} />
+                                                <i className="fas fa-chevron-down text-xs ml-1 transition-transform duration-200 group-hover:rotate-180" />
                                             )}
                                         </Link>
                                         {item.submenu && (
                                             <div 
-                                                className={`absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 animate-slideDown ${openDropdown === item.key ? 'block' : 'hidden'}`}
+                                                className={`absolute mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0 ${
+                                                    // Jika item menu berada di 2 terakhir (Edukasi atau kontak), tampilkan submenu ke kiri
+                                                    index >= menuItems.length - 2 ? 'right-0' : 'left-0'
+                                                }`}
                                             >
                                                 {item.submenu.map((subItem) => (
-                                                    <div key={subItem.key} className="relative">
+                                                    <div key={subItem.key} className="relative group">
                                                         {!subItem.submenu ? (
                                                             <Link 
                                                                 href={subItem.href} 
@@ -388,17 +394,26 @@ const NavBar: React.FC = () => {
                                                                 {subItem.label}
                                                             </Link>
                                                         ) : (
-                                                            <div className="relative group">
-                                                                <button
-                                                                    onClick={(e) => toggleSubDropdown(e, subItem.key)}
+                                                            <div 
+                                                                className="relative group/sub"
+                                                                onMouseEnter={() => setOpenSubDropdown(subItem.key)}
+                                                                onMouseLeave={() => setOpenSubDropdown(null)}
+                                                            >
+                                                                <Link
+                                                                    href="#"
                                                                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center"
                                                                 >
                                                                     {subItem.label}
-                                                                    <i className={`fas fa-chevron-right text-xs ${openSubDropdown === subItem.key ? 'transform rotate-90' : ''}`} />
-                                                                </button>
+                                                                    <i className="fas fa-chevron-right text-xs group-hover/sub:rotate-90 transition-transform duration-200" />
+                                                                </Link>
                                                                 {subItem.submenu && (
                                                                     <div 
-                                                                        className={`absolute left-full top-0 w-56 bg-white rounded-md shadow-lg py-1 ml-1 z-50 ${openSubDropdown === subItem.key ? 'block' : 'hidden'}`}
+                                                                        className={`absolute top-0 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 transform ${
+                                                                            // Jika item menu berada di 2 terakhir, tampilkan submenu ke kiri
+                                                                            index >= menuItems.length - 2 
+                                                                                ? 'right-full mr-1 translate-x-1 group-hover/sub:translate-x-0' 
+                                                                                : 'left-full ml-1 -translate-x-1 group-hover/sub:translate-x-0'
+                                                                        }`}
                                                                     >
                                                                         {subItem.submenu.map((child) => (
                                                                             <Link 
