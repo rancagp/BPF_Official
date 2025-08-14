@@ -28,86 +28,49 @@ function App({ Component, pageProps }: AppProps) {
     };
   }, [router]);
 
-  // Handle route changes and sync i18n
-  useEffect(() => {
-    if (!router.isReady) return;
-
-    const handleRouteChange = (url: string, { shallow }: { shallow: boolean }) => {
-      // Skip if this is a shallow route change
-      if (shallow) return;
-
-      // Extract locale from URL
-      const localeMatch = url.match(/^\/(en|id)(\/|$)/);
-      const newLocale = localeMatch ? localeMatch[1] : 'id';
-      
-      // Always update i18n to ensure consistency
-      if (i18n.language !== newLocale) {
-        i18n.changeLanguage(newLocale).catch(console.error);
-      }
-
-      // Ensure URL has correct locale prefix for non-default language
-      if (newLocale !== 'id' && !url.startsWith(`/${newLocale}`)) {
-        const cleanPath = url.startsWith('/id/') ? url.replace(/^\/id/, '') : url;
-        const newPath = `/${newLocale}${cleanPath === '/' ? '' : cleanPath}`;
-        
-        if (newPath !== url) {
-          router.replace(
-            newPath,
-            undefined,
-            { locale: newLocale, shallow: true }
-          );
-        }
-      }
-    };
-
-    // Sync on initial load
-    handleRouteChange(router.asPath, { shallow: false });
-    
-    // Sync on route changes
-    router.events.on('routeChangeStart', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-    };
-  }, [router.isReady, router.events, router.asPath, i18n]);
-
-  // Handle initial locale setup - only runs once on mount
+  // Handle locale changes and URL consistency
   useEffect(() => {
     if (!router.isReady) return;
 
     const currentPath = router.asPath;
     const currentLocale = locale || 'id';
     
+    // Skip if we're already on the correct path
+    if (currentLocale === 'id' && !currentPath.startsWith('/id')) return;
+    if (currentLocale !== 'id' && currentPath.startsWith(`/${currentLocale}`)) return;
+
     // For default locale (id), ensure no /id prefix
     if (currentLocale === 'id' && currentPath.startsWith('/id')) {
       const newPath = currentPath.replace(/^\/id(\/|$)/, '/') || '/';
       if (newPath !== currentPath) {
         router.replace(
-          { pathname: newPath, query },
+          newPath,
           undefined,
           { locale: 'id', shallow: true }
         );
       }
+      return;
     }
+    
     // For non-default locales, ensure they have the correct prefix
-    else if (currentLocale !== 'id') {
-      // Only add prefix if it's not already there
-      if (!currentPath.startsWith(`/${currentLocale}`)) {
-        const cleanPath = currentPath.startsWith('/id/') 
-          ? currentPath.replace(/^\/id/, '') 
-          : currentPath;
-        const newPath = `/${currentLocale}${cleanPath === '/' ? '' : cleanPath}`;
-        
-        // Only update if path actually needs to change
-        if (newPath !== currentPath) {
-          router.replace(
-            { pathname: newPath, query },
-            undefined,
-            { locale: currentLocale, shallow: true }
-          );
-        }
+    if (currentLocale !== 'id') {
+      const cleanPath = currentPath.startsWith('/id/') 
+        ? currentPath.replace(/^\/id/, '') 
+        : currentPath.startsWith('/')
+          ? currentPath
+          : `/${currentPath}`;
+          
+      const newPath = `/${currentLocale}${cleanPath === '/' ? '' : cleanPath}`;
+      
+      if (newPath !== currentPath) {
+        router.replace(
+          newPath,
+          undefined,
+          { locale: currentLocale, shallow: true }
+        );
       }
     }
-  }, [router.isReady]); // Only run once when router is ready
+  }, [router.isReady, locale, router.asPath]);
 
   // Handle loading screen
   useEffect(() => {

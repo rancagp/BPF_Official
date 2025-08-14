@@ -5,8 +5,12 @@ module.exports = {
   i18n: {
     defaultLocale: 'id',
     locales: ['id', 'en'],
-    localeDetection: false,
+    localeDetection: true,
     localePath: path.resolve('./public/locales'),
+    // Force locale in URL
+    localeSubpaths: {
+      en: 'en'
+    },
   },
   // Daftar namespace yang digunakan
   ns: ['common', 'aboutus'],

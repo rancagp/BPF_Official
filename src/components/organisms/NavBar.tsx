@@ -1,20 +1,223 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
 import MarketUpdate from "./MarketUpdate";
 
 interface MenuItem {
+    key: string;
     label: string;
-    href?: string;
+    href: string;
     submenu?: MenuItem[];
-    key?: string;
+    icon?: string;
+    disabled?: boolean;
 }
+
+// Type for menu items with submenus
+interface NavItem extends Omit<MenuItem, 'submenu'> {
+    submenu?: NavItem[];
+}
+
+// Base menu items with required properties
+const baseMenuItems: NavItem[] = [
+    { 
+        key: 'home',
+        label: 'Beranda',
+        href: "/"
+    },
+    {
+        key: 'about',
+        label: 'Tentang Kami',
+        href: "#",
+        submenu: [
+            { 
+                key: 'about_companyProfile',
+                label: 'Profil Perusahaan',
+                href: "/profil/perusahaan" 
+            },
+            { 
+                key: 'about_businessLicense',
+                label: 'Legalitas Bisnis',
+                href: "/profil/legalitas-bisnis" 
+            },
+            { 
+                key: 'about_brokerRepresentative',
+                label: 'Wakil Pialang',
+                href: "/profil/wakil-pialang" 
+            },
+            { 
+                key: 'about_regulatoryBody',
+                label: 'Badan Regulasi',
+                href: "/profil/badan-regulasi" 
+            },
+            { 
+                key: 'about_facilitiesServices',
+                label: 'Fasilitas & Layanan', 
+                href: "/umum/fasilitas-layanan" 
+            },
+            {
+                key: 'about_achievements',
+                label: 'Pencapaian',
+                href: '#',
+                submenu: [
+                    { 
+                        key: 'about_achievements_awards',
+                        label: 'Penghargaan', 
+                        href: "/profil/pencapaian/penghargaan" 
+                    },
+                    { 
+                        key: 'about_achievements_certificates',
+                        label: 'Sertifikat', 
+                        href: "/profil/pencapaian/sertifikat" 
+                    },
+                ],
+            },
+            {
+                key: 'about_general',
+                label: 'Umum',
+                href: '#',
+                submenu: [
+                    { 
+                        key: 'about_general_information',
+                        label: 'Informasi', 
+                        href: "/umum/informasi" 
+                    },
+                    { 
+                        key: 'about_general_videos',
+                        label: 'Video', 
+                        href: "/umum/video" 
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        key: 'products',
+        label: 'Produk',
+        href: '#',
+        submenu: [
+            { 
+                key: 'products_allProducts',
+                label: 'Semua Produk', 
+                href: "/produk/semua-produk" 
+            },
+            { 
+                key: 'products_jfxProducts',
+                label: 'Produk JFX', 
+                href: "/produk/jfx" 
+            },
+            { 
+                key: 'products_spaProducts',
+                label: 'Produk SPA', 
+                href: "/produk/spa" 
+            },
+            { 
+                key: 'products_productAdvantages',
+                label: 'Keunggulan Produk', 
+                href: "/produk/keunggulan" 
+            },
+            { 
+                key: 'products_transactionIllustration',
+                label: 'Ilustrasi Transaksi', 
+                href: "/produk/ilustrasi" 
+            },
+        ],
+    },
+    {
+        key: 'procedures',
+        label: 'Prosedur',
+        href: '#',
+        submenu: [
+            { 
+                key: 'procedures_onlineRegistration',
+                label: 'Pendaftaran Online', 
+                href: "/prosedur/pendaftaran" 
+            },
+            { 
+                key: 'procedures_withdrawal',
+                label: 'Penarikan Dana', 
+                href: "/prosedur/penarikan" 
+            },
+            { 
+                key: 'procedures_transactionGuide',
+                label: 'Panduan Transaksi', 
+                href: "/prosedur/panduan" 
+            },
+        ],
+    },
+    {
+        key: 'analysis',
+        label: 'Analisis',
+        href: '#',
+        submenu: [
+            { 
+                key: 'analysis_news',
+                label: 'Berita', 
+                href: "/analisis/berita" 
+            },
+            { 
+                key: 'analysis_economicCalendar',
+                label: 'Kalender Ekonomi', 
+                href: "/analisis/kalender-ekonomi" 
+            },
+            { 
+                key: 'analysis_historicalData',
+                label: 'Data Historis', 
+                href: "/analisis/data-historis" 
+            },
+            { 
+                key: 'analysis_pivotFibonacci',
+                label: 'Pivot & Fibonacci', 
+                href: "/analisis/pivot-fibonacci" 
+            },
+        ],
+    },
+    {
+        key: 'education',
+        label: 'Edukasi',
+        href: '#',
+        submenu: [
+            { 
+                key: 'education_tradingMechanism',
+                label: 'Mekanisme Trading', 
+                href: "/edukasi/mekanisme" 
+            },
+            { 
+                key: 'education_indexSymbols',
+                label: 'Simbol Indeks', 
+                href: "/edukasi/simbol-indeks" 
+            },
+            { 
+                key: 'education_locoLondonGold',
+                label: 'Loco London Gold', 
+                href: "/edukasi/loco-london-gold" 
+            },
+            { 
+                key: 'education_summerWinter',
+                label: 'Summer & Winter', 
+                href: "/edukasi/summer-winter" 
+            },
+            { 
+                key: 'education_articles',
+                label: 'Artikel', 
+                href: "/edukasi/artikel" 
+            },
+            { 
+                key: 'education_marketingTools',
+                label: 'Alat Pemasaran', 
+                href: "/edukasi/alat-pemasaran" 
+            },
+        ],
+    },
+];
 
 const NavBar: React.FC = () => {
     const { t, i18n } = useTranslation('common');
     const router = useRouter();
+    const [menuItems, setMenuItems] = useState<NavItem[]>(baseMenuItems);
+    const [mobileMenuItems, setMobileMenuItems] = useState<NavItem[]>(baseMenuItems);
     const [menuOpen, setMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null);
@@ -71,171 +274,35 @@ const NavBar: React.FC = () => {
         };
     }, [i18n]);
 
-    // Daftar menu dengan terjemahan langsung
-    const menuItems: MenuItem[] = [
-        { 
-            label: t('home', 'Beranda'),
-            href: "/",
-            key: 'home'
-        },
-        {
-            label: t('about', 'Tentang Kami'),
-            key: 'about',
-            submenu: [
-                { 
-                    label: t('about_companyProfile', 'Profil Perusahaan'),
-                    href: "/profil/perusahaan" 
-                },
-                { 
-                    label: t('about_businessLicense', 'Legalitas Bisnis'),
-                    href: "/profil/legalitas-bisnis" 
-                },
-                { 
-                    label: t('about_brokerRepresentative', 'Wakil Pialang'),
-                    href: "/profil/wakil-pialang" 
-                },
-                { 
-                    label: t('about_regulatoryBody', 'Badan Regulasi'),
-                    href: "/profil/badan-regulasi" 
-                },
-                { 
-                    label: t('about_facilitiesServices', 'Fasilitas & Layanan'), 
-                    href: "/umum/fasilitas-layanan" 
-                },
-                {
-                    label: t('about_achievements', 'Pencapaian'),
-                    key: 'achievements',
-                    submenu: [
-                        { 
-                            label: t('about_achievements_awards', 'Penghargaan'), 
-                            href: "/profil/pencapaian/penghargaan" 
-                        },
-                        { 
-                            label: t('about_achievements_certificates', 'Sertifikat'), 
-                            href: "/profil/pencapaian/sertifikat" 
-                        },
-                    ],
-                },
-                {
-                    label: t('about_general', 'Umum'),
-                    key: 'general',
-                    submenu: [
-                        { 
-                            label: t('about_general_information', 'Informasi'), 
-                            href: "/umum/informasi" 
-                        },
-                        { 
-                            label: t('about_general_videos', 'Video'), 
-                            href: "/umum/video" 
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            label: t('products', 'Produk'),
-            key: 'products',
-            submenu: [
-                { 
-                    label: t('products_allProducts', 'Semua Produk'), 
-                    href: "/produk/semua-produk" 
-                },
-                { 
-                    label: t('products_jfxProducts', 'Produk JFX'), 
-                    href: "/produk/jfx" 
-                },
-                { 
-                    label: t('products_spaProducts', 'Produk SPA'), 
-                    href: "/produk/spa" 
-                },
-                { 
-                    label: t('products_productAdvantages', 'Keunggulan Produk'), 
-                    href: "/produk/keunggulan" 
-                },
-                { 
-                    label: t('products_transactionIllustration', 'Ilustrasi Transaksi'), 
-                    href: "/produk/ilustrasi" 
-                },
-            ],
-        },
-        {
-            label: t('procedures', 'Prosedur'),
-            key: 'procedures',
-            submenu: [
-                { 
-                    label: t('procedures_onlineRegistration', 'Pendaftaran Online'), 
-                    href: "/prosedur/pendaftaran" 
-                },
-                { 
-                    label: t('procedures_withdrawal', 'Penarikan Dana'), 
-                    href: "/prosedur/penarikan" 
-                },
-                { 
-                    label: t('procedures_transactionGuide', 'Panduan Transaksi'), 
-                    href: "/prosedur/panduan" 
-                },
-            ],
-        },
-        {
-            label: t('analysis', 'Analisis'),
-            key: 'analysis',
-            submenu: [
-                { 
-                    label: t('analysis_news', 'Berita'), 
-                    href: "/analisis/berita" 
-                },
-                { 
-                    label: t('analysis_economicCalendar', 'Kalender Ekonomi'), 
-                    href: "/analisis/kalender-ekonomi" 
-                },
-                { 
-                    label: t('analysis_historicalData', 'Data Historis'), 
-                    href: "/analisis/data-historis" 
-                },
-                { 
-                    label: t('analysis_pivotFibonacci', 'Pivot & Fibonacci'), 
-                    href: "/analisis/pivot-fibonacci" 
-                },
-            ],
-        },
-        {
-            label: t('education', 'Edukasi'),
-            key: 'education',
-            submenu: [
-                { 
-                    label: t('education_tradingMechanism', 'Mekanisme Trading'), 
-                    href: "/edukasi/mekanisme" 
-                },
-                { 
-                    label: t('education_indexSymbols', 'Simbol Indeks'), 
-                    href: "/edukasi/simbol-indeks" 
-                },
-                { 
-                    label: t('education_locoLondonGold', 'Loco London Gold'), 
-                    href: "/edukasi/loco-london-gold" 
-                },
-                { 
-                    label: t('education_summerWinter', 'Summer & Winter'), 
-                    href: "/edukasi/summer-winter" 
-                },
-                { 
-                    label: t('education_articles', 'Artikel'), 
-                    href: "/edukasi/artikel" 
-                },
-                { 
-                    label: t('education_marketingTools', 'Alat Pemasaran'), 
-                    href: "/edukasi/alat-pemasaran" 
-                },
-            ],
-        },
-    ];
+    // Apply translations to menu items
+    useEffect(() => {
+        const translatedMenuItems = baseMenuItems.map(item => ({
+            ...item,
+            label: t(item.key, item.label),
+            submenu: item.submenu?.map(subItem => ({
+                ...subItem,
+                label: t(subItem.key, subItem.label),
+                submenu: subItem.submenu?.map(childItem => ({
+                    ...childItem,
+                    label: t(childItem.key, childItem.label)
+                }))
+            }))
+        }));
+        
+        setMenuItems(translatedMenuItems);
+        setMobileMenuItems(translatedMenuItems);
+    }, [i18n.language, t]);
 
-    const toggleDropdown = (key: string) => {
+    const toggleDropdown = (e: React.MouseEvent, key: string) => {
+        e.preventDefault();
+        e.stopPropagation();
         setOpenDropdown(openDropdown === key ? null : key);
-        setOpenSubDropdown(null);
+        setOpenSubDropdown(null); // Close any open sub-dropdowns
     };
     
-    const toggleSubDropdown = (key: string) => {
+    const toggleSubDropdown = (e: React.MouseEvent, key: string) => {
+        e.preventDefault();
+        e.stopPropagation();
         setOpenSubDropdown(openSubDropdown === key ? null : key);
     };
     
@@ -244,6 +311,20 @@ const NavBar: React.FC = () => {
         setOpenDropdown(null);
         setOpenSubDropdown(null);
     };
+
+    // Close dropdowns when clicking outside
+    useEffect(() => {
+        const handleClickOutside = () => {
+            if (openDropdown || openSubDropdown) {
+                closeAllMenus();
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [openDropdown, openSubDropdown]);
 
     if (!isClient) {
         return null; // Tampilkan loading state atau null di server
@@ -265,7 +346,7 @@ const NavBar: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex justify-between h-16">
                         {/* Logo */}
-                        <a href="/" className="flex items-center gap-1 group">
+                        <Link href="/" locale={i18n.language} className="flex items-center gap-1 group">
                             <img 
                                 src="/assets/logo-kpf-full.png" 
                                 alt="Logo KPF" 
@@ -273,69 +354,72 @@ const NavBar: React.FC = () => {
                                 height={40}
                                 className="h-8 w-auto md:h-10 transition-transform duration-300 group-hover:scale-105" 
                             />
-                        </a>
+                        </Link>
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-1">
                             {menuItems.map((item, index) => (
-                                <div key={item.key || index} className="relative">
-                                    {item.href ? (
-                                        <a
-                                            href={item.href}
-                                            className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors"
-                                        >
-                                            {item.label}
-                                        </a>
-                                    ) : (
-                                        <button
-                                            onClick={() => toggleDropdown(item.key || '')}
+                                <div key={item.key} className="relative">
+                                    <div className="relative group">
+                                        <Link 
+                                            href={item.href || '#'} 
+                                            locale={i18n.language}
                                             className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors flex items-center"
+                                            onClick={(e) => item.submenu && toggleDropdown(e, item.key)}
                                         >
                                             {item.label}
-                                            <i className={`ml-1 fas fa-chevron-down text-xs transition-transform ${openDropdown === item.key ? 'transform rotate-180' : ''}`} />
-                                        </button>
-                                    )}
-                                    
-                                    {item.submenu && openDropdown === item.key && (
-                                        <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50">
-                                            {item.submenu.map((subItem, subIndex) => (
-                                                <div key={subItem.key || subIndex} className="relative">
-                                                    {subItem.href ? (
-                                                        <a
-                                                            href={subItem.href}
-                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                        >
-                                                            {subItem.label}
-                                                        </a>
-                                                    ) : (
-                                                        <button
-                                                            onClick={() => toggleSubDropdown(subItem.key || '')}
-                                                            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center"
-                                                        >
-                                                            {subItem.label}
-                                                            {subItem.submenu && (
-                                                                <i className={`fas fa-chevron-right text-xs ${openSubDropdown === subItem.key ? 'transform rotate-90' : ''}`} />
-                                                            )}
-                                                        </button>
-                                                    )}
-                                                    
-                                                    {subItem.submenu && openSubDropdown === subItem.key && (
-                                                        <div className="absolute left-full top-0 w-56 bg-white rounded-md shadow-lg py-1 ml-1 z-50">
-                                                            {subItem.submenu.map((child, childIndex) => (
-                                                                <a
-                                                                    key={childIndex}
-                                                                    href={child.href}
-                                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            {item.submenu && (
+                                                <i className={`fas fa-chevron-down text-xs ml-1 ${openDropdown === item.key ? 'transform rotate-180' : ''}`} />
+                                            )}
+                                        </Link>
+                                        {item.submenu && (
+                                            <div 
+                                                className={`absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 animate-slideDown ${openDropdown === item.key ? 'block' : 'hidden'}`}
+                                            >
+                                                {item.submenu.map((subItem) => (
+                                                    <div key={subItem.key} className="relative">
+                                                        {!subItem.submenu ? (
+                                                            <Link 
+                                                                href={subItem.href} 
+                                                                locale={i18n.language}
+                                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                                onClick={closeAllMenus}
+                                                            >
+                                                                {subItem.label}
+                                                            </Link>
+                                                        ) : (
+                                                            <div className="relative group">
+                                                                <button
+                                                                    onClick={(e) => toggleSubDropdown(e, subItem.key)}
+                                                                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center"
                                                                 >
-                                                                    {child.label}
-                                                                </a>
-                                                            ))}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
+                                                                    {subItem.label}
+                                                                    <i className={`fas fa-chevron-right text-xs ${openSubDropdown === subItem.key ? 'transform rotate-90' : ''}`} />
+                                                                </button>
+                                                                {subItem.submenu && (
+                                                                    <div 
+                                                                        className={`absolute left-full top-0 w-56 bg-white rounded-md shadow-lg py-1 ml-1 z-50 ${openSubDropdown === subItem.key ? 'block' : 'hidden'}`}
+                                                                    >
+                                                                        {subItem.submenu.map((child) => (
+                                                                            <Link 
+                                                                                key={child.key}
+                                                                                href={child.href} 
+                                                                                locale={i18n.language}
+                                                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                                                onClick={closeAllMenus}
+                                                                            >
+                                                                                {child.label}
+                                                                            </Link>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -371,7 +455,7 @@ const NavBar: React.FC = () => {
                                     ) : (
                                         <div>
                                             <button
-                                                onClick={() => toggleDropdown(item.key || '')}
+                                                onClick={(e) => toggleDropdown(e, item.key || '')}
                                                 className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-700 hover:bg-gray-50 flex justify-between items-center"
                                             >
                                                 {item.label}
@@ -393,7 +477,7 @@ const NavBar: React.FC = () => {
                                                             ) : (
                                                                 <div>
                                                                     <button
-                                                                        onClick={() => toggleSubDropdown(sub.key || '')}
+                                                                        onClick={(e) => toggleSubDropdown(e, sub.key || '')}
                                                                         className="w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-green-700 hover:bg-gray-50 rounded-md flex justify-between items-center"
                                                                     >
                                                                         {sub.label}
