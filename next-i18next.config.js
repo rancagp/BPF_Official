@@ -13,7 +13,7 @@ module.exports = {
     },
   },
   // Daftar namespace yang digunakan
-  ns: ['common', 'aboutus'],
+  ns: ['common', 'aboutus', 'footer'],
   defaultNS: 'common',
   
   // Konfigurasi React

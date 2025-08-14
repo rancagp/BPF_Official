@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'next-i18next';
 
 // Ikon SVG inline
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
@@ -43,66 +44,68 @@ const Icons = {
 };
 
 const Footer = () => {
-    const [mounted, setMounted] = React.useState(false);
-    
-    React.useEffect(() => {
-        setMounted(true);
-    }, []);
-    
+    const { t } = useTranslation('footer');
+    const [isClient, setIsClient] = React.useState(false);
     const currentYear = new Date().getFullYear();
     
-    if (!mounted) {
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    // Fallback values untuk semua terjemahan
+    const warningTitle = t('warningTitle', 'PERHATIAN');
+    const warningMessage = t('warningMessage', 'Managemen PT. Kontakperkasa Futures menghimbau kepada seluruh masyarakat untuk lebih berhati-hati terhadap beberapa bentuk penipuan yang berkedok investasi mengatasnamakan PT. Kontakperkasa Futures.');
+    const quickLinks = t('quickLinks', 'Tautan Cepat');
+    const contactUs = t('contactUs', 'Kontak Kami');
+    const legal = t('legal', 'Legalitas');
+    const headOffice = t('headOffice', 'Kantor Pusat');
+    const address = t('address', 'Sudirman Plaza, Gedung Plaza Marein Lt. 7 & 19, Jl. Jend. Sudirman Kav. 76-78, Jakarta 12910');
+    const komdigiDesc = t('komdigiDesc', 'Terdaftar dan diawasi oleh Kementerian Komunikasi dan Informatika Republik Indonesia');
+    const isoDesc = t('isoDesc', 'Bersertifikat ISO 9001:2015');
+    const copyright = t('copyright', '&copy; {{year}} PT. Kontakperkasa Futures. All rights reserved.');
+    const termsConditions = t('termsConditions', 'Syarat & Ketentuan');
+    const privacyPolicy = t('privacyPolicy', 'Kebijakan Privasi');
+    const disclaimer = t('disclaimer', 'Disclaimer');
+
+    // Tampilkan loading sederhana di server
+    if (!isClient) {
         return (
-            <footer className="bg-white border-t border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 py-6">
-                    <div className="animate-pulse space-y-4">
-                        <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                    </div>
-                </div>
+            <footer className="bg-white">
+                <div className="animate-pulse h-64 bg-gray-100"></div>
             </footer>
         );
     }
-    
+
     return (
         <footer className="bg-white border-t border-gray-100">
             {/* Warning Banner */}
-            <div className="bg-yellow-50 border-b border-yellow-100">
-                <div className="max-w-7xl mx-auto px-4 py-3">
-                    <div className="flex items-start">
-                        <div className="flex-shrink-0 pt-0.5">
-                            <Icons.Warning />
-                        </div>
-                        <div className="ml-3">
-                            <h3 className="text-sm font-medium text-yellow-800">PERHATIAN</h3>
-                            <p className="text-xs text-yellow-700 mt-1">
-                                Managemen PT. Kontakperkasa Futures menghimbau kepada seluruh masyarakat untuk lebih berhati-hati terhadap beberapa bentuk penipuan yang berkedok investasi mengatasnamakan PT. Kontakperkasa Futures.
-                            </p>
-                        </div>
+            <div className="bg-yellow-50 py-4 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto flex">
+                    <Icons.Warning />
+                    <div className="ml-3">
+                        <h3 className="text-sm font-medium text-yellow-800">{warningTitle}</h3>
+                        <p className="text-xs text-yellow-700 mt-1">
+                            {warningMessage}
+                        </p>
                     </div>
                 </div>
             </div>
 
-            {/* Main Footer */}
-            <div className="max-w-7xl mx-auto px-4 py-8">
+            {/* Main Footer Content */}
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-800 mb-4">Tautan Cepat</h3>
+                        <h3 className="text-sm font-semibold text-gray-800 mb-4">{quickLinks}</h3>
                         <ul className="space-y-2">
                             {[
                                 { icon: <Icons.Home />, text: 'Beranda', href: '/' },
-                                { icon: <Icons.Cube />, text: 'Lihat Produk', href: '/produk' },
-                                { icon: <Icons.Envelope />, text: 'Kontak', href: '/hubungi-kami' }
+                                { icon: <Icons.Cube />, text: 'Lihat Produk', href: '/products' },
+                                { icon: <Icons.Envelope />, text: 'Kontak', href: '/contact' }
                             ].map((item, index) => (
                                 <li key={index}>
-                                    <a 
-                                        href={item.href} 
-                                        className="flex items-center text-sm text-gray-600 hover:text-green-600 transition-colors"
-                                    >
-                                        <span className="text-green-500 mr-2">
-                                            {item.icon}
-                                        </span>
+                                    <a href={item.href} className="flex items-center text-sm text-gray-600 hover:text-green-600">
+                                        {item.icon}
                                         {item.text}
                                     </a>
                                 </li>
@@ -112,66 +115,49 @@ const Footer = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-800 mb-4">Kontak Kami</h3>
+                        <h3 className="text-sm font-semibold text-gray-800 mb-4">{contactUs}</h3>
                         <div className="space-y-3">
                             <div className="flex">
-                                <Icons.MapPin className="flex-shrink-0 mt-1 mr-2 text-green-500" />
+                                <Icons.MapPin />
                                 <div>
-                                    <p className="text-xs font-medium text-gray-900">Kantor Pusat</p>
-                                    <p className="text-xs text-gray-600">Sudirman Plaza, Gedung Plaza Marein Lt. 7 & 19, Jl. Jend. Sudirman Kav. 76-78, Jakarta 12910</p>
+                                    <p className="text-xs font-medium text-gray-900">{headOffice}</p>
+                                    <p className="text-xs text-gray-600">{address}</p>
                                 </div>
                             </div>
                             <div className="flex items-center">
-                                <Icons.Phone className="flex-shrink-0 mr-2 text-green-500" />
-                                <a href="tel:02157936555" className="text-xs text-gray-600 hover:text-green-600">
-                                    (021) 5793 6555
-                                </a>
+                                <Icons.Phone />
+                                <a href="tel:+62215705777" className="text-sm text-gray-600 hover:text-green-600">(021) 570-5777</a>
                             </div>
                             <div className="flex items-center">
-                                <Icons.Envelope className="flex-shrink-0 mr-2 text-green-500" />
-                                <a href="mailto:corporate@kontak-perkasa-futures.co.id" className="text-xs text-gray-600 hover:text-green-600">
-                                    corporate@kontak-perkasa-futures.co.id
-                                </a>
+                                <Icons.Envelope />
+                                <a href="mailto:info@kontakperkasa.net" className="text-sm text-gray-600 hover:text-green-600">info@kontakperkasa.net</a>
                             </div>
                         </div>
                     </div>
 
                     {/* Legal Info */}
                     <div className="md:col-span-2">
-                        <h3 className="text-sm font-semibold text-gray-800 mb-4">Legalitas</h3>
+                        <h3 className="text-sm font-semibold text-gray-800 mb-4">{legal}</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {[
                                 {
-                                    href: "https://www.komdigi.go.id/",
                                     src: "/assets/BrandLogo.org-KOMDIGI-Logo-2024.png",
                                     alt: "Kementerian Komunikasi dan Informatika",
-                                    description: "Terdaftar dan diawasi oleh Kementerian Komunikasi dan Informatika Republik Indonesia"
+                                    description: komdigiDesc
                                 },
                                 {
                                     src: "/assets/iso.png",
-                                    alt: "ISO Certification",
-                                    description: "Bersertifikat ISO 9001:2015"
+                                    alt: "ISO 9001:2015 Certified",
+                                    description: isoDesc
                                 }
                             ].map((item, index) => (
                                 <div key={index} className="bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                    {item.href ? (
-                                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="block">
-                                            <img 
-                                                src={item.src} 
-                                                alt={item.alt} 
-                                                className="h-10 mx-auto mb-2 object-contain"
-                                            />
-                                        </a>
-                                    ) : (
-                                        <img 
-                                            src={item.src} 
-                                            alt={item.alt} 
-                                            className="h-10 mx-auto mb-2 object-contain"
-                                        />
-                                    )}
-                                    <p className="text-[10px] text-center text-gray-500 leading-tight">
-                                        {item.description}
-                                    </p>
+                                    <img 
+                                        src={item.src} 
+                                        alt={item.alt} 
+                                        className="h-12 w-auto object-contain mb-2"
+                                    />
+                                    <p className="text-xs text-gray-600">{item.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -181,18 +167,21 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="mt-8 pt-6 border-t border-gray-100">
                     <div className="flex flex-col md:flex-row justify-between items-center">
-                        <p className="text-xs text-gray-500 mb-4 md:mb-0">
-                            &copy; {currentYear} PT. Kontakperkasa Futures. All rights reserved.
-                        </p>
+                        <p 
+                            className="text-xs text-gray-500 mb-4 md:mb-0"
+                            dangerouslySetInnerHTML={{ 
+                                __html: copyright.replace('{{year}}', currentYear.toString())
+                            }} 
+                        />
                         <div className="flex flex-wrap justify-center gap-4">
                             <a href="/syarat-ketentuan" className="text-xs text-gray-500 hover:text-green-600">
-                                Syarat & Ketentuan
+                                {termsConditions}
                             </a>
                             <a href="/kebijakan-privasi" className="text-xs text-gray-500 hover:text-green-600">
-                                Kebijakan Privasi
+                                {privacyPolicy}
                             </a>
                             <a href="/disclaimer" className="text-xs text-gray-500 hover:text-green-600">
-                                Disclaimer
+                                {disclaimer}
                             </a>
                         </div>
                     </div>

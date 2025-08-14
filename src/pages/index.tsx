@@ -15,7 +15,7 @@ import ModalPopup from "@/components/moleculs/ModalPopup";
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale || 'id', ['aboutus', 'common'])),
+      ...(await serverSideTranslations(locale || 'id', ['aboutus', 'common', 'footer'])),
     },
   };
 };

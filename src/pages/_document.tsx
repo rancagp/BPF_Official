@@ -1,9 +1,8 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import { i18n } from 'next-i18next';
+import { Html, Head, Main, NextScript, DocumentContext } from "next/document";
 
 export default function Document() {
-  // Gunakan bahasa dari i18n atau default ke 'id'
-  const lang = i18n?.language || 'id';
+  // Default language
+  const lang = 'id';
   
   return (
     <Html lang={lang}>
