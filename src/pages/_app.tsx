@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import nextI18NextConfig from '../../next-i18next.config';
 import LoadingScreen from "@/components/organisms/LoadingScreen";
+import ScrollToTop from '@/components/atoms/ScrollToTop';
 
 function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(true);
@@ -97,6 +98,7 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <LoadingScreen show={loading} />
       {!loading && <Component {...pageProps} />}
+      <ScrollToTop />
     </>
   );
 }
