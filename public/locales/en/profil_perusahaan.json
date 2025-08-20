@@ -1,0 +1,54 @@
+{
+  "pageTitle": "Company Profile",
+  "sections": {
+    "about": {
+      "title": "About Us",
+      "description1": "PT Kontak Perkasa Futures is a futures brokerage company established in 2000. As one of the main players in the futures trading industry in Indonesia, we are committed to providing the best services in derivative, commodity, and stock index transactions.",
+      "description2": "As a member of the Jakarta Futures Exchange (JFX) and Indonesia Clearing House (KBI), and directly supervised by BAPPEBTI, we uphold professionalism and compliance with applicable regulations in all company operational activities."
+    },
+    "vision": {
+      "title": "Vision",
+      "description": "To develop and advance Commodity Futures Trading and provide a positive impact on the Indonesian economy."
+    },
+    "mission": {
+      "title": "Mission",
+      "items": [
+        "Promote promotional and educational programs about the futures trading industry",
+        "Provide hedging instruments with KYC principles",
+        "Introduce the futures trading industry through higher education and seminars",
+        "Enhance regulatory compliance aspects",
+        "Prepare qualified human resources through training programs"
+      ]
+    },
+    "values": {
+      "title": "Company Values",
+      "items": {
+        "integrity": {
+          "title": "Integrity",
+          "description": "Uphold honesty and professionalism in every service"
+        },
+        "customerSatisfaction": {
+          "title": "Customer Satisfaction",
+          "description": "Provide the best service for customer satisfaction"
+        },
+        "compliance": {
+          "title": "Compliance",
+          "description": "Always comply with applicable laws and regulations"
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Continue to innovate in product and service development"
+        }
+      }
+    },
+    "membership": {
+      "title": "Membership & Affiliation",
+      "logos": {
+        "jfx": "Jakarta Futures Exchange",
+        "kbi": "Indonesia Clearing House",
+        "aspebtindo": "Indonesian Futures and Commodity Exchange Association",
+        "bappebti": "Commodity Futures Trading Regulatory Agency"
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "pageTitle": "Profil Perusahaan",
+  "sections": {
+    "about": {
+      "title": "Tentang Kami",
+      "description1": "PT Kontak Perkasa Futures adalah perusahaan pialang berjangka yang telah berdiri sejak tahun 2000. Sebagai salah satu pelaku utama di industri perdagangan berjangka di Indonesia, kami berkomitmen untuk memberikan layanan terbaik di bidang transaksi derivatif, komoditi, dan indeks saham.",
+      "description2": "Sebagai anggota PT Bursa Berjangka Jakarta (JFX) dan PT Kliring Berjangka Indonesia (KBI), serta diawasi langsung oleh BAPPEBTI, kami menjunjung tinggi profesionalisme dan kepatuhan terhadap regulasi yang berlaku dalam setiap aktivitas operasional perusahaan."
+    },
+    "vision": {
+      "title": "Visi",
+      "description": "Mengembangkan dan memajukan Perdagangan Berjangka Komoditi serta memberikan dampak positif untuk perekonomian di Indonesia."
+    },
+    "mission": {
+      "title": "Misi",
+      "items": [
+        "Menggiatkan program promosi dan edukasi tentang industri PBK",
+        "Menyediakan sarana lindung nilai (hedging) dengan prinsip KYC",
+        "Memperkenalkan industri PBK melalui pendidikan tinggi dan seminar",
+        "Meningkatkan aspek kepatuhan peraturan yang berlaku",
+        "Menyiapkan SDM berkualitas melalui program pelatihan"
+      ]
+    },
+    "values": {
+      "title": "Nilai-Nilai Perusahaan",
+      "items": {
+        "integrity": {
+          "title": "Integritas",
+          "description": "Menjunjung tinggi kejujuran dan profesionalisme dalam setiap layanan"
+        },
+        "customerSatisfaction": {
+          "title": "Kepuasan Nasabah",
+          "description": "Memberikan pelayanan terbaik untuk kepuasan nasabah"
+        },
+        "compliance": {
+          "title": "Kepatuhan",
+          "description": "Selalu patuh terhadap peraturan dan perundang-undangan yang berlaku"
+        },
+        "innovation": {
+          "title": "Inovasi",
+          "description": "Terus berinovasi dalam pengembangan produk dan layanan"
+        }
+      }
+    },
+    "membership": {
+      "title": "Anggota & Afiliasi",
+      "logos": {
+        "jfx": "JFX",
+        "kbi": "KBI",
+        "aspebtindo": "ASPEBTINDO",
+        "bappebti": "BAPPEBTI"
+      }
+    }
+  }
+}

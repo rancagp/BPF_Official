@@ -14,8 +14,7 @@ export default function ProdukContainerMultilateral() {
                     <ProductCard
                         key={index}
                         title={product.title}
-                        image={`https://placehold.co/400`}
-                    />
+                        image={`https://placehold.co/400`} category={""} slug={""}                    />
                 ))}
             </div>
         </div>

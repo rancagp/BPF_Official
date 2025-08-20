@@ -1,0 +1,9 @@
+{
+  "title": "Pasar Saat Ini",
+  "loading": "Memuat data...",
+  "error": "Terjadi kesalahan saat memuat data",
+  "lastUpdated": "Data diperbarui setiap 5 detik • Terakhir diperbarui:",
+  "errorFetching": "Gagal mengambil data",
+  "invalidDataFormat": "Format data tidak valid",
+  "reload": "Muat Ulang"
+}

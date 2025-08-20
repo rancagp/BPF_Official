@@ -1,0 +1,9 @@
+{
+  "title": "Current Market",
+  "loading": "Loading data...",
+  "error": "An error occurred while loading data",
+  "lastUpdated": "Data updated every 5 seconds • Last updated:",
+  "errorFetching": "Failed to fetch data",
+  "invalidDataFormat": "Invalid data format",
+  "reload": "Reload"
+}

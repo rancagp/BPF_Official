@@ -9,9 +9,9 @@ module.exports = {
     localePath: path.resolve('./public/locales')
   },
   
-  // Namespace yang digunakan
-  ns: ['common', 'aboutus', 'footer'],
-  defaultNS: 'aboutus',
+  // Namespace yang digunakan di seluruh aplikasi
+  ns: ['common', 'aboutus', 'footer', 'produk', 'berita', 'profil_perusahaan', 'market', 'pengumuman', 'welcome'],
+  defaultNS: 'common',
   
   // Konfigurasi React
   react: {
@@ -26,7 +26,7 @@ module.exports = {
   fallbackLng: 'id',
   
   // Pemisah untuk namespace dan key
-  nsSeparator: '::',
+  nsSeparator: ':',
   keySeparator: '.',
   
   // Pengaturan interpolation

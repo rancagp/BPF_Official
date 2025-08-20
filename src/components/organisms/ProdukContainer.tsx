@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useTranslation } from 'next-i18next';
 import Header1 from "@/components/moleculs/Header1";
 
 type Product = {
@@ -14,6 +15,7 @@ type Product = {
 };
 
 export default function ProdukContainer() {
+    const { t } = useTranslation('produk', { useSuspense: false });
     const router = useRouter();
     const [productList, setProductList] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -60,14 +62,14 @@ export default function ProdukContainer() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
                 <span className="inline-block px-4 py-1.5 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">
-                    Produk Unggulan
+                    {t('featuredBadge')}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 bg-black bg-clip-text text-transparent">
-                    Solusi Investasi Terbaik
+                    {t('title')}
                 </h2>
                 <div className="w-24 h-1 bg-green-600 rounded-full mx-auto mb-6"></div>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    Temukan beragam produk investasi terbaik yang dirancang untuk membantu Anda mencapai kebebasan finansial dengan aman dan menguntungkan.
+                    {t('description')}
                 </p>
             </div>
 
@@ -121,7 +123,7 @@ export default function ProdukContainer() {
                                     {product.name}
                                 </h3>
                                 <p className="text-gray-500 text-sm mb-4 line-clamp-2">
-                                    {product.deskripsi || 'Temukan peluang investasi terbaik dengan produk unggulan kami.'}
+                                    {product.deskripsi || t('defaultDescription')}
                                 </p>
                                 <button 
                                     className="w-full mt-4 px-6 py-2.5 bg-green-600 text-white font-medium rounded-lg hover:bg-green-800 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 flex items-center justify-center space-x-2"
@@ -130,7 +132,7 @@ export default function ProdukContainer() {
                                         handleProductClick(product.category, product.slug);
                                     }}
                                 >
-                                    <span>Lihat Detail</span>
+                                    <span>{t('viewDetails')}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                     </svg>
@@ -145,7 +147,7 @@ export default function ProdukContainer() {
                             href="/produk"
                             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-800 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
                         >
-                            Lihat Semua Produk
+                            {t('viewAllProducts')}
                             <svg className="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>

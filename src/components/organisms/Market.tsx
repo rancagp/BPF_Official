@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 const LastUpdatedTime = () => {
   const [currentTime, setCurrentTime] = useState<string>('');
+  const { t } = useTranslation('market');
   
   useEffect(() => {
     // Update waktu hanya di sisi klien
@@ -21,7 +23,7 @@ const LastUpdatedTime = () => {
   return (
     <div className="mt-8 text-center">
       <p className="text-sm text-gray-500">
-        Data diperbarui setiap 5 detik • Terakhir diperbarui: {currentTime}
+        {t('lastUpdated')} {currentTime}
       </p>
     </div>
   );
@@ -125,6 +127,7 @@ export default function Market() {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const prevDataRef = useRef<MarketItem[]>([]);
+  const { t } = useTranslation('market');
 
   useEffect(() => {
     const fetchMarketData = async () => {
@@ -133,14 +136,14 @@ export default function Market() {
         
         if (!res.ok) {
           const errorText = await res.text();
-          throw new Error(`Error ${res.status}: ${res.statusText || 'Gagal mengambil data'}`);
+          throw new Error(`Error ${res.status}: ${res.statusText || t('errorFetching')}`);
         }
 
         const data = await res.json();
         
         // Pastikan data adalah array
         if (!Array.isArray(data)) {
-          throw new Error('Format data tidak valid');
+          throw new Error(t('invalidDataFormat'));
         }
 
         // Proses data
@@ -168,7 +171,7 @@ export default function Market() {
         setErrorMessage('');
       } catch (error: any) {
         console.error('Error:', error);
-        setErrorMessage(error.message || 'Terjadi kesalahan saat memuat data');
+        setErrorMessage(error.message || t('error'));
       } finally {
         setIsLoading(false);
       }
@@ -189,7 +192,7 @@ export default function Market() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            Pasar Saat Ini
+            {t('title')}
           </h2>
           <div className="mt-2 h-1 w-16 bg-green-500 mx-auto rounded-full"></div>
         </div>
@@ -205,13 +208,13 @@ export default function Market() {
             ))}
           </div>
         ) : errorMessage ? (
-          <div className="text-center py-8 bg-red-50 rounded-lg">
-            <p className="text-red-600">{errorMessage}</p>
+          <div className="text-center py-8">
+            <p className="text-red-500 mb-4">{errorMessage}</p>
             <button 
               onClick={() => window.location.reload()}
-              className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
             >
-              Muat Ulang
+              {t('reload', 'Muat Ulang')}
             </button>
           </div>
         ) : (

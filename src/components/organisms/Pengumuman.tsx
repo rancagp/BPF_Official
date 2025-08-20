@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from 'next-i18next';
 import NewsCard2 from "@/components/moleculs/NewsCard2";
 import Header1 from "@/components/moleculs/Header1";
 
@@ -21,8 +22,16 @@ type PengumumanHomeProps = {
 };
 
 export default function PengumumanHome({ showHeader = true, className }: PengumumanHomeProps) {
+    const { t, i18n } = useTranslation('pengumuman');
     const [pengumumanList, setPengumumanList] = useState<Berita[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    
+    // Debug logging
+    useEffect(() => {
+        console.log('Current language:', i18n.language);
+        console.log('Available resources:', i18n.getResourceBundle(i18n.language, 'pengumuman'));
+    }, [i18n.language]);
 
     useEffect(() => {
         async function fetchBerita() {
@@ -67,7 +76,8 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                 console.log('Processed data with images:', processedData);
                 setPengumumanList(processedData);
             } catch (error) {
-                console.error("Gagal memuat berita:", error);
+                console.error('Error loading announcements:', error);
+                setError(t('error'));
             } finally {
                 setLoading(false);
             }
@@ -76,19 +86,27 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
         fetchBerita();
     }, []);
 
+    if (error) {
+        return (
+            <div className="text-center py-8 text-red-600">
+                {error}
+            </div>
+        );
+    }
+
     return (
         <div className={`${className} mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}>
             {showHeader && (
                 <div className="text-center mb-12">
                     <span className="inline-block px-4 py-1.5 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">
-                        Update Terbaru
+                        {t('updateLabel')}
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        Pengumuman Terbaru
+                        {t('title')}
                     </h2>
                     <div className="w-24 h-1 bg-green-600 rounded-full mx-auto mb-6"></div>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Dapatkan informasi terbaru seputar pengumuman dan berita penting dari kami.
+                        {t('description')}
                     </p>
                 </div>
             )}
@@ -99,7 +117,9 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                         <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <div className="animate-pulse h-48 bg-gray-200"></div>
                             <div className="p-6">
-                                <div className="h-4 bg-gray-200 rounded w-24 mb-4"></div>
+                                <div className="h-4 bg-gray-200 rounded w-24 mb-4">
+                                {t('loading')}
+                            </div>
                                 <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
                                 <div className="space-y-2">
                                     <div className="h-4 bg-gray-200 rounded"></div>
@@ -127,7 +147,7 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                                     content={item.isi}
                                     link={`/informasi/umum/${item.slug}`}
                                     image={item.image}
-                                    category={item.kategori || 'Pengumuman'}
+                                    category={item.kategori || t('category')}
                                 />
                             </div>
                         ))}
@@ -138,7 +158,7 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                             href="/informasi/umum"
                             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-800 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
                         >
-                            Lihat Semua Pengumuman
+                            <span>{t('viewAll')}</span>
                             <svg className="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
@@ -150,8 +170,8 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <h3 className="mt-4 text-lg font-medium text-gray-900">Belum ada pengumuman</h3>
-                    <p className="mt-1 text-gray-500">Nantikan pengumuman terbaru dari kami.</p>
+                    <h3 className="mt-4 text-lg font-medium text-gray-900">{t('noAnnouncements.title')}</h3>
+                    <p className="mt-1 text-gray-500">{t('noAnnouncements.description')}</p>
                 </div>
             )}
         </div>

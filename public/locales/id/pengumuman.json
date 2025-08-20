@@ -1,0 +1,13 @@
+{
+  "updateLabel": "Update Terbaru",
+  "title": "Pengumuman Terbaru",
+  "description": "Dapatkan informasi terbaru seputar pengumuman dan berita penting dari kami.",
+  "viewAll": "Lihat Semua Pengumuman",
+  "noAnnouncements": {
+    "title": "Belum ada pengumuman",
+    "description": "Nantikan pengumuman terbaru dari kami."
+  },
+  "category": "Pengumuman",
+  "loading": "Memuat pengumuman...",
+  "error": "Gagal memuat pengumuman"
+}

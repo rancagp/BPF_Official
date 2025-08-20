@@ -1,4 +1,5 @@
 import CardDetail from "../atoms/CardDetail";
+import { useTranslation } from 'next-i18next';
 
 interface NewsCardProps {
     title: string;
@@ -15,6 +16,7 @@ export default function NewsCard({
     slug,
     img,
 }: NewsCardProps) {
+    const { t } = useTranslation('berita');
 
     // Fungsi untuk memotong teks tanpa memotong di tengah kata
     function stripHtml(html: string = ""): string {
@@ -73,7 +75,7 @@ export default function NewsCard({
                 </h3>
                 <p className="text-gray-600 mb-5 text-base line-clamp-3">{trimmedExcerpt}</p>
                 <div className="mt-auto pt-4 border-t border-gray-100">
-                    <CardDetail link={fullLink} />
+                    <CardDetail link={fullLink} text={t('readMore')} />
                 </div>
             </div>
         </div>

@@ -1,0 +1,13 @@
+{
+  "updateLabel": "Latest Update",
+  "title": "Latest Announcements",
+  "description": "Get the latest information about important announcements and news from us.",
+  "viewAll": "View All Announcements",
+  "noAnnouncements": {
+    "title": "No announcements yet",
+    "description": "Stay tuned for upcoming announcements from us."
+  },
+  "category": "Announcement",
+  "loading": "Loading announcements...",
+  "error": "Failed to load announcements"
+}
