@@ -1,0 +1,26 @@
+{
+  "pageTitle": "Wakil Pialang",
+  "pageDescription": "Daftar wakil pialang berjangka PT Kontakperkasa Futures di berbagai kota di Indonesia",
+  "loading": "Memuat...",
+  "loadingText": "Memuat data wakil pialang...",
+  "errorText": "Gagal memuat data. Silakan coba lagi nanti.",
+  "noDataText": "Tidak ada data wakil pialang yang tersedia.",
+  "viewAllText": "Lihat Semua",
+  "wakilPialangIn": "Wakil Pialang di {city}",
+  "wakilPialangList": "Daftar Wakil Pialang",
+  "licenseNumber": "Nomor Izin",
+  "status": "Status",
+  "active": "Aktif",
+  "inactive": "Tidak Aktif",
+  "backButton": "Kembali ke Daftar Wakil Pialang",
+  "table": {
+    "no": "No",
+    "name": "Nama",
+    "licenseNumber": "Nomor Izin WPB",
+    "status": "Status"
+  },
+  "error": {
+    "title": "Terjadi Kesalahan",
+    "description": "Maaf, terjadi kesalahan saat memuat data. Silakan coba lagi nanti."
+  }
+}

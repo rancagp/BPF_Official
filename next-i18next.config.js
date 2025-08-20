@@ -10,7 +10,7 @@ module.exports = {
   },
   
   // Namespace yang digunakan di seluruh aplikasi
-  ns: ['common', 'aboutus', 'footer', 'produk', 'berita', 'profil_perusahaan', 'market', 'pengumuman', 'welcome'],
+  ns: ['common', 'aboutus', 'footer', 'produk', 'berita', 'profil_perusahaan', 'market', 'pengumuman', 'welcome', 'legalitas_bisnis', 'wakil_pialang', 'badan_regulasi', 'fasilitas_layanan', 'penghargaan', 'sertifikat', 'informasi', 'video'],
   defaultNS: 'common',
   
   // Konfigurasi React

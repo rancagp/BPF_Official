@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import CardCategoryPialang from "@/components/atoms/CardCategoryPialang";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
 import Link from "next/link";
@@ -20,7 +22,16 @@ const dataDummy: KategoriPialang[] = [
     { id: 6, nama_kategori: "Semarang", slug: "wakil-pialang-semarang" },
 ];
 
+export async function getStaticProps({ locale }: { locale: string }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale || 'id', ['wakil_pialang', 'common', 'footer'])),
+        },
+    };
+}
+
 export default function WakilPialang() {
+    const { t } = useTranslation('wakil_pialang');
     const [kategori, setKategori] = useState<KategoriPialang[]>([]);
     const [sedangMemuat, setSedangMemuat] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -35,7 +46,6 @@ export default function WakilPialang() {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
-                    // credentials: 'include', // Uncomment ini jika menggunakan session/cookie
                 });
                 
                 if (!response.ok) {
@@ -45,7 +55,6 @@ export default function WakilPialang() {
                 }
                 
                 const data = await response.json();
-                console.log('Data diterima:', data);
                 
                 if (Array.isArray(data)) {
                     setKategori(data);
@@ -56,8 +65,7 @@ export default function WakilPialang() {
             } catch (err: unknown) {
                 const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan yang tidak diketahui';
                 console.error("Gagal memuat kategori:", errorMessage);
-                setError(`Gagal memuat data: ${errorMessage}. Menggunakan data dummy...`);
-                // Fallback ke data dummy jika API error
+                setError(`${t('errorText')} ${errorMessage}`);
                 setKategori(dataDummy);
             } finally {
                 setSedangMemuat(false);
@@ -65,25 +73,25 @@ export default function WakilPialang() {
         };
 
         ambilKategori();
-    }, []);
+    }, [t]);
 
     if (sedangMemuat) {
         return (
-            <PageTemplate title="Wakil Pialang">
+            <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
                 <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                    <ProfilContainer title="Daftar Wakil Pialang">
-                        <div className="text-center py-10">Memuat data...</div>
+                    <ProfilContainer title={t('wakilPialangList')}>
+                        <div className="text-center py-10">{t('loadingText')}</div>
                     </ProfilContainer>
                 </div>
             </PageTemplate>
         );
     }
 
-    if (error) {
+    if (error && kategori.length === 0) {
         return (
-            <PageTemplate title="Wakil Pialang">
+            <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
                 <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                    <ProfilContainer title="Terjadi Kesalahan">
+                    <ProfilContainer title={t('error')}>
                         <div className="text-center py-10 text-red-600">
                             {error}
                         </div>
@@ -94,11 +102,10 @@ export default function WakilPialang() {
     }
 
     return (
-        <PageTemplate title="Wakil Pialang">
+        <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Daftar Wakil Pialang">
-                    {kategori.length > 0 ? (
-                        <div className="space-y-4">
+                <ProfilContainer title={t('wakilPialangList')}>
+                    <div className="space-y-4">
                         {kategori.map((item) => (
                             <Link 
                                 key={item.id} 
@@ -116,7 +123,7 @@ export default function WakilPialang() {
                                             {item.nama_kategori}
                                         </h3>
                                         <p className="text-sm text-gray-500">
-                                            Lihat daftar lengkap wakil pialang
+                                            {t('viewAllText')}
                                         </p>
                                     </div>
                                     <div className="ml-4 text-gray-400 group-hover:text-green-500 transition-colors">
@@ -128,11 +135,6 @@ export default function WakilPialang() {
                             </Link>
                         ))}
                     </div>
-                    ) : (
-                        <div className="text-center py-10 text-gray-500">
-                            Tidak ada data wakil pialang yang tersedia.
-                        </div>
-                    )}
                 </ProfilContainer>
             </div>
         </PageTemplate>

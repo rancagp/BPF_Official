@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
 
@@ -15,7 +18,23 @@ interface WakilPialang {
     };
 }
 
+export async function getStaticProps({ locale }: { locale: string }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale || 'id', ['wakil_pialang', 'common', 'footer'])),
+        },
+    };
+}
+
+export async function getStaticPaths() {
+    return {
+        paths: [],
+        fallback: 'blocking',
+    };
+}
+
 export default function WakilPialangBySlug() {
+    const { t } = useTranslation('wakil_pialang');
     const router = useRouter();
     const { slug } = router.query;
 
@@ -92,23 +111,38 @@ export default function WakilPialangBySlug() {
         fetchData();
     }, [slug]);
 
+    if (loading) {
+        return (
+            <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
+                <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
+                    <ProfilContainer title={t('loading')}>
+                        <div className="text-center py-12">
+                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mx-auto"></div>
+                            <p className="mt-4 text-gray-600">{t('loadingText')}</p>
+                        </div>
+                    </ProfilContainer>
+                </div>
+            </PageTemplate>
+        );
+    }
+
     return (
-        <PageTemplate title="Wakil Pialang">
+        <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title={kategoriNama || "Wakil Pialang"}>
-                    {loading ? (
-                        <p>Memuat data Wakil Pialang...</p>
-                    ) : wakilList.length === 0 ? (
-                        <p className="text-gray-500">Tidak ada data Wakil Pialang untuk kategori ini.</p>
+                    {wakilList.length === 0 ? (
+                        <h1 className="text-2xl font-bold text-gray-900 mb-6">
+                            {t('wakilPialangIn', { city: kategoriNama })}
+                        </h1>
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden border bg-white">
                                 <thead className="bg-green-500 text-white">
                                     <tr>
-                                        <th className="px-6 py-3 text-sm font-semibold uppercase">No</th>
-                                        <th className="px-6 py-3 text-sm font-semibold uppercase">Nama</th>
-                                        <th className="px-6 py-3 text-sm font-semibold uppercase">Nomor Izin WPB</th>
-                                        <th className="px-6 py-3 text-sm font-semibold uppercase">Status</th>
+                                        <th className="px-6 py-3 text-sm font-semibold uppercase">{t('table.no', { ns: 'wakil_pialang' })}</th>
+                                        <th className="px-6 py-3 text-sm font-semibold uppercase">{t('table.name', { ns: 'wakil_pialang' })}</th>
+                                        <th className="px-6 py-3 text-sm font-semibold uppercase">{t('table.licenseNumber', { ns: 'wakil_pialang' })}</th>
+                                        <th className="px-6 py-3 text-sm font-semibold uppercase">{t('table.status', { ns: 'wakil_pialang' })}</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
@@ -116,15 +150,19 @@ export default function WakilPialangBySlug() {
                                         <tr key={wpb.id} className="bg-zinc-50 hover:bg-green-100 transition duration-200">
                                             <td className="px-6 py-4 text-center">{index + 1}</td>
                                             <td className="px-6 py-4 text-center">{wpb.name}</td>
-                                            <td className="px-6 py-4 text-center">{wpb.nomor_izin}</td>
+                                            <td className="px-6 py-4 text-center">
+                                                <div className="text-sm font-medium text-gray-500">
+                                                    {t('licenseNumber')}: {wpb.nomor_izin}
+                                                </div>
+                                            </td>
                                             <td className="px-6 py-4 text-center">
                                                 <span
-                                                    className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${wpb.status === "aktif"
+                                                    className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${wpb.status.toLowerCase() === "aktif"
                                                         ? "bg-green-100 text-green-700"
                                                         : "bg-red-100 text-red-700"
                                                         }`}
                                                 >
-                                                    {wpb.status === "aktif" ? "Aktif" : "Tidak Aktif"}
+                                                    {wpb.status.toLowerCase() === "aktif" ? t('active') : t('inactive')}
                                                 </span>
                                             </td>
                                         </tr>

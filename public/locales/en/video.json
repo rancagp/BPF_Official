@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Videos",
+  "sectionTitle": "General Videos",
+  "videos": [
+    {
+      "title": "17 August 2024 Celebration at PT. Kontakperkasa Futures Jakarta",
+      "description": "Indonesian Independence Day Celebration 2024 at KPF Jakarta",
+      "videoUrl": "https://www.youtube.com/embed/ZW7CWB8fnZs"
+    },
+    {
+      "title": "Futures Trading Literacy Month 2024 - August 5, 2024",
+      "description": "Futures Trading Literacy Month Activities in 2024",
+      "videoUrl": "https://www.youtube.com/embed/GW0TRluwfC0"
+    },
+    {
+      "title": "Futures Trading Literacy Month KPF Marein 2023",
+      "description": "Futures Trading Literacy Activities with KPF Marein 2023",
+      "videoUrl": "https://www.youtube.com/embed/bIKJmN-sPS4"
+    }
+  ]
+}

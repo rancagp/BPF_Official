@@ -1,0 +1,46 @@
+{
+  "pageTitle": "Facilities & Services",
+  "pageDescription": "Various best facilities and services to support your trading activities safely and comfortably",
+  "services": [
+    {
+      "title": "Futures Broker Dealer (WPB)",
+      "description": "The company is supported by Professional Futures Broker Dealers certified by Bappebti."
+    },
+    {
+      "title": "Online Registration Facility",
+      "description": "We provide facilities for Prospective Customers who want to join PT. Kontakperkasa Futures by registering online at www.kp-futures.com."
+    },
+    {
+      "title": "Two-Factor Authentication (2FA) Security System",
+      "description": "Implementation of One Time Password (OTP) when logging into the online trading transaction system."
+    },
+    {
+      "title": "Online Trading & Demo Account",
+      "description": "A special portal for online transactions via the internet. Equipped with real-time price spreads, chart views, and market information. Also includes a Demo Account facility for transaction simulations."
+    },
+    {
+      "title": "Daily Transaction Reports",
+      "description": "Daily transaction reports are sent to customer emails and can also be monitored directly through the online trading system."
+    },
+    {
+      "title": "Fund Withdrawal",
+      "description": "Withdrawal forms can be processed online. Funds can be processed within one business day (T+1) after all requirements are met."
+    },
+    {
+      "title": "Segregated Account",
+      "description": "All customer funds are placed in a Segregated Account approved by Bappebti and separated from company assets."
+    },
+    {
+      "title": "Transaction Flexibility",
+      "description": "Two-way transactions allow investors to profit whether the market rises or falls, with high product liquidity."
+    },
+    {
+      "title": "Dispute Resolution",
+      "description": "Customer complaint handling refers to Bappebti Regulation Number 4 of 2020 concerning Guidelines for Customer Dispute Resolution in the Commodity Futures Trading Sector."
+    },
+    {
+      "title": "Sitna Program",
+      "description": "A transaction transparency program that allows customers to monitor transactions on the Jakarta Futures Exchange (JFX) and Indonesia Clearing House."
+    }
+  ]
+}

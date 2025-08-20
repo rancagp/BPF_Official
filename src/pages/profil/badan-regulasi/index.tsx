@@ -1,52 +1,70 @@
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Image from "next/image";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
-import Image from "next/image";
 
-const legalitasData = [
+type LegalitasItem = {
+    id: number;
+    key: 'bappebti' | 'bbj' | 'kbi';
+    image: string;
+};
+
+const legalitasData: LegalitasItem[] = [
     {
         id: 1,
-        title: "BADAN PENGAWAS PERDAGANGAN BERJANGKA KOMODITI (BAPPEBTI)",
-        image: "/assets/logo-kemendag.png", 
-        description: "BAPPEBTI atau Badan Pengawas Perdagangan Berjangka Komoditi dibentuk berdasarkan Undang-Undang Nomor 32 Tahun 1997, BAPPEBTI merupakan salah satu unit eselon I berada di bawah Departemen Perdagangan. BAPPEBTI mempunyai tugas melaksanakan pembinaan, pengaturan, dan pengawasan kegiatan perdagangan berjangka berdasarkan kebijakan yang ditetapkan oleh Menteri dan peraturan perundang-undangan yang berlaku."
+        key: 'bappebti',
+        image: "/assets/logo-kemendag.png",
     },
     {
         id: 2,
-        title: "BURSA BERJANGKA JAKARTA (BBJ)",
-        image: "/assets/logo-jfx.png", 
-        description: "PT. Bursa Berjangka Jakarta merupakan bursa pertama yang didirikan dengan Undang-Undang ini. Ia didirikan pada tanggal 19 Agustus 1999 oleh 4 perkebunan sawit, 7 penyulingan sawit, 8 eksportir kopi, 8 perusahaan pialang pasar modal dan 2 perusahaan dagang. Modal disetor hanya sebesar 11,4 milyar Rupiah dari 40 milyar modal yang disetujui. Bursa Berjangka Jakarta memenuhi semua persyaratan yang ditulis dalam UU 32/1997 tersebut dan mendapat lisensi Bappebti pada semester kedua tahun 2000. ",
+        key: 'bbj',
+        image: "/assets/logo-jfx.png",
     },
     {
         id: 3,
-        title: "KLIRING BERJANGKA INDONESIA (KBI)",
-        image: "/assets/logo-kbi.png", 
-        description: "PT KLIRING BERJANGKA INDONESIA (Persero) merupakan suatu Badan Usaha Milik Negara yang bercita-cita untuk menjadi suatu perusahaan domestik yang efektif dan pada akhirnya menjadi suatu perusahaan global yang berstandar international. Didirikan untuk mengkliringkan dan menjamin penyelesaian transaksi kontrak Berjangka/Derivatif/Spot & Forward dan Resi Gudang secara teratur, wajar, dan efisien sehingga mampu memelihara Integritas Finansial Pasar.",
+        key: 'kbi',
+        image: "/assets/logo-kbi.png",
     },
 ];
 
+export async function getStaticProps({ locale }: { locale: string }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale || 'id', ['badan_regulasi', 'common', 'footer'])),
+        },
+    };
+}
+
 export default function Legalitas() {
+    const { t } = useTranslation('badan_regulasi');
+
     return (
-        <PageTemplate title="Badan Regulasi">
+        <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Badan Regulasi">
+                <ProfilContainer title={t('pageTitle')}>
                     <div className="space-y-16">
-                        {legalitasData.map((item, index) => (
+                        {legalitasData.map((item) => (
                             <div key={item.id} className="flex flex-col md:flex-row items-center gap-8">
                                 {/* Image Container */}
                                 <div className="md:w-1/3 flex-shrink-0 w-full">
                                     <div className="relative aspect-video bg-white rounded-lg overflow-hidden shadow-md p-4">
                                         <Image
                                             src={item.image}
-                                            alt={item.title}
+                                            alt={t(`${item.key}.title`)}
                                             fill
                                             className="object-contain"
+                                            sizes="(max-width: 768px) 100vw, 33vw"
                                         />
                                     </div>
                                 </div>
                                 {/* Text Content */}
                                 <div className="md:w-2/3">
-                                    <h3 className="text-2xl font-bold text-gray-800 mb-3">{item.title}</h3>
+                                    <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                                        {t(`${item.key}.title`)}
+                                    </h3>
                                     <p className="text-gray-600 text-base leading-relaxed text-justify">
-                                        {item.description}
+                                        {t(`${item.key}.description`)}
                                     </p>
                                 </div>
                             </div>
