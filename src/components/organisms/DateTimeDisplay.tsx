@@ -59,36 +59,59 @@ const DateTimeDisplay = () => {
     }, []);
 
     return (
-        <div className="bg-stone-50 text-gray-600 text-xs border-b border-gray-100">
+        <div className="bg-white text-gray-600 text-xs border-b border-gray-100">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-1.5 space-y-1 md:space-y-0">
-                    {/* Date Section */}
-                    <div className="flex items-center">
-                        <i className="far fa-calendar-alt text-gray-400 mr-1.5"></i>
+                <div className="flex items-center justify-between py-2">
+                    {/* Date */}
+                    <div className="flex items-center text-gray-500">
+                        <i className="far fa-calendar-alt mr-2"></i>
                         <span>{currentDate}</span>
                     </div>
-
+                    
                     {/* Time Zones */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+                    <div className="hidden md:flex items-center space-x-5">
                         <div className="flex items-center">
-                            <span className="w-16 font-medium">{timezones.jakarta}</span>
-                            <span className="ml-1">{currentTimeJKT}</span>
+                            <span className="w-12 text-right font-medium">{timezones.jakarta}</span>
+                            <span className="ml-1 w-10">{currentTimeJKT}</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="w-16 font-medium">{timezones.tokyo}</span>
-                            <span className="ml-1">{currentTimeTKY}</span>
+                            <span className="w-12 text-right font-medium">{timezones.tokyo}</span>
+                            <span className="ml-1 w-10">{currentTimeTKY}</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="w-16 font-medium">{timezones.hongkong}</span>
-                            <span className="ml-1">{currentTimeHK}</span>
+                            <span className="whitespace-nowrap font-medium">{timezones.hongkong}</span>
+                            <span className="ml-1 w-10">{currentTimeHK}</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="w-16 font-medium">{timezones.newyork}</span>
-                            <span className="ml-1">{currentTimeNY}</span>
+                            <span className="w-14 text-right font-medium">{timezones.newyork}</span>
+                            <span className="ml-1 w-10">{currentTimeNY}</span>
                         </div>
                     </div>
-
-                    <LanguageSwitcher />
+                    
+                    {/* Language Switcher */}
+                    <div className="ml-4">
+                        <LanguageSwitcher />
+                    </div>
+                </div>
+                
+                {/* Time Zones - Mobile */}
+                <div className="md:hidden flex items-center space-x-4 overflow-x-auto py-2 -mx-4 px-4">
+                    <div className="flex items-center flex-shrink-0">
+                        <span className="w-10 text-right font-medium">JKT</span>
+                        <span className="ml-1">{currentTimeJKT}</span>
+                    </div>
+                    <div className="flex items-center flex-shrink-0">
+                        <span className="w-10 text-right font-medium">TKY</span>
+                        <span className="ml-1">{currentTimeTKY}</span>
+                    </div>
+                    <div className="flex items-center flex-shrink-0">
+                        <span className="w-10 text-right font-medium">HKG</span>
+                        <span className="ml-1">{currentTimeHK}</span>
+                    </div>
+                    <div className="flex items-center flex-shrink-0">
+                        <span className="w-10 text-right font-medium">NYC</span>
+                        <span className="ml-1">{currentTimeNY}</span>
+                    </div>
                 </div>
             </div>
         </div>
