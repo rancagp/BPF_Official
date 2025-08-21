@@ -1,9 +1,21 @@
 import ProductCard from "@/components/moleculs/ProductCard";
 
 const products = [
-    { title: "Kontrak Berjangka Olein (OLE)" },
-    { title: "Kontrak Berjangka Emas (GOL)" },
-    { title: "Kontrak Berjangka Emas 250 Gram (GOL250)" },
+    { 
+      title: "Kontrak Berjangka Olein (OLE)",
+      slug: "kontrak-berjangka-olein",
+      image: "https://placehold.co/400"
+    },
+    { 
+      title: "Kontrak Berjangka Emas (GOL)",
+      slug: "kontrak-berjangka-emas",
+      image: "https://placehold.co/400"
+    },
+    { 
+      title: "Kontrak Berjangka Emas 250 Gram (GOL250)",
+      slug: "kontrak-berjangka-emas-250",
+      image: "https://placehold.co/400"
+    },
 ];
 
 export default function ProdukContainerMultilateral() {
@@ -14,7 +26,9 @@ export default function ProdukContainerMultilateral() {
                     <ProductCard
                         key={index}
                         title={product.title}
-                        image={`https://placehold.co/400`} category={""} slug={""}                    />
+                        image={product.image}
+                        href={`/produk/${product.slug}`}
+                    />
                 ))}
             </div>
         </div>
