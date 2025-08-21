@@ -1,4 +1,88 @@
 {
+  "registrationFlow": {
+    "steps": [
+      {
+        "title": "Open Company Website",
+        "description": "Prospective clients visit the official website of PT Rifan Financindo Berjangka.",
+        "items": []
+      },
+      {
+        "title": "Register for a Demo Account",
+        "items": [
+          "Fill in personal data",
+          "Get demo account access",
+          "Perform transaction simulations"
+        ]
+      },
+      {
+        "title": "Filling in Agreement Documents",
+        "description": "Prospective clients complete the following documents:",
+        "items": [
+          "Application Agreement",
+          "Risk Disclosure Document",
+          "Power of Attorney Agreement (PPA)",
+          "Transaction Mechanism (Trading Rules)",
+          "Supporting documents (ID Card and others)"
+        ]
+      },
+      {
+        "title": "Verification by Futures Broker Representative",
+        "description": "Includes verification of personal data and proof of margin deposit.",
+        "items": []
+      },
+      {
+        "title": "Margin Deposit to Segregated Account",
+        "description": "Clients deposit margin funds to the provided segregated account.",
+        "items": []
+      },
+      {
+        "title": "Real Account Opening",
+        "description": "After verification and margin funds are received, the real account will be activated.",
+        "items": []
+      },
+      {
+        "title": "User ID and Password Creation",
+        "description": "Clients will receive user ID and password to access the trading platform.",
+        "items": []
+      },
+      {
+        "title": "Training and Guidance",
+        "items": [
+          "Attend trading training sessions",
+          "Receive platform usage guidance",
+          "Understand risk management"
+        ]
+      }
+    ]
+  },
+
+  
+  "registrasiOnline": {
+    "title": "Online Registration Procedure",
+    "description": "Register your trading account easily and quickly online through PT. KONTAKPERKASA FUTURES. Follow these registration steps:",
+    "steps": [
+      "Fill out the online registration form with valid personal data",
+      "Upload required documents (ID Card/Passport, Tax ID, etc.)",
+      "Data and document verification by our team",
+      "Account opening completed and you will receive account details"
+    ],
+    "documentsRequired": {
+      "title": "Required Documents",
+      "items": [
+        "ID Card (Indonesian Citizens) or Passport (Foreigners)",
+        "Tax ID (NPWP)",
+        "Proof of address (if different from ID card)",
+        "Other supporting documents as required"
+      ]
+    },
+    "notes": [
+      "Ensure all data matches the original documents",
+      "Verification process takes 1-2 business days",
+      "You will receive a confirmation email once your account is activated"
+    ]
+  },
+
+  
   "ilustrasiTransaksi": {
     "title": "Transaction Illustration",
     "description": "For those of you who want to invest in products from PT. KONTAKPERKASA FUTURES, you can see the transaction illustration below to further consider whether you are sure about this:",
@@ -102,6 +186,40 @@
         "example": "A customer takes a sell position on UJ1010_BBJ at 102.20 (1 lot), then liquidates at 102.12.",
         "result": "P/L = US$45.04 (net profit)"
       }
+    }
+  },
+  
+  "penarikanDana": {
+    "title": "Withdrawal Procedure",
+    "description": "Funds Withdrawal can be made at any time by the Client as desired, provided that the withdrawn amount does not exceed the <span class='font-medium'>Effective Margin</span> stated in the Client's daily transaction report (<span class='italic'>Statement Report</span>).",
+    "prosesTitle": "Funds Withdrawal Process (<span class='italic'>Withdrawal</span>)",
+    "prosesSteps": [
+      "Client logs in to the <span class='font-medium'>Withdrawal</span> menu on the real trading account to submit a withdrawal request in accordance with the applicable terms and conditions.",
+      "Client fills out the withdrawal application form completely and correctly.",
+      "Funds can only be transferred to an account under the Client's name that matches the previously approved Account Opening Application document.",
+      "The standard withdrawal process takes a maximum of <span class='font-medium'>three working days (T+3)</span>. However, PT. Rifan Financindo Berjangka is committed to expediting the process to be completed within <span class='font-medium'>one working day (T+1)</span>."
+    ]
+  },
+  
+  "petunjukTransaksi": {
+    "title": "Trading Instructions",
+    "description": "Clients can submit orders online or via telephone as recommended when practicing with a Demo account before using Real online trading.",
+    "description2": "Clients who submit orders online will receive a USER ID and password from PT. KONTAKPERKASA FUTURES. To conduct online transactions, you must meet the following requirements:",
+    "requirements": [
+      "Internet connection",
+      {
+        "text": "Access to the following link:",
+        "link": {
+          "url": "http://etrade.kontakperkasafutures.com/login.php",
+          "text": "http://etrade.kontakperkasafutures.com/login.php"
+        }
+      },
+      "The client already has a user ID and password from PT. Kontakperkasa Futures (this password can be changed by the client themselves)."
+    ],
+    "note": "Note: For each transaction, clients can only buy or sell a maximum of 50 lots.",
+    "attention": {
+      "title": "Attention:",
+      "content": "Clients are required to read and understand the terms and conditions of online trading presented on the opening page. If a client logs into the online system and conducts transactions, it means the client accepts all consequences related to such transactions."
     }
   }
 }

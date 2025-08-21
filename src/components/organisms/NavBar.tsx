@@ -133,7 +133,7 @@ const baseMenuItems: NavItem[] = [
             { 
                 key: 'procedures_onlineRegistration',
                 label: 'Pendaftaran Online', 
-                href: "/prosedur/pendaftaran" 
+                href: "/prosedur/registrasi-online" 
             },
             { 
                 key: 'procedures_withdrawal',
@@ -143,7 +143,7 @@ const baseMenuItems: NavItem[] = [
             { 
                 key: 'procedures_transactionGuide',
                 label: 'Panduan Transaksi', 
-                href: "/prosedur/panduan" 
+                href: "/prosedur/petunjuk-transaksi" 
             },
         ],
     },
