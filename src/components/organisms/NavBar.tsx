@@ -9,7 +9,7 @@ import MarketUpdate from "./MarketUpdate";
 interface MenuItem {
     key: string;
     label: string;
-    href: string;
+    href?: string;
     submenu?: MenuItem[];
     icon?: string;
     disabled?: boolean;
@@ -18,6 +18,7 @@ interface MenuItem {
 // Type for menu items with submenus
 interface NavItem extends Omit<MenuItem, 'submenu'> {
     submenu?: NavItem[];
+    target?: string;
 }
 
 // Base menu items with required properties
@@ -30,7 +31,6 @@ const baseMenuItems: NavItem[] = [
     {
         key: 'about',
         label: 'Tentang Kami',
-        href: "#",
         submenu: [
             { 
                 key: 'about_companyProfile',
@@ -96,7 +96,6 @@ const baseMenuItems: NavItem[] = [
     {
         key: 'products',
         label: 'Produk',
-        href: '#',
         submenu: [
             { 
                 key: 'products_allProducts',
@@ -128,7 +127,6 @@ const baseMenuItems: NavItem[] = [
     {
         key: 'procedures',
         label: 'Prosedur',
-        href: '#',
         submenu: [
             { 
                 key: 'procedures_onlineRegistration',
@@ -150,7 +148,6 @@ const baseMenuItems: NavItem[] = [
     {
         key: 'analysis',
         label: 'Analisis',
-        href: '#',
         submenu: [
             { 
                 key: 'analysis_news',
@@ -177,17 +174,16 @@ const baseMenuItems: NavItem[] = [
     {
         key: 'education',
         label: 'Edukasi',
-        href: '#',
         submenu: [
             { 
                 key: 'education_tradingMechanism',
                 label: 'Mekanisme Trading', 
-                href: "/edukasi/mekanisme" 
+                href: "/edukasi/mekanisme-perdagangan" 
             },
             { 
                 key: 'education_indexSymbols',
                 label: 'Simbol Indeks', 
-                href: "/edukasi/simbol-indeks" 
+                href: "/edukasi/symbol-indeks" 
             },
             { 
                 key: 'education_locoLondonGold',
@@ -207,7 +203,8 @@ const baseMenuItems: NavItem[] = [
             { 
                 key: 'education_marketingTools',
                 label: 'Alat Pemasaran', 
-                href: "/edukasi/alat-pemasaran" 
+                href: "https://digitalmarketing.kp-futures.com/",
+                target: "_blank"
             },
         ],
     },
@@ -365,16 +362,33 @@ const NavBar: React.FC = () => {
                                         onMouseEnter={() => item.submenu && setOpenDropdown(item.key)}
                                         onMouseLeave={() => item.submenu && setOpenDropdown(null)}
                                     >
-                                        <Link 
-                                            href={item.href || '#'} 
-                                            locale={i18n.language}
-                                            className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors flex items-center"
-                                        >
-                                            {item.label}
-                                            {item.submenu && (
-                                                <i className="fas fa-chevron-down text-xs ml-1 transition-transform duration-200 group-hover:rotate-180" />
-                                            )}
-                                        </Link>
+                                        {item.href ? (
+                                            <Link 
+                                                href={item.href}
+                                                locale={i18n.language}
+                                                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors flex items-center"
+                                                target={item.target}
+                                                rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
+                                            >
+                                                {item.label}
+                                                {item.submenu && (
+                                                    <i className="fas fa-chevron-down text-xs ml-1 transition-transform duration-200 group-hover:rotate-180" />
+                                                )}
+                                            </Link>
+                                        ) : (
+                                            <div 
+                                                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors flex items-center cursor-pointer"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                }}
+                                            >
+                                                {item.label}
+                                                {item.submenu && (
+                                                    <i className="fas fa-chevron-down text-xs ml-1 transition-transform duration-200 group-hover:rotate-180" />
+                                                )}
+                                            </div>
+                                        )}
                                         {item.submenu && (
                                             <div 
                                                 className={`absolute mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0 ${
@@ -385,49 +399,64 @@ const NavBar: React.FC = () => {
                                                 {item.submenu.map((subItem) => (
                                                     <div key={subItem.key} className="relative group">
                                                         {!subItem.submenu ? (
-                                                            <Link 
-                                                                href={subItem.href} 
-                                                                locale={i18n.language}
-                                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                                onClick={closeAllMenus}
-                                                            >
-                                                                {subItem.label}
-                                                            </Link>
+                                                            subItem.href ? (
+                                                                <Link 
+                                                                    href={subItem.href} 
+                                                                    locale={i18n.language}
+                                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                                    onClick={closeAllMenus}
+                                                                    target={subItem.target}
+                                                                    rel={subItem.target === '_blank' ? 'noopener noreferrer' : undefined}
+                                                                >
+                                                                    {subItem.label}
+                                                                </Link>
+                                                            ) : (
+                                                                <div 
+                                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        e.stopPropagation();
+                                                                        closeAllMenus();
+                                                                    }}
+                                                                >
+                                                                    {subItem.label}
+                                                                </div>
+                                                            )
                                                         ) : (
                                                             <div 
                                                                 className="relative group/sub"
                                                                 onMouseEnter={() => setOpenSubDropdown(subItem.key)}
                                                                 onMouseLeave={() => setOpenSubDropdown(null)}
                                                             >
-                                                                <Link
-                                                                    href="#"
-                                                                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center"
+                                                                <div 
+                                                                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center cursor-pointer"
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        e.stopPropagation();
+                                                                    }}
                                                                 >
                                                                     {subItem.label}
                                                                     <i className="fas fa-chevron-right text-xs group-hover/sub:rotate-90 transition-transform duration-200" />
-                                                                </Link>
-                                                                {subItem.submenu && (
-                                                                    <div 
-                                                                        className={`absolute top-0 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 transform ${
-                                                                            // Jika item menu berada di 2 terakhir, tampilkan submenu ke kiri
-                                                                            index >= menuItems.length - 2 
-                                                                                ? 'right-full mr-1 translate-x-1 group-hover/sub:translate-x-0' 
-                                                                                : 'left-full ml-1 -translate-x-1 group-hover/sub:translate-x-0'
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.submenu.map((child) => (
-                                                                            <Link 
-                                                                                key={child.key}
-                                                                                href={child.href} 
-                                                                                locale={i18n.language}
-                                                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                                                onClick={closeAllMenus}
-                                                                            >
-                                                                                {child.label}
-                                                                            </Link>
-                                                                        ))}
-                                                                    </div>
-                                                                )}
+                                                                </div>
+                                                                <div 
+                                                                    className={`absolute top-0 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 transform ${
+                                                                        index >= menuItems.length - 2 
+                                                                            ? 'right-full mr-1 translate-x-1 group-hover/sub:translate-x-0' 
+                                                                            : 'left-full ml-1 -translate-x-1 group-hover/sub:translate-x-0'
+                                                                    }`}
+                                                                >
+                                                                    {subItem.submenu.map((child) => (
+                                                                        <Link 
+                                                                            key={child.key}
+                                                                            href={child.href || '#'} 
+                                                                            locale={i18n.language}
+                                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                                            onClick={closeAllMenus}
+                                                                        >
+                                                                            {child.label}
+                                                                        </Link>
+                                                                    ))}
+                                                                </div>
                                                             </div>
                                                         )}
                                                     </div>

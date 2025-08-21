@@ -1,0 +1,51 @@
+{
+  "title": "Symbol Indeks",
+  "pageTitle": "Symbol Indeks - PT. Kresna Berjangka Investama",
+  "contractMonthSymbol": "Simbol Bulan Kontrak",
+  "symbolIndexData": [
+    { "symbol": "HSIV9", "description": "Hang Seng Index (Futures) untuk kontrak Oktober 2009" },
+    { "symbol": "HSI", "description": "Hang Seng Index (Spot)" },
+    { "symbol": "SN1Z9", "description": "Nikkei 225 Index (Futures) untuk kontrak Desember 2009" },
+    { "symbol": "SNI", "description": "Nikkei 225 Index (Spot)" },
+    { "symbol": "JKSCI", "description": "Jakarta Composite Index (Spot)" },
+    { "symbol": "SISE4", "description": "Straits Times Index (Spot)" },
+    { "symbol": "KCOM", "description": "Kuala Lumpur Composite Index (Spot)" },
+    { "symbol": "SHICOM", "description": "Shanghai Composite Index (Spot)" },
+    { "symbol": "SZICOM", "description": "Shenzhen Composite Index (Spot)" },
+    { "symbol": "TOPX", "description": "Tokyo Stock Price Index (Spot)" },
+    { "symbol": "BSET", "description": "Bangkok Stock Price Index (Spot)" },
+    { "symbol": "KSCI", "description": "Korea Stock Composite Index (Spot)" },
+    { "symbol": "DJIA", "description": "Dow Jones Industrial Average (Spot)" },
+    { "symbol": "NDX", "description": "Nasdaq 100 Index (Spot)" },
+    { "symbol": "NDXI", "description": "Nasdaq Composite Index (Spot)" },
+    { "symbol": "SPX", "description": "Standard & Poor's 500 Index (Spot)" },
+    { "symbol": "FTSE", "description": "Financial Times Stock Exchange (Spot)" },
+    { "symbol": "DAX", "description": "Deutscher Aktien Index / German Stock Index (Spot)" },
+    { "symbol": "NYSEI", "description": "New York Stock Index (Spot)" },
+    { "symbol": "LGD", "description": "Loco Gold London (Spot)" }
+  ],
+  "hangSengMonths": [
+    { "code": "F", "month": "Januari" },
+    { "code": "G", "month": "Februari" },
+    { "code": "H", "month": "Maret" },
+    { "code": "J", "month": "April" },
+    { "code": "K", "month": "Mei" },
+    { "code": "M", "month": "Juni" },
+    { "code": "N", "month": "Juli" },
+    { "code": "Q", "month": "Agustus" },
+    { "code": "U", "month": "September" },
+    { "code": "V", "month": "Oktober" },
+    { "code": "X", "month": "November" },
+    { "code": "Z", "month": "Desember" }
+  ],
+  "nikkeiMonths": [
+    { "code": "H", "month": "Maret" },
+    { "code": "M", "month": "Juni" },
+    { "code": "U", "month": "September" },
+    { "code": "Z", "month": "Desember" }
+  ],
+  "futures": {
+    "hangSeng": "Hang Seng Futures",
+    "nikkei225": "Nikkei 225 Futures"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "title": "Loco London Gold",
+  "pageTitle": "Loco London Gold - PT. Kresna Berjangka Investama",
+  "intro": {
+    "p1": "Emas merupakan salah satu jenis komoditi yang paling banyak diminati untuk tujuan investasi. Di samping itu, emas juga digunakan sebagai standar keuangan atau ekonomi, cadangan devisa dan alat pembayaran yang paling utama di beberapa negara. Para investor umumnya membeli emas untuk hedge atau safe haven terhadap beberapa krisis termasuk ekonomi, politik, sosial atau krisis yang berbasis mata uang.",
+    "p2": "Permintaan emas fisik mengalami peningkatan cukup signifikan dari tahun ke tahun. Padahal cadangan emas dunia sangatlah terbatas. Oleh karena itu, dibeberapa negara maju telah menyediakan investasi alternatif berupa produk derivatif emas dengan menarik sejumlah margin sebagai jaminan transaksinya (margin trading). Ini karena adanya faktor harga, dimana harga emas juga dapat berfluktuasi sebagaimana komoditas lainnya."
+  },
+  "sejarah": {
+    "title": "A. Sejarah Perdagangan Emas",
+    "p1": "Di dalam pasar komoditas istilah \"Loco\" berarti \"di\". Berasal dari bahasa latin Locus yang berarti tempat. Loco London merepresentasikan basis perdagangan dan penyelesaian emas dan perak internasional di London. Pelaksanaan pasar ini di bawah naungan London Bullion Market Association (LBMA), namun bukan bursa.",
+    "p2": "Pasar emas fisik (spot gold) terbesar dunia adalah London dan Zurich, akan tetapi London yang paling menonjol. London tumbuh mendominasi pasar emas pada saat emas menjadi mata uang utama. Penemuan signifikan di Ural (Rusia) telah meningkatkan produksi emas global di abad 18. Pertengahan abad 19 menjadi momen bagi Inggris untuk mendominasi perdagangan dan keuangan dunia, sebagai sumber modal untuk pertambangan emas, dan menjadi standar emas mata uang lokal, British Pound. Sehingga London menjadi pusat perdagangan dan penyelesaian emas dunia.",
+    "otc": {
+      "title": "Perdagangan Over-the-Counter (OTC)",
+      "content": "Pasar emas London merupakan pasar Over-The-Counter yang berarti perdagangan dilakukan secara langsung antara dua pihak yang terlibat, dan tidak melalui pihak ketiga yang mengatur perdagangan, seperti bursa. Pasar OTC berlangsung selama 24 jam sehari dan tidak mempunyai struktur formal dan tidak ada tempat pertemuan sentral. Sebagian besar perdagangan dilakukan melalui telpon atau sistem dealing elektronik. Di pasar finansial global saat ini, perdagangan emas di London hampir terselenggara sepanjang waktu diseluruh dunia."
+    },
+    "investasi": {
+      "title": "Mengapa berinvestasi di emas (Spot OTC)",
+      "points": [
+        "Harga biasanya dikuotasikan dan diperdagangkan terhadap dolar AS.",
+        "Dapat melayani beberapa tujuan transaksi seperti hedging, investasi dan spekulasi.",
+        "Investor dapat mempertahankan posisi mereka selama waktu yang mereka inginkan tanpa ada jatuh tempo.",
+        "Menerima bunga saat menjual emas atau perak Loco-London pada suku bunga terakhir.",
+        "Transaksi leverage pada margin.",
+        "Diversifikasi portfolio investasi."
+      ]
+    }
+  },
+  "mekanisme": {
+    "title": "B. Mekanisme Perdagangan Emas Loco London",
+    "p1": "Perdagangan emas Loco-London di Indonesia diatur oleh Bappebti (Badan Pengawas Perdagangan Berjangka Komoditi) dan dilaksanakan oleh Bursa Berjangka Jakarta (BBJ). Perdagangan emas Loco-London di Indonesia dilakukan secara elektronik dengan sistem perdagangan yang transparan dan dapat diakses oleh masyarakat luas.",
+    "p2": "Berikut adalah mekanisme perdagangan emas Loco-London di Indonesia:",
+    "points": [
+      "Pembukaan rekening di perusahaan pialang berjangka yang terdaftar di Bappebti.",
+      "Melakukan deposit sejumlah dana sebagai margin awal.",
+      "Melakukan transaksi jual/beli emas melalui sistem perdagangan elektronik.",
+      "Transaksi dapat dilakukan kapan saja selama jam perdagangan berlangsung.",
+      "Posisi dapat ditutup kapan saja sesuai keinginan investor.",
+      "Keuntungan/kerugian akan langsung terlihat pada akun investor."
+    ]
+  },
+  "keuntungan": {
+    "title": "C. Keuntungan Berinvestasi di Emas Loco London",
+    "points": [
+      "Likuiditas tinggi - dapat dijual kapan saja sesuai harga pasar.",
+      "Leverage - dengan modal kecil dapat melakukan transaksi yang lebih besar.",
+      "Hedging - melindungi nilai aset dari inflasi dan fluktuasi nilai tukar.",
+      "Dapat diperdagangkan 24 jam sehari.",
+      "Biaya transaksi yang relatif rendah.",
+      "Transparansi harga yang real-time."
+    ]
+  },
+  "resiko": {
+    "title": "D. Resiko Investasi Emas Loco London",
+    "content": "Seperti halnya instrumen investasi lainnya, investasi emas Loco London juga memiliki resiko yang perlu diperhatikan, antara lain:",
+    "points": [
+      "Resiko pasar - harga emas bisa naik turun dipengaruhi berbagai faktor ekonomi global.",
+      "Resiko likuiditas - meskipun likuiditas tinggi, dalam kondisi pasar tertentu mungkin sulit menutup posisi.",
+      "Resiko leverage - penggunaan leverage dapat memperbesar keuntungan tetapi juga kerugian.",
+      "Resiko regulasi - perubahan peraturan dapat mempengaruhi perdagangan emas.",
+      "Resiko mata uang - fluktuasi nilai tukar dapat mempengaruhi nilai investasi."
+    ]
+  },
+  "analisis": {
+    "title": "E. Analisis Harga Emas",
+    "intro": "Pada kenyataannya, harga emas tidak hanya tergantung pada permintaan dan penawaran, tetapi juga dipengaruhi oleh situasi perekonomian secara keseluruhan. Berikut adalah beberapa faktor utamanya:",
+    "factors": [
+      {
+        "title": "Perubahan Kurs",
+        "content": "Melemahnya Dolar AS biasanya mendorong kenaikan harga emas, karena investor beralih ke emas sebagai aset safe haven."
+      },
+      {
+        "title": "Situasi Politik Dunia",
+        "content": "Ketidakpastian politik global, seperti perang, membuat pelaku pasar beralih ke emas, sehingga permintaan dan harga melonjak."
+      },
+      {
+        "title": "Penawaran & Permintaan",
+        "content": "Aksi jual oleh bank sentral atau penjualan forward oleh perusahaan tambang dapat menekan harga emas."
+      },
+      {
+        "title": "Situasi Ekonomi Global",
+        "content": "Inflasi tinggi mendorong investor menggunakan emas sebagai lindung nilai, sementara pertumbuhan ekonomi dapat meningkatkan permintaan perhiasan."
+      },
+      {
+        "title": "Suku Bunga",
+        "content": "Kenaikan suku bunga membuat deposito lebih menarik daripada emas (non-interest), sehingga menekan harga emas, dan sebaliknya."
+      }
+    ]
+  },
+  "derivatif": {
+    "title": "F. Kontrak Derivatif Emas Loco London (SPA)",
+    "content": "Kini kontrak derivatif emas Loco London menjadi objek transaksi melalui Sistem Perdagangan Alternatif (SPA), berdasarkan Peraturan Kepala Bappebti No. 72/BAPPEBTI/Per/9/2009. Selain emas, produk lainnya adalah kontrak derivatif antar mata uang asing (cross currencies) dan indeks."
+  },
+  "footerNote": "*) Diolah dari beberapa sumber"
+}

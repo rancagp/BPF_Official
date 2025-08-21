@@ -1,0 +1,32 @@
+{
+  "title": "Trading Mechanism",
+  "multilateral": {
+    "title": "Multilateral (JFX)",
+    "description": "Transaction mechanism between multiple parties with an open bidding system in the exchange. Aims for price discovery, hedging, and may involve physical delivery of commodities.",
+    "flowTitle": "Multilateral Trading Flow",
+    "tableHeader": "MULTILATERAL"
+  },
+  "bilateral": {
+    "title": "Bilateral (ATS)",
+    "description": "Transaction between two parties outside the exchange (OTC). Known as Alternative Trading System (ATS), conducted purely for speculation purposes with cash settlement.",
+    "flowTitle": "Bilateral Trading Flow",
+    "tableHeader": "BILATERAL"
+  },
+  "comparison": {
+    "title": "Comparison Table",
+    "rows": [
+      { "multilateral": "In exchange", "bilateral": "Over the counter (ATS)" },
+      { "multilateral": "Exchange rules", "bilateral": "ATS operator rules" },
+      { "multilateral": "Exchange system (JAFeTS, J-Trader)", "bilateral": "Operator system" },
+      { "multilateral": "Non-fixed counterparty", "bilateral": "Fixed counterparty" },
+      { "multilateral": "Generally Order Driven", "bilateral": "All Quote Driven" },
+      { "multilateral": "May have no price", "bilateral": "Always has a price" },
+      { "multilateral": "Can queue", "bilateral": "Must take existing price" },
+      { "multilateral": "Same price for one contract", "bilateral": "Varying spreads" },
+      { "multilateral": "Neutral exchange", "bilateral": "Profit motivation" }
+    ]
+  },
+  "flow": {
+    "title": "Trading Flow"
+  }
+}

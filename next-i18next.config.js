@@ -10,7 +10,28 @@ module.exports = {
   },
   
   // Namespace yang digunakan di seluruh aplikasi
-  ns: ['common', 'aboutus', 'footer', 'produk', 'berita', 'profil_perusahaan', 'market', 'pengumuman', 'welcome', 'legalitas_bisnis', 'wakil_pialang', 'badan_regulasi', 'fasilitas_layanan', 'penghargaan', 'sertifikat', 'informasi', 'video'],
+  ns: [
+    'common', 
+    'aboutus', 
+    'footer', 
+    'produk', 
+    'berita', 
+    'profil_perusahaan', 
+    'market', 
+    'pengumuman', 
+    'welcome', 
+    'legalitas_bisnis', 
+    'wakil_pialang', 
+    'badan_regulasi', 
+    'fasilitas_layanan', 
+    'penghargaan', 
+    'sertifikat', 
+    'informasi', 
+    'video', 
+    'symbol-indeks',
+    'loco-london-gold'
+  ],
+  
   defaultNS: 'common',
   
   // Konfigurasi React
@@ -19,7 +40,7 @@ module.exports = {
   },
   
   // Mode development
-  reloadOnPrerender: process.env.NODE_ENV === 'development',
+  reloadOnPrerender: true, // Always true for development
   debug: process.env.NODE_ENV === 'development',
   
   // Konfigurasi dasar
@@ -38,13 +59,26 @@ module.exports = {
   preload: ['id', 'en'],
   
   // Pengaturan tambahan
-  saveMissing: false,
-  returnObjects: false,
+  saveMissing: true, // Enable missing key logging
+  returnObjects: true, // Enable returning objects from translation
   
   // Nonaktifkan deteksi bahasa dari browser
   detection: {
-    order: ['path'],
+    order: ['path', 'cookie', 'htmlTag'],
     lookupFromPathIndex: 0,
-    caches: []
+    caches: ['cookie']
+  },
+  
+  // Enable compatibility JSON mode
+  compatibilityJSON: 'v3',
+  
+  // Enable debug mode in development
+  debug: process.env.NODE_ENV === 'development',
+  
+  // Custom error handling
+  react: {
+    useSuspense: false,
+    transSupportBasicHtmlNodes: true,
+    transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p', 'b', 'em']
   }
 };

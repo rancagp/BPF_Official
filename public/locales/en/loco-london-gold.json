@@ -1,0 +1,94 @@
+{
+  "title": "Loco London Gold",
+  "pageTitle": "Loco London Gold - PT. Kresna Berjangka Investama",
+  "intro": {
+    "p1": "Gold is one of the most sought-after commodities for investment purposes. Additionally, gold is used as a financial or economic standard, foreign exchange reserves, and the primary means of payment in several countries. Investors typically buy gold as a hedge or safe haven against various crises, including economic, political, social, or currency-based crises.",
+    "p2": "The demand for physical gold has increased significantly from year to year, even though the world's gold reserves are very limited. Therefore, several developed countries have provided alternative investments in the form of gold derivative products by requiring a certain margin as transaction collateral (margin trading). This is due to price factors, as gold prices can also fluctuate like other commodities."
+  },
+  "sejarah": {
+    "title": "A. History of Gold Trading",
+    "p1": "In commodity markets, the term \"Loco\" means \"in.\" It comes from the Latin word Locus, which means place. Loco London represents the international gold and silver trading and settlement base in London. This market operates under the auspices of the London Bullion Market Association (LBMA) but is not an exchange.",
+    "p2": "The world's largest physical gold (spot gold) markets are in London and Zurich, with London being the most prominent. London came to dominate the gold market when gold became the primary currency. Significant discoveries in the Urals (Russia) increased global gold production in the 18th century. The mid-19th century marked a moment for Britain to dominate world trade and finance as a source of capital for gold mining and as the gold standard for the local currency, the British Pound. Thus, London became the center of world gold trading and settlement.",
+    "otc": {
+      "title": "Over-the-Counter (OTC) Trading",
+      "content": "The London gold market is an Over-The-Counter market, meaning trading is conducted directly between the two parties involved, without going through a third party that regulates trading, such as an exchange. The OTC market operates 24 hours a day and has no formal structure or central meeting place. Most trading is done via telephone or electronic dealing systems. In today's global financial markets, gold trading in London is almost continuous worldwide."
+    },
+    "investasi": {
+      "title": "Why Invest in Gold (Spot OTC)",
+      "points": [
+        "Prices are typically quoted and traded against the US dollar.",
+        "Can serve various transaction purposes such as hedging, investment, and speculation.",
+        "Investors can maintain their positions for as long as they wish without any maturity date.",
+        "Earn interest when selling Loco-London gold or silver at the last interest rate.",
+        "Leveraged margin trading.",
+        "Diversify investment portfolios."
+      ]
+    }
+  },
+  "mekanisme": {
+    "title": "B. Loco London Gold Trading Mechanism",
+    "p1": "Loco-London gold trading in Indonesia is regulated by Bappebti (Commodity Futures Trading Regulatory Agency) and executed by the Jakarta Futures Exchange (JFX). Loco-London gold trading in Indonesia is conducted electronically with a transparent trading system accessible to the public.",
+    "p2": "The following is the mechanism for Loco-London gold trading in Indonesia:",
+    "points": [
+      "Open an account with a futures brokerage firm registered with Bappebti.",
+      "Deposit funds as initial margin.",
+      "Conduct buy/sell transactions through the electronic trading system.",
+      "Transactions can be made anytime during trading hours.",
+      "Positions can be closed anytime at the investor's discretion.",
+      "Profits/losses will be immediately visible in the investor's account."
+    ]
+  },
+  "keuntungan": {
+    "title": "C. Benefits of Investing in Loco London Gold",
+    "points": [
+      "High liquidity - can be sold anytime at market prices.",
+      "Leverage - with small capital, larger transactions can be made.",
+      "Hedging - protects asset value from inflation and exchange rate fluctuations.",
+      "Tradable 24 hours a day.",
+      "Relatively low transaction costs.",
+      "Real-time price transparency."
+    ]
+  },
+  "resiko": {
+    "title": "D. Risks of Loco London Gold Investment",
+    "content": "Like other investment instruments, Loco London gold investment also has risks that need to be considered, including:",
+    "points": [
+      "Market risk - gold prices can fluctuate due to various global economic factors.",
+      "Liquidity risk - although highly liquid, it may be difficult to close positions under certain market conditions.",
+      "Leverage risk - the use of leverage can amplify both profits and losses.",
+      "Regulatory risk - changes in regulations can affect gold trading.",
+      "Currency risk - exchange rate fluctuations can affect investment value."
+    ]
+  },
+  "analisis": {
+    "title": "E. Gold Price Analysis",
+    "intro": "In reality, gold prices depend not only on supply and demand but are also influenced by the overall economic situation. Here are some key factors:",
+    "factors": [
+      {
+        "title": "Exchange Rate Changes",
+        "content": "A weakening US dollar typically drives up gold prices as investors turn to gold as a safe haven asset."
+      },
+      {
+        "title": "Global Political Situation",
+        "content": "Global political uncertainty, such as wars, leads market participants to shift to gold, causing demand and prices to surge."
+      },
+      {
+        "title": "Supply & Demand",
+        "content": "Selling by central banks or forward sales by mining companies can put pressure on gold prices."
+      },
+      {
+        "title": "Global Economic Situation",
+        "content": "High inflation encourages investors to use gold as a hedge, while economic growth can increase jewelry demand."
+      },
+      {
+        "title": "Interest Rates",
+        "content": "Rising interest rates make deposits more attractive than gold (non-interest bearing), thus putting downward pressure on gold prices, and vice versa."
+      }
+    ]
+  },
+  "derivatif": {
+    "title": "F. Loco London Gold Derivative Contracts (ATS)",
+    "content": "Loco London gold derivative contracts are now traded through the Alternative Trading System (ATS), based on Bappebti Regulation No. 72/BAPPEBTI/Per/9/2009. Besides gold, other products include foreign exchange (cross currencies) and index derivative contracts."
+  },
+  "footerNote": "*) Compiled from various sources"
+}

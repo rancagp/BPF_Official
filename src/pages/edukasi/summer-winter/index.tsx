@@ -1,149 +1,403 @@
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import PageTemplate from "@/components/templates/PageTemplate";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 
+export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['summer-winter', 'common', 'footer'])),
+    },
+    revalidate: 60 * 60 * 24, // Revalidate every 24 hours
+  };
+};
+
 const SummerWinterPage = () => {
+  const { t, i18n } = useTranslation('summer-winter');
+  const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Helper function to get nested translation with fallback
+  const translate = (key: string, fallback: string = '') => {
+    return t(key) || fallback;
+  };
+
+  // Helper function to format date and time
+  const formatDateTime = (date: Date) => {
+    const dayName = t(`common.days.${['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][date.getDay()]}`);
+    const day = date.getDate();
+    const month = t(`months.${['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'][date.getMonth()]}`);
+    const year = date.getFullYear();
+    
+    return `${dayName}, ${day} ${month} ${year}`;
+  };
+
+  // Helper function to get localized date string
+  const getLocalizedDate = (day: number, monthKey: string, year: number) => {
+    const monthMap: {[key: string]: number} = {
+      'march': 2, // JavaScript months are 0-indexed
+      'october': 9,
+      'november': 10
+    };
+    
+    const date = new Date(year, monthMap[monthKey], day);
+    const monthName = t(`months.${monthKey}`);
+    
+    // Get translated day names from the locale
+    const dayNames = {
+      sunday: t('common.days.sunday'),
+      monday: t('common.days.monday'),
+      tuesday: t('common.days.tuesday'),
+      wednesday: t('common.days.wednesday'),
+      thursday: t('common.days.thursday'),
+      friday: t('common.days.friday'),
+      saturday: t('common.days.saturday')
+    };
+    
+    // Get the day of week (0-6, where 0 is Sunday)
+    const dayOfWeek = date.getDay();
+    const dayName = [
+      dayNames.sunday,
+      dayNames.monday,
+      dayNames.tuesday,
+      dayNames.wednesday,
+      dayNames.thursday,
+      dayNames.friday,
+      dayNames.saturday
+    ][dayOfWeek];
+    
+    return `${dayName}, ${day} ${monthName} ${year}`;
+  };
+
+  // BST Schedule data
+  const bstSchedule = [
+    { year: 2010, startDay: 28, startMonth: 'march', endDay: 31, endMonth: 'october' },
+    { year: 2011, startDay: 27, startMonth: 'march', endDay: 30, endMonth: 'october' },
+    { year: 2012, startDay: 25, startMonth: 'march', endDay: 28, endMonth: 'october' },
+    { year: 2013, startDay: 31, startMonth: 'march', endDay: 27, endMonth: 'october' },
+    { year: 2014, startDay: 30, startMonth: 'march', endDay: 26, endMonth: 'october' },
+    { year: 2015, startDay: 29, startMonth: 'march', endDay: 25, endMonth: 'october' },
+  ].map(item => ({
+    ...item,
+    start: getLocalizedDate(item.startDay, item.startMonth, item.year),
+    end: getLocalizedDate(item.endDay, item.endMonth, item.year)
+  }));
+
+  // US DST Schedule data
+  const usDstSchedule = [
+    { year: 2010, startDay: 14, startMonth: 'march', endDay: 7, endMonth: 'november' },
+    { year: 2011, startDay: 13, startMonth: 'march', endDay: 6, endMonth: 'november' },
+    { year: 2012, startDay: 11, startMonth: 'march', endDay: 4, endMonth: 'november' },
+    { year: 2013, startDay: 10, startMonth: 'march', endDay: 3, endMonth: 'november' },
+    { year: 2014, startDay: 9, startMonth: 'march', endDay: 2, endMonth: 'november' },
+    { year: 2015, startDay: 8, startMonth: 'march', endDay: 1, endMonth: 'november' },
+  ].map(item => ({
+    ...item,
+    start: getLocalizedDate(item.startDay, item.startMonth, item.year),
+    end: getLocalizedDate(item.endDay, item.endMonth, item.year)
+  }));
+
+  if (!isClient) {
     return (
-        <PageTemplate title="Summer & Winter - Waktu Inggris & Amerika Utara">
-            <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Summer & Winter">
-                    <div className="space-y-12 text-gray-700">
-
-                        {/* UK Time Section */}
-                        <section>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-2">Waktu Inggris / UK Time / British Time</h2>
-                            <div className="w-20 h-1 bg-green-500 mb-6"></div>
-                            <p className="mb-4">UK Time - Inggis, Wales, Skotlandia, Irlandia Utara</p>
-                            <p className="mb-4">Waktu Inggris di zona waktu Eropa Barat (Zona Waktu Eropa Barat). Sama seperti negara-negara Eropa lainnya, Waktu Musim Panas diberlakukan di Inggris, dimana waktu maju satu jam (GMT + 1). Setelah Musim Panas, ketika Waktu Inggis bergeser mundur satu jam ke Waktu Eropa Barat (WET) atau (GMT).</p>
-
-                            <div className="grid md:grid-cols-2 gap-8 mt-8">
-                                {/* Summer Begin */}
-                                <div className="bg-white p-6 rounded-lg shadow-md border">
-                                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Waktu Musim Panas Dimulai (25 Mar)</h3>
-                                    <img src="/assets/musim-panas-mulai.png" alt="Musim Panas Mulai" className="w-64 h-auto rounded-md mb-4 mx-auto"/>
-                                    <p>Ketika waktu standar lokal akan mencapai Minggu, 25 Maret 2012, 01:00:00 dimajukan 1 jam menjadi Minggu, 25 Maret 2012, 02:00:00 waktu siang hari setempat sebagai gantinya.</p>
-                                </div>
-
-                                {/* Summer End */}
-                                <div className="bg-white p-6 rounded-lg shadow-md border">
-                                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Waktu Musim Panas Berakhir (28 Okt)</h3>
-                                    <img src="/assets/musim-panas-berakhir.png" alt="Musim Panas Berakhir" className="w-64 h-auto rounded-md mb-4 mx-auto"/>
-                                    <p>Ketika waktu siang hari setempat akan segera tiba Minggu, 28 Oktober 2012, 02:00:00 jam diputar mundur 1 jam menjadi Minggu, 28 Oktober 2012, 01:00:00 waktu standar setempat sebagai gantinya.</p>
-                                </div>
-                            </div>
-
-                            <div className="mt-8 overflow-x-auto">
-                                <h4 className="font-bold text-lg mb-2">Detik sebelum dan sesudah perubahan waktu maju</h4>
-                                <table className="min-w-full bg-white border">
-                                    <thead className="bg-gray-100">
-                                        <tr>
-                                            <th className="py-2 px-4 border-b">Tanggal Setempat</th>
-                                            <th className="py-2 px-4 border-b">Waktu Setempat</th>
-                                            <th className="py-2 px-4 border-b">DST</th>
-                                            <th className="py-2 px-4 border-b">UTC Offset</th>
-                                            <th className="py-2 px-4 border-b">Zona Waktu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td className="py-2 px-4 border-b">Minggu, 25 Maret 2012</td><td className="py-2 px-4 border-b">00:59:59</td><td className="py-2 px-4 border-b">No</td><td className="py-2 px-4 border-b">UTC</td><td className="py-2 px-4 border-b">GMT</td></tr>
-                                        <tr className="bg-green-100 font-bold"><td className="py-2 px-4 border-b">01:00:00 → 02:00:00</td><td className="py-2 px-4 border-b">+1h</td><td className="py-2 px-4 border-b">+1h</td><td className="py-2 px-4 border-b">UTC+1h</td><td className="py-2 px-4 border-b">BST</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">Minggu, 25 Maret 2012</td><td className="py-2 px-4 border-b">02:00:01</td><td className="py-2 px-4 border-b">+1h</td><td className="py-2 px-4 border-b">UTC+1h</td><td className="py-2 px-4 border-b">BST</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div className="mt-8 overflow-x-auto">
-                                <h4 className="font-bold text-lg mb-2">Detik sebelum dan sesudah perubahan waktu mundur</h4>
-                                <table className="min-w-full bg-white border">
-                                    <thead className="bg-gray-100">
-                                        <tr>
-                                            <th className="py-2 px-4 border-b">Tanggal Setempat</th>
-                                            <th className="py-2 px-4 border-b">Waktu Setempat</th>
-                                            <th className="py-2 px-4 border-b">DST</th>
-                                            <th className="py-2 px-4 border-b">UTC Offset</th>
-                                            <th className="py-2 px-4 border-b">Zona Waktu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td className="py-2 px-4 border-b">Minggu, 28 Oktober 2012</td><td className="py-2 px-4 border-b">01:59:59</td><td className="py-2 px-4 border-b">+1h</td><td className="py-2 px-4 border-b">UTC+1h</td><td className="py-2 px-4 border-b">BST</td></tr>
-                                        <tr className="bg-red-100 font-bold"><td className="py-2 px-4 border-b">02:00:00 → 01:00:00</td><td className="py-2 px-4 border-b">No</td><td className="py-2 px-4 border-b">No</td><td className="py-2 px-4 border-b">UTC</td><td className="py-2 px-4 border-b">GMT</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">Minggu, 28 Oktober 2012</td><td className="py-2 px-4 border-b">01:00:01</td><td className="py-2 px-4 border-b">No</td><td className="py-2 px-4 border-b">UTC</td><td className="py-2 px-4 border-b">GMT</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-8">
-                                <h4 className="font-semibold text-lg mb-3">Rumus Waktu Musim Panas Eropa</h4>
-                                <p className="mb-2"><b>Mulai:</b> Minggu (31 - ((((5 * y) / 4) + 4) mod 7)) Maret pukul 01:00 GMT</p>
-                                <p><b>Berakhir:</b> Minggu (31 - ((((5 * y) / 4) + 1) mod 7)) Oktober pukul 01:00 GMT</p>
-                                <p className="text-sm mt-4"><i>Catatan: Rumus berlaku hingga 2099. y adalah tahun.</i></p>
-                            </div>
-
-                            <div className="mt-8 overflow-x-auto">
-                                <h4 className="font-bold text-lg mb-2">Jadwal BST (2010-2015)</h4>
-                                <table className="min-w-full bg-white border">
-                                    <thead className="bg-gray-100">
-                                        <tr><th className="py-2 px-4 border-b">Tahun</th><th className="py-2 px-4 border-b">BST Mulai</th><th className="py-2 px-4 border-b">BST Berakhir</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td className="py-2 px-4 border-b">2010</td><td className="py-2 px-4 border-b">Minggu, 28 Maret</td><td className="py-2 px-4 border-b">Minggu, 31 Oktober</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2011</td><td className="py-2 px-4 border-b">Minggu, 27 Maret</td><td className="py-2 px-4 border-b">Minggu, 30 Oktober</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2012</td><td className="py-2 px-4 border-b">Minggu, 25 Maret</td><td className="py-2 px-4 border-b">Minggu, 28 Oktober</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2013</td><td className="py-2 px-4 border-b">Minggu, 31 Maret</td><td className="py-2 px-4 border-b">Minggu, 27 Oktober</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2014</td><td className="py-2 px-4 border-b">Minggu, 30 Maret</td><td className="py-2 px-4 border-b">Minggu, 26 Oktober</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2015</td><td className="py-2 px-4 border-b">Minggu, 29 Maret</td><td className="py-2 px-4 border-b">Minggu, 25 Oktober</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-
-                        <hr className="my-12 border-gray-300"/>
-
-                        {/* North America Time Section */}
-                        <section>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-2">Waktu Musim Panas - Amerika Utara</h2>
-                            <div className="w-20 h-1 bg-blue-500 mb-6"></div>
-                            <p className="mb-4">USA - Amerika Serikat, Kanada, Meksiko</p>
-                            <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-                                <h4 className="font-semibold text-lg mb-3">Aturan DST Amerika Utara (sejak 2007)</h4>
-                                <p><b>Mulai:</b> Minggu kedua di bulan Maret, Pukul 2 Pagi waktu setempat.</p>
-                                <p><b>Akhir:</b> Minggu pertama di bulan November, Pukul 2 Pagi waktu setempat.</p>
-                            </div>
-
-                            <div className="mt-8 overflow-x-auto">
-                                <h4 className="font-bold text-lg mb-2">Jadwal DST (USA) 2007 - 2015</h4>
-                                <table className="min-w-full bg-white border">
-                                    <thead className="bg-gray-100">
-                                        <tr><th className="py-2 px-4 border-b">Tahun</th><th className="py-2 px-4 border-b">DST Dimulai</th><th className="py-2 px-4 border-b">DST Berakhir</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td className="py-2 px-4 border-b">2007</td><td className="py-2 px-4 border-b">Maret 11</td><td className="py-2 px-4 border-b">November 4</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2008</td><td className="py-2 px-4 border-b">Maret 9</td><td className="py-2 px-4 border-b">November 2</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2009</td><td className="py-2 px-4 border-b">Maret 8</td><td className="py-2 px-4 border-b">November 1</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2010</td><td className="py-2 px-4 border-b">Maret 14</td><td className="py-2 px-4 border-b">November 7</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2011</td><td className="py-2 px-4 border-b">Maret 13</td><td className="py-2 px-4 border-b">November 6</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2012</td><td className="py-2 px-4 border-b">Maret 11</td><td className="py-2 px-4 border-b">November 4</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2013</td><td className="py-2 px-4 border-b">Maret 10</td><td className="py-2 px-4 border-b">November 3</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2014</td><td className="py-2 px-4 border-b">Maret 9</td><td className="py-2 px-4 border-b">November 2</td></tr>
-                                        <tr><td className="py-2 px-4 border-b">2015</td><td className="py-2 px-4 border-b">Maret 8</td><td className="py-2 px-4 border-b">November 1</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-
-                        <footer className="text-sm italic text-gray-500 text-center pt-8">
-                            <p>Disusun Oleh: Research Team</p>
-                            <p>Sumber:</p>
-                            <ul className="list-none">
-                                <li>[1] <a href="http://wwp.greenwich-mean-time.eu/time-zone/europe/uk/time/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Greenwich Mean Time</a></li>
-                                <li>[2] <a href="http://en.wikipedia.org/wiki/European_Summer_Time" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Wikipedia - European Summer Time</a></li>
-                            </ul>
-                        </footer>
-
-                    </div>
-                </ProfilContainer>
-            </div>
-        </PageTemplate>
+      <PageTemplate title={translate('title')}>
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+        </div>
+      </PageTemplate>
     );
+  }
+
+  return (
+    <PageTemplate title={translate('title')}>
+      <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
+        <ProfilContainer title="Summer & Winter">
+          <div className="space-y-12 text-gray-700">
+            {/* UK Time Section */}
+            <section>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">{translate('ukTime.title')}</h2>
+              <div className="w-20 h-1 bg-green-500 mb-6"></div>
+              <p className="mb-4">{translate('ukTime.description')}</p>
+              <p className="mb-4">{translate('ukTime.intro')}</p>
+
+              <div className="grid md:grid-cols-2 gap-8 mt-8">
+                {/* Summer Begin */}
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">{translate('ukTime.sections.summerStart.title')}</h3>
+                  <img 
+                    src="/assets/musim-panas-mulai.png" 
+                    alt={translate('ukTime.sections.summerStart.title')} 
+                    className="w-64 h-auto rounded-md mb-4 mx-auto"
+                  />
+                  <p>{translate('ukTime.sections.summerStart.description')}</p>
+                </div>
+
+                {/* Summer End */}
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">{translate('ukTime.sections.summerEnd.title')}</h3>
+                  <img 
+                    src="/assets/musim-panas-berakhir.png" 
+                    alt={translate('ukTime.sections.summerEnd.title')}
+                    className="w-64 h-auto rounded-md mb-4 mx-auto"
+                  />
+                  <p>{translate('ukTime.sections.summerEnd.description')}</p>
+                </div>
+              </div>
+
+              <div className="mt-8 overflow-x-auto">
+                <h4 className="font-bold text-lg mb-2">{translate('ukTime.sections.beforeAfterForward')}</h4>
+                <table className="min-w-full bg-white border">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.date')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.time')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.dst')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.offset')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.timezone')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 2, 25))}</td>
+                      <td className="py-2 px-4 border-b">00:59:59</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">UTC</td>
+                      <td className="py-2 px-4 border-b">GMT</td>
+                    </tr>
+                    <tr className="bg-green-100 font-bold">
+                      <td className="py-2 px-4 border-b">01:00:00 → 02:00:00</td>
+                      <td className="py-2 px-4 border-b">+1h</td>
+                      <td className="py-2 px-4 border-b">+1h</td>
+                      <td className="py-2 px-4 border-b">UTC+1h</td>
+                      <td className="py-2 px-4 border-b">BST</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 2, 25))}</td>
+                      <td className="py-2 px-4 border-b">02:00:01</td>
+                      <td className="py-2 px-4 border-b">+1h</td>
+                      <td className="py-2 px-4 border-b">UTC+1h</td>
+                      <td className="py-2 px-4 border-b">BST</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-8 overflow-x-auto">
+                <h4 className="font-bold text-lg mb-2">{translate('ukTime.sections.beforeAfterBackward')}</h4>
+                <table className="min-w-full bg-white border">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.date')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.time')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.dst')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.offset')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.timezone')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 9, 28))}</td>
+                      <td className="py-2 px-4 border-b">01:59:59</td>
+                      <td className="py-2 px-4 border-b">+1h</td>
+                      <td className="py-2 px-4 border-b">UTC+1h</td>
+                      <td className="py-2 px-4 border-b">BST</td>
+                    </tr>
+                    <tr className="bg-red-100 font-bold">
+                      <td className="py-2 px-4 border-b">02:00:00 → 01:00:00</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">UTC</td>
+                      <td className="py-2 px-4 border-b">GMT</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 9, 28))}</td>
+                      <td className="py-2 px-4 border-b">01:00:01</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">UTC</td>
+                      <td className="py-2 px-4 border-b">GMT</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-8">
+                <h4 className="font-semibold text-lg mb-3">{translate('ukTime.sections.europeanFormula.title')}</h4>
+                <p className="mb-2"><b>{translate('common.timeForward')}:</b> {translate('ukTime.sections.europeanFormula.start')}</p>
+                <p><b>{translate('common.timeBackward')}:</b> {translate('ukTime.sections.europeanFormula.end')}</p>
+                <p className="text-sm mt-4"><i>{translate('ukTime.sections.europeanFormula.note')}</i></p>
+              </div>
+
+              <div className="mt-8 overflow-x-auto">
+                <h4 className="font-bold text-lg mb-2">{translate('ukTime.sections.scheduleTitle')}</h4>
+                <table className="min-w-full bg-white border">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.year')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.startDate')}</th>
+                      <th className="py-2 px-4 border-b">{translate('ukTime.sections.tableHeaders.endDate')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bstSchedule.map((item, index) => (
+                      <tr key={index}>
+                        <td className="py-2 px-4 border-b">{item.year}</td>
+                        <td className="py-2 px-4 border-b">{item.start}</td>
+                        <td className="py-2 px-4 border-b">{item.end}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <hr className="my-12 border-gray-300"/>
+
+                        {/* US Time Section */}
+            <section>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">{translate('usTime.title')}</h2>
+              <div className="w-20 h-1 bg-blue-500 mb-6"></div>
+              <p className="mb-4">{translate('usTime.description')}</p>
+              <p className="mb-4">{translate('usTime.intro')}</p>
+
+              <div className="grid md:grid-cols-2 gap-8 mt-8">
+                {/* Daylight Start */}
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">{translate('usTime.sections.daylightStart.title')}</h3>
+                  <img 
+                    src="/assets/musim-panas-mulai.png" 
+                    alt={translate('usTime.sections.daylightStart.title')}
+                    className="w-64 h-auto rounded-md mb-4 mx-auto"
+                  />
+                  <p>{translate('usTime.sections.daylightStart.description')}</p>
+                </div>
+
+                {/* Daylight End */}
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">{translate('usTime.sections.daylightEnd.title')}</h3>
+                  <img 
+                    src="/assets/musim-panas-berakhir.png" 
+                    alt={translate('usTime.sections.daylightEnd.title')}
+                    className="w-64 h-auto rounded-md mb-4 mx-auto"
+                  />
+                  <p>{translate('usTime.sections.daylightEnd.description')}</p>
+                </div>
+              </div>
+
+              <div className="mt-8 overflow-x-auto">
+                <h4 className="font-bold text-lg mb-2">{translate('usTime.sections.beforeAfterForward')}</h4>
+                <table className="min-w-full bg-white border">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.date')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.time')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.dst')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.offset')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.timezone')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 2, 11))}</td>
+                      <td className="py-2 px-4 border-b">01:59:59</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">UTC-5h</td>
+                      <td className="py-2 px-4 border-b">EST</td>
+                    </tr>
+                    <tr className="bg-green-100 font-bold">
+                      <td className="py-2 px-4 border-b">02:00:00 → 03:00:00</td>
+                      <td className="py-2 px-4 border-b">+1h</td>
+                      <td className="py-2 px-4 border-b">{translate('common.yes')}</td>
+                      <td className="py-2 px-4 border-b">UTC-4h</td>
+                      <td className="py-2 px-4 border-b">EDT</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 2, 11))}</td>
+                      <td className="py-2 px-4 border-b">03:00:01</td>
+                      <td className="py-2 px-4 border-b">{translate('common.yes')}</td>
+                      <td className="py-2 px-4 border-b">UTC-4h</td>
+                      <td className="py-2 px-4 border-b">EDT</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-8 overflow-x-auto">
+                <h4 className="font-bold text-lg mb-2">{translate('usTime.sections.beforeAfterBackward')}</h4>
+                <table className="min-w-full bg-white border">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.date')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.time')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.dst')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.offset')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.timezone')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 10, 4))}</td>
+                      <td className="py-2 px-4 border-b">01:59:59</td>
+                      <td className="py-2 px-4 border-b">{translate('common.yes')}</td>
+                      <td className="py-2 px-4 border-b">UTC-4h</td>
+                      <td className="py-2 px-4 border-b">EDT</td>
+                    </tr>
+                    <tr className="bg-red-100 font-bold">
+                      <td className="py-2 px-4 border-b">02:00:00 → 01:00:00</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">UTC-5h</td>
+                      <td className="py-2 px-4 border-b">EST</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">{formatDateTime(new Date(2012, 10, 4))}</td>
+                      <td className="py-2 px-4 border-b">01:00:01</td>
+                      <td className="py-2 px-4 border-b">{translate('common.no')}</td>
+                      <td className="py-2 px-4 border-b">UTC-5h</td>
+                      <td className="py-2 px-4 border-b">EST</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 mt-8">
+                <h4 className="font-semibold text-lg mb-3">{translate('usTime.sections.usFormula.title')}</h4>
+                <p className="mb-2"><b>{translate('common.timeForward')}:</b> {translate('usTime.sections.usFormula.start')}</p>
+                <p><b>{translate('common.timeBackward')}:</b> {translate('usTime.sections.usFormula.end')}</p>
+              </div>
+
+              <div className="mt-8 overflow-x-auto">
+                <h4 className="font-bold text-lg mb-2">{translate('usTime.sections.scheduleTitle')}</h4>
+                <table className="min-w-full bg-white border">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.year')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.startDate')}</th>
+                      <th className="py-2 px-4 border-b">{translate('usTime.sections.tableHeaders.endDate')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {usDstSchedule.map((item, index) => (
+                      <tr key={`us-${index}`}>
+                        <td className="py-2 px-4 border-b">{item.year}</td>
+                        <td className="py-2 px-4 border-b">{item.start}</td>
+                        <td className="py-2 px-4 border-b">{item.end}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </ProfilContainer>
+      </div>
+    </PageTemplate>
+  );
 };
 
 export default SummerWinterPage;
