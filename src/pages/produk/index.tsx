@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
 import PageTemplate from "@/components/templates/PageTemplate";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import ProductCard from "@/components/moleculs/ProductCard";
@@ -14,7 +17,16 @@ type Product = {
     category: string;
 };
 
+export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'produk', 'footer'])),
+    },
+  };
+};
+
 export default function ProdukPage() {
+    const { t } = useTranslation('produk');
     const router = useRouter();
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -58,16 +70,9 @@ export default function ProdukPage() {
     };
 
     return (
-        <PageTemplate title="Produk Kami">
+        <PageTemplate title={t('title')}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title="Produk Kami">
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Daftar Produk</h2>
-                        <p className="text-gray-600">
-                            Temukan berbagai produk investasi terbaik dari kami.
-                        </p>
-                    </div>
-
+                <ProfilContainer title={t('title')}>
                     {loading ? (
                         <div className="flex justify-center py-16">
                             <div className="animate-pulse flex flex-col items-center">
@@ -77,39 +82,21 @@ export default function ProdukPage() {
                             </div>
                         </div>
                     ) : products.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                             {products.map((product) => (
-                                <div 
+                                <ProductCard
                                     key={`${product.category}-${product.id}`}
-                                    className="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer"
-                                    onClick={() => handleProductClick(product.category, product.slug)}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault();
-                                            handleProductClick(product.category, product.slug);
-                                        }
-                                    }}
-                                >
-                                    <ProductCard
-                                        title={product.name}
-                                        image={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
-                                        category={product.category}
-                                        slug={product.slug}
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                        <span className="text-white text-sm font-medium">Lihat Detail</span>
-                                    </div>
-                                </div>
+                                    image={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
+                                    title={product.name}
+                                    description={product.deskripsi || t('defaultDescription')}
+                                    href={`/produk/${product.category.toLowerCase()}/${product.slug}`}
+                                    ctaText={t('viewDetails')}
+                                    className="h-full"
+                                />
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-16 bg-gray-50 rounded-lg">
-                            <i className="fas fa-box-open text-4xl text-gray-300 mb-3"></i>
-                            <p className="text-gray-600">Tidak ada produk tersedia saat ini.</p>
-                            <p className="text-sm text-gray-500 mt-1">Silakan coba lagi nanti</p>
-                        </div>
+                        <p className="text-center text-gray-600">{t('errorText')}</p>
                     )}
                 </ProfilContainer>
             </div>

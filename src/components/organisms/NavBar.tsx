@@ -101,7 +101,7 @@ const baseMenuItems: NavItem[] = [
             { 
                 key: 'products_allProducts',
                 label: 'Semua Produk', 
-                href: "/produk/semua-produk" 
+                href: "/produk" 
             },
             { 
                 key: 'products_jfxProducts',
@@ -116,12 +116,12 @@ const baseMenuItems: NavItem[] = [
             { 
                 key: 'products_productAdvantages',
                 label: 'Keunggulan Produk', 
-                href: "/produk/keunggulan" 
+                href: "/produk/keunggulan-produk" 
             },
             { 
                 key: 'products_transactionIllustration',
                 label: 'Ilustrasi Transaksi', 
-                href: "/produk/ilustrasi" 
+                href: "/prosedur/ilustrasi-transaksi" 
             },
         ],
     },

@@ -1,0 +1,107 @@
+{
+  "ilustrasiTransaksi": {
+    "title": "Transaction Illustration",
+    "description": "For those of you who want to invest in products from PT. KONTAKPERKASA FUTURES, you can see the transaction illustration below to further consider whether you are sure about this:",
+    "rumusPerhitungan": {
+      "title": "Transaction Calculation Formula",
+      "formula": "[(Selling Price – Buying Price) x Contract Size x n Lot] – [(Facility Fee + VAT) x n Lot]",
+      "keterangan": "Description:",
+      "details": [
+        {"key": "contractSize", "label": "Contract Size", "value": "US $5 per point for stock index rolling spot contracts and 100 troy ounces for Loco London gold daily rolling contracts."},
+        {"key": "lot", "label": "n Lot", "value": "n is the number of lots transacted."},
+        {"key": "facilityFee", "label": "Facility Fee (commission)", "value": "US $15 per lot per side (buy or sell). Total commission fee is US $30 for 1 lot settlement."},
+        {"key": "vat", "label": "VAT (Value Added Tax)", "value": "11% of the commission fee, which is US $1.65 per lot/side. Total VAT fee is US $3.3 for 1 lot settlement."},
+        {"key": "overnight", "label": "Overnight/Roll Over Fee", "value": "If the transaction settlement is done for more than one day (overnight), each transaction lot will be charged an overnight/roll over fee."}
+      ],
+      "rollOverFee": {
+        "title": "Roll over fee / storage:",
+        "items": [
+          "HKK5U and HKK50 at US $3/night.",
+          "JPK5U and JPK50 at US $2/night.",
+          "XULF and XUL10 at US $5/night.",
+          "XAGF and XAG10 at US $5/night."
+        ]
+      }
+    },
+    "contohTransaksi": {
+      "title": "Transaction Examples",
+      "dayTradeProfit": {
+        "title": "Example 1: Day Trade (Profit)",
+        "description": "A customer takes a buy position on HKK5U at 24,600 points for 2 lots. The investor then closes/liquidates the 2-lot buy position when the index is at 24,700 points.",
+        "calculation": [
+          "P/L = [(24,700 – 24,600) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
+          "P/L = (100 x US$5 x 2) – (US$33.3 x 2)",
+          "P/L = US$1000 – US$66.6"
+        ],
+        "result": "P/L = US$933.4 (net profit)"
+      },
+      "dayTradeLoss": {
+        "title": "Example 2: Day Trade (Loss)",
+        "description": "A customer takes a sell position on HKK5U at 24,700 points for 2 lots. The investor then closes/liquidates the 2-lot sell position when the index is at 24,800 points.",
+        "calculation": [
+          "P/L = [(24,700 – 24,800) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
+          "P/L = (-100 x US$5 x 2) – (US$33.3 x 2)",
+          "P/L = -US$1000 – US$66.6"
+        ],
+        "result": "P/L = -US$1,066.6 (net loss)"
+      },
+      "overnightTrade": {
+        "title": "Example 3: Overnight Trade",
+        "description": "A customer takes a buy position on HKK5U at 24,600 points for 2 lots. The investor then closes/liquidates the 2-lot buy position the next day (overnight) when the index is at 24,700 points.",
+        "calculation": [
+          "P/L = [(24,700 – 24,600) x US$5 x 2] – [(US$30 + US$3.3) x 2] – (US$3 x 2)",
+          "P/L = (100 x US$5 x 2) – (US$33.3 x 2) – US$6",
+          "P/L = US$1000 – US$66.6 – US$6"
+        ],
+        "result": "P/L = US$927.4 (net profit)",
+        "note": "*Note: Overnight fee (roll over fee) for HKK5U is US$3/lot/night (assuming 1 night)."
+      }
+    },
+    "catatanPenting": {
+      "title": "Important Notes",
+      "items": [
+        "Financial market transactions involve the risk of loss. Please ensure you understand the risks before trading.",
+        "The examples above are for illustration purposes only and are not a guarantee of future profits.",
+        "Fees and terms are subject to change at any time according to company policy.",
+        "For more information, please contact our customer service."
+      ]
+    },
+    "kodeJenisKontrak": {
+      "title": "Contract Codes & Types",
+      "table": {
+        "headers": {
+          "kodeKontrak": "Contract Code",
+          "dasar": "Base",
+          "kategori": "Category",
+          "jenisKontrak": "Contract Type"
+        }
+      },
+      "types": {
+        "spotGbpUsd": "Daily Rolling Spot GBP/USD Contract",
+        "spotEurUsd": "Daily Rolling Spot EUR/USD Contract",
+        "spotAudUsd": "Daily Rolling Spot AUD/USD Contract",
+        "spotUsdChf": "Daily Rolling Spot USD/CHF Contract",
+        "spotUsdJpy": "Daily Rolling Spot USD/JPY Contract"
+      }
+    },
+    "ilustrasiPerhitungan": {
+      "title": "Transaction Calculation Illustration",
+      "directRates": {
+        "title": "Direct Rates (Example: EU1010_BBJ)",
+        "formula": "P/L = (Selling Price - Buying Price) x Contract Size x Number of Lots – [(Facility Fee + VAT) x n Lot]",
+        "example1": "A customer takes a buy position on EU1010_BBJ at 1.3530 (2 lots), then liquidates at 1.3540.",
+        "example2": "However, if liquidated at 1.3525:",
+        "results": {
+          "profit": "P/L = US$133.4 (net profit)",
+          "loss": "P/L = -US$166.6 (net loss)"
+        }
+      },
+      "indirectRates": {
+        "title": "Indirect Rates (Example: UJ1010_BBJ)",
+        "formula": "P/L = ((Selling Price - Buying Price) / Liquidation Price) x Contract Size x Number of Lots",
+        "example": "A customer takes a sell position on UJ1010_BBJ at 102.20 (1 lot), then liquidates at 102.12.",
+        "result": "P/L = US$45.04 (net profit)"
+      }
+    }
+  }
+}
