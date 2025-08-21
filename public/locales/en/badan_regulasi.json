@@ -1,0 +1,16 @@
+{
+  "pageTitle": "Regulatory Bodies",
+  "pageDescription": "Information about regulatory bodies overseeing futures trading activities",
+  "bappebti": {
+    "title": "COMMODITY FUTURES TRADING REGULATORY AGENCY (BAPPEBTI)",
+    "description": "BAPPEBTI or the Commodity Futures Trading Regulatory Agency was established based on Law Number 32 of 1997. BAPPEBTI is one of the echelon I units under the Ministry of Trade. BAPPEBTI is responsible for fostering, regulating, and supervising futures trading activities based on policies set by the Minister and applicable laws and regulations."
+  },
+  "bbj": {
+    "title": "JAKARTA FUTURES EXCHANGE (JFX)",
+    "description": "PT. Jakarta Futures Exchange is the first exchange established under this Law. It was established on August 19, 1999, by 4 palm plantations, 7 palm oil refineries, 8 coffee exporters, 8 securities brokerage companies, and 2 trading companies. The paid-up capital was only IDR 11.4 billion out of the approved IDR 40 billion. The Jakarta Futures Exchange meets all the requirements written in Law 32/1997 and received Bappebti's license in the second half of 2000."
+  },
+  "kbi": {
+    "title": "INDONESIA COMMODITY & DERIVATIVES EXCHANGE (ICDX)",
+    "description": "PT Kliring Berjangka Indonesia (Persero) is a State-Owned Enterprise that aspires to become an effective domestic company and eventually a global company with international standards. It was established to clear and guarantee the settlement of Futures/Derivatives/Spot & Forward contracts and Warehouse Receipts in an orderly, fair, and efficient manner to maintain Market Financial Integrity."
+  }
+}

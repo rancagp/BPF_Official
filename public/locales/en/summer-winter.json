@@ -1,0 +1,96 @@
+{
+  "title": "Summer & Winter - UK & North America Time",
+  "ukTime": {
+    "title": "UK Time / British Time",
+    "description": "UK Time - England, Wales, Scotland, Northern Ireland",
+    "intro": "UK Time is in the Western European Time Zone. Like other European countries, Summer Time is observed in the UK, where the time is shifted forward by 1 hour (GMT+1). After Summer Time, when UK time shifts back by 1 hour to Western European Time (WET) or (GMT).",
+    "sections": {
+      "summerStart": {
+        "title": "Summer Time Begins (Mar 25)",
+        "description": "When local standard time is about to reach Sunday, March 25, 2012, 01:00:00, it is moved forward by 1 hour to Sunday, March 25, 2012, 02:00:00 local daylight time instead."
+      },
+      "summerEnd": {
+        "title": "Summer Time Ends (Oct 28)",
+        "description": "When local daylight time is about to reach Sunday, October 28, 2012, 02:00:00, it is moved backward by 1 hour to Sunday, October 28, 2012, 01:00:00 local standard time instead."
+      },
+      "beforeAfterForward": "Seconds before and after moving time forward",
+      "beforeAfterBackward": "Seconds before and after moving time backward",
+      "europeanFormula": {
+        "title": "European Summer Time Formula",
+        "start": "Start: Sunday (31 - ((((5 * y) / 4) + 4) mod 7)) March at 01:00 GMT",
+        "end": "End: Sunday (31 - ((((5 * y) / 4) + 1) mod 7)) October at 01:00 GMT",
+        "note": "Note: Formula is valid until 2099. y is the year."
+      },
+      "scheduleTitle": "BST Schedule (2010-2015)",
+      "tableHeaders": {
+        "date": "Local Date",
+        "time": "Local Time",
+        "dst": "DST",
+        "offset": "UTC Offset",
+        "timezone": "Time Zone",
+        "year": "Year",
+        "startDate": "BST Start",
+        "endDate": "BST End"
+      },
+      "timeChange": "Time Change",
+      "timeForward": "Forward 1h",
+      "timeBackward": "Backward 1h"
+    }
+  },
+  "usTime": {
+    "title": "US & Canada Time",
+    "description": "US & Canada Time - Eastern Standard Time (EST) / Eastern Daylight Time (EDT)",
+    "intro": "In the US and Canada, this time zone is generically called Eastern Time (ET). Specifically, it is Eastern Standard Time (EST) when standard time is observed (winter), and Eastern Daylight Time (EDT) when daylight saving time is observed (spring, summer, autumn).",
+    "sections": {
+      "daylightStart": {
+        "title": "Daylight Saving Time Begins (2nd Sunday in March)",
+        "description": "When local standard time is about to reach Sunday, March 11, 2012, 02:00:00, it is moved forward by 1 hour to Sunday, March 11, 2012, 03:00:00 local daylight time instead."
+      },
+      "daylightEnd": {
+        "title": "Daylight Saving Time Ends (1st Sunday in November)",
+        "description": "When local daylight time is about to reach Sunday, November 4, 2012, 02:00:00, it is moved backward by 1 hour to Sunday, November 4, 2012, 01:00:00 local standard time instead."
+      },
+      "beforeAfterForward": "Seconds before and after moving time forward",
+      "beforeAfterBackward": "Seconds before and after moving time backward",
+      "usFormula": {
+        "title": "US/Canada Time Change Formula",
+        "start": "Start: Second Sunday in March at 02:00 local time",
+        "end": "End: First Sunday in November at 02:00 local time"
+      },
+      "scheduleTitle": "Daylight Saving Time Schedule (2010-2015)",
+      "tableHeaders": {
+        "date": "Local Date",
+        "time": "Local Time",
+        "dst": "DST",
+        "offset": "UTC Offset",
+        "timezone": "Time Zone",
+        "year": "Year",
+        "startDate": "DST Start",
+        "endDate": "DST End"
+      },
+      "timeChange": "Time Change",
+      "timeForward": "Forward 1h",
+      "timeBackward": "Backward 1h"
+    }
+  },
+  "common": {
+    "timeForward": "Time Forward",
+    "timeBackward": "Time Backward",
+    "no": "No",
+    "yes": "Yes",
+    "days": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    }
+  },
+  "months": {
+    "march": "March",
+    "october": "October",
+    "november": "November"
+  }
+}

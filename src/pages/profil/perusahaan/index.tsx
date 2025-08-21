@@ -1,83 +1,180 @@
-// Profil Perusahaan
-
-import CardVisiMisi from "@/components/atoms/CardVisiMisi";
-import TitleH3 from "@/components/atoms/TitleH3";
-import ProfilContainer from "@/components/templates/PageContainer/ProfilContainer";
+import { FaBullseye, FaChartLine, FaHandshake, FaUsers, FaShieldAlt, FaGraduationCap } from 'react-icons/fa';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
+import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
+import Image from "next/image";
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'id', ['profil_perusahaan', 'common', 'footer'])),
+    },
+  };
+};
 
 export default function ProfilPerusahaan() {
-    const visiMisiItems = [
-        "Menjadi perusahaan nomor satu dalam industri perdagangan berjangka komoditi di Indonesia",
-        "Menerapkan Good Corporate Governance dalam menjalankan kegiatan sebagai pialang berjangka yang menjunjung tinggi nilai fairness dan kepastian hukum bagi setiap orang yang terlibat di dalamnya.",
-    ];
+  const { t } = useTranslation('profil_perusahaan');
+  
+  // Definisikan tipe untuk item visi misi
+  type VisiMisiItem = {
+    icon: React.ReactNode;
+    title: string;
+    description?: string;
+    items: string[];
+    bgColor: string;
+  };
 
-    const anggotaLogos = [
-        { src: "/assets/logo-jfx.png", alt: "JFX" },
-        { src: "/assets/logo-kbi.png", alt: "KBI" },
-        { src: "/assets/logo-bappebti.png", alt: "BAPPEBTI" },
-        { src: "/assets/logo-aspebtindo.png", alt: "ASPEBTINDO" },
-    ];
+  // Dapatkan data misi terlebih dahulu
+  const misiItems = t('sections.mission.items', { returnObjects: true });
+  
+  const visiMisiItems: VisiMisiItem[] = [
+    {
+      icon: <FaBullseye className="text-3xl text-blue-600" />,
+      title: t('sections.vision.title'),
+      description: t('sections.vision.description'),
+      items: [],
+      bgColor: "bg-gray-50"
+    },
+    {
+      icon: <FaChartLine className="text-3xl text-green-600" />,
+      title: t('sections.mission.title'),
+      description: '',
+      items: Array.isArray(misiItems) ? misiItems : [],
+      bgColor: "bg-gray-50"
+    }
+  ];
 
-    return (
-        <PageTemplate title="Profil Perusahaan - PT Solid Gold Berjangka">
-            <div className="my-10 mx-52">
-                <ProfilContainer title="PT. Rifan Financinda Berjangka">
-                    <div className="mx-22 space-y-10">
-                        <div className="space-y-5">
-                            <TitleH3>Tentang Kami</TitleH3>
-                            <div className="space-y-3">
-                                <p>
-                                    <strong>PT. Rifan Financindo Berjangka</strong> adalah anggota dari bursa berjangka yang ada di Indonesia yaitu Jakarta Futures Exchange (JFX) serta untuk menjamin integritas keuangan perusahaan juga merupakan anggota dari lembaga kliring dari bursa berjangka tersebut yaitu anggota dari Indonesian Derivatives Clearing House (KBI). Perusahaan berkomitmen untuk melaksanakan perdagangan berjangka secara teratur, wajar, efektif dan transparan yang diatur dalam undang-undang di bidang Perdagangan Berjangka untuk memberikan kepastian hukum bagi semua pihak dalam kegiatan Perdagangan Berjangka di Indonesia.
-                                </p>
-                                <p>
-                                    <strong>PT Rifan Financindo Berjangka</strong> telah berpengalaman lebih dari 20 tahun di industri Perdagangan Berjangka Komoditi dan merupakan perusahaan pialang terbesar dengan menduduki posisi teratas dari 10 perusahaan pialang berjangka dengan transaksi teraktif di PT Bursa Berjangka Jakarta. Selain anggota bursa, PT Rifan Financindo Berjangka juga merupakan anggota PT Kliring Berjangka Indonesia (Persero) dan terdaftar resmi di Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI). Sejak tahun 2000 PT Rifan Financindo Berjangka terus berkembang dengan jumlah kantor operasional yang tersebar di kota-kota besar di Indonesia. Berkantor pusat di Jakarta (Axa Tower) dan kantor cabang yang berada di Jakarta (DBS Bank Tower), Bandung, Semarang, Solo, Yogyakarta, Surabaya (Ciputra World), Medan, Pekanbaru dan Palembang, Balikpapan dan Surabaya (Pakuwon Tower).
-                                </p>
-                            </div>
-                        </div>
+  // Definisikan tipe untuk nilai perusahaan
+  type NilaiPerusahaan = {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+  };
 
-                        {/* Visi */}
-                        <div className="space-y-5">
-                            <TitleH3>Visi</TitleH3>
-                            <div className="flex flex-col justify-center items-center gap-3">
-                                {visiMisiItems.map((item, index) => (
-                                    <CardVisiMisi key={`visi-${index}`}>
-                                        {item}
-                                    </CardVisiMisi>
-                                ))}
-                            </div>
-                        </div>
+  const nilaiPerusahaan: NilaiPerusahaan[] = [
+    {
+      icon: <FaHandshake className="text-2xl text-yellow-600" />,
+      title: t('sections.values.items.integrity.title'),
+      description: t('sections.values.items.integrity.description')
+    },
+    {
+      icon: <FaUsers className="text-2xl text-purple-600" />,
+      title: t('sections.values.items.customerSatisfaction.title'),
+      description: t('sections.values.items.customerSatisfaction.description')
+    },
+    {
+      icon: <FaShieldAlt className="text-2xl text-red-600" />,
+      title: t('sections.values.items.compliance.title'),
+      description: t('sections.values.items.compliance.description')
+    },
+    {
+      icon: <FaGraduationCap className="text-2xl text-indigo-600" />,
+      title: t('sections.values.items.innovation.title'),
+      description: t('sections.values.items.innovation.description')
+    }
+  ];
 
-                        {/* Misi */}
-                        <div className="space-y-5">
-                            <TitleH3>Misi</TitleH3>
-                            <div className="flex flex-col justify-center items-center gap-3">
-                                {visiMisiItems.map((item, index) => (
-                                    <CardVisiMisi key={`misi-${index}`}>
-                                        {item}
-                                    </CardVisiMisi>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+  const anggotaLogos = [
+    { src: "/assets/logo-jfx.png", alt: t('sections.membership.logos.jfx') },
+    { src: "/assets/logo-kbi.png", alt: t('sections.membership.logos.kbi') },
+    { src: "/assets/logo-aspebtindo.png", alt: t('sections.membership.logos.aspebtindo') },
+    { src: "/assets/logo-bappebti.png", alt: t('sections.membership.logos.bappebti') },
+  ];
 
-                    <hr />
-
-                    {/* Anggota Dari */}
-                    <div className="text-center">
-                        <h3 className="text-xl mb-4">Anggota Dari:</h3>
-                        <div className="flex flex-wrap justify-center items-center gap-6">
-                            {anggotaLogos.map((logo, index) => (
-                                <img
-                                    key={index}
-                                    src={logo.src}
-                                    alt={logo.alt}
-                                    className="h-15 w-auto"
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </ProfilContainer>
+  return (
+    <PageTemplate title={t('pageTitle')}>
+      <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
+        <ProfilContainer title="PT. KONTAKPERKASA FUTURES">
+          {/* Tentang Kami */}
+          <section className="mb-16">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                {t('sections.about.title')}
+              </h2>
+              <div className="prose max-w-none text-gray-700">
+                <p className="text-lg leading-relaxed">
+                  {t('sections.about.description1')}
+                </p>
+                <p className="mt-4 text-lg leading-relaxed">
+                  {t('sections.about.description2')}
+                </p>
+              </div>
             </div>
-        </PageTemplate>
-    );
+          </section>
+
+          {/* Visi & Misi */}
+          <section className="grid md:grid-cols-2 gap-8 mb-16">
+            {visiMisiItems.map((item, index) => (
+              <div key={index} className={`${item.bgColor} rounded-xl p-6 shadow-md`}>
+                <div className="flex items-center mb-4">
+                  <div className="mr-4">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
+                </div>
+                {item.description && (
+                  <p className="text-gray-700 mt-2">{item.description}</p>
+                )}
+                {Array.isArray(item.items) && item.items.length > 0 && (
+                  <ul className="mt-4 space-y-2">
+                    {(item.items as unknown as string[]).map((misi: string, i: number) => (
+                      <li key={i} className="flex items-start">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-700">{misi}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </section>
+
+          {/* Nilai-Nilai Perusahaan */}
+          <section className="mb-16">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+              {t('sections.values.title')}
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {nilaiPerusahaan.map((nilai, index) => (
+                <div key={index} className="bg-gray-50 rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+                  <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    {nilai.icon}
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                    {nilai.title}
+                  </h4>
+                  <p className="text-gray-600">
+                    {nilai.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Anggota & Afiliasi */}
+          <section className="bg-gray-50 rounded-xl p-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+              {t('sections.membership.title')}
+            </h2>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {anggotaLogos.map((logo, index) => (
+                <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <div className="h-16 w-32 relative">
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </ProfilContainer>
+      </div>
+    </PageTemplate>
+  );
 }

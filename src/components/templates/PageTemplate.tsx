@@ -10,30 +10,33 @@ import DateTimeDisplay from "@/components/organisms/DateTimeDisplay";
 
 interface PageTemplateProps {
     title?: string;
+    description?: string;
     children: ReactNode;
 }
 
-export default function PageTemplate({ title, children }: PageTemplateProps) {
+export default function PageTemplate({ title, description, children }: PageTemplateProps) {
+    const pageTitle = title ? `${title} - PT. Kontak Perkasa Futures` : "PT. Kontak Perkasa Futures";
+    const pageDescription = description || "PT. Kontak Perkasa Futures adalah perusahaan pialang berjangka terpercaya di Indonesia.";
+    
     return (
         <>
             <Head>
-                <title>{title || "PT Solid Gold Berjangka"}</title>
+                <title>{pageTitle}</title>
+                <meta name="description" content={pageDescription} />
+                <meta property="og:title" content={pageTitle} />
+                <meta property="og:description" content={pageDescription} />
+                <meta name="twitter:title" content={pageTitle} />
+                <meta name="twitter:description" content={pageDescription} />
 
                 {/* Favicon & Icons */}
-                <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
-                <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-                <link rel="shortcut icon" href="/favicon/favicon.ico" />
-                <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-                <meta name="apple-mobile-web-app-title" content="RFB" />
-                <link rel="manifest" href="/favicon/site.webmanifest" />
+                <link rel="icon" href="/assets/logo-kpf.png" type="image/png" />
+                <link rel="shortcut icon" href="/assets/logo-kpf.png" type="image/png" />
+                <link rel="apple-touch-icon" href="/assets/logo-kpf.png" />
+                <meta name="apple-mobile-web-app-title" content="KPF" />
 
                 {/* Font: Montserrat */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-                    rel="stylesheet"
-                />
             </Head>
 
             <DateTimeDisplay />

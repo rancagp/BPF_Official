@@ -1,0 +1,23 @@
+{
+  "title": "Economic Calendar",
+  "filters": {
+    "today": "Today",
+    "thisWeek": "This Week",
+    "previousWeek": "Previous Week",
+    "nextWeek": "Next Week"
+  },
+  "table": {
+    "time": "Time",
+    "country": "Country",
+    "impact": "Impact",
+    "figures": "Figures",
+    "previous": "Previous",
+    "forecast": "Forecast",
+    "actual": "Actual"
+  },
+  "impactLevels": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  }
+}

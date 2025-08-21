@@ -1,0 +1,58 @@
+{
+  "pageTitle": "Legalitas Bisnis",
+  "pageDescription": "Legalitas dan perizinan resmi PT Kontakperkasa Futures",
+  "aboutTitle": "Tentang Legalitas Kami",
+  "aboutDescription": "PT Kontakperkasa Futures merupakan pialang berjangka yang telah mendapatkan izin usaha dari BAPPEBTI, sesuai dengan Undang-Undang RI No. 32 Tahun 1997 tentang Perdagangan Berjangka Komoditi yang telah diubah dengan Undang-Undang No. 10 Tahun 2011.",
+  "importantNotice": {
+    "title": "Informasi Penting:",
+    "description": "PT Kontakperkasa Futures berkomitmen untuk selalu beroperasi sesuai dengan peraturan perundang-undangan yang berlaku dan menjaga kepercayaan nasabah dengan menjunjung tinggi prinsip kehati-hatian dan profesionalisme."
+  },
+  "partnersTitle": "Mitra & Lembaga Terkait",
+  "legalitasItems": [
+    {
+      "title": "Surat Persetujuan Anggota Bursa (SPAB)",
+      "description": "Surat Persetujuan Anggota Bursa (SPAB) di Bursa Berjangka Jakarta (Nomor: SPAB-002/BBJ/09/00).",
+      "icon": "📜"
+    },
+    {
+      "title": "Surat Persetujuan Pengalihan Keanggotaan Bursa (SPPKB)",
+      "description": "Surat Persetujuan Pengalihan Keanggotaan Bursa (SPPKB) di Bursa Berjangka Jakarta (Nomor: SPPKB-006/BBJ/12/00).",
+      "icon": "📋"
+    },
+    {
+      "title": "Izin Usaha Pialang Berjangka",
+      "description": "Keputusan Kepala Bappebti (Nomor: 41/BAPPEBTI/SI/XXI/2000).",
+      "icon": "🏛️"
+    },
+    {
+      "title": "Keanggotaan Kliring Berjangka Indonesia",
+      "description": "Keanggotaan Kliring Berjangka Indonesia (Nomor: 08/AK-KJBK/XII/2000).",
+      "icon": "🔗"
+    },
+    {
+      "title": "Pengesahan Departemen Kehakiman dan HAM",
+      "description": "Pengesahan Departemen Kehakiman dan HAM: C-16764 HT.01.04.TH.2002.",
+      "icon": "⚖️"
+    },
+    {
+      "title": "Akta Berita Acara Rapat",
+      "description": "Akta berita acara rapat: No. 161 Tanggal 19 Juli 2002 oleh Notaris Noor Irawati SH, PT Kontakperkasa Futures.",
+      "icon": "📄"
+    },
+    {
+      "title": "Peserta Sistem Perdagangan Alternatif (SPA)",
+      "description": "SK Bappebti (Nomor: 1145/BAPPEBTI/SP3/2007) tentang Pemberian Persetujuan sebagai peserta Sistem Perdagangan Alternatif (SPA) kepada PT Kontakperkasa Futures.",
+      "icon": "💼"
+    },
+    {
+      "title": "Keanggotaan ASPEBTINDO",
+      "description": "Keanggotaan ASPEBTINDO (Nomor: 0040/ASPEBTINDO/AANG-B/7/2015).",
+      "icon": "🏢"
+    },
+    {
+      "title": "Penerimaan Nasabah Elektronik On-Line",
+      "description": "Penetapan Sebagai Pialang Berjangka yang melakukan Kegiatan Penerimaan Nasabah secara Elektronik On-Line di Bidang Perdagangan Berjangka Komoditi kepada PT Kontakperkasa Futures (Nomor: 25/BAPPEBTI/KEP-PBK/08/2014).",
+      "icon": "💻"
+    }
+  ]
+}

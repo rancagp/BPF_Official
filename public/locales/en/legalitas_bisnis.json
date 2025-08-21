@@ -1,0 +1,58 @@
+{
+  "pageTitle": "Business Legality",
+  "pageDescription": "Official licenses and permits of PT Kontakperkasa Futures",
+  "aboutTitle": "About Our Legality",
+  "aboutDescription": "PT Kontakperkasa Futures is a futures broker that has obtained a business license from BAPPEBTI, in accordance with Law No. 32 of 1997 concerning Commodity Futures Trading as amended by Law No. 10 of 2011.",
+  "importantNotice": {
+    "title": "Important Information:",
+    "description": "PT Kontakperkasa Futures is committed to always operating in accordance with applicable laws and regulations and maintaining customer trust by upholding the principles of prudence and professionalism."
+  },
+  "partnersTitle": "Partners & Related Institutions",
+  "legalitasItems": [
+    {
+      "title": "Stock Exchange Member Approval Letter (SPAB)",
+      "description": "Stock Exchange Member Approval Letter (SPAB) at Jakarta Futures Exchange (Number: SPAB-002/BBJ/09/00).",
+      "icon": "📜"
+    },
+    {
+      "title": "Stock Exchange Membership Transfer Approval Letter (SPPKB)",
+      "description": "Stock Exchange Membership Transfer Approval Letter (SPPKB) at Jakarta Futures Exchange (Number: SPPKB-006/BBJ/12/00).",
+      "icon": "📋"
+    },
+    {
+      "title": "Futures Brokerage Business License",
+      "description": "Decision of the Head of Bappebti (Number: 41/BAPPEBTI/SI/XXI/2000).",
+      "icon": "🏛️"
+    },
+    {
+      "title": "Indonesia Clearing Membership",
+      "description": "Indonesia Clearing Membership (Number: 08/AK-KJBK/XII/2000).",
+      "icon": "🔗"
+    },
+    {
+      "title": "Ministry of Law and Human Rights Endorsement",
+      "description": "Endorsement from the Ministry of Law and Human Rights: C-16764 HT.01.04.TH.2002.",
+      "icon": "⚖️"
+    },
+    {
+      "title": "Meeting Minutes Deed",
+      "description": "Meeting minutes deed: No. 161 dated July 19, 2002 by Notary Noor Irawati SH, PT Kontakperkasa Futures.",
+      "icon": "📄"
+    },
+    {
+      "title": "Alternative Trading System (SPA) Participant",
+      "description": "Bappebti Decree (Number: 1145/BAPPEBTI/SP3/2007) regarding Approval as a Participant of the Alternative Trading System (SPA) for PT Kontakperkasa Futures.",
+      "icon": "💼"
+    },
+    {
+      "title": "ASPEBTINDO Membership",
+      "description": "ASPEBTINDO Membership (Number: 0040/ASPEBTINDO/AANG-B/7/2015).",
+      "icon": "🏢"
+    },
+    {
+      "title": "Electronic Online Customer Acceptance",
+      "description": "Designation as a Futures Broker conducting Electronic Online Customer Acceptance Activities in the Field of Commodity Futures Trading for PT Kontakperkasa Futures (Number: 25/BAPPEBTI/KEP-PBK/08/2014).",
+      "icon": "💻"
+    }
+  ]
+}

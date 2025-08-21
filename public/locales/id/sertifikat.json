@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Sertifikat",
+  "certificates": [
+    {
+      "image": "/assets/sertifikat-1.jpg",
+      "description": "PT. KontakPerkasa Futures Mendapatkan Sertifikat \"The Best Reliable Futures Company Of The Year\" pada Tahun 2014"
+    },
+    {
+      "image": "/assets/sertifikat-kbi.jpg",
+      "description": "Sertifikat Keanggotaan Kliring Berjangka"
+    },
+    {
+      "image": "/assets/sertifikat-izin.png",
+      "description": "Sertifikat Izin Usaha Pialang Berjangka"
+    },
+    {
+      "image": "/assets/sertifikat-apbi.png",
+      "description": "Sertifikat Keanggotaan Asosiasi Pialang Berjangka Indonesia"
+    }
+  ]
+}

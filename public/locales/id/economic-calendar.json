@@ -1,0 +1,23 @@
+{
+  "title": "Kalender Ekonomi",
+  "filters": {
+    "today": "Hari Ini",
+    "thisWeek": "Minggu Ini",
+    "previousWeek": "Minggu Lalu",
+    "nextWeek": "Minggu Depan"
+  },
+  "table": {
+    "time": "Waktu",
+    "country": "Negara",
+    "impact": "Dampak",
+    "figures": "Data",
+    "previous": "Sebelumnya",
+    "forecast": "Perkiraan",
+    "actual": "Aktual"
+  },
+  "impactLevels": {
+    "high": "Tinggi",
+    "medium": "Sedang",
+    "low": "Rendah"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "registrationFlow": {
+    "steps": [
+      {
+        "title": "Membuka Website Perusahaan",
+        "description": "Calon Nasabah mengunjungi website resmi PT Rifan Financindo Berjangka.",
+        "items": []
+      },
+      {
+        "title": "Registrasi Akun Demo",
+        "items": [
+          "Memasukkan data diri",
+          "Mendapatkan akses akun demo",
+          "Melakukan simulasi transaksi"
+        ]
+      },
+      {
+        "title": "Pengisian Dokumen Perjanjian",
+        "description": "Calon Nasabah melengkapi dokumen berikut:",
+        "items": [
+          "Aplikasi Perjanjian",
+          "Dokumen Pemberitahuan Adanya Risiko",
+          "Perjanjian Pemberian Amanat (PPA)",
+          "Mekanisme Transaksi (Trading Rules)",
+          "Dokumen pendukung (KTP dan lainnya)"
+        ]
+      },
+      {
+        "title": "Verifikasi oleh Wakil Pialang Berjangka",
+        "description": "Meliputi verifikasi data pribadi dan bukti penyetoran dana margin.",
+        "items": []
+      },
+      {
+        "title": "Setoran Dana Margin ke Rekening Segregasi",
+        "description": "Nasabah melakukan setoran dana margin ke rekening terpisah (segregated account) yang telah disediakan.",
+        "items": []
+      },
+      {
+        "title": "Pembukaan Akun Real",
+        "description": "Setelah verifikasi dan dana margin diterima, akun real akan diaktifkan.",
+        "items": []
+      },
+      {
+        "title": "Pembuatan User ID dan Password",
+        "description": "Nasabah akan menerima user ID dan password untuk mengakses platform trading.",
+        "items": []
+      },
+      {
+        "title": "Pelatihan dan Bimbingan",
+        "items": [
+          "Mengikuti sesi pelatihan trading",
+          "Mendapatkan bimbingan penggunaan platform",
+          "Memahami manajemen risiko"
+        ]
+      }
+    ]
+  },
+
+  
+  "registrasiOnline": {
+    "title": "Prosedur Registrasi Online",
+    "description": "Daftar akun trading Anda secara online dengan mudah dan cepat melalui PT. KONTAKPERKASA FUTURES. Ikuti langkah-langkah pendaftaran berikut ini:",
+    "steps": [
+      "Isi formulir pendaftaran online dengan data diri yang valid",
+      "Unggah dokumen yang diperlukan (KTP/Paspor, NPWP, dll)",
+      "Verifikasi data dan dokumen oleh tim kami",
+      "Pembukaan akun selesai dan Anda akan menerima detail akun"
+    ],
+    "documentsRequired": {
+      "title": "Dokumen yang Diperlukan",
+      "items": [
+        "KTP (WNI) atau Paspor (WNA)",
+        "NPWP",
+        "Bukti alamat (jika alamat di KTP berbeda dengan domisili)",
+        "Dokumen pendukung lainnya sesuai ketentuan"
+      ]
+    },
+    "notes": [
+      "Pastikan data yang diisi sesuai dengan dokumen asli",
+      "Proses verifikasi membutuhkan waktu 1-2 hari kerja",
+      "Setelah akun aktif, Anda akan menerima email konfirmasi"
+    ]
+  },
+
+  
+  "ilustrasiTransaksi": {
+    "title": "Ilustrasi Transaksi",
+    "description": "Untuk Anda yang ingin melakukan investasi dengan produk-produk dari PT. KONTAKPERKASA FUTURES, Anda dapat melihat ilustrasi transaksi dibawah ini, guna untuk mempertimbangkan lebih dalam lagi apakah Anda yakin dalam hal ini:",
+    "rumusPerhitungan": {
+      "title": "Rumus Perhitungan Transaksi",
+      "formula": "[(Selling Price – Buying Price) x Contract Size x n Lot] – [(Facility Fee + VAT) x n Lot]",
+      "keterangan": "Keterangan:",
+      "details": [
+        {"key": "contractSize", "label": "Contract Size (nilai kontrak)", "value": "sebesar US $5 per poin untuk kontrak gulir berkala indeks saham dan 100 troy ounce untuk kontak gulir harian emas Loco London."},
+        {"key": "lot", "label": "n Lot", "value": "n adalah banyaknya lot yang ditransaksikan."},
+        {"key": "facilityFee", "label": "Facility Fee (biaya komisi)", "value": "sebesar US $15 per lot per sisi (beli atau jual). Total biaya komisi sebesar US $30 untuk 1 lot settlement."},
+        {"key": "vat", "label": "VAT (Pajak Pertambahan Nilai)", "value": "sebesar 11% dari biaya komisi yaitu US $1.65 / lot/side. Total biaya VAT sebesar US $3.3 untuk 1 lot settlement."},
+        {"key": "overnight", "label": "Biaya Inap/Roll Over", "value": "Apabila penyelesaian transaksi dilakukan lebih dari satu hari (overnight) maka setiap lot transaksi akan dikenakan biaya inap / roll over."}
+      ],
+      "rollOverFee": {
+        "title": "Roll over fee / storage (biaya inap):",
+        "items": [
+          "HKK5U dan HKK50 sebesar US $3 / malam.",
+          "JPK5U dan JPK50 sebesar US $2 / malam.",
+          "XULF dan XUL10 sebesar US $5 / malam.",
+          "XAGF dan XAG10 sebesar US $5 / malam."
+        ]
+      }
+    },
+    "contohTransaksi": {
+      "title": "Contoh Transaksi",
+      "dayTradeProfit": {
+        "title": "Contoh 1: Day Trade (Profit)",
+        "description": "Seorang nasabah mengambil posisi beli HKK5U pada level 24.600 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi beli 2 lot tersebut ketika indeks berada pada level 24.700 poin.",
+        "calculation": [
+          "P/L = [(24.700 – 24.600) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
+          "P/L = (100 x US$5 x 2) – (US$33.3 x 2)",
+          "P/L = US$1000 – US$66.6"
+        ],
+        "result": "P/L = US$933.4 (laba bersih)"
+      },
+      "dayTradeLoss": {
+        "title": "Contoh 2: Day Trade (Rugi)",
+        "description": "Seorang nasabah mengambil posisi jual HKK5U pada level 24.700 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi jual 2 lot tersebut ketika indeks berada pada level 24.800 poin.",
+        "calculation": [
+          "P/L = [(24.700 – 24.800) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
+          "P/L = (-100 x US$5 x 2) – (US$33.3 x 2)",
+          "P/L = -US$1000 – US$66.6"
+        ],
+        "result": "P/L = -US$1,066.6 (rugi bersih)"
+      },
+      "overnightTrade": {
+        "title": "Contoh 3: Overnight Trade",
+        "description": "Seorang nasabah mengambil posisi beli HKK5U pada level 24.600 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi beli 2 lot tersebut pada hari berikutnya (overnight) ketika indeks berada pada level 24.700 poin.",
+        "calculation": [
+          "P/L = [(24.700 – 24.600) x US$5 x 2] – [(US$30 + US$3.3) x 2] – (US$3 x 2)",
+          "P/L = (100 x US$5 x 2) – (US$33.3 x 2) – US$6",
+          "P/L = US$1000 – US$66.6 – US$6"
+        ],
+        "result": "P/L = US$927.4 (laba bersih)",
+        "note": "*Keterangan: Biaya inap (roll over fee) untuk HKK5U adalah US$3/lot/malam (asumsi 1 malam)."
+      }
+    },
+    "catatanPenting": {
+      "title": "Catatan Penting",
+      "items": [
+        "Transaksi di pasar keuangan mengandung risiko kerugian. Pastikan Anda memahami risikonya sebelum bertransaksi.",
+        "Contoh di atas hanya sebagai ilustrasi dan bukan merupakan jaminan keuntungan di masa depan.",
+        "Biaya dan ketentuan dapat berubah sewaktu-waktu sesuai dengan kebijakan perusahaan.",
+        "Untuk informasi lebih lanjut, silakan hubungi customer service kami."
+      ]
+    },
+    "kodeJenisKontrak": {
+      "title": "Kode & Jenis Kontrak",
+      "table": {
+        "headers": {
+          "kodeKontrak": "Kode Kontrak",
+          "dasar": "Dasar",
+          "kategori": "Kategori",
+          "jenisKontrak": "Jenis Kontrak"
+        }
+      },
+      "types": {
+        "spotGbpUsd": "Kontrak Gulir Harian Harga Spot GBP/USD",
+        "spotEurUsd": "Kontrak Gulir Harian Harga Spot EUR/USD",
+        "spotAudUsd": "Kontrak Gulir Harian Harga Spot AUD/USD",
+        "spotUsdChf": "Kontrak Gulir Harian Harga Spot USD/CHF",
+        "spotUsdJpy": "Kontrak Gulir Harian Harga Spot USD/JPY"
+      }
+    },
+    "ilustrasiPerhitungan": {
+      "title": "Ilustrasi Perhitungan Transaksi",
+      "directRates": {
+        "title": "Direct Rates (Contoh: EU1010_BBJ)",
+        "formula": "P/L = (Harga Jual - Harga Beli) x Contract Size x Jumlah Lot – [(Facility Fee + VAT) x n Lot]",
+        "example1": "Nasabah mengambil posisi beli EU1010_BBJ pada harga 1.3530 (2 lot), kemudian melikuidasi pada harga 1.3540.",
+        "example2": "Namun apabila dilikuidasi pada harga 1.3525:",
+        "results": {
+          "profit": "P/L = US$133.4 (laba bersih)",
+          "loss": "P/L = -US$166.6 (rugi bersih)"
+        }
+      },
+      "indirectRates": {
+        "title": "Indirect Rates (Contoh: UJ1010_BBJ)",
+        "formula": "P/L = ((Harga Jual - Harga Beli) / Harga Likuidasi) x Contract Size x Jumlah Lot",
+        "example": "Nasabah mengambil posisi jual UJ1010_BBJ pada harga 102.20 (1 lot), kemudian melikuidasi pada harga 102.12.",
+        "result": "P/L = US$45.04 (laba bersih)"
+      }
+    }
+  },
+  
+  "penarikanDana": {
+    "title": "Prosedur Penarikan",
+    "description": "Penarikan Dana (<span class='italic'>Withdrawal</span>) dapat dilakukan kapan saja oleh Nasabah apabila diinginkan, dengan catatan dana yang ditarik tidak melebihi jumlah <span class='font-medium'>Effective Margin</span> yang tercantum dalam laporan transaksi harian Nasabah (<span class='italic'>Statement Report</span>).",
+    "prosesTitle": "Proses Penarikan Dana (<span class='italic'>Withdrawal</span>)",
+    "prosesSteps": [
+      "Nasabah masuk ke menu <span class='font-medium'>Withdrawal</span> pada akun transaksi riil untuk melakukan permohonan penarikan dana dengan mengikuti syarat dan ketentuan yang berlaku.",
+      "Nasabah mengisi formulir permohonan penarikan dana secara lengkap dan benar.",
+      "Dana hanya dapat ditransfer ke rekening atas nama Nasabah yang sesuai dengan dokumen Aplikasi Pembukaan Rekening yang telah disahkan sebelumnya.",
+      "Proses penarikan dana melalui mekanisme standar memerlukan waktu maksimum <span class='font-medium'>tiga hari kerja (T+3)</span>. Namun, PT. Rifan Financindo Berjangka berkomitmen untuk mempercepat proses agar dapat diselesaikan dalam waktu <span class='font-medium'>satu hari kerja (T+1)</span>."
+    ]
+  },
+  
+  "petunjukTransaksi": {
+    "title": "Petunjuk Transaksi",
+    "description": "Nasabah dapat memberi atau menyampaikan amanat dengan cara online dan atau bisa juga melalui telephone seperti yang di anjurkan kepada nasabah ketika melakukan simulasi trading melalui akun Demo terlebih dahulu sebelum memakai Real online trading.",
+    "description2": "Nasabah yang memberikan atau menyampaikan pesan dengan cara online akan mendapatkan USER ID beserta password nya dari PT. KONTAKPERKASA FUTURES. Dan untuk melakukan transaksi dengan cara online, syarat yang harus Anda penuhi ialah:",
+    "requirements": [
+      "Adanya jaringan internet",
+      {
+        "text": "Akses ke link berikut:",
+        "link": {
+          "url": "http://etrade.kontakperkasafutures.com/login.php",
+          "text": "http://etrade.kontakperkasafutures.com/login.php"
+        }
+      },
+      "Nasabah sudah memiliki user ID beserta passwordnya dari PT. Kontakperkasa Futures (password ini bisa diganti oleh nasabah dengan sendirinya)."
+    ],
+    "note": "Catatan: Untuk setiap transaksi, nasabah hanya dapat membeli atau menjual maksimum 50 lot.",
+    "attention": {
+      "title": "Perhatian:",
+      "content": "Nasabah wajib membaca dan memahami beberapa ketentuan di dalam online trading yang dipaparkan di halaman pembuka. Jika nasabah masuk ke dalam sistem online (login) dan melakukan transaksi, berarti nasabah bersangkutan menerima seluruh konsekuensi yang ada berkaitan dengan transaksi tersebut."
+    }
+  }
+}

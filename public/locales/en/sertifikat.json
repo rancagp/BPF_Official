@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Certificates",
+  "certificates": [
+    {
+      "image": "/assets/sertifikat-1.jpg",
+      "description": "PT. KontakPerkasa Futures Receives \"The Best Reliable Futures Company Of The Year\" Certificate in 2014"
+    },
+    {
+      "image": "/assets/sertifikat-kbi.jpg",
+      "description": "Futures Clearing Membership Certificate"
+    },
+    {
+      "image": "/assets/sertifikat-izin.png",
+      "description": "Futures Brokerage Business License Certificate"
+    },
+    {
+      "image": "/assets/sertifikat-apbi.png",
+      "description": "Indonesian Futures Brokers Association Membership Certificate"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "pageTitle": "Broker Representatives",
+  "pageDescription": "List of broker representatives of PT Kontakperkasa Futures in various cities across Indonesia",
+  "loading": "Loading...",
+  "loadingText": "Loading broker representatives...",
+  "errorText": "Failed to load data. Please try again later.",
+  "noDataText": "No broker representatives available.",
+  "viewAllText": "View All",
+  "wakilPialangIn": "Broker Representatives in {city}",
+  "wakilPialangList": "List of Broker Representatives",
+  "licenseNumber": "License Number",
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "backButton": "Back to Broker Representatives",
+  "table": {
+    "no": "No",
+    "name": "Name",
+    "licenseNumber": "WPB License Number",
+    "status": "Status"
+  },
+  "error": {
+    "title": "Error",
+    "description": "Sorry, an error occurred while loading the data. Please try again later."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "title": "Pivot & Fibonacci",
+  "tabs": {
+    "pivot": "Pivot",
+    "fibonacci": "Fibonacci"
+  },
+  "pivot": {
+    "title": "Pivot Point Calculator",
+    "high": "High",
+    "low": "Low",
+    "close": "Close",
+    "calculate": "Calculate",
+    "reset": "Reset",
+    "fillAllFields": "Please fill in all required fields with valid numbers.",
+    "level": "Level",
+    "classic": "Classic",
+    "woodie": "Woodie",
+    "camarilla": "Camarilla",
+    "results": {
+      "title": "Calculation Results",
+      "classic": "Classic",
+      "woodie": "Woodie",
+      "camarilla": "Camarilla",
+      "fibonacci": "Fibonacci"
+    },
+    "levels": {
+      "r3": "Resistance 3 (R3)",
+      "r2": "Resistance 2 (R2)",
+      "r1": "Resistance 1 (R1)",
+      "pp": "Pivot Point (PP)",
+      "s1": "Support 1 (S1)",
+      "s2": "Support 2 (S2)",
+      "s3": "Support 3 (S3)"
+    }
+  },
+  "fibonacci": {
+    "title": "Fibonacci Retracement Levels",
+    "high": "High",
+    "low": "Low",
+    "priceA": "Price A",
+    "priceB": "Price B",
+    "highValue": "high value",
+    "lowValue": "low value",
+    "calculate": "Calculate",
+    "reset": "Reset",
+    "fillAllFields": "Please enter valid numbers for both prices.",
+    "retracement": "Retracement",
+    "projection": "Projection",
+    "level": "Level",
+    "value": "Value",
+    "levels": {
+      "0": "0.0% (High)",
+      "23.6": "23.6%",
+      "38.2": "38.2%",
+      "50": "50.0%",
+      "61.8": "61.8%",
+      "78.6": "78.6%",
+      "100": "100.0% (Low)",
+      "127.2": "127.2%",
+      "161.8": "161.8%",
+      "261.8": "261.8%",
+      "423.6": "423.6%"
+    }
+  },
+  "table": {
+    "title": "Historical Data",
+    "date": "Date",
+    "open": "Open",
+    "high": "High",
+    "low": "Low",
+    "close": "Close",
+    "noData": "No data available"
+  }
+}
