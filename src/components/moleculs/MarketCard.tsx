@@ -1,6 +1,13 @@
 import React from 'react';
 
-export default function MarketCard({ symbol, last, percentChange, direction }) {
+interface MarketCardProps {
+  symbol: string;
+  last: string | number;
+  percentChange: string | number;
+  direction: 'up' | 'down' | 'neutral';
+}
+
+export default function MarketCard({ symbol, last, percentChange, direction }: MarketCardProps) {
     const bgColor = direction === 'up' ? 'bg-green-100 border-green-500' :
         direction === 'down' ? 'bg-red-100 border-red-500' :
             'bg-gray-100 border-gray-400';
