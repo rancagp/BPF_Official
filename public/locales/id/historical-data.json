@@ -1,0 +1,26 @@
+{
+  "title": "Data Historis",
+  "filters": {
+    "from": "Dari:",
+    "to": "Sampai:",
+    "apply": "Terapkan",
+    "reset": "Reset"
+  },
+  "table": {
+    "date": "Tanggal",
+    "open": "Buka",
+    "high": "Tertinggi",
+    "low": "Terendah",
+    "close": "Tutup",
+    "noData": "Tidak ada data yang tersedia untuk rentang tanggal yang dipilih"
+  },
+  "actions": {
+    "download": "Unduh Data (.CSV)",
+    "downloadAll": "Unduh Semua Data",
+    "downloadSelected": "Unduh Data Terpilih"
+  },
+  "messages": {
+    "selectDateRange": "Silakan pilih rentang tanggal",
+    "downloading": "Mengunduh data..."
+  }
+}

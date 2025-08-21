@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { useTranslation } from 'next-i18next';
 
 // Definisikan tipe untuk input dan hasil
 type PivotInput = { [key: string]: string };
 type PivotResult = { [key: string]: number | string };
 
 export default function PivotSection() {
-    const [inputs, setInputs] = useState<PivotInput>({ Open: "", High: "", Low: "", Close: "" });
+    const { t } = useTranslation('pivot-fibonacci');
+    const [inputs, setInputs] = useState<PivotInput>({ 
+        high: "", 
+        low: "", 
+        close: "" 
+    });
     const [results, setResults] = useState<{
         classic: PivotResult;
         woodie: PivotResult;
@@ -21,13 +27,12 @@ export default function PivotSection() {
     };
 
     const calculatePivots = () => {
-        const open = parseFloat(inputs.Open);
-        const high = parseFloat(inputs.High);
-        const low = parseFloat(inputs.Low);
-        const close = parseFloat(inputs.Close);
+        const high = parseFloat(inputs.high);
+        const low = parseFloat(inputs.low);
+        const close = parseFloat(inputs.close);
 
-        if (isNaN(open) || isNaN(high) || isNaN(low) || isNaN(close)) {
-            alert("Please fill in all fields (Open, High, Low, Close) with valid numbers.");
+        if (isNaN(high) || isNaN(low) || isNaN(close)) {
+            alert(t('pivot.fillAllFields', { defaultValue: 'Please fill in all required fields with valid numbers.' }));
             return;
         }
 
@@ -41,11 +46,11 @@ export default function PivotSection() {
         const classicS2 = classicPP - range;
         const classicR3 = classicR1 + range;
         const classicS3 = classicS1 - range;
-        const classicR4 = classicR2 + range;
-        const classicS4 = classicS2 - range;
+        const classicR4 = classicR2 + range * 1.618;  // Extended level using Fibonacci
+        const classicS4 = classicS2 - range * 1.618;  // Extended level using Fibonacci
 
-        // Woodie Pivots (Updated Formulas)
-        const woodiePP = (high + low + 2 * open) / 4;
+        // Woodie Pivots (Using close instead of open)
+        const woodiePP = (high + low + 2 * close) / 4;
         const woodieR1 = (2 * woodiePP) - low;
         const woodieS1 = (2 * woodiePP) - high;
         const woodieR2 = woodiePP + range;
@@ -95,61 +100,93 @@ export default function PivotSection() {
 
     return (
         <div className="space-y-6">
-            <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    {Object.keys(inputs).map((label) => (
+            <h2 className="text-xl font-semibold">{t('pivot.title')}</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {['high', 'low', 'close'].map((field) => (
+                    <div key={field} className="space-y-1">
+                        <label className="block text-sm font-medium text-gray-700">
+                            {t(`pivot.${field}`)}
+                        </label>
                         <input
-                            key={label}
                             type="text"
-                            name={label}
-                            placeholder={label}
-                            value={inputs[label]}
+                            name={field}
+                            value={inputs[field]}
                             onChange={handleInputChange}
-                            className="border px-3 py-2 rounded-md text-sm w-full"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
+                            placeholder={t(`pivot.${field}`)}
                         />
-                    ))}
-                </div>
-                <button 
+                    </div>
+                ))}
+            </div>
+
+            <div className="flex space-x-4">
+                <button
                     onClick={calculatePivots}
-                    className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition sm:col-span-2 md:col-span-1"
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
-                    Calculate
+                    {t('pivot.calculate')}
+                </button>
+                <button
+                    onClick={() => {
+                        setInputs({ high: "", low: "", close: "" });
+                        setResults(null);
+                    }}
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
+                    {t('pivot.reset')}
                 </button>
             </div>
 
-            <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
-                <table className="min-w-full bg-white text-sm">
-                    <thead className="bg-green-600 text-white">
-                        <tr>
-                            <th className="py-3 px-6 text-left font-semibold">Level</th>
-                            <th className="py-3 px-6 text-left font-semibold">Classic</th>
-                            <th className="py-3 px-6 text-left font-semibold">Woodie</th>
-                            <th className="py-3 px-6 text-left font-semibold">Camarilla</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableLabels.map((label, idx) => (
-                            <tr
-                                key={label}
-                                className={`${idx % 2 === 0 ? "bg-gray-50" : "bg-white"} border-t hover:bg-gray-100 transition`}
-                            >
-                                <td className={`py-3 px-6 font-medium ${label === "P" ? "text-green-600" : "text-gray-700"}`}>
-                                    {label}
-                                </td>
-                                <td className="py-3 px-6 text-gray-900 font-semibold">
-                                    {results ? formatNumber(results.classic[label]) : "0"}
-                                </td>
-                                <td className="py-3 px-6 text-gray-900 font-semibold">
-                                    {results ? formatNumber(results.woodie[label]) : "0"}
-                                </td>
-                                <td className="py-3 px-6 text-gray-900 font-semibold">
-                                    {results ? formatNumber(results.camarilla[label]) : "0"}
-                                </td>
+            {results && (
+                <div className="mt-6 overflow-x-auto">
+                    <h3 className="text-lg font-medium mb-4">{t('pivot.results.title', 'Hasil Perhitungan')}</h3>
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {t('pivot.level', 'Level')}
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {t('pivot.classic', 'Klasik')}
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {t('pivot.woodie', 'Woodie')}
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {t('pivot.camarilla', 'Camarilla')}
+                                </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {[
+                                { level: 'R3', label: t('pivot.levels.r3', 'Resistance 3 (R3)'), classic: results.classic.R3, woodie: results.woodie.R3, camarilla: results.camarilla.R3 },
+                                { level: 'R2', label: t('pivot.levels.r2', 'Resistance 2 (R2)'), classic: results.classic.R2, woodie: results.woodie.R2, camarilla: results.camarilla.R2 },
+                                { level: 'R1', label: t('pivot.levels.r1', 'Resistance 1 (R1)'), classic: results.classic.R1, woodie: results.woodie.R1, camarilla: results.camarilla.R1 },
+                                { level: 'PP', label: t('pivot.levels.pp', 'Pivot Point (PP)'), classic: results.classic.PP, woodie: results.woodie.PP, camarilla: results.camarilla.PP },
+                                { level: 'S1', label: t('pivot.levels.s1', 'Support 1 (S1)'), classic: results.classic.S1, woodie: results.woodie.S1, camarilla: results.camarilla.S1 },
+                                { level: 'S2', label: t('pivot.levels.s2', 'Support 2 (S2)'), classic: results.classic.S2, woodie: results.woodie.S2, camarilla: results.camarilla.S2 },
+                                { level: 'S3', label: t('pivot.levels.s3', 'Support 3 (S3)'), classic: results.classic.S3, woodie: results.woodie.S3, camarilla: results.camarilla.S3 },
+                            ].map((row, idx) => (
+                                <tr key={row.level} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {row.label}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {formatNumber(row.classic)}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {formatNumber(row.woodie)}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {formatNumber(row.camarilla)}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 }

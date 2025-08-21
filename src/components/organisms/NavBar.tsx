@@ -160,12 +160,12 @@ const baseMenuItems: NavItem[] = [
             { 
                 key: 'analysis_economicCalendar',
                 label: 'Kalender Ekonomi', 
-                href: "/analisis/kalender-ekonomi" 
+                href: "/analisis/economic-calendar" 
             },
             { 
                 key: 'analysis_historicalData',
                 label: 'Data Historis', 
-                href: "/analisis/data-historis" 
+                href: "/analisis/historical-data" 
             },
             { 
                 key: 'analysis_pivotFibonacci',

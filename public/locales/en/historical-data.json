@@ -1,0 +1,26 @@
+{
+  "title": "Historical Data",
+  "filters": {
+    "from": "From:",
+    "to": "To:",
+    "apply": "Apply",
+    "reset": "Reset"
+  },
+  "table": {
+    "date": "Date",
+    "open": "Open",
+    "high": "High",
+    "low": "Low",
+    "close": "Close",
+    "noData": "No data available for the selected date range"
+  },
+  "actions": {
+    "download": "Download Data (.CSV)",
+    "downloadAll": "Download All Data",
+    "downloadSelected": "Download Selected Data"
+  },
+  "messages": {
+    "selectDateRange": "Please select a date range",
+    "downloading": "Downloading data..."
+  }
+}

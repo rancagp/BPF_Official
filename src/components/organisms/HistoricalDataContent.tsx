@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from 'next-i18next';
 
 export default function HistoricalDataContent() {
+    const { t } = useTranslation('historical-data');
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
 
@@ -11,8 +13,8 @@ export default function HistoricalDataContent() {
     ];
 
     const handleDownload = () => {
-        const last30 = dataHistorical.slice(-30); // Ambil 30 data terakhir
-        const header = "Date,Open,High,Low,Close\n";
+        const last30 = dataHistorical.slice(-30);
+        const header = `${t('table.date')},${t('table.open')},${t('table.high')},${t('table.low')},${t('table.close')}\n`;
         const rows = last30.map(row =>
             `${row.date},${row.open},${row.high},${row.low},${row.close}`
         ).join("\n");
@@ -21,7 +23,7 @@ export default function HistoricalDataContent() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "historical-data.csv";
+        link.download = `historical-data-${new Date().toISOString().split('T')[0]}.csv`;
         link.click();
         URL.revokeObjectURL(url);
     };
@@ -31,7 +33,9 @@ export default function HistoricalDataContent() {
             {/* Filter Section */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div className="flex items-center gap-2">
-                    <label htmlFor="from" className="font-medium">From:</label>
+                    <label htmlFor="from" className="font-medium whitespace-nowrap">
+                        {t('filters.from')}
+                    </label>
                     <input
                         type="date"
                         id="from"
@@ -41,7 +45,9 @@ export default function HistoricalDataContent() {
                     />
                 </div>
                 <div className="flex items-center gap-2">
-                    <label htmlFor="to" className="font-medium">To:</label>
+                    <label htmlFor="to" className="font-medium whitespace-nowrap">
+                        {t('filters.to')}
+                    </label>
                     <input
                         type="date"
                         id="to"
@@ -51,40 +57,75 @@ export default function HistoricalDataContent() {
                     />
                 </div>
                 <button
-                    onClick={handleDownload}
-                    className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors whitespace-nowrap"
+                    onClick={() => {}}
                 >
-                    Download
+                    {t('filters.apply')}
+                </button>
+                <button
+                    className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors whitespace-nowrap"
+                    onClick={() => {
+                        setFromDate("");
+                        setToDate("");
+                    }}
+                >
+                    {t('filters.reset')}
                 </button>
             </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto rounded-lg border border-zinc-200">
-                <table className="w-full text-sm md:text-base min-w-[700px]">
-                    <thead className="bg-green-600 text-white">
-                        <tr>
-                            <th className="p-2 text-center">Date</th>
-                            <th className="p-2 text-center">Open</th>
-                            <th className="p-2 text-center">High</th>
-                            <th className="p-2 text-center">Low</th>
-                            <th className="p-2 text-center">Close</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dataHistorical.map((row, index) => (
-                            <tr
-                                key={index}
-                                className={`${index % 2 === 0 ? "bg-white" : "bg-zinc-100"} hover:bg-green-100 transition text-center`}
-                            >
-                                <td className="p-2">{row.date}</td>
-                                <td className="p-2">{row.open}</td>
-                                <td className="p-2">{row.high}</td>
-                                <td className="p-2">{row.low}</td>
-                                <td className="p-2">{row.close}</td>
+            {/* Data Table */}
+            <div className="overflow-x-auto">
+                {dataHistorical.length > 0 ? (
+                    <table className="min-w-full border-collapse">
+                        <thead>
+                            <tr className="bg-gray-100">
+                                <th className="p-3 text-left border">{t('table.date')}</th>
+                                <th className="p-3 text-left border">{t('table.open')}</th>
+                                <th className="p-3 text-left border">{t('table.high')}</th>
+                                <th className="p-3 text-left border">{t('table.low')}</th>
+                                <th className="p-3 text-left border">{t('table.close')}</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {dataHistorical.map((row, index) => (
+                                <tr key={index} className="border-b hover:bg-gray-50">
+                                    <td className="p-3 border">{row.date}</td>
+                                    <td className="p-3 border">{row.open}</td>
+                                    <td className="p-3 border">{row.high}</td>
+                                    <td className="p-3 border">{row.low}</td>
+                                    <td className="p-3 border">{row.close}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="text-center py-8 text-gray-500">
+                        {t('table.noData')}
+                    </div>
+                )}
+            </div>
+
+            {/* Download Button */}
+            <div className="flex flex-wrap justify-end gap-3">
+                <button
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors flex items-center gap-2 whitespace-nowrap"
+                    onClick={handleDownload}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                    {t('actions.downloadAll')}
+                </button>
+                <button
+                    className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors flex items-center gap-2 whitespace-nowrap"
+                    onClick={handleDownload}
+                    disabled={!fromDate || !toDate}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                    {t('actions.downloadSelected')}
+                </button>
             </div>
         </div>
     );

@@ -1,0 +1,74 @@
+{
+  "title": "Pivot & Fibonacci",
+  "tabs": {
+    "pivot": "Pivot",
+    "fibonacci": "Fibonacci"
+  },
+  "pivot": {
+    "title": "Kalkulator Pivot Point",
+    "high": "Tertinggi",
+    "low": "Terendah",
+    "close": "Tutup",
+    "calculate": "Hitung",
+    "reset": "Reset",
+    "fillAllFields": "Harap isi semua kolom yang diperlukan dengan angka yang valid.",
+    "level": "Level",
+    "classic": "Klasik",
+    "woodie": "Woodie",
+    "camarilla": "Camarilla",
+    "results": {
+      "title": "Hasil Perhitungan",
+      "classic": "Klasik",
+      "woodie": "Woodie",
+      "camarilla": "Camarilla",
+      "fibonacci": "Fibonacci"
+    },
+    "levels": {
+      "r3": "Resistance 3 (R3)",
+      "r2": "Resistance 2 (R2)",
+      "r1": "Resistance 1 (R1)",
+      "pp": "Pivot Point (PP)",
+      "s1": "Support 1 (S1)",
+      "s2": "Support 2 (S2)",
+      "s3": "Support 3 (S3)"
+    }
+  },
+  "fibonacci": {
+    "title": "Level Fibonacci Retracement",
+    "high": "Tertinggi",
+    "low": "Terendah",
+    "priceA": "Harga A",
+    "priceB": "Harga B",
+    "highValue": "nilai tinggi",
+    "lowValue": "nilai rendah",
+    "calculate": "Hitung",
+    "reset": "Reset",
+    "fillAllFields": "Harap isi kedua harga dengan angka yang valid.",
+    "retracement": "Retracement",
+    "projection": "Proyeksi",
+    "level": "Level",
+    "value": "Nilai",
+    "levels": {
+      "0": "0.0% (Tertinggi)",
+      "23.6": "23.6%",
+      "38.2": "38.2%",
+      "50": "50.0%",
+      "61.8": "61.8%",
+      "78.6": "78.6%",
+      "100": "100.0% (Terendah)",
+      "127.2": "127.2%",
+      "161.8": "161.8%",
+      "261.8": "261.8%",
+      "423.6": "423.6%"
+    }
+  },
+  "table": {
+    "title": "Data Historis",
+    "date": "Tanggal",
+    "open": "Buka",
+    "high": "Tertinggi",
+    "low": "Terendah",
+    "close": "Tutup",
+    "noData": "Tidak ada data yang tersedia"
+  }
+}

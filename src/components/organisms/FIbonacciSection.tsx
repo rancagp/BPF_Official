@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslation } from 'next-i18next';
 
 // Definisikan tipe untuk hasil perhitungan
 interface Result {
@@ -8,6 +9,7 @@ interface Result {
 
 // Komponen kalkulator tunggal yang bisa digunakan kembali
 const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
+    const { t } = useTranslation('pivot-fibonacci');
     const [priceA, setPriceA] = useState(""); // Low untuk Uptrend, High untuk Downtrend
     const [priceB, setPriceB] = useState(""); // High untuk Uptrend, Low untuk Downtrend
     const [results, setResults] = useState<{ retracement: Result; projection: Result } | null>(null);
@@ -27,7 +29,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
         const pA = parseFloat(priceA);
         const pB = parseFloat(priceB);
         if (isNaN(pA) || isNaN(pB)) {
-            alert("Please enter valid numbers for both prices.");
+            alert(t('fibonacci.fillAllFields', 'Please enter valid numbers for both prices.'));
             return;
         }
 
@@ -49,12 +51,13 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
     };
 
     const formatNumber = (num: number | undefined) => num !== undefined ? num.toFixed(2) : "0.00";
+    const isUptrend = trend === 'Uptrend';
 
     return (
         <div className="p-6 bg-white shadow-md rounded-xl border border-gray-200">
             <div className="mb-4">
                 <Image
-                    src={`/assets/${trend === 'Uptrend' ? "up-trend.png" : "down-trend.png"}`}
+                    src={`/assets/${isUptrend ? "up-trend.png" : "down-trend.png"}`}
                     alt={trend}
                     width={500}
                     height={200}
@@ -64,66 +67,93 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Price (A)</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">
+                        {isUptrend ? t('fibonacci.low', 'Low') : t('fibonacci.high', 'High')} ({t('fibonacci.priceA', 'Price A')})
+                    </label>
                     <input
                         type="text"
-                        placeholder={trend === 'Uptrend' ? "low value" : "high value"}
+                        placeholder={isUptrend ? t('fibonacci.lowValue', 'low value') : t('fibonacci.highValue', 'high value')}
                         className="w-full px-3 py-2 border rounded-md text-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
                         value={priceA}
                         onChange={(e) => handleInputChange(setPriceA, e.target.value)}
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Price (B)</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">
+                        {isUptrend ? t('fibonacci.high', 'High') : t('fibonacci.low', 'Low')} ({t('fibonacci.priceB', 'Price B')})
+                    </label>
                     <input
                         type="text"
-                        placeholder={trend === 'Uptrend' ? "high value" : "low value"}
+                        placeholder={isUptrend ? t('fibonacci.highValue', 'high value') : t('fibonacci.lowValue', 'low value')}
                         className="w-full px-3 py-2 border rounded-md text-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
                         value={priceB}
                         onChange={(e) => handleInputChange(setPriceB, e.target.value)}
                     />
                 </div>
                 <div className="sm:col-span-2">
-                    <button onClick={handleCalculate} className="w-full py-2 mt-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition">
-                        Calculate
+                    <button 
+                        onClick={handleCalculate} 
+                        className="w-full py-2 mt-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition"
+                    >
+                        {t('fibonacci.calculate', 'Calculate')}
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                    <h4 className="text-sm font-bold text-gray-800 mb-2">Retracement</h4>
+                    <h4 className="text-sm font-bold text-gray-800 mb-2">
+                        {t('fibonacci.retracement', 'Retracement')}
+                    </h4>
                     <table className="w-full text-sm border border-gray-300 rounded overflow-hidden">
                         <thead className="bg-gray-100">
                             <tr>
-                                <th className="px-3 py-2 text-left font-medium text-gray-600">Level</th>
-                                <th className="px-3 py-2 text-right font-medium text-gray-600">Value</th>
+                                <th className="px-3 py-2 text-left font-medium text-gray-600">
+                                    {t('fibonacci.level', 'Level')}
+                                </th>
+                                <th className="px-3 py-2 text-right font-medium text-gray-600">
+                                    {t('fibonacci.value', 'Value')}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {retracementLevels.map((level) => (
                                 <tr key={level} className="border-t last:border-b">
-                                    <td className="px-3 py-2 text-gray-700 font-medium">{level.toFixed(1)}%</td>
-                                    <td className="px-3 py-2 text-right text-gray-800 font-mono">{formatNumber(results?.retracement[level])}</td>
+                                    <td className="px-3 py-2 text-gray-700 font-medium">
+                                        {level.toFixed(1)}%
+                                    </td>
+                                    <td className="px-3 py-2 text-right text-gray-800 font-mono">
+                                        {formatNumber(results?.retracement[level])}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
                 <div>
-                    <h4 className="text-sm font-bold text-gray-800 mb-2">Projection</h4>
+                    <h4 className="text-sm font-bold text-gray-800 mb-2">
+                        {t('fibonacci.projection', 'Projection')}
+                    </h4>
                     <table className="w-full text-sm border border-gray-300 rounded overflow-hidden">
                         <thead className="bg-gray-100">
                             <tr>
-                                <th className="px-3 py-2 text-left font-medium text-gray-600">Level</th>
-                                <th className="px-3 py-2 text-right font-medium text-gray-600">Value</th>
+                                <th className="px-3 py-2 text-left font-medium text-gray-600">
+                                    {t('fibonacci.level', 'Level')}
+                                </th>
+                                <th className="px-3 py-2 text-right font-medium text-gray-600">
+                                    {t('fibonacci.value', 'Value')}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {projectionLevels.map(({ level }) => (
                                 <tr key={level} className="border-t last:border-b">
-                                    <td className="px-3 py-2 text-gray-700 font-medium">{level.toFixed(1)}%</td>
-                                    <td className="px-3 py-2 text-right text-gray-800 font-mono">{formatNumber(results?.projection[level])}</td>
+                                    <td className="px-3 py-2 text-gray-700 font-medium">
+                                        {level.toFixed(1)}%
+                                    </td>
+                                    <td className="px-3 py-2 text-right text-gray-800 font-mono">
+                                        {formatNumber(results?.projection[level])}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -135,10 +165,15 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
 };
 
 export default function FibonacciSection() {
+    const { t } = useTranslation('pivot-fibonacci');
+    
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <CalculatorSection trend="Uptrend" />
-            <CalculatorSection trend="Downtrend" />
+        <div className="space-y-6">
+            <h2 className="text-xl font-semibold">{t('fibonacci.title')}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <CalculatorSection trend="Uptrend" />
+                <CalculatorSection trend="Downtrend" />
+            </div>
         </div>
     );
 }
