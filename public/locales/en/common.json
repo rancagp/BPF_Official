@@ -39,5 +39,7 @@
     "tokyo": "Tokyo",
     "hongkong": "Hong Kong",
     "newyork": "New York"
-  }
+  },
+  "noImage": "No Image",
+  "readMore": "Read More"
 }

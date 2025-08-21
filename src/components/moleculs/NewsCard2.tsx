@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import CardDetail from "../atoms/CardDetail";
 
 interface NewsCard2Props {
@@ -9,16 +11,31 @@ interface NewsCard2Props {
     category?: string;
 }
 
-export default function NewsCard2({ date, title, content, link, image, category = 'Pengumuman' }: NewsCard2Props) {
-    // Fungsi format tanggal ke DD MMMM YYYY
+export default function NewsCard2({ date, title, content, link, image, category }: NewsCard2Props) {
+    const { t, i18n } = useTranslation(['common', 'pengumuman', 'footer']);
+    const { locale } = useRouter();
+    
+    // Default category translation
+    const defaultCategory = t('pengumuman:category', { defaultValue: 'Announcement' });
+    const displayCategory = category || defaultCategory;
+    
+    // Format date based on current locale
     const formatDate = (inputDate: string) => {
+        if (!inputDate) return '';
+        
         const options: Intl.DateTimeFormatOptions = {
             day: '2-digit',
             month: 'long',
             year: 'numeric',
         };
-        const parsedDate = new Date(inputDate);
-        return parsedDate.toLocaleDateString('id-ID', options);
+        
+        try {
+            const parsedDate = new Date(inputDate);
+            return parsedDate.toLocaleDateString(locale || 'id-ID', options);
+        } catch (e) {
+            console.error('Invalid date format:', inputDate);
+            return '';
+        }
     };
 
     // Fungsi truncate
@@ -31,11 +48,12 @@ export default function NewsCard2({ date, title, content, link, image, category 
         return html.replace(/<[^>]+>/g, '');
     };
 
-    // Fungsi untuk menangani error gambar
+    // Function to handle image error with localized text
     const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
         const target = e.target as HTMLImageElement;
         target.onerror = null;
-        target.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23EEEEEE%22%2F%3E%3Ctext%20x%3D%22290.5625%22%20y%3D%22217.7%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%22%20font-size%3D%2240%22%20font-weight%3D%22bold%22%20fill%3D%22%23AAAAAA%22%3ENo%20Image%3C%2Ftext%3E%3C%2Fsvg%3E';
+        const noImageText = t('common:noImage', { defaultValue: 'No Image' });
+        target.src = `data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23EEEEEE%22%2F%3E%3Ctext%20x%3D%22400%22%20y%3D%22220%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%20fill%3D%22%23AAAAAA%22%3E${encodeURIComponent(noImageText)}%3C%2Ftext%3E%3C%2Fsvg%3E`;
     };
 
     const formattedDate = formatDate(date);
@@ -67,7 +85,7 @@ export default function NewsCard2({ date, title, content, link, image, category 
             <div className="p-6 flex-1 flex flex-col">
                 <div className="flex justify-between items-center mb-3">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        {category}
+                        {displayCategory}
                     </span>
                     <time className="text-sm text-gray-500" dateTime={date}>
                         {formattedDate}
