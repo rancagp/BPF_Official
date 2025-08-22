@@ -39,7 +39,10 @@ export default function WakilPialang() {
     useEffect(() => {
         const ambilKategori = async () => {
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                // Pastikan menggunakan HTTPS untuk production
+                const apiUrl = process.env.NODE_ENV === 'production' 
+                    ? 'https://kpf-backpanel-production.up.railway.app' 
+                    : process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
                 const response = await fetch(`${apiUrl}/api/kategori-wakil-pialang`, {
                     method: 'GET',
                     headers: {
