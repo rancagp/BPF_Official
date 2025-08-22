@@ -48,13 +48,14 @@ export default function WakilPialangBySlug() {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                // Pastikan menggunakan HTTPS untuk production
-                const apiUrl = process.env.NODE_ENV === 'production'
-                    ? 'https://kpf-backpanel-production.up.railway.app'
-                    : process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                // Selalu gunakan URL production di lingkungan production
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                const fullApiUrl = apiUrl.startsWith('http:') && typeof window !== 'undefined' && window.location.protocol === 'https:'
+                    ? apiUrl.replace('http:', 'https:')
+                    : apiUrl;
                 
                 // Ambil detail kategori
-                const kategoriResponse = await fetch(`${apiUrl}/api/kategori-wakil-pialang/${slug}`, {
+                const kategoriResponse = await fetch(`${fullApiUrl}/api/kategori-wakil-pialang/${slug}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
