@@ -169,10 +169,17 @@ export default function CarouselWithContent() {
             // Update state hanya jika komponen masih terpasang
             if (isMounted.current) {
                 console.log('Mengupdate state banners dengan:', sortedBanners);
-                setBanners(sortedBanners as Banner[]);
+                // Pastikan sortedBanners adalah array yang valid
+                const validBanners = Array.isArray(sortedBanners) ? sortedBanners : [];
+                console.log('Memperbarui state banners dengan:', validBanners);
+                setBanners(prevBanners => {
+                    console.log('Sebelum update state - prevBanners:', prevBanners);
+                    console.log('Akan mengupdate state dengan:', validBanners);
+                    return validBanners;
+                });
                 setError(null);
                 setLoading(false);
-                console.log('State setelah update - loading:', false, 'banners:', sortedBanners);
+                console.log('State setelah update - loading:', false, 'banners:', validBanners);
             } else {
                 console.log('Komponen sudah tidak terpasang, batalkan update state');
             }
@@ -221,21 +228,27 @@ export default function CarouselWithContent() {
 
     // Update ref setiap kali banners berubah
     useEffect(() => {
+        console.log('State banners berubah:', banners);
         bannersRef.current = banners;
-        console.log('bannersRef diperbarui:', banners);
+        console.log('bannersRef diperbarui:', bannersRef.current);
     }, [banners]);
 
     // Inisialisasi slides dari data banner
     const slides: Slide[] = useMemo(() => {
         console.log('Menginisialisasi slides dari banners:', banners);
         
-        if (!banners || banners.length === 0) {
+        // Gunakan bannersRef untuk memastikan mendapatkan nilai terbaru
+        const currentBanners = bannersRef.current;
+        console.log('Menggunakan currentBanners:', currentBanners);
+        
+        if (!currentBanners || currentBanners.length === 0) {
             console.log('Tidak ada banner yang tersedia');
             return [];
         }
         
         // Urutkan banner berdasarkan order
-        const sortedBanners = [...banners].sort((a, b) => (a.order || 0) - (b.order || 0));
+        const sortedBanners = [...currentBanners].sort((a, b) => (a.order || 0) - (b.order || 0));
+        console.log('Banner yang akan diproses (setelah diurutkan):', sortedBanners);
         
         const processedSlides = sortedBanners.map(banner => {
             try {
