@@ -71,10 +71,7 @@ export default function CarouselWithContent() {
             console.log('Mengambil data dari API...');
             const response = await getBanners();
             
-            if (!isMounted.current) {
-                console.log('Komponen sudah tidak terpasang, hentikan proses');
-                return;
-            }
+            if (!isMounted.current) return;
             
             console.log('Response dari API:', response);
             
@@ -83,33 +80,32 @@ export default function CarouselWithContent() {
                 throw new Error('Format data banner tidak valid');
             }
             
-            // Filter hanya banner aktif dan pastikan memiliki data yang valid
-            const validBanners = response
+            // Proses data banner
+            const bannersData = response
                 .filter(banner => banner?.is_active && banner?.image)
                 .map(banner => {
-                    // Pastikan URL gambar lengkap
                     let imageUrl = banner.image.trim();
-                    if (!imageUrl.startsWith('http')) {
-                        const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
+                    if (imageUrl && !imageUrl.startsWith('http')) {
+                        const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000')
+                            .replace(/\/+$/, '');
                         imageUrl = `${baseUrl}/${imageUrl.replace(/^\/+/, '')}`;
                     }
                     
                     return {
-                        ...banner,
-                        image: imageUrl
+                        id: banner.id,
+                        title: banner.title || 'No Title',
+                        description: banner.description || '',
+                        image: imageUrl,
+                        order: banner.order || 0,
+                        is_active: true
                     };
                 })
-                .sort((a, b) => (a.order || 0) - (b.order || 0));
+                .sort((a, b) => a.order - b.order);
             
-            console.log('Banner yang akan ditampilkan:', validBanners);
+            console.log('Banner yang akan ditampilkan:', bannersData);
             
-            // Update state dalam satu batch
-            if (isMounted.current) {
-                console.log('Mengupdate state dengan banner baru');
-                setBanners(validBanners);
-                setLoading(false);
-                setError(null);
-            }
+            // Gunakan banner dari API jika ada, jika tidak gunakan default
+            setBanners(bannersData.length > 0 ? bannersData : defaultBanners);
         } catch (err) {
             console.error('Gagal mengambil data banner:', err);
             if (isMounted.current) {
@@ -126,6 +122,13 @@ export default function CarouselWithContent() {
         }
     }, []);
     
+    // Debug: Pantau perubahan pada state banners
+    useEffect(() => {
+        console.log('State banners berubah:', banners);
+        console.log('Jumlah banner:', banners.length);
+        console.log('Isi banners:', JSON.stringify(banners, null, 2));
+    }, [banners]);
+
     // Ambil data banner dari API
     useEffect(() => {
         console.log('Komponen Carousel dipasang, memulai fetchBanners');
@@ -156,23 +159,39 @@ export default function CarouselWithContent() {
     const slides: Slide[] = useMemo(() => {
         console.log('Menginisialisasi slides dari banners:', banners);
         
-        if (!banners || banners.length === 0) {
+        // Pastikan banners adalah array yang valid
+        if (!Array.isArray(banners) || banners.length === 0) {
             console.log('Tidak ada banner yang tersedia');
             return [];
         }
         
-        // Pastikan banners adalah array yang valid
-        const validBanners = Array.isArray(banners) ? banners : [];
+        console.log('Memproses', banners.length, 'banner');
         
         // Map langsung dari banners yang sudah diproses
-        return validBanners.map(banner => ({
-            title: banner.title || 'No Title',
-            description: banner.description || '',
-            image: banner.image || ''
-        }));
+        return banners
+            .filter(banner => {
+                const hasImage = banner?.image?.trim();
+                if (!hasImage) {
+                    console.warn('Banner tidak memiliki gambar:', banner);
+                    return false;
+                }
+                return true;
+            })
+            .map(banner => ({
+                title: banner.title?.trim() || 'No Title',
+                description: banner.description?.trim() || '',
+                image: banner.image.trim()
+            }));
     }, [banners]);
 
     const totalSlides = Math.max(0, slides.length);
+    
+    // Debug: Pantau perubahan pada slides
+    useEffect(() => {
+        console.log('Slides berubah:', slides);
+        console.log('Jumlah slides:', slides.length);
+        console.log('Isi slides:', JSON.stringify(slides, null, 2));
+    }, [slides]);
     
     // Buat array slides untuk infinite carousel
     const fullSlides = useMemo(() => {
