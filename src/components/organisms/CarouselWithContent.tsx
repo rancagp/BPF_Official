@@ -55,27 +55,16 @@ export default function CarouselWithContent() {
     const [banners, setBanners] = useState<Banner[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    
-    // Gunakan ref untuk melacak perubahan state banners
-    const bannersRef = useRef<Banner[]>([]);
-    
-    // Update ref ketika state banners berubah
-    useEffect(() => {
-        console.log('State banners berubah:', banners);
-        bannersRef.current = banners;
-    }, [banners]);
-    const [index, setIndex] = useState(1); // start dari 1 karena clone
+    const [index, setIndex] = useState(0);
     const [transitioning, setTransitioning] = useState(true);
     const [isTabActive, setIsTabActive] = useState(true);
     
     // Refs
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const isMounted = useRef(true);
-    const isTransitioningRef = useRef(false);
     
     // Fungsi untuk memuat banner
     const fetchBanners = useCallback(async () => {
-        // Set isMounted ke true saat memulai
         isMounted.current = true;
         console.log('Memulai pengambilan banner...');
         setLoading(true);
@@ -84,7 +73,6 @@ export default function CarouselWithContent() {
             console.log('Mengambil data dari API...');
             const response = await getBanners();
             
-            // Periksa apakah komponen masih terpasang
             if (!isMounted.current) {
                 console.log('Komponen sudah tidak terpasang, hentikan proses');
                 return;
@@ -92,96 +80,31 @@ export default function CarouselWithContent() {
             
             console.log('Response dari API:', response);
             
-            // Pastikan data yang diterima adalah array
+            // Pastikan response adalah array
             if (!Array.isArray(response)) {
-                console.error('Format data banner tidak valid:', response);
                 throw new Error('Format data banner tidak valid');
             }
             
-            // Buat salinan data untuk menghindari mutasi
-            const data = JSON.parse(JSON.stringify(response));
+            // Filter hanya banner aktif dan pastikan memiliki data yang valid
+            const validBanners = response
+                .filter(banner => banner?.is_active && banner?.image)
+                .map(banner => ({
+                    ...banner,
+                    // Pastikan URL gambar lengkap
+                    image: banner.image.startsWith('http') 
+                        ? banner.image 
+                        : `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'}/${
+                            banner.image.replace(/^\/+/, '')
+                        }`
+                }))
+                .sort((a, b) => (a.order || 0) - (b.order || 0));
             
-            console.log('Data banner yang akan diproses:', data);
+            console.log('Banner yang akan ditampilkan:', validBanners);
             
-            // Filter hanya banner yang aktif
-            const activeBanners = data.filter((banner: any) => banner?.is_active);
-            console.log('Jumlah banner aktif:', activeBanners.length, activeBanners);
-            
-            // Jika tidak ada banner aktif, gunakan default
-            if (activeBanners.length === 0) {
-                console.log('Tidak ada banner aktif, menggunakan banner default');
-                setBanners(defaultBanners);
-                setLoading(false);
-                return;
-            }
-            
-            // Pastikan URL gambar lengkap
-            const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
-            console.log('Menggunakan base URL:', baseUrl);
-            
-            // Proses banner
-            const processedBanners = activeBanners.map((banner: any) => {
-                try {
-                    if (!banner) {
-                        console.warn('Banner null/undefined ditemukan');
-                        return null;
-                    }
-                    
-                    // Pastikan banner memiliki properti yang diperlukan
-                    if (!banner.id || !banner.title || !banner.image) {
-                        console.warn('Banner tidak valid - properti penting hilang:', banner);
-                        return null;
-                    }
-                    
-                    let imageUrl = banner.image?.toString().trim() || '';
-                    
-                    // Jika gambar sudah URL lengkap, gunakan langsung
-                    if (imageUrl.startsWith('http')) {
-                        return banner;
-                    }
-                    
-                    // Tambahkan base URL jika diperlukan
-                    if (imageUrl.startsWith('/')) {
-                        imageUrl = imageUrl.substring(1); // Hapus slash di depan
-                    }
-                    
-                    const fullImageUrl = `${baseUrl}/${imageUrl}`;
-                    
-                    return {
-                        ...banner,
-                        image: fullImageUrl
-                    };
-                } catch (err) {
-                    console.error('Error memproses banner:', banner?.id, err);
-                    return null;
-                }
-            }).filter(Boolean); // Hapus null entries
-            
-            console.log('Banner setelah diproses:', processedBanners);
-            
-            // Urutkan berdasarkan order
-            const sortedBanners = [...processedBanners].sort((a: any, b: any) => 
-                (a.order || 0) - (b.order || 0)
-            );
-            
-            console.log('Banner setelah diurutkan:', sortedBanners);
-            
-            // Update state hanya jika komponen masih terpasang
             if (isMounted.current) {
-                console.log('Mengupdate state banners dengan:', sortedBanners);
-                // Pastikan sortedBanners adalah array yang valid
-                const validBanners = Array.isArray(sortedBanners) ? sortedBanners : [];
-                console.log('Memperbarui state banners dengan:', validBanners);
-                setBanners(prevBanners => {
-                    console.log('Sebelum update state - prevBanners:', prevBanners);
-                    console.log('Akan mengupdate state dengan:', validBanners);
-                    return validBanners;
-                });
-                setError(null);
+                setBanners(validBanners);
                 setLoading(false);
-                console.log('State setelah update - loading:', false, 'banners:', validBanners);
-            } else {
-                console.log('Komponen sudah tidak terpasang, batalkan update state');
+                setError(null);
             }
         } catch (err) {
             console.error('Gagal mengambil data banner:', err);
@@ -219,82 +142,29 @@ export default function CarouselWithContent() {
                 clearTimeout(timeoutRef.current);
                 timeoutRef.current = null;
             }
-            if (navigationCooldown.current) {
-                clearTimeout(navigationCooldown.current);
-                navigationCooldown.current = null;
-            }
         };
     }, []); // Hanya dijalankan sekali saat komponen dipasang
-
-    // Update ref setiap kali banners berubah
-    useEffect(() => {
-        console.log('State banners berubah:', banners);
-        bannersRef.current = banners;
-        console.log('bannersRef diperbarui:', bannersRef.current);
-    }, [banners]);
 
     // Inisialisasi slides dari data banner
     const slides: Slide[] = useMemo(() => {
         console.log('Menginisialisasi slides dari banners:', banners);
         
-        // Gunakan bannersRef untuk memastikan mendapatkan nilai terbaru
-        const currentBanners = bannersRef.current;
-        console.log('Menggunakan currentBanners:', currentBanners);
-        
-        if (!currentBanners || currentBanners.length === 0) {
+        if (!banners || banners.length === 0) {
             console.log('Tidak ada banner yang tersedia');
             return [];
         }
         
-        // Urutkan banner berdasarkan order
-        const sortedBanners = [...currentBanners].sort((a, b) => (a.order || 0) - (b.order || 0));
-        console.log('Banner yang akan diproses (setelah diurutkan):', sortedBanners);
-        
-        const processedSlides = sortedBanners.map(banner => {
-            try {
-                if (!banner) {
-                    console.warn('Banner null/undefined ditemukan');
-                    return null;
-                }
-                
-                // Pastikan URL gambar valid
-                let imageUrl = banner.image?.trim() || '';
-                console.log('Memproses banner:', banner.id, 'dengan image:', imageUrl);
-                
-                // Jika URL relatif, tambahkan base URL
-                if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('//')) {
-                    // Hapus slash di awal jika ada
-                    imageUrl = imageUrl.replace(/^\/+/, '');
-                    const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
-                    imageUrl = `${baseUrl}/${imageUrl}`;
-                }
-                
-                if (!imageUrl) {
-                    console.warn('URL gambar kosong untuk banner:', banner.id);
-                    return null;
-                }
-                
-                const slide = {
-                    title: banner.title || 'No Title',
-                    description: banner.description || '',
-                    image: imageUrl
-                };
-                
-                console.log('Banner berhasil diproses:', banner.id, slide);
-                return slide as Slide;
-            } catch (error) {
-                console.error('Error memproses banner:', banner?.id, error);
-                return null;
-            }
-        }).filter(Boolean) as Slide[]; // Hapus entri null
-        
-        console.log('Total slide yang diproses:', processedSlides.length, processedSlides);
-        return processedSlides;
+        // Map langsung dari banners yang sudah diproses
+        return banners.map(banner => ({
+            title: banner.title || 'No Title',
+            description: banner.description || '',
+            image: banner.image
+        }));
     }, [banners]);
 
     const totalSlides = Math.max(0, slides.length);
     
-    // Buat array slides dengan kloning untuk infinite loop
+    // Buat array slides untuk infinite carousel
     const fullSlides = useMemo(() => {
         if (slides.length === 0) {
             console.log('Tidak ada slide yang tersedia untuk fullSlides');
@@ -303,20 +173,23 @@ export default function CarouselWithContent() {
         
         console.log('Membuat fullSlides dengan', slides.length, 'slide');
         
+        // Jika hanya ada 1 slide, tidak perlu clone
+        if (slides.length === 1) {
+            return [...slides];
+        }
+        
         // Tambahkan clone dari slide pertama di akhir dan clone dari slide terakhir di awal
-        const full = [
+        return [
             { ...slides[slides.length - 1], __isClone: true },
             ...slides,
             { ...slides[0], __isClone: true }
         ];
-        
-        console.log('fullSlides dibuat dengan', full.length, 'slide');
-        return full;
     }, [slides]);
 
     const goTo = useCallback((newIndex: number) => {
         // Pastikan fullSlides sudah terisi
         if (!fullSlides || fullSlides.length === 0) {
+            console.log('Tidak ada slide yang tersedia');
             console.warn('No slides available');
             return;
         }
@@ -387,17 +260,13 @@ export default function CarouselWithContent() {
             return;
         }
 
-        // Reset index jika mencapai ujung carousel
+        // Reset index jika sampai di clone
         if (index === 0) {
-            // ke clone belakang → reset ke slide terakhir
-            setTransitioning(false);
-            requestAnimationFrame(() => {
-                setIndex(totalSlides);
-                requestAnimationFrame(() => {
-                    setTransitioning(true);
-                });
-            });
-        } else if (index === fullSlides.length - 1) {
+            console.log('Reset ke slide terakhir');
+            setIndex(totalSlides);
+        } else if (index >= totalSlides + 1) {
+            console.log('Reset ke slide pertama');
+            setIndex(1);
             // ke clone depan → reset ke slide pertama
             setTransitioning(false);
             requestAnimationFrame(() => {
@@ -450,10 +319,10 @@ export default function CarouselWithContent() {
         if (!isTabActive || fullSlides.length <= 1) return;
         
         const startAutoplay = () => {
-            if (isTransitioningRef.current) return;
+            if (transitioning) return;
             
             timeoutRef.current = setTimeout(() => {
-                if (isTabActive && !isTransitioningRef.current && fullSlides.length > 1) {
+                if (isTabActive && !transitioning && fullSlides.length > 1) {
                     // Gunakan fungsi next yang sudah didefinisikan
                     next();
                 }
@@ -463,7 +332,6 @@ export default function CarouselWithContent() {
         // Mulai autoplay setelah transisi selesai
         if (transitioning) {
             const timer = setTimeout(() => {
-                isTransitioningRef.current = false;
                 // Jangan mulai autoplay jika ini adalah slide kloning
                 if (index > 0 && index < fullSlides.length - 1) {
                     startAutoplay();
