@@ -219,18 +219,25 @@ export default function CarouselWithContent() {
         };
     }, []); // Hanya dijalankan sekali saat komponen dipasang
 
+    // Update ref setiap kali banners berubah
+    useEffect(() => {
+        bannersRef.current = banners;
+        console.log('bannersRef diperbarui:', banners);
+    }, [banners]);
+
     // Inisialisasi slides dari data banner
     const slides: Slide[] = useMemo(() => {
-        // Gunakan ref untuk mendapatkan nilai terbaru dari banners
-        const currentBanners = bannersRef.current;
-        console.log('Menginisialisasi slides dari banners:', currentBanners);
+        console.log('Menginisialisasi slides dari banners:', banners);
         
-        if (!currentBanners || currentBanners.length === 0) {
+        if (!banners || banners.length === 0) {
             console.log('Tidak ada banner yang tersedia');
             return [];
         }
         
-        const processedSlides = currentBanners.map(banner => {
+        // Urutkan banner berdasarkan order
+        const sortedBanners = [...banners].sort((a, b) => (a.order || 0) - (b.order || 0));
+        
+        const processedSlides = sortedBanners.map(banner => {
             try {
                 if (!banner) {
                     console.warn('Banner null/undefined ditemukan');
@@ -276,19 +283,23 @@ export default function CarouselWithContent() {
     
     // Buat array slides dengan kloning untuk infinite loop
     const fullSlides = useMemo(() => {
-        if (totalSlides === 0) return [];
-        if (totalSlides === 1) return [...slides]; // Tidak perlu kloning jika hanya 1 slide
+        if (slides.length === 0) {
+            console.log('Tidak ada slide yang tersedia untuk fullSlides');
+            return [];
+        }
         
-        // Pastikan slides memiliki isi sebelum mengakses indeks
-        if (!slides || slides.length === 0) return [];
+        console.log('Membuat fullSlides dengan', slides.length, 'slide');
         
-        // Kloning slide terakhir di awal dan slide pertama di akhir
-        return [
-            slides[totalSlides - 1], // Kloning slide terakhir
-            ...slides,                // Semua slide asli
-            slides[0]                 // Kloning slide pertama
+        // Tambahkan clone dari slide pertama di akhir dan clone dari slide terakhir di awal
+        const full = [
+            { ...slides[slides.length - 1], __isClone: true },
+            ...slides,
+            { ...slides[0], __isClone: true }
         ];
-    }, [slides, totalSlides]);
+        
+        console.log('fullSlides dibuat dengan', full.length, 'slide');
+        return full;
+    }, [slides]);
 
     const goTo = useCallback((newIndex: number) => {
         // Pastikan fullSlides sudah terisi
@@ -339,6 +350,23 @@ export default function CarouselWithContent() {
         resetNavigationCooldown();
     }, [index, canNavigate, goTo, resetNavigationCooldown, fullSlides.length]);
 
+    // Handle reset index when slides change
+    useEffect(() => {
+        console.log('fullSlides length changed:', fullSlides.length, 'current index:', index);
+        
+        if (fullSlides.length <= 1) return;
+            
+        if (index === 0) {
+            // Set index ke 1 karena index 0 adalah clone dari slide terakhir
+            console.log('Reset index from 0 to 1');
+            setIndex(1);
+        } else if (index >= fullSlides.length) {
+            // Jika index melebihi jumlah slide, reset ke slide terakhir yang asli
+            console.log('Reset index from', index, 'to', fullSlides.length - 2);
+            setIndex(Math.max(1, fullSlides.length - 2));
+        }
+    }, [fullSlides.length]);
+
     const handleTransitionEnd = useCallback(() => {
         // Pastikan fullSlides memiliki konten yang valid
         if (fullSlides.length <= 1) {
@@ -374,14 +402,27 @@ export default function CarouselWithContent() {
     useEffect(() => {
         const handleVisibilityChange = () => {
             const isVisible = !document.hidden;
+            console.log('Tab visibility changed:', { isVisible, currentIndex: index });
             setIsTabActive(isVisible);
             
-            if (isVisible && transitioning) {
+            if (isVisible) {
                 // Reset timer when tab becomes visible
                 if (timeoutRef.current) {
                     clearTimeout(timeoutRef.current);
                 }
-                timeoutRef.current = setTimeout(next, 8000);
+                
+                if (transitioning) {
+                    timeoutRef.current = setTimeout(next, 5000);
+                } else if (fullSlides.length > 1) {
+                    // Pastikan index valid
+                    const validIndex = Math.max(1, Math.min(index, fullSlides.length - 2));
+                    if (validIndex !== index) {
+                        setIndex(validIndex);
+                    }
+                    
+                    // Mulai autoplay setelah 5 detik
+                    timeoutRef.current = setTimeout(next, 5000);
+                }
             }
         };
 
@@ -389,7 +430,7 @@ export default function CarouselWithContent() {
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, [transitioning, next]);
+    }, [transitioning, next, index, fullSlides.length]);
 
     // Autoplay
     useEffect(() => {
