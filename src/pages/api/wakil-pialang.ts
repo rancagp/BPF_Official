@@ -18,7 +18,15 @@ export default async function handler(
     res: NextApiResponse<WakilPialang[] | { message: string }>
 ) {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/wakil-pialang`);
+        const { kategori_slug } = req.query;
+        let apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/wakil-pialang`;
+        
+        // Jika ada parameter kategori_slug, tambahkan ke URL
+        if (kategori_slug) {
+            apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kategori-wakil-pialang/${kategori_slug}/wakil`;
+        }
+        
+        const response = await fetch(apiUrl);
 
         if (!response.ok) {
             return res.status(response.status).json({ message: 'Gagal memuat data Wakil Pialang' });

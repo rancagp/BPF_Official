@@ -39,12 +39,8 @@ export default function WakilPialang() {
     useEffect(() => {
         const ambilKategori = async () => {
             try {
-                // Selalu gunakan URL production di lingkungan production
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-                const fullApiUrl = apiUrl.startsWith('http:') && typeof window !== 'undefined' && window.location.protocol === 'https:'
-                    ? apiUrl.replace('http:', 'https:')
-                    : apiUrl;
-                const response = await fetch(`${fullApiUrl}/api/kategori-wakil-pialang`, {
+                // Gunakan Next.js API route
+                const response = await fetch('/api/kategori-pialang', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

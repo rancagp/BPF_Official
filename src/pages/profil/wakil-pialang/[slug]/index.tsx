@@ -48,14 +48,8 @@ export default function WakilPialangBySlug() {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                // Selalu gunakan URL production di lingkungan production
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-                const fullApiUrl = apiUrl.startsWith('http:') && typeof window !== 'undefined' && window.location.protocol === 'https:'
-                    ? apiUrl.replace('http:', 'https:')
-                    : apiUrl;
-                
-                // Ambil detail kategori
-                const kategoriResponse = await fetch(`${fullApiUrl}/api/kategori-wakil-pialang/${slug}`, {
+                // Gunakan Next.js API route
+                const kategoriResponse = await fetch(`/api/kategori-pialang/${slug}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -77,8 +71,8 @@ export default function WakilPialangBySlug() {
                     throw new Error('Data kategori tidak valid');
                 }
 
-                // Ambil daftar wakil pialang berdasarkan kategori
-                const wakilResponse = await fetch(`${apiUrl}/api/kategori-wakil-pialang/${slug}/wakil`, {
+                // Ambil daftar wakil pialang menggunakan API route Next.js
+                const wakilResponse = await fetch(`/api/wakil-pialang?kategori_slug=${slug}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
