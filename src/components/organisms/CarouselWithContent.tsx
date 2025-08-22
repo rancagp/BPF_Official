@@ -65,9 +65,7 @@ export default function CarouselWithContent() {
     
     // Fungsi untuk memuat banner
     const fetchBanners = useCallback(async () => {
-        isMounted.current = true;
         console.log('Memulai pengambilan banner...');
-        setLoading(true);
         
         try {
             console.log('Mengambil data dari API...');
@@ -88,20 +86,26 @@ export default function CarouselWithContent() {
             // Filter hanya banner aktif dan pastikan memiliki data yang valid
             const validBanners = response
                 .filter(banner => banner?.is_active && banner?.image)
-                .map(banner => ({
-                    ...banner,
+                .map(banner => {
                     // Pastikan URL gambar lengkap
-                    image: banner.image.startsWith('http') 
-                        ? banner.image 
-                        : `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'}/${
-                            banner.image.replace(/^\/+/, '')
-                        }`
-                }))
+                    let imageUrl = banner.image.trim();
+                    if (!imageUrl.startsWith('http')) {
+                        const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
+                        imageUrl = `${baseUrl}/${imageUrl.replace(/^\/+/, '')}`;
+                    }
+                    
+                    return {
+                        ...banner,
+                        image: imageUrl
+                    };
+                })
                 .sort((a, b) => (a.order || 0) - (b.order || 0));
             
             console.log('Banner yang akan ditampilkan:', validBanners);
             
+            // Update state dalam satu batch
             if (isMounted.current) {
+                console.log('Mengupdate state dengan banner baru');
                 setBanners(validBanners);
                 setLoading(false);
                 setError(null);
@@ -125,14 +129,17 @@ export default function CarouselWithContent() {
     // Ambil data banner dari API
     useEffect(() => {
         console.log('Komponen Carousel dipasang, memulai fetchBanners');
-        fetchBanners().catch(err => {
-            console.error('Error dalam fetchBanners:', err);
-            if (isMounted.current) {
-                setError('Terjadi kesalahan saat memuat banner');
-                setBanners(defaultBanners);
-                setLoading(false);
-            }
-        });
+        
+        // Pastikan komponen terpasang
+        isMounted.current = true;
+        
+        // Reset state sebelum fetch
+        setBanners([]);
+        setLoading(true);
+        setError(null);
+        
+        // Panggil fetchBanners
+        fetchBanners();
         
         // Cleanup function
         return () => {
@@ -154,11 +161,14 @@ export default function CarouselWithContent() {
             return [];
         }
         
+        // Pastikan banners adalah array yang valid
+        const validBanners = Array.isArray(banners) ? banners : [];
+        
         // Map langsung dari banners yang sudah diproses
-        return banners.map(banner => ({
+        return validBanners.map(banner => ({
             title: banner.title || 'No Title',
             description: banner.description || '',
-            image: banner.image
+            image: banner.image || ''
         }));
     }, [banners]);
 
@@ -166,7 +176,9 @@ export default function CarouselWithContent() {
     
     // Buat array slides untuk infinite carousel
     const fullSlides = useMemo(() => {
-        if (slides.length === 0) {
+        console.log('Membuat fullSlides dari slides:', slides);
+        
+        if (!Array.isArray(slides) || slides.length === 0) {
             console.log('Tidak ada slide yang tersedia untuk fullSlides');
             return [];
         }
@@ -175,15 +187,19 @@ export default function CarouselWithContent() {
         
         // Jika hanya ada 1 slide, tidak perlu clone
         if (slides.length === 1) {
+            console.log('Hanya 1 slide, tidak perlu clone');
             return [...slides];
         }
         
         // Tambahkan clone dari slide pertama di akhir dan clone dari slide terakhir di awal
-        return [
+        const result = [
             { ...slides[slides.length - 1], __isClone: true },
             ...slides,
             { ...slides[0], __isClone: true }
         ];
+        
+        console.log('FullSlides berhasil dibuat:', result);
+        return result;
     }, [slides]);
 
     const goTo = useCallback((newIndex: number) => {
