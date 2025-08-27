@@ -49,9 +49,14 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       'localhost',
+      '127.0.0.1',
       'kpf-backend.test',
       'kpf-backpanel-production.up.railway.app',
       'kpf-backpanel-production.up.railway.app:443',
+      'placehold.co',
+      'images.unsplash.com',
+      'source.unsplash.com',
+      'via.placeholder.com'
     ],
     remotePatterns: [
       {
