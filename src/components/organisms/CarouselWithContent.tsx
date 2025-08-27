@@ -12,6 +12,8 @@ interface Banner {
     image: string;
     order: number;
     is_active: boolean;
+    hasError?: boolean;
+    key?: string; // Untuk memaksa re-render gambar
     created_at?: string;
     updated_at?: string;
 }
@@ -25,6 +27,8 @@ interface Slide {
     title: string;
     description: string;
     image: string;
+    hasError?: boolean;
+    key?: string; // Untuk memaksa re-render gambar
 }
 
 const defaultBanners: Banner[] = [
@@ -34,7 +38,8 @@ const defaultBanners: Banner[] = [
         description: "Bergabunglah dan cobalah alat perdagangan online kami di manapun Anda berada. Hubungi marketing kami untuk memulai panduan yang tepat tentang online trading kami",
         image: "/assets/corousel-1.png",
         order: 1,
-        is_active: true
+        is_active: true,
+        hasError: false
     },
     {
         id: 2,
@@ -42,7 +47,8 @@ const defaultBanners: Banner[] = [
         description: "Kami akan selalu memberikan layanan terbaik bagi seluruh calon nasabah dan nasabah terutama dalam hal kemudahan bertransaksi real account maupun demo account didukung oleh SDM berkualitas yang telah resmi menjadi wakil pialang berjangka melalui fit dan proper test dari Bappebti.",
         image: "/assets/corousel-2.png",
         order: 2,
-        is_active: true
+        is_active: true,
+        hasError: false
     }
 ];
 
@@ -86,19 +92,25 @@ export default function CarouselWithContent() {
                 .filter(banner => banner?.is_active && banner?.image)
                 .map(banner => {
                     let imageUrl = banner.image.trim();
-                    if (imageUrl && !imageUrl.startsWith('http')) {
-                        const baseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000')
-                            .replace(/\/+$/, '');
-                        imageUrl = `${baseUrl}/${imageUrl.replace(/^\/+/, '')}`;
+                    
+                    // Pastikan URL menggunakan HTTPS untuk production
+                    if (process.env.NODE_ENV === 'production') {
+                        imageUrl = imageUrl.replace('http://', 'https://');
                     }
+                    
+                    // Tambahkan timestamp cache-busting
+                    const timestamp = new Date().getTime();
+                    imageUrl = `${imageUrl}${imageUrl.includes('?') ? '&' : '?'}t=${timestamp}`;
                     
                     return {
                         id: banner.id,
                         title: banner.title || 'No Title',
                         description: banner.description || '',
                         image: imageUrl,
+                        key: `${banner.id}-${new Date().getTime()}`, // Unik key untuk setiap gambar
                         order: banner.order || 0,
-                        is_active: true
+                        is_active: true,
+                        hasError: false
                     };
                 })
                 .sort((a, b) => a.order - b.order);
@@ -168,23 +180,38 @@ export default function CarouselWithContent() {
         
         console.log('Memproses', banners.length, 'banner');
         
-        // Map langsung dari banners yang sudah diproses
-        return banners
-            .filter(banner => {
-                const hasImage = banner?.image?.trim();
-                if (!hasImage) {
-                    console.warn('Banner tidak memiliki gambar:', banner);
-                    return false;
-                }
-                return true;
-            })
-            .map(banner => ({
-                title: banner.title?.trim() || 'No Title',
-                description: banner.description?.trim() || '',
-                image: banner.image.trim(),
-                // Tambahkan properti untuk menandai apakah gambar gagal dimuat
-                hasError: false
-            }));
+        try {
+            return banners
+                .filter(banner => {
+                    if (!banner) return false;
+                    const hasImage = banner.image && typeof banner.image === 'string' && banner.image.trim() !== '';
+                    if (!hasImage) {
+                        console.warn('Banner tidak memiliki gambar yang valid:', banner);
+                        return false;
+                    }
+                    return true;
+                })
+                .map(banner => {
+                    const slide: Slide = {
+                        title: banner.title?.trim() || 'No Title',
+                        description: banner.description?.trim() || '',
+                        image: banner.image.trim()
+                    };
+                    
+                    // Hanya tambahkan properti opsional jika ada nilainya
+                    if (banner.hasError !== undefined) {
+                        slide.hasError = banner.hasError;
+                    }
+                    if (banner.key) {
+                        slide.key = banner.key;
+                    }
+                    
+                    return slide;
+                });
+        } catch (error) {
+            console.error('Error saat memproses banner:', error);
+            return [];
+        }
     }, [banners]);
 
     const totalSlides = Math.max(0, slides.length);
@@ -393,6 +420,13 @@ export default function CarouselWithContent() {
     const debouncedGoToNext = useCallback(debounce(next, 300), [next]);
     const debouncedGoToPrev = useCallback(debounce(prev, 300), [prev]);
 
+    const handleImageError = useCallback((index: number) => {
+        console.log('Gambar gagal dimuat:', index);
+        const newBanners = [...banners];
+        newBanners[index].hasError = true;
+        setBanners(newBanners);
+    }, [banners]);
+
     // Tampilkan loading hanya jika benar-benar loading dan belum ada banner
     if (loading && banners.length === 0) {
         console.log('Menampilkan loading state');
@@ -462,18 +496,14 @@ export default function CarouselWithContent() {
                                         src={slide.image}
                                         alt={slide.title}
                                         fill
-                                        className="object-contain"
+                                        className="object-cover object-center"
+                                        priority={i === 0}
                                         onError={(e) => {
-                                            console.error('Gagal memuat gambar:', {
-                                                imageUrl: slide.image,
-                                                timestamp: new Date().toISOString()
-                                            });
-                                            // Tandai error dan biarkan komponen menangani fallback
-                                            e.currentTarget.src = '/images/placeholder.jpg';
-                                            e.currentTarget.alt = 'Gambar tidak tersedia';
+                                            console.error('Gagal memuat gambar:', slide.image);
+                                            handleImageError(i);
                                         }}
                                         unoptimized={process.env.NODE_ENV === 'development'}
-                                        priority={index === 0} // Hanya preload gambar pertama
+                                        key={slide.key}
                                     />
                                 </div>
                             </div>
