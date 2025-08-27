@@ -1,5 +1,7 @@
 import React from "react";
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // Ikon SVG inline
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
@@ -45,8 +47,17 @@ const Icons = {
 
 const Footer = () => {
     const { t } = useTranslation('footer');
+    const router = useRouter();
     const [isClient, setIsClient] = React.useState(false);
     const currentYear = new Date().getFullYear();
+    
+    // Get current locale
+    const { locale, locales, asPath } = router;
+    
+    // Function to get localized path
+    const getLocalizedPath = (path: string) => {
+        return `/${locale}${path === '/' ? '' : path}`;
+    };
     
     React.useEffect(() => {
         setIsClient(true);
@@ -100,14 +111,18 @@ const Footer = () => {
                         <ul className="space-y-2">
                             {[
                                 { icon: <Icons.Home />, text: t('home', 'Beranda'), href: '/' },
-                                { icon: <Icons.Cube />, text: t('viewProducts', 'Lihat Produk'), href: '/products' },
-                                { icon: <Icons.Envelope />, text: t('contact', 'Kontak'), href: '/contact' }
+                                { icon: <Icons.Cube />, text: t('viewProducts', 'Lihat Produk'), href: '/produk' },
+                                { icon: <Icons.Envelope />, text: t('contact', 'Kontak'), href: '/hubungi-kami' }
                             ].map((item, index) => (
                                 <li key={index}>
-                                    <a href={item.href} className="flex items-center text-sm text-gray-600 hover:text-green-600">
+                                    <Link 
+                                        href={item.href} 
+                                        locale={locale}
+                                        className="flex items-center text-sm text-gray-600 hover:text-green-600"
+                                    >
                                         {item.icon}
                                         {item.text}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -126,11 +141,11 @@ const Footer = () => {
                             </div>
                             <div className="flex items-center">
                                 <Icons.Phone />
-                                <a href="tel:+62215705777" className="text-sm text-gray-600 hover:text-green-600">(021) 570-5777</a>
+                                <a href="tel:+62215705777" className="text-sm text-gray-600 hover:text-green-600">(021) 5793 6555</a>
                             </div>
                             <div className="flex items-center">
                                 <Icons.Envelope />
-                                <a href="mailto:info@kontakperkasa.net" className="text-sm text-gray-600 hover:text-green-600">info@kontakperkasa.net</a>
+                                <a href="mailto:corporate@kontak-perkasa-futures.co.id" className="text-sm text-gray-600 hover:text-green-600">corporate@kontak-perkasa-futures.co.id</a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +161,7 @@ const Footer = () => {
                                     description: komdigiDesc
                                 },
                                 {
-                                    src: "/assets/iso.png",
+                                    src: "/assets/ISO.png",
                                     alt: "ISO 9001:2015 Certified",
                                     description: isoDesc
                                 }

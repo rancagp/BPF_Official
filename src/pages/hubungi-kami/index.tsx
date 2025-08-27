@@ -1,6 +1,15 @@
 import { FaMapMarkerAlt, FaPhone, FaFax, FaEnvelope, FaExternalLinkAlt, FaHeadset } from 'react-icons/fa';
+import { useTranslation, TFunction } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
 import PageTemplate from "@/components/templates/PageTemplate";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'hubungi-kami', 'footer'])),
+  },
+});
 
 interface Kantor {
   kota: string;
@@ -58,32 +67,63 @@ const kantorCabang: Kantor[] = [
   }
 ];
 
+interface OfficeProps {
+  office: typeof kantorPusat | Kantor;
+  isHeadOffice?: boolean;
+  t: TFunction;
+}
+
+const OfficeCard = ({ office, isHeadOffice = false, t }: OfficeProps) => (
+  <div className="bg-white p-6 rounded-lg shadow">
+    {isHeadOffice && (
+      <p className="font-semibold mb-2">{t('companyName')}</p>
+    )}
+    <div className="space-y-2">
+      <div className="flex items-start">
+        <FaMapMarkerAlt className="text-blue-600 mt-0.5 mr-1.5 flex-shrink-0" size={14} />
+        <p className="whitespace-pre-line text-gray-700">{office.alamat}</p>
+      </div>
+      <p className="text-gray-700">
+        <span className="font-medium">{t('phone')}:</span> {office.telepon}
+      </p>
+      <p className="text-gray-700">
+        <span className="font-medium">{t('fax')}:</span> {office.fax}
+      </p>
+      {office.email && (
+        <p className="text-gray-700">
+          <span className="font-medium">{t('email')}:</span>{' '}
+          <a href={`mailto:${office.email}`} className="text-blue-600 hover:underline">
+            {office.email}
+          </a>
+        </p>
+      )}
+    </div>
+  </div>
+);
+
 export default function HubungiKami() {
+  const { t } = useTranslation('hubungi-kami');
+  
   return (
-    <PageTemplate title="Hubungi Kami | Kontakperkasa Futures">
+    <PageTemplate title={t('title')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-        <ProfilContainer title="Hubungi Kami">
+        <ProfilContainer title={t('title')}>
         
-        {/* Kantor Pusat */}
+        {/* Head Office */}
         <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">KANTOR PUSAT</h2>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <p className="font-semibold mb-2">PT. Kontakperkasa Futures</p>
-            <p className="whitespace-pre-line text-gray-700 mb-4">{kantorPusat.alamat}</p>
-            <p className="text-gray-700">
-              Telp : {kantorPusat.telepon}, Fax : {kantorPusat.fax}
-            </p>
-            <p className="text-gray-700">
-              Email : <a href={`mailto:${kantorPusat.email}`} className="text-blue-600 hover:underline">{kantorPusat.email}</a>
-            </p>
-          </div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            {t('headOffice')}
+          </h2>
+          <OfficeCard office={kantorPusat} isHeadOffice t={t} />
         </div>
 
 
 
-        {/* Kantor Cabang */}
+        {/* Branch Offices */}
         <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Kantor Cabang</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">
+            {t('branchOffice')}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {kantorCabang.map((cabang, index) => (
               <div key={index} className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow">
@@ -94,10 +134,10 @@ export default function HubungiKami() {
                     <p className="whitespace-pre-line text-gray-700">{cabang.alamat}</p>
                   </div>
                   <p className="text-gray-700">
-                    Telp: {cabang.telepon}
+                    <span className="font-medium">{t('phone')}:</span> {cabang.telepon}
                   </p>
                   <p className="text-gray-700">
-                    Fax: {cabang.fax}
+                    <span className="font-medium">{t('fax')}:</span> {cabang.fax}
                   </p>
                   <a 
                     href={cabang.mapLink} 
@@ -105,7 +145,7 @@ export default function HubungiKami() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 hover:underline text-xs mt-1"
                   >
-                    Lihat di Peta <FaExternalLinkAlt className="ml-1" size={10} />
+                    {t('viewOnMap', 'Lihat di Peta')} <FaExternalLinkAlt className="ml-1" size={10} />
                   </a>
                 </div>
               </div>
@@ -113,15 +153,19 @@ export default function HubungiKami() {
           </div>
         </div>
 
-        {/* Keluhan Online */}
+        {/* Online Complaint */}
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-xl font-bold text-gray-800 mb-4">PENYAMPAIAN KELUHAN ONLINE</h3>
-          <p className="text-gray-700 mb-4">Kirimkan keluhan atau saran Anda melalui email resmi kami.</p>
+          <h3 className="text-xl font-bold text-gray-800 mb-4">
+            {t('complaintTitle')}
+          </h3>
+          <p className="text-gray-700 mb-4">
+            {t('complaintDescription')}
+          </p>
           <a 
             href="mailto:customer.care@kontak-perkasa-futures.co.id"
             className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
           >
-            <FaEnvelope className="mr-2" /> Kirim Email
+            <FaEnvelope className="mr-2" /> {t('sendEmail')}
           </a>
         </div>
         </ProfilContainer>
