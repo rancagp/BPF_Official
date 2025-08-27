@@ -48,15 +48,18 @@ const nextConfig: NextConfig = {
   // Image optimization
   images: {
     domains: [
-      'kpf-backend.test',
       'localhost',
-      '127.0.0.1',
-      'placehold.co',
-      'images.unsplash.com',
-      'source.unsplash.com',
-      'via.placeholder.com'
+      'kpf-backend.test',
+      'kpf-backpanel-production.up.railway.app',
+      'kpf-backpanel-production.up.railway.app:443',
     ],
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'kpf-backpanel-production.up.railway.app',
+        port: '',
+        pathname: '/storage/banners/**',
+      },
       {
         protocol: 'http',
         hostname: 'kpf-backend.test',
@@ -70,6 +73,12 @@ const nextConfig: NextConfig = {
         pathname: '/storage/**',
       },
     ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
   // TypeScript configuration
