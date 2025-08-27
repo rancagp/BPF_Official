@@ -29,7 +29,14 @@ module.exports = {
     'informasi', 
     'video', 
     'symbol-indeks',
-    'loco-london-gold'
+    'loco-london-gold',
+    'hubungi-kami',
+    'summer-winter',
+    'economic-calendar',
+    'historical-data',
+    'mekanisme-perdagangan',
+    'pivot-fibonacci',
+    'prosedur',
   ],
   
   defaultNS: 'common',
