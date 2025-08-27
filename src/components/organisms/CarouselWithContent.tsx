@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { getBanners } from "@/services/bannerService";
 import { debounce } from "@/utils/debounce";
+import Image from "next/image";
 
 interface Banner {
     id: number;
@@ -180,7 +181,9 @@ export default function CarouselWithContent() {
             .map(banner => ({
                 title: banner.title?.trim() || 'No Title',
                 description: banner.description?.trim() || '',
-                image: banner.image.trim()
+                image: banner.image.trim(),
+                // Tambahkan properti untuk menandai apakah gambar gagal dimuat
+                hasError: false
             }));
     }, [banners]);
 
@@ -454,21 +457,25 @@ export default function CarouselWithContent() {
                         {/* Gambar */}
                         <div className="mt-8 md:mt-0">
                             <div className="h-100 md:h-120 w-full">
-                                <img 
-                                    src={slide.image} 
-                                    alt={slide.title} 
-                                    className="w-full h-full object-contain"
-                                    onError={(e) => {
-                                        console.error('Gagal memuat gambar:', {
-                                            imageUrl: slide.image,
-                                            error: e,
-                                            timestamp: new Date().toISOString()
-                                        });
-                                        // Coba fallback ke placeholder yang ada di public folder
-                                        e.currentTarget.src = '/placeholder.jpg';
-                                        e.currentTarget.alt = 'Gambar tidak tersedia';
-                                    }}
-                                />
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src={slide.image}
+                                        alt={slide.title}
+                                        fill
+                                        className="object-contain"
+                                        onError={(e) => {
+                                            console.error('Gagal memuat gambar:', {
+                                                imageUrl: slide.image,
+                                                timestamp: new Date().toISOString()
+                                            });
+                                            // Tandai error dan biarkan komponen menangani fallback
+                                            e.currentTarget.src = '/images/placeholder.jpg';
+                                            e.currentTarget.alt = 'Gambar tidak tersedia';
+                                        }}
+                                        unoptimized={process.env.NODE_ENV === 'development'}
+                                        priority={index === 0} // Hanya preload gambar pertama
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
