@@ -468,7 +468,7 @@ export default function CarouselWithContent() {
                 {fullSlides.map((slide: Slide, i: number) => (
                     <div
                         key={i}
-                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-1 md:px-32"
+                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-8 md:px-16 lg:px-32"
                     >
                         {/* Teks */}
                         <div className="text-center md:text-left max-w-xl">
@@ -489,23 +489,26 @@ export default function CarouselWithContent() {
                         </div>
 
                         {/* Gambar */}
-                        <div className="mt-8 md:mt-0">
-                            <div className="h-100 md:h-120 w-full">
-                                <div className="relative w-full h-full">
+                        <div className="mt-8 md:mt-0 w-full md:w-1/2 flex-shrink-0">
+                            <div className="relative w-full h-[300px] md:h-[450px] lg:h-[420px]">
+                                {slide.hasError ? (
+                                    <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                                        <span className="text-gray-500">Gambar tidak tersedia</span>
+                                    </div>
+                                ) : (
                                     <Image
                                         src={slide.image}
                                         alt={slide.title}
                                         fill
-                                        className="object-cover object-center"
+                                        className="object-contain"
                                         priority={i === 0}
                                         onError={(e) => {
                                             console.error('Gagal memuat gambar:', slide.image);
                                             handleImageError(i);
                                         }}
                                         unoptimized={process.env.NODE_ENV === 'development'}
-                                        key={slide.key}
                                     />
-                                </div>
+                                )}
                             </div>
                         </div>
                     </div>
