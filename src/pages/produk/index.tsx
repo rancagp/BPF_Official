@@ -82,18 +82,27 @@ export default function ProdukPage() {
                             </div>
                         </div>
                     ) : products.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {products.map((product) => (
-                                <ProductCard
-                                    key={`${product.category}-${product.id}`}
-                                    image={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
-                                    title={product.name}
-                                    description={product.deskripsi || t('defaultDescription')}
-                                    href={`/produk/${product.category.toLowerCase()}/${product.slug}`}
-                                    ctaText={t('viewDetails')}
-                                    className="h-full"
-                                />
-                            ))}
+                        <div className="space-y-10">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {products.map((product) => {
+                                    if (!product || !product.category || !product.slug) {
+                                        console.warn('Invalid product data:', product);
+                                        return null;
+                                    }
+                                    return (
+                                        <ProductCard 
+                                            key={`${product.category}-${product.id}`}
+                                            product={{
+                                                ...product,
+                                                deskripsi: product.deskripsi || t('defaultDescription')
+                                            }}
+                                            onClick={(category, slug) => {
+                                                router.push(`/produk/${category.toLowerCase()}/${slug}`);
+                                            }}
+                                        />
+                                    );
+                                })}
+                            </div>
                         </div>
                     ) : (
                         <p className="text-center text-gray-600">{t('errorText')}</p>

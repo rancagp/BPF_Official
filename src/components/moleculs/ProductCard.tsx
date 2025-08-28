@@ -1,44 +1,82 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProductCardProps {
-    title: string;
-    image: string;
+    product: {
+        id: number;
+        name: string;
+        image: string;
+        slug: string;
+        category: string;
+        deskripsi?: string;
+    };
+    onClick?: (category: string, slug: string) => void;
     className?: string;
-    description?: string;
-    href: string;
-    ctaText?: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-    title,
-    image,
-    className = "",
-    description,
-    href,
-    ctaText = "View Details"
+const ProductCard: React.FC<ProductCardProps> = ({ 
+    product = { 
+        id: 0, 
+        name: 'Produk', 
+        image: '', 
+        slug: 'produk', 
+        category: 'produk' 
+    }, 
+    onClick, 
+    className = '' 
 }) => {
+    const handleClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (onClick) {
+            onClick(product.category, product.slug);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (onClick) {
+                onClick(product.category, product.slug);
+            }
+        }
+    };
+
     return (
-        <div className={`${className} bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full`}>
-            <a href={href} className="block h-full">
-                <div className="relative h-40 overflow-hidden">
-                    <img
-                        src={image}
-                        alt={title}
-                        className="w-full h-full object-cover"
+        <div 
+            className={`group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-100 ${className}`}
+            onClick={handleClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={handleKeyDown}
+        >
+            <Link href={`/produk/${product?.category?.toLowerCase() || 'produk'}/${product?.slug || 'produk'}`} className="block h-full">
+                <div className="relative h-48 overflow-hidden">
+                    <Image
+                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
+                        alt={product.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-green-600/20 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
-                    <h3 className="text-lg font-semibold text-green-600 text-center mb-2">{title}</h3>
-                    {description && (
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                            {description}
+                <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                        {product.name}
+                    </h3>
+                    {product.deskripsi && (
+                        <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+                            {product.deskripsi}
                         </p>
                     )}
-                    <span className="mt-auto text-green-600 text-sm font-medium hover:underline">
-                        {ctaText}
-                    </span>
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                        <button className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300 text-sm font-medium">
+                            Lihat Detail
+                        </button>
+                    </div>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };

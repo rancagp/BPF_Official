@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTranslation } from 'next-i18next';
 import Header1 from "@/components/moleculs/Header1";
+import ProductCard from '../moleculs/ProductCard';
 
 type Product = {
     id: number;
@@ -91,56 +92,20 @@ export default function ProdukContainer() {
             ) : productList.length > 0 ? (
                 <div className="space-y-10">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {productList.slice(0, 6).map((product) => (
-                        <div 
-                            key={`${product.category}-${product.id}`}
-                            className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-100"
-                            onClick={() => handleProductClick(product.category, product.slug)}
-                            role="button"
-                            tabIndex={0}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                    e.preventDefault();
-                                    handleProductClick(product.category, product.slug);
-                                }
-                            }}
-                        >
-                            <div className="relative h-48 overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-tr from-green-600/20 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                <img 
-                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                                <span className={`absolute top-4 right-4 px-3 py-1 text-xs font-semibold rounded-full ${
-                                    product.category === 'JFX' ? 'bg-white text-green-800' : 'bg-white text-green-800'
-                                }`}>
-                                    {product.category}
-                                </span>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300 line-clamp-2">
-                                    {product.name}
-                                </h3>
-                                <p className="text-gray-500 text-sm mb-4 line-clamp-2">
-                                    {product.deskripsi || t('defaultDescription')}
-                                </p>
-                                <button 
-                                    className="w-full mt-4 px-6 py-2.5 bg-green-600 text-white font-medium rounded-lg hover:bg-green-800 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 flex items-center justify-center space-x-2"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleProductClick(product.category, product.slug);
-                                    }}
-                                >
-                                    <span>{t('viewDetails')}</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                    </div>
+                    {productList.filter(Boolean).slice(0, 6).map((product) => {
+                        if (!product || !product.category || !product.slug) {
+                            console.warn('Invalid product data:', product);
+                            return null;
+                        }
+                        return (
+                            <ProductCard 
+                                key={`${product.category}-${product.id}`}
+                                product={product}
+                                onClick={handleProductClick}
+                            />
+                        );
+                    })}
+                </div>
                     
                     <div className="text-center pt-6">
                         <Link 

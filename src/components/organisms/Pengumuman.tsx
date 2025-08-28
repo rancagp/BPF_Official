@@ -115,29 +115,31 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
             )}
 
             {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {[...Array(3)].map((_, index) => (
-                        <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div className="animate-pulse h-48 bg-gray-200"></div>
-                            <div className="p-6">
-                                <div className="h-4 bg-gray-200 rounded w-24 mb-4">
-                                {t('loading')}
-                            </div>
-                                <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
-                                <div className="space-y-2">
-                                    <div className="h-4 bg-gray-200 rounded"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                <div className="space-y-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[...Array(6)].map((_, index) => (
+                            <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                                <div className="animate-pulse h-48 bg-gray-200"></div>
+                                <div className="p-6">
+                                    <div className="h-4 bg-gray-200 rounded w-24 mb-4">
+                                        {t('loading')}
+                                    </div>
+                                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
+                                    <div className="space-y-2">
+                                        <div className="h-4 bg-gray-200 rounded"></div>
+                                        <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                        <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                                    </div>
+                                    <div className="mt-6 h-4 bg-gray-200 rounded w-32"></div>
                                 </div>
-                                <div className="mt-6 h-4 bg-gray-200 rounded w-32"></div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             ) : pengumumanList.length > 0 ? (
-                <>
+                <div className="space-y-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {pengumumanList.map((item) => (
+                        {pengumumanList.slice(0, 6).map((item) => (
                             <div 
                                 key={item.id}
                                 className="transform transition-transform duration-300 hover:-translate-y-1"
@@ -148,8 +150,8 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                                     title={item.judul}
                                     date={item.created_at}
                                     content={item.isi}
-                                    link={`/umum/informasi/${item.slug}`}
                                     image={item.image}
+                                    link={`/umum/informasi/${item.slug}`}
                                     category={item.kategori || t('category')}
                                 />
                             </div>
@@ -168,7 +170,7 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                             </svg>
                         </Link>
                     </div>
-                </>
+                </div>
             ) : (
                 <div className="text-center py-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-dashed border-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
