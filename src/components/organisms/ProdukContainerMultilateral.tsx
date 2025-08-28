@@ -25,9 +25,13 @@ export default function ProdukContainerMultilateral() {
                 {products.map((product, index) => (
                     <ProductCard
                         key={index}
-                        title={product.title}
-                        image={product.image}
-                        href={`/produk/${product.slug}`}
+                        product={{
+                            id: index,
+                            name: product.title,
+                            image: product.image,
+                            slug: product.slug,
+                            category: 'multilateral' // atau kategori yang sesuai
+                        }}
                     />
                 ))}
             </div>
