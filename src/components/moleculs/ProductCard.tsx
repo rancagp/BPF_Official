@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             tabIndex={0}
             onKeyDown={handleKeyDown}
         >
-            <Link href={`/produk/${product?.category?.toLowerCase() || 'produk'}/${product?.slug || 'produk'}`} className="block h-full">
+            <Link href={`/produk/${product?.category?.toLowerCase() || 'produk'}/${product?.slug || 'produk'}`} className="flex flex-col h-full">
                 <div className="relative h-48 overflow-hidden">
                     <Image
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
@@ -61,7 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-tr from-green-600/20 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
                         {product.name}
                     </h3>
@@ -70,7 +70,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             {product.deskripsi}
                         </p>
                     )}
-                    <div className="mt-4 pt-4 border-t border-gray-100">
+                    <div className="mt-auto pt-4 border-t border-gray-100">
                         <button className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300 text-sm font-medium">
                             Lihat Detail
                         </button>

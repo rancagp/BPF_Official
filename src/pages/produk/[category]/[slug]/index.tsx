@@ -19,7 +19,8 @@ export default function ProductDetail() {
     const { category, slug } = router.query;
 
     const [product, setProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [notFound, setNotFound] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!category || !slug) return;
@@ -57,15 +58,46 @@ export default function ProductDetail() {
         fetchProduct();
     }, [category, slug]);
 
-    if (!category || !slug || loading) {
+    if (loading) {
         return (
             <PageTemplate title="Memuat...">
-                <div className="text-center py-20">Memuat produk...</div>
+                <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
+                    <ProfilContainer title="Memuat...">
+                        <div className="flex flex-col gap-5 items-start">
+                            <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-10 w-full">
+                                {/* Skeleton Gambar */}
+                                <div className="w-full md:w-1/2">
+                                    <div className="animate-pulse bg-gray-200 rounded-2xl w-full h-96"></div>
+                                </div>
+
+                                {/* Skeleton Deskripsi */}
+                                <div className="w-full md:w-1/2 space-y-4">
+                                    <div className="h-8 bg-gray-200 rounded w-3/4"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-full"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                </div>
+                            </div>
+
+                            {/* Skeleton Spesifikasi */}
+                            <div className="w-full pt-8 mt-8 border-t border-gray-200">
+                                <div className="h-6 bg-gray-200 rounded w-1/4 mb-6"></div>
+                                <div className="space-y-4">
+                                    <div className="h-4 bg-gray-200 rounded w-full"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </ProfilContainer>
+                </div>
             </PageTemplate>
         );
     }
 
-    if (!product) {
+    if (notFound) {
         return (
             <PageTemplate title="Produk Tidak Ditemukan">
                 <div className="text-center py-20">Produk tidak ditemukan.</div>
@@ -74,29 +106,29 @@ export default function ProductDetail() {
     }
 
     return (
-        <PageTemplate title={product.name}>
+        <PageTemplate title={product?.name || 'Detail Produk'}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title={product.name}>
+                <ProfilContainer title={product?.name || 'Detail Produk'}>
                     <div className="flex flex-col gap-5 items-start">
                         <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-10">
                             {/* Gambar Produk */}
                             <div className="w-full md:w-1/2 flex justify-center">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
-                                    alt={product.name}
+                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product?.image}`}
+                                    alt={product?.name}
                                     className="w-full max-w-md h-auto object-cover rounded-2xl shadow-lg"
                                 />
                             </div>
 
                             {/* Deskripsi */}
                             <div className="w-full md:w-1/2 text-gray-800 leading-relaxed text-base text-justify">
-                                <div dangerouslySetInnerHTML={{ __html: product.deskripsi || "" }} />
+                                <div dangerouslySetInnerHTML={{ __html: product?.deskripsi || "" }} />
                             </div>
                         </div>
 
                         {/* Deskripsi & Spesifikasi */}
                         <div className="w-full">
-                            {product.specs && (
+                            {product?.specs && (
                                 <div className="border-t pt-4 text-sm prose max-w-none prose-p:my-2 prose-table:border prose-th:border prose-td:border prose-th:bg-gray-100">
                                     <div dangerouslySetInnerHTML={{ __html: product.specs }} />
                                 </div>
