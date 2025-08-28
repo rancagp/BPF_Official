@@ -141,15 +141,16 @@ const NavBar: React.FC = () => {
         {items.map((item) => (
           <div key={item.key}>
             {item.href && !item.submenu ? (
-              <a
+              <Link
                 href={item.href}
+                locale={i18n.language}
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-700 hover:bg-gray-50"
                 onClick={closeAllMenus}
                 target={item.target}
                 rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
               >
                 {item.label}
-              </a>
+              </Link>
             ) : (
               <div>
                 <button

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import NewsCard2 from "@/components/moleculs/NewsCard2";
 import Header1 from "@/components/moleculs/Header1";
 
@@ -23,6 +25,7 @@ type PengumumanHomeProps = {
 
 export default function PengumumanHome({ showHeader = true, className }: PengumumanHomeProps) {
     const { t, i18n } = useTranslation('pengumuman');
+    const router = useRouter();
     const [pengumumanList, setPengumumanList] = useState<Berita[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -145,7 +148,7 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                                     title={item.judul}
                                     date={item.created_at}
                                     content={item.isi}
-                                    link={`/informasi/umum/${item.slug}`}
+                                    link={`/umum/informasi/${item.slug}`}
                                     image={item.image}
                                     category={item.kategori || t('category')}
                                 />
@@ -154,15 +157,16 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                     </div>
                     
                     <div className="text-center mt-12">
-                        <a 
-                            href="/informasi/umum"
+                        <Link 
+                            href="/umum/informasi"
+                            locale={router.locale}
                             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-800 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
                         >
                             <span>{t('viewAll')}</span>
                             <svg className="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </>
             ) : (

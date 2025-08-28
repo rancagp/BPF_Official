@@ -1,4 +1,12 @@
 {
   "pageTitle": "Informasi Umum",
-  "content": "Konten informasi umum akan ditampilkan di sini."
+  "content": "Konten informasi umum akan ditampilkan di sini.",
+  "view_all_information": "Lihat Semua Informasi",
+  "back_to_list": "Kembali ke Daftar",
+  "published_on": "Dipublikasikan pada",
+  "category": "Kategori",
+  "error_loading": "Gagal memuat informasi. Silakan coba lagi nanti.",
+  "not_found": "Informasi tidak ditemukan",
+  "not_found_message": "Informasi yang Anda cari tidak dapat ditemukan.",
+  "back_to_home": "Kembali ke Beranda"
 }

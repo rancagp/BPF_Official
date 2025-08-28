@@ -1,4 +1,12 @@
 {
   "pageTitle": "General Information",
-  "content": "General information content will be displayed here."
+  "content": "General information content will be displayed here.",
+  "view_all_information": "View All Information",
+  "back_to_list": "Back to List",
+  "published_on": "Published on",
+  "category": "Category",
+  "error_loading": "Error loading information. Please try again later.",
+  "not_found": "Information not found",
+  "not_found_message": "The information you are looking for could not be found.",
+  "back_to_home": "Back to Home"
 }
