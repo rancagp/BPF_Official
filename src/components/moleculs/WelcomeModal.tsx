@@ -14,12 +14,12 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
     <ModalPopup isOpen={isOpen} onClose={onClose}>
       <div className="relative p-1 text-center max-w-2xl w-full">
         {/* Decorative elements */}
-        <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-green-400 to-blue-500 rounded-full -z-10 opacity-30"></div>
-        <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-tr from-green-400 to-blue-500 rounded-full -z-10 opacity-30"></div>
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-green-100 rounded-full -z-10"></div>
+        <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-green-100 rounded-full -z-10"></div>
         
-        {/* Logo with gradient border */}
+        {/* Logo with border */}
         <div className="mb-6">
-          <div className="mx-auto w-32 h-32 p-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl shadow-lg">
+          <div className="mx-auto w-32 h-32 p-1 bg-white border-2 border-green-500 rounded-2xl shadow-md">
             <div className="bg-white p-4 rounded-xl h-full flex items-center justify-center">
               <Image 
                 src="/assets/logo-kpf.png" 
@@ -33,7 +33,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold text-green-600 mb-4">
           {t('title')}
         </h1>
         

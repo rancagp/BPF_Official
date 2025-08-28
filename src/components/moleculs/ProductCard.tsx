@@ -52,6 +52,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         >
             <Link href={`/produk/${product?.category?.toLowerCase() || 'produk'}/${product?.slug || 'produk'}`} className="flex flex-col h-full">
                 <div className="relative h-48 overflow-hidden">
+                    {/* Category Badge */}
+                    <div className="absolute top-3 right-3 z-10">
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-white text-green-700 border border-green-200">
+                            {product.category || 'Produk'}
+                        </span>
+                    </div>
                     <Image
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
                         alt={product.name}

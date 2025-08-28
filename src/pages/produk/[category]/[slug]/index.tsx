@@ -134,6 +134,19 @@ export default function ProductDetail() {
                                 </div>
                             )}
                         </div>
+
+                        {/* Tombol Lihat Semua Produk */}
+                        <div className="mt-10 pt-6 border-t border-gray-200 w-full">
+                            <button 
+                                onClick={() => router.push('/produk')}
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                </svg>
+                                Lihat Semua Produk
+                            </button>
+                        </div>
                     </div>
                 </ProfilContainer>
             </div>
