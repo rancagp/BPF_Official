@@ -18,11 +18,11 @@ export default function CardDetail({ link = "#", text, locale }: CardDetailProps
         <Link
             href={link}
             locale={currentLocale}
-            className="bg-green-600 hover:bg-green-700 w-fit text-white px-3 py-1 rounded-lg font-medium inline-flex items-center mt-auto space-x-3 transition-all duration-300"
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium inline-flex items-center mt-auto transition-all duration-300 whitespace-nowrap"
             passHref
         >
-            <i className="fa-solid fa-magnifying-glass"></i>
-            <span>{buttonText}</span>
+            <i className="fa-solid fa-magnifying-glass text-sm"></i>
+            <span className="ml-2 text-sm">{buttonText}</span>
         </Link>
     );
 }

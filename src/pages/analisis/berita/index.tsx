@@ -1,9 +1,10 @@
-import BeritaSection from "@/components/organisms/BeritaSection";
-import ProfilContainer from "@/components/templates/PageContainer/Container";
-import PageTemplate from "@/components/templates/PageTemplate";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import PageTemplate from '@/components/templates/PageTemplate';
+import Container from '@/components/templates/PageContainer/Container';
+import NewsCard from '@/components/moleculs/Newscard';
 import { useTranslation } from 'next-i18next';
 import { GetStaticProps } from 'next';
+import beritaList from '@/data/BeritaList';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
@@ -19,22 +20,26 @@ export default function Berita() {
   return (
     <PageTemplate title={t('title', 'Berita Terbaru')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-        <ProfilContainer title={t('title', 'Berita Terbaru')}>
-          <div className="space-y-10">
-            <BeritaSection showHeader={false} />
-
-            <div className="flex justify-center">
-              <a 
-                href="https://www.newsmaker.id/index.php/id/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-lg text-white transition-all duration-300 font-medium"
+        <Container title={t('title', 'Berita Terbaru')}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {beritaList.map((berita, index) => (
+              <div 
+                key={index}
+                className="transform transition-transform duration-300 hover:-translate-y-1"
+                data-aos="fade-up"
+                data-aos-delay={`${(index % 3) * 100}`}
               >
-                {t('viewAllNews', 'Lihat Semua Berita')}
-              </a>
-            </div>
+                <NewsCard
+                  title={berita.title}
+                  date={berita.date}
+                  content={berita.content}
+                  slug={berita.slug}
+                  img={berita.img}
+                />
+              </div>
+            ))}
           </div>
-        </ProfilContainer>
+        </Container>
       </div>
     </PageTemplate>
   );
