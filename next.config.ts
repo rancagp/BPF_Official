@@ -56,7 +56,8 @@ const nextConfig: NextConfig = {
       'placehold.co',
       'images.unsplash.com',
       'source.unsplash.com',
-      'via.placeholder.com'
+      'via.placeholder.com',
+      'portalnews.newsmaker.id'
     ],
     remotePatterns: [
       {
@@ -64,6 +65,12 @@ const nextConfig: NextConfig = {
         hostname: 'kpf-backpanel-production.up.railway.app',
         port: '',
         pathname: '/storage/banners/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'portalnews.newsmaker.id',
+        port: '',
+        pathname: '/**',
       },
       {
         protocol: 'http',

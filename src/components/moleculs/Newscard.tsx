@@ -32,16 +32,31 @@ export default function NewsCard({
     const trimmedExcerpt = trimText(content, 200);  // Ubah jadi 200 atau sesuai kebutuhan
 
     const formatDate = (inputDate: string) => {
-        const options: Intl.DateTimeFormatOptions = {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-        };
-        const parsedDate = new Date(inputDate);
-        return parsedDate.toLocaleDateString("id-ID", options);
+        try {
+            const parsedDate = new Date(inputDate);
+            // Periksa apakah tanggal valid
+            if (isNaN(parsedDate.getTime())) {
+                return inputDate; // Kembalikan nilai asli jika tidak valid
+            }
+            const options: Intl.DateTimeFormatOptions = {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+            };
+            return parsedDate.toLocaleDateString("id-ID", options);
+        } catch (error) {
+            console.error('Error formatting date:', error);
+            return inputDate; // Kembalikan nilai asli jika terjadi error
+        }
     };
 
-    const fullLink = `/analisis/berita/${slug}`;
+    // Pastikan slug tidak mengandung awalan /analisis/berita/
+    const cleanSlug = slug.startsWith('analisis/berita/') 
+        ? slug.replace('analisis/berita/', '') 
+        : slug;
+    const fullLink = cleanSlug.startsWith('/') 
+        ? cleanSlug 
+        : `/analisis/berita/${cleanSlug}`;
 
     return (
         <div className="group h-full flex flex-col rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-green-100">
