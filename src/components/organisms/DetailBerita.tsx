@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Dialog } from '@headlessui/react';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -31,6 +32,7 @@ const getFullImageUrl = (imagePath: string) => {
 export default function DetailBerita({ date, title, img, content, kategori = 'Berita' }: DetailBeritaProps) {
     const images = Array.isArray(img) ? img : [img];
     const mainImage = images[0] || '/images/placeholder-news.jpg';
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(0);
 
@@ -134,7 +136,7 @@ export default function DetailBerita({ date, title, img, content, kategori = 'Be
             {/* Tombol Lihat Semua Berita */}
             <div className="mt-10 pt-6 border-t border-gray-200 w-full">
                 <button 
-                    onClick={() => window.location.href = '/analisis/berita'}
+                    onClick={() => router.push('/analisis/berita', undefined, { locale: router.locale })}
                     className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
                 >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
