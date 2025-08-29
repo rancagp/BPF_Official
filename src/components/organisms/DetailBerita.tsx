@@ -35,7 +35,9 @@ export default function DetailBerita({ date, title, img, content, kategori = 'Be
     const [selectedImage, setSelectedImage] = useState(0);
 
     const openModal = (index: number) => {
-        setSelectedImage(index);
+        // Pastikan index tidak melebihi jumlah gambar yang ada
+        const safeIndex = Math.min(Math.max(0, index), images.length - 1);
+        setSelectedImage(safeIndex);
         setIsOpen(true);
     };
 
@@ -98,31 +100,49 @@ export default function DetailBerita({ date, title, img, content, kategori = 'Be
                         Galeri Foto
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-6">
-                        {images.slice(1).map((image, index) => (
-                            <div 
-                                key={index} 
-                                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
-                            >
+                        {images.map((image, index) => {
+                            // Skip gambar utama (index 0) karena sudah ditampilkan di atas
+                            if (index === 0) return null;
+                            
+                            return (
                                 <div 
-                                    className="relative aspect-video w-full h-48 bg-gray-100 flex items-center justify-center cursor-pointer" 
-                                    onClick={() => openModal(index)}
+                                    key={index} 
+                                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
                                 >
-                                    <Image 
-                                        src={getFullImageUrl(image)}
-                                        alt={`${title} - Gambar ${index + 2}`}
-                                        fill
-                                        className="object-contain p-2"
-                                        onError={(e) => {
-                                            const target = e.target as HTMLImageElement;
-                                            target.src = '/images/placeholder-news.jpg';
-                                        }}
-                                    />
+                                    <div 
+                                        className="relative aspect-video w-full h-48 bg-gray-100 flex items-center justify-center cursor-pointer" 
+                                        onClick={() => openModal(index)}
+                                    >
+                                        <Image 
+                                            src={getFullImageUrl(image)}
+                                            alt={`${title} - Gambar ${index}`}
+                                            fill
+                                            className="object-contain p-2"
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.src = '/images/placeholder-news.jpg';
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             )}
+
+            {/* Tombol Lihat Semua Berita */}
+            <div className="mt-10 pt-6 border-t border-gray-200 w-full">
+                <button 
+                    onClick={() => window.location.href = '/analisis/berita'}
+                    className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
+                >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                    Lihat Semua Berita
+                </button>
+            </div>
 
             {/* Share buttons */}
             <div className="mt-12 pt-6 border-t border-gray-200">
