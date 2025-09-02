@@ -43,9 +43,6 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
                 const data: Berita[] = await response.json();
-                // Log data untuk debugging
-                console.log('Data pengumuman dari API:', data);
-                console.log('NEXT_PUBLIC_API_BASE_URL:', process.env.NEXT_PUBLIC_API_BASE_URL);
                 
                 // Pastikan path gambar lengkap
                 const processedData = data.map(item => {
