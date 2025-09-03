@@ -10,18 +10,18 @@ import { NewsItem, NewsCategory } from '@/services/newsService';
 import Image from 'next/image';
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
-// Mengambil gambar ketiga (indeks 2) untuk PT KPF
+// Mengambil gambar ketiga (indeks 2) atau keempat (indeks 3) dari API
 const getFullImageUrl = (images: string[] | undefined): string => {
     if (!images || !Array.isArray(images) || images.length === 0) {
         return '/images/placeholder-news.jpg';
     }
     
-    // Ambil gambar ketiga (indeks 2) untuk PT KPF
-    const imagePath = images[2] || images[0]; // Fallback ke gambar pertama jika indeks 2 tidak ada
+    // Ambil gambar ketiga (indeks 2) atau keempat (indeks 3) dari API
+    const imagePath = images[2] || images[3] || images[0]; // Fallback ke gambar pertama jika indeks 2 dan 3 tidak ada
     
     if (!imagePath) return '/images/placeholder-news.jpg';
     if (imagePath.startsWith('http')) return imagePath;
-    return `https://portalnews.newsmaker.id/${imagePath.replace(/^\/+/, '')}`;
+    return `http://portalnews.test/${imagePath.replace(/^\/+/, '')}`;
 };
 
 export default function BeritaDetail() {
@@ -146,6 +146,19 @@ export default function BeritaDetail() {
                             className="prose max-w-none" 
                             dangerouslySetInnerHTML={{ __html: berita.content }} 
                         />
+                        
+                        {/* Tombol Lihat Semua Berita */}
+                        <div className="mt-10 pt-6 border-t border-gray-200 w-full">
+                            <button 
+                                onClick={() => router.push('/analisis/berita')}
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                </svg>
+                                Lihat Semua Berita
+                            </button>
+                        </div>
                     </div>
                 </Container>
             </div>

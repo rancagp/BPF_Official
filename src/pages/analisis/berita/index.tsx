@@ -17,18 +17,18 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 };
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
-// Mengambil gambar ketiga (indeks 2) untuk PT KPF
+// Mengambil gambar ketiga (indeks 2) atau keempat (indeks 3) dari API
 const getFullImageUrl = (images: string[] | undefined) => {
   if (!images || !Array.isArray(images) || images.length === 0) {
     return '/images/placeholder-news.jpg';
   }
   
-  // Ambil gambar ketiga (indeks 2) untuk PT KPF
-  const imagePath = images[2] || images[0]; // Fallback ke gambar pertama jika indeks 2 tidak ada
+  // Ambil gambar ketiga (indeks 2) atau keempat (indeks 3) dari API
+  const imagePath = images[2] || images[3] || images[0]; // Fallback ke gambar pertama jika indeks 2 dan 3 tidak ada
   
   if (!imagePath) return '/images/placeholder-news.jpg';
   if (imagePath.startsWith('http')) return imagePath;
-  return `https://portalnews.newsmaker.id/${imagePath.replace(/^\/+/, '')}`;
+  return `http://portalnews.test/${imagePath.replace(/^\/+/, '')}`;
 };
 
 export default function Berita() {

@@ -48,6 +48,7 @@ const nextConfig: NextConfig = {
   // Image optimization
   images: {
     domains: [
+      'portalnews.test',
       'localhost',
       '127.0.0.1',
       'kpf-backend.test',
@@ -60,6 +61,12 @@ const nextConfig: NextConfig = {
       'portalnews.newsmaker.id'
     ],
     remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'portalnews.test',
+        port: '',
+        pathname: '/uploads/**',
+      },
       {
         protocol: 'https',
         hostname: 'kpf-backpanel-production.up.railway.app',

@@ -7,9 +7,17 @@ export interface NewsCategory {
 export interface NewsItem {
   id: number;
   title: string;
+  titles: {
+    default: string;
+    sg?: string;
+    rfb?: string;
+    kpf: string;
+    ewf?: string;
+    bpf?: string;
+  };
   slug: string;
   content: string;
-  category_id: string;
+  category_id: number;
   kategori: NewsCategory;
   images: string[];
   created_at: string;
@@ -46,7 +54,18 @@ export const fetchNews = async (page = 1, perPage = 9): Promise<NewsApiResponse>
       throw new Error('Gagal mengambil daftar berita');
     }
     
-    return await response.json();
+    const data = await response.json();
+    
+    // Map data untuk memastikan title menggunakan title KPF
+    const mappedData = {
+      ...data,
+      data: data.data.map((item: any) => ({
+        ...item,
+        title: item.titles?.kpf || item.title // Gunakan title KPF jika tersedia
+      }))
+    };
+    
+    return mappedData;
   } catch (error) {
     console.error('Error fetching news:', error);
     throw error;
@@ -74,6 +93,12 @@ export const fetchNewsDetail = async (slug: string): Promise<NewsItem | null> =>
     }
     
     const result = await response.json();
+    
+    // Pastikan title menggunakan title KPF
+    if (result.data) {
+      result.data.title = result.data.titles?.kpf || result.data.title;
+    }
+    
     return result.data || null;
   } catch (error) {
     console.error('Error fetching news detail:', error);
