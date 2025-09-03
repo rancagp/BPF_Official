@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const response = await fetch(`https://portalnews.newsmaker.id/api/berita/${encodeURIComponent(slug)}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/berita/${encodeURIComponent(slug)}`);
 
         if (!response.ok) {
             return res.status(response.status).json({ error: 'Data tidak ditemukan' });
