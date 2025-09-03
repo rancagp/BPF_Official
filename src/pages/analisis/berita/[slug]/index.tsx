@@ -10,7 +10,15 @@ import { NewsItem, NewsCategory } from '@/services/newsService';
 import Image from 'next/image';
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
-const getFullImageUrl = (imagePath: string): string => {
+// Mengambil gambar ketiga (indeks 2) untuk PT KPF
+const getFullImageUrl = (images: string[] | undefined): string => {
+    if (!images || !Array.isArray(images) || images.length === 0) {
+        return '/images/placeholder-news.jpg';
+    }
+    
+    // Ambil gambar ketiga (indeks 2) untuk PT KPF
+    const imagePath = images[2] || images[0]; // Fallback ke gambar pertama jika indeks 2 tidak ada
+    
     if (!imagePath) return '/images/placeholder-news.jpg';
     if (imagePath.startsWith('http')) return imagePath;
     return `https://portalnews.newsmaker.id/${imagePath.replace(/^\/+/, '')}`;
@@ -67,7 +75,7 @@ export default function BeritaDetail() {
                         <div className="animate-pulse space-y-4">
                             <div className="h-8 bg-gray-200 rounded w-3/4"></div>
                             <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                            <div className="h-64 bg-gray-200 rounded"></div>
+                            <div className="relative w-full h-64 md:h-96 lg:h-[500px] rounded-lg overflow-hidden bg-gray-200"></div>
                             <div className="space-y-2">
                                 {[1, 2, 3, 4, 5].map((i) => (
                                     <div key={i} className="h-4 bg-gray-200 rounded"></div>
@@ -110,13 +118,35 @@ export default function BeritaDetail() {
         <PageTemplate title={berita.title}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <Container title={t('title', 'Berita Terbaru')}>
-                    <DetailBerita
-                        date={berita.created_at}
-                        title={berita.title}
-                        img={berita.images || []}
-                        kategori={berita.kategori?.name}
-                        content={berita.content}
-                    />
+                    <div className="relative w-full h-64 md:h-96 lg:h-[500px] rounded-lg overflow-hidden mb-8">
+                        <Image
+                            src={getFullImageUrl(berita.images)}
+                            alt={berita.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                    <div className="prose max-w-none">
+                        <div className="flex items-center text-gray-500 text-sm mb-6">
+                            <span>{formatDate(berita.created_at)}</span>
+                            {berita.kategori?.name && (
+                                <span className="mx-2">•</span>
+                            )}
+                            {berita.kategori?.name && (
+                                <span className="text-green-600 font-medium">
+                                    {berita.kategori.name}
+                                </span>
+                            )}
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                            {berita.title}
+                        </h1>
+                        <div 
+                            className="prose max-w-none" 
+                            dangerouslySetInnerHTML={{ __html: berita.content }} 
+                        />
+                    </div>
                 </Container>
             </div>
         </PageTemplate>

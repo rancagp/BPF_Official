@@ -7,7 +7,15 @@ import NewsCard from "@/components/moleculs/Newscard";
 import { NewsItem, fetchFeaturedNews } from '@/services/newsService';
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
-const getFullImageUrl = (imagePath: string) => {
+// Mengambil gambar ketiga (indeks 2) untuk PT KPF
+const getFullImageUrl = (images: string[] | undefined) => {
+  if (!images || !Array.isArray(images) || images.length === 0) {
+    return '/images/placeholder-news.jpg';
+  }
+  
+  // Ambil gambar ketiga (indeks 2) untuk PT KPF
+  const imagePath = images[2] || images[0]; // Fallback ke gambar pertama jika indeks 2 tidak ada
+  
   if (!imagePath) return '/images/placeholder-news.jpg';
   if (imagePath.startsWith('http')) return imagePath;
   return `https://portalnews.newsmaker.id/${imagePath.replace(/^\/+/, '')}`;
@@ -97,7 +105,7 @@ export default function BeritaSection({ className, limit = 3, showHeader = true 
                                 date={berita.created_at}
                                 content={berita.content?.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...'}
                                 slug={berita.slug}
-                                img={berita.images?.[0] ? getFullImageUrl(berita.images[0]) : '/images/placeholder-news.jpg'}
+                                img={getFullImageUrl(berita.images)}
                             />
                         </div>
                     ))}
