@@ -84,11 +84,11 @@ export default function WakilPialangSection({
         {showHeader && (
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {t('pageTitle', 'Wakil Pialang')}
+              {t('pageTitle')}
             </h2>
             <div className="w-24 h-1 bg-green-600 rounded-full mx-auto mb-6"></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              {t('pageDescription', 'Daftar wakil pialang berjangka PT Kontakperkasa Futures di berbagai kota di Indonesia')}
+              {t('pageDescription')}
             </p>
           </div>
         )}

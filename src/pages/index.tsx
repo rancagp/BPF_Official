@@ -24,7 +24,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         'produk',
         'aboutus',
         'welcome',
-        'footer'
+        'footer',
+        'wakil_pialang'
       ])),
     },
   };

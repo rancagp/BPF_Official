@@ -12,7 +12,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
     const { t } = useTranslation('pivot-fibonacci');
     const [priceA, setPriceA] = useState(""); // Low untuk Uptrend, High untuk Downtrend
     const [priceB, setPriceB] = useState(""); // High untuk Uptrend, Low untuk Downtrend
-    const [results, setResults] = useState<{ retracement: Result; projection: Result } | null>(null);
+    const [results, setResults] = useState<{ retracement: Result; projection: Result }>({ retracement: {}, projection: {} });
 
     const retracementLevels = [23.6, 38.2, 50.0, 61.8, 78.6];
     const projectionLevels = [
@@ -46,7 +46,10 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                 retracementLevels.forEach(level => { newRetracement[level] = low + diff * (level / 100); });
                 projectionLevels.forEach(({ level, factor }) => { newProjection[level] = low - diff * factor; });
             }
-            setResults({ retracement: newRetracement, projection: newProjection });
+            setResults(prev => ({
+                retracement: { ...prev.retracement, ...newRetracement },
+                projection: { ...prev.projection, ...newProjection }
+            }));
         } else {
             alert(t('fibonacci.fillAllFields', 'Mohon masukkan angka yang valid untuk kedua harga.'));
         }
@@ -128,7 +131,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                     onClick={() => {
                         setPriceA("");
                         setPriceB("");
-                        setResults(null);
+                        setResults({ retracement: {}, projection: {} });
                     }}
                     className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
                 >
