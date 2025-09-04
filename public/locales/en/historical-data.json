@@ -16,7 +16,7 @@
   },
   "actions": {
     "download": "Download Data (.CSV)",
-    "downloadAll": "Download All Data",
+    "downloadAll": "Download",
     "downloadSelected": "Download Selected Data"
   },
   "messages": {

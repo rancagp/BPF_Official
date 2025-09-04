@@ -10,6 +10,7 @@ export interface HistoricalData {
   low: string;
   close: string;
   category: string;
+  instrument: string;  // Menambahkan properti instrument
   created_at: string;
   updated_at: string;
 }

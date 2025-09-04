@@ -6,11 +6,11 @@ import PageTemplate from "@/components/templates/PageTemplate";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PivotSection from "@/components/organisms/PivotSection"; 
 import FibonacciSection from "@/components/organisms/FIbonacciSection";
-import HistoricalTable from "@/components/organisms/TableHistory";
+import HistoricalTable from "@/components/organisms/HistoricalDataContent";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale || 'id', ['pivot-fibonacci', 'common', 'footer'])),
+    ...(await serverSideTranslations(locale || 'id', ['pivot-fibonacci', 'common', 'footer', 'historical-data'])),
   },
 });
 
