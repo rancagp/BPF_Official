@@ -94,13 +94,19 @@ export default function NewsCard2({ date, title, content, link, image, category,
             
             {/* Content Container */}
             <div className="p-6 flex flex-col flex-1">
-                <div className="flex justify-between items-center mb-3">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        {displayCategory}
-                    </span>
-                    <time className="text-sm text-gray-500 whitespace-nowrap ml-2" dateTime={date}>
-                        {formattedDate}
-                    </time>
+                <div className="flex flex-col gap-2 mb-3">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 break-words max-w-full">
+                            {displayCategory}
+                        </span>
+                        <time 
+                            className="text-xs text-gray-500 whitespace-normal sm:whitespace-nowrap flex-shrink-0" 
+                            dateTime={date}
+                            title={formattedDate}
+                        >
+                            {formattedDate}
+                        </time>
+                    </div>
                 </div>
                 
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-300 line-clamp-2">

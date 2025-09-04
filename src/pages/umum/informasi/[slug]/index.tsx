@@ -185,24 +185,19 @@ export default function DetailBerita() {
     return (
         <PageTemplate title={berita.judul}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title={berita.judul}>
-                    <div className="mb-6">
+                <ProfilContainer title={t('detail_information', 'Detail Informasi')}>
+                    <div className="max-w-4xl mx-auto">
+                        {/* Featured Image - Original size with container */}
                         {berita.image && (
-                            <div className="w-full mb-8 rounded-xl overflow-hidden bg-gray-100 flex justify-center">
+                            <div className="mb-8 flex justify-center bg-gray-50 rounded-lg overflow-hidden">
                                 <div className="relative w-full max-w-4xl">
                                     <Image
                                         src={berita.image}
                                         alt={berita.judul}
                                         width={1200}
                                         height={675}
-                                        className="w-full h-auto rounded-lg object-contain max-h-[70vh]"
-                                        style={{
-                                            maxWidth: '100%',
-                                            height: 'auto',
-                                            display: 'block',
-                                            margin: '0 auto'
-                                        }}
-                                        sizes="(max-width: 768px) 100vw, 80vw"
+                                        className="w-full h-auto object-contain"
+                                        quality={100}
                                         priority
                                         unoptimized={!berita.image.startsWith('http')}
                                     />
@@ -210,28 +205,58 @@ export default function DetailBerita() {
                             </div>
                         )}
 
-                            <div className="flex flex-wrap items-center text-sm text-gray-500 mb-6 gap-2">
-                            <span>{formatDate(berita.created_at)}</span>
-                            <span>•</span>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                {berita.kategori || 'Umum'}
+                        {/* Date and Category - Moved below image */}
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-4">
+                            <time dateTime={berita.created_at} className="flex items-center">
+                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                {formatDate(berita.created_at)}
+                            </time>
+                            <span className="text-gray-300">•</span>
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+                                {berita.kategori || 'Informasi Umum'}
                             </span>
                         </div>
-                        
+
+                        {/* Title - Moved below date and category */}
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+                            {berita.judul}
+                        </h1>
+
+                        {/* Content */}
                         <div 
-                            className="prose max-w-none prose-lg text-gray-700"
-                            dangerouslySetInnerHTML={{ __html: berita.isi }}
+                            className="prose prose-lg max-w-none text-gray-700"
+                            style={{
+                                color: '#374151',
+                                lineHeight: '1.8',
+                            }}
+                            dangerouslySetInnerHTML={{ 
+                                __html: berita.isi
+                                    .replace(/<p>/g, '<p class="mb-4">')
+                                    .replace(/<h2/g, '<h2 class="text-2xl font-bold mt-10 mb-4 text-gray-800"')
+                                    .replace(/<h3/g, '<h3 class="text-xl font-semibold mt-8 mb-3 text-gray-800"')
+                                    .replace(/<ul/g, '<ul class="list-disc pl-6 space-y-2 my-6"')
+                                    .replace(/<ol/g, '<ol class="list-decimal pl-6 space-y-2 my-6"')
+                                    .replace(/<a/g, '<a class="text-green-600 hover:text-green-700 hover:underline"')
+                                    .replace(/<blockquote/g, '<blockquote class="border-l-4 border-green-500 pl-4 italic my-6 text-gray-600"')
+                                    .replace(/<img/g, '<img class="my-6 rounded-lg shadow-md w-full h-auto"')
+                                    .replace(/<table/g, '<table class="min-w-full divide-y divide-gray-200 my-6"')
+                                    .replace(/<th/g, '<th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"')
+                                    .replace(/<td/g, '<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"')
+                            }}
                         />
 
-                        <div className="mt-10 pt-6 border-t border-gray-200">
+                        {/* Back Button */}
+                        <div className="mt-12 pt-8 border-t border-gray-100">
                             <button 
                                 onClick={() => router.push('/umum/informasi')}
-                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto text-sm font-medium"
                             >
-                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                 </svg>
-                                {t('view_all_information', 'Lihat Semua Informasi')}
+                                {t('back_to_information', 'Kembali ke Daftar Informasi')}
                             </button>
                         </div>
                     </div>

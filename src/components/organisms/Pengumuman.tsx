@@ -86,6 +86,10 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
         fetchBerita();
     }, []);
 
+    if (loading) {
+        return null;
+    }
+
     if (error) {
         return (
             <div className="text-center py-8 text-red-600">
