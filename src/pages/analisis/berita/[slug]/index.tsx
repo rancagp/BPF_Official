@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import PageTemplate from '@/components/templates/PageTemplate';
 import Container from '@/components/templates/PageContainer/Container';
 import NotFound from '@/components/moleculs/NotFound';
-import DetailBerita from '@/components/organisms/DetailBerita';
-import { fetchNewsDetail } from '@/services/newsService';
-import { NewsItem, NewsCategory } from '@/services/newsService';
+import { fetchNews, fetchNewsDetail } from '@/services/newsService';
+import { NewsItem } from '@/services/newsService';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
 // Mengambil gambar ketiga (indeks 2) atau keempat (indeks 3) dari API
@@ -21,6 +21,7 @@ const getFullImageUrl = (images: string[] | undefined): string => {
     
     if (!imagePath) return '/images/placeholder-news.jpg';
     if (imagePath.startsWith('http')) return imagePath;
+    
     // Gunakan base URL yang benar untuk gambar
     return `https://portalnews.newsmaker.id/${imagePath.replace(/^\/+/, '')}`;
 };
@@ -32,6 +33,8 @@ export default function BeritaDetail() {
     const [berita, setBerita] = useState<NewsItem | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [relatedBerita, setRelatedBerita] = useState<NewsItem[]>([]);
+    const [loadingRelated, setLoadingRelated] = useState(true);
 
     useEffect(() => {
         const loadBerita = async () => {
@@ -55,6 +58,50 @@ export default function BeritaDetail() {
 
         loadBerita();
     }, [slug]);
+
+    // Fungsi untuk mengambil berita terkait
+    const fetchRelatedBerita = useCallback(async () => {
+        if (!slug) return;
+        
+        try {
+            setLoadingRelated(true);
+            // Mengambil 10 berita terbaru untuk memastikan cukup berita setelah difilter
+            const response = await fetchNews(1, 10, 'created_at', 'desc');
+            
+            if (!response || !response.data) {
+                console.error('Response tidak valid:', response);
+                return;
+            }
+            
+            console.log('Berita yang diterima:', response.data);
+            
+            // Urutkan berdasarkan created_at terbaru
+            const sortedBerita = [...response.data].sort((a: NewsItem, b: NewsItem) => 
+                new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            );
+            
+            console.log('Berita setelah diurutkan:', sortedBerita);
+            
+            // Filter berita saat ini dari daftar related berita
+            const filteredBerita = sortedBerita
+                .filter((item: NewsItem) => item?.slug && item.slug !== slug)
+                .slice(0, 3); // Ambil 3 berita terbaru setelah difilter
+            
+            console.log('Berita setelah difilter:', filteredBerita);
+            
+            setRelatedBerita(filteredBerita);
+        } catch (error) {
+            console.error('Gagal mengambil berita terkait:', error);
+            setRelatedBerita([]);
+        } finally {
+            setLoadingRelated(false);
+        }
+    }, [slug]);
+    
+    // Panggil fungsi fetchRelatedBerita saat komponen dimount
+    useEffect(() => {
+        fetchRelatedBerita();
+    }, [fetchRelatedBerita]);
 
     const formatDate = (inputDate: string) => {
         const options: Intl.DateTimeFormatOptions = {
@@ -174,6 +221,86 @@ export default function BeritaDetail() {
                             />
                         </div>
                         
+                        {/* Another Posts Section */}
+                        <div className="mt-10 pt-6 border-t border-gray-200 w-full">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-8">Berita Lainnya</h3>
+                            {loadingRelated ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                                    {[1, 2, 3].map((item) => (
+                                        <div key={item} className="animate-pulse">
+                                            <div className="h-48 bg-gray-200 rounded-xl mb-4"></div>
+                                            <div className="h-4 bg-gray-200 rounded w-1/4 mb-2"></div>
+                                            <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                                            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                                    {relatedBerita.map((item) => (
+                                        <div key={item.id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                            <Link 
+                                                href={`/analisis/berita/${item.slug}`}
+                                                className="block h-full flex flex-col"
+                                            >
+                                                <div className="relative h-48 w-full overflow-hidden">
+                                                    {item.images?.length ? (
+                                                        <Image
+                                                            src={item.images[2] 
+                                                                ? `https://portalnews.newsmaker.id/${item.images[2].replace(/^\/+/, '')}`
+                                                                : `https://portalnews.newsmaker.id/${item.images[1].replace(/^\/+/, '')}`}
+                                                            alt={item.titles?.kpf || item.title || 'Berita terkait'}
+                                                            fill
+                                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                            onError={(e) => {
+                                                                const target = e.target as HTMLImageElement;
+                                                                target.onerror = null;
+                                                                target.src = 'https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <div className="absolute inset-0 bg-gray-200 group-hover:scale-105 transition-transform duration-300"></div>
+                                                    )}
+                                                </div>
+                                                <div className="p-5 flex-1 flex flex-col">
+                                                    <div className="mb-2">
+                                                        {item.kategori?.name && (
+                                                            <div className="text-xs font-medium text-green-600 mb-1">
+                                                                {item.kategori.name}
+                                                            </div>
+                                                        )}
+                                                        <div className="text-xs text-gray-500">
+                                                            {formatDate(item.created_at)}
+                                                        </div>
+                                                    </div>
+                                                    <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2" style={{
+                                                        display: '-webkit-box',
+                                                        WebkitLineClamp: 2,
+                                                        WebkitBoxOrient: 'vertical',
+                                                        textOverflow: 'ellipsis',
+                                                        minHeight: '3em',
+                                                        lineHeight: '1.5em',
+                                                        overflow: 'hidden',
+                                                        marginBottom: '0.5rem'
+                                                    }}>
+                                                        {item.titles?.kpf || item.title}
+                                                    </h4>
+                                                    <p className="text-sm text-gray-600 line-clamp-3" style={{
+                                                        marginTop: 'auto',
+                                                        paddingTop: '0.5rem',
+                                                        borderTop: '1px solid #f3f4f6'
+                                                    }}>
+                                                        {item.content?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
                         {/* Tombol Lihat Semua Berita */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
                             <button 
