@@ -11,6 +11,7 @@ import AboutUs from "@/components/organisms/AboutUs";
 import Iso from "@/components/organisms/Market";
 import Pengumuman from "@/components/organisms/Pengumuman";
 import WelcomeModal from "@/components/moleculs/WelcomeModal";
+import WakilPialangSection from "@/components/organisms/WakilPialangSection";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
@@ -74,6 +75,12 @@ export default function HomePage() {
         <hr className="border-gray-200 " />
 
         <Iso />
+
+        <hr className="border-gray-200" />
+
+        <div className="sm:px-6 md:px-10 lg:px-20 xl:px-36 2xl:px-52">
+          <WakilPialangSection />
+        </div>
 
         <hr className="border-gray-200" />
 

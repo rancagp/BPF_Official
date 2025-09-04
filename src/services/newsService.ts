@@ -44,10 +44,10 @@ export interface NewsApiResponse {
   total: number;
 }
 
-export const fetchNews = async (page = 1, perPage = 9): Promise<NewsApiResponse> => {
+export const fetchNews = async (page = 1, perPage = 9, sortBy = 'created_at', order = 'desc'): Promise<NewsApiResponse> => {
   try {
     const response = await fetch(
-      `https://portalnews.newsmaker.id/api/berita?page=${page}&per_page=${perPage}`
+      `https://portalnews.newsmaker.id/api/berita?page=${page}&per_page=${perPage}&sort_by=${sortBy}&order=${order}`
     );
     
     if (!response.ok) {
@@ -74,7 +74,7 @@ export const fetchNews = async (page = 1, perPage = 9): Promise<NewsApiResponse>
 
 export const fetchFeaturedNews = async (limit = 3): Promise<NewsItem[]> => {
   try {
-    const response = await fetchNews(1, limit);
+    const response = await fetchNews(1, limit, 'created_at', 'desc');
     return response.data || [];
   } catch (error) {
     console.error('Error fetching featured news:', error);

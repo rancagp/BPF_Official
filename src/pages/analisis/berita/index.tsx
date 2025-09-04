@@ -48,8 +48,15 @@ export default function Berita() {
   const loadNews = async (page = 1) => {
     try {
       setLoading(true);
-      const response = await fetchNews(page, pagination.perPage);
-      setNews(response.data);
+      // Pastikan berita diurutkan berdasarkan created_at descending (terbaru dulu)
+      const response = await fetchNews(page, pagination.perPage, 'created_at', 'desc');
+      
+      // Pastikan data diurutkan di sisi klien juga sebagai cadangan
+      const sortedData = [...response.data].sort((a, b) => 
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+      
+      setNews(sortedData);
       setPagination({
         currentPage: response.current_page,
         totalPages: response.last_page,

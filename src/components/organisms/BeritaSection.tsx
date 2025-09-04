@@ -28,7 +28,7 @@ interface BeritaSectionProps {
     className?: string;
 }
 
-export default function BeritaSection({ className, limit = 3, showHeader = true }: BeritaSectionProps) {
+export default function BeritaSection({ className, limit = 6, showHeader = true }: BeritaSectionProps) {
     const { t } = useTranslation('berita');
     const router = useRouter();
     const { locale } = router;
@@ -40,8 +40,13 @@ export default function BeritaSection({ className, limit = 3, showHeader = true 
         const loadNews = async () => {
             try {
                 setIsLoading(true);
+                // Pastikan berita diurutkan berdasarkan created_at descending (terbaru dulu)
                 const featuredNews = await fetchFeaturedNews(limit);
-                setNews(featuredNews);
+                // Urutkan ulang di sisi klien untuk memastikan
+                const sortedNews = [...featuredNews].sort((a, b) => 
+                  new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                );
+                setNews(sortedNews);
                 setError(null);
             } catch (err) {
                 console.error('Error loading news:', err);
@@ -94,7 +99,7 @@ export default function BeritaSection({ className, limit = 3, showHeader = true 
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {news.map((berita, index) => (
+                    {news.slice(0, 6).map((berita, index) => (
                         <div 
                             key={berita.id}
                             className="transform transition-transform duration-300 hover:-translate-y-1"
