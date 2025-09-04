@@ -66,12 +66,14 @@ export default function ProductDetail() {
                         <div className="flex flex-col gap-5 items-start">
                             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-10 w-full">
                                 {/* Skeleton Gambar */}
-                                <div className="w-full md:w-1/2">
-                                    <div className="animate-pulse bg-gray-200 rounded-2xl w-full h-96"></div>
+                                <div className="w-full flex justify-center px-4">
+                                    <div className="w-full max-w-2xl bg-white p-6 rounded-xl shadow-sm">
+                                        <div className="animate-pulse bg-gray-200 rounded-2xl w-full h-96"></div>
+                                    </div>
                                 </div>
 
                                 {/* Skeleton Deskripsi */}
-                                <div className="w-full md:w-1/2 space-y-4">
+                                <div className="w-full max-w-4xl mx-auto space-y-12">
                                     <div className="h-8 bg-gray-200 rounded w-3/4"></div>
                                     <div className="h-4 bg-gray-200 rounded w-full"></div>
                                     <div className="h-4 bg-gray-200 rounded w-5/6"></div>
@@ -81,9 +83,10 @@ export default function ProductDetail() {
                                 </div>
                             </div>
 
-                            {/* Skeleton Spesifikasi */}
-                            <div className="w-full pt-8 mt-8 border-t border-gray-200">
-                                <div className="h-6 bg-gray-200 rounded w-1/4 mb-6"></div>
+                            <div className="w-full bg-white p-6 rounded-xl shadow-sm">
+                                <h2 className="text-2xl font-bold text-gray-800 mb-4 pb-3 border-b border-gray-100">
+                                    <div className="h-6 bg-gray-200 rounded w-1/4 mb-6"></div>
+                                </h2>
                                 <div className="space-y-4">
                                     <div className="h-4 bg-gray-200 rounded w-full"></div>
                                     <div className="h-4 bg-gray-200 rounded w-5/6"></div>
@@ -109,37 +112,39 @@ export default function ProductDetail() {
         <PageTemplate title={product?.name || 'Detail Produk'}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title={product?.name || 'Detail Produk'}>
-                    <div className="flex flex-col gap-5 items-start">
-                        <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-10">
-                            {/* Gambar Produk */}
-                            <div className="w-full md:w-1/2 flex justify-center">
+                    <div className="flex flex-col items-center gap-8">
+                        {/* Gambar Produk */}
+                        <div className="w-full max-w-2xl mx-auto">
                                 <img
                                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product?.image}`}
                                     alt={product?.name}
-                                    className="w-full max-w-md h-auto object-cover rounded-2xl shadow-lg"
+                                className="w-full h-auto object-contain"
+                                    style={{ maxHeight: '500px' }}
                                 />
                             </div>
 
-                            {/* Deskripsi */}
-                            <div className="w-full md:w-1/2 text-gray-800 leading-relaxed text-base text-justify">
-                                <div dangerouslySetInnerHTML={{ __html: product?.deskripsi || "" }} />
+                        {/* Deskripsi */}
+                        {product?.deskripsi && (
+                            <div className="w-full max-w-4xl mx-auto py-6 border-b border-gray-200">
+                                <h2 className="text-xl font-semibold text-gray-800 mb-4">Deskripsi Produk</h2>
+                                <div className="prose max-w-none text-gray-700 leading-relaxed" 
+                                     dangerouslySetInnerHTML={{ __html: product.deskripsi }} />
                             </div>
-                        </div>
+                        )}
 
-                        {/* Deskripsi & Spesifikasi */}
-                        <div className="w-full">
-                            {product?.specs && (
-                                <div className="border-t pt-4 text-sm prose max-w-none prose-p:my-2 prose-table:border prose-th:border prose-td:border prose-th:bg-gray-100">
-                                    <div dangerouslySetInnerHTML={{ __html: product.specs }} />
-                                </div>
-                            )}
-                        </div>
+                        {/* Spesifikasi */}
+                        {product?.specs && (
+                            <div className="w-full max-w-4xl mx-auto py-6">
+                                <div className="prose max-w-none text-sm" 
+                                     dangerouslySetInnerHTML={{ __html: product.specs }} />
+                            </div>
+                        )}
 
                         {/* Tombol Lihat Semua Produk */}
-                        <div className="mt-10 pt-6 border-t border-gray-200 w-full">
+                        <div className="mt-4 w-full max-w-4xl mx-auto text-center">
                             <button 
                                 onClick={() => router.push('/produk')}
-                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors inline-flex items-center"
                             >
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
@@ -148,6 +153,7 @@ export default function ProductDetail() {
                             </button>
                         </div>
                     </div>
+
                 </ProfilContainer>
             </div>
         </PageTemplate>

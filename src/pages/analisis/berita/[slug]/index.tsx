@@ -143,10 +143,36 @@ export default function BeritaDetail() {
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                             {berita.title}
                         </h1>
-                        <div 
-                            className="prose max-w-none" 
-                            dangerouslySetInnerHTML={{ __html: berita.content }} 
-                        />
+                        <div className="max-w-4xl mx-auto">
+                            <div 
+                                className="prose prose-lg max-w-none text-left"
+                                style={{
+                                    color: '#374151',
+                                    lineHeight: '1.8',
+                                    fontSize: '1.125rem',
+                                    textAlign: 'left',
+                                }}
+                                dangerouslySetInnerHTML={{ 
+                                    __html: berita.content 
+                                        .replace(/<p(\s+[^>]*)?>/g, (match, p1) => {
+                                            // Jika paragraf kosong atau hanya berisi whitespace, abaikan
+                                            if (/^\s*$/.test(match)) return match;
+                                            // Tambahkan class untuk spasi yang lebih besar
+                                            return `<p class="mb-4 leading-relaxed"${p1 || ''}>`;
+                                        })
+                                        .replace(/<h2/g, '<h2 class="text-2xl font-bold mt-10 mb-4 text-gray-800"')
+                                        .replace(/<h3/g, '<h3 class="text-xl font-semibold mt-8 mb-3 text-gray-800"')
+                                        .replace(/<ul/g, '<ul class="list-disc pl-6 space-y-2 my-6"')
+                                        .replace(/<ol/g, '<ol class="list-decimal pl-6 space-y-2 my-6"')
+                                        .replace(/<a/g, '<a class="text-green-600 hover:text-green-700 hover:underline"')
+                                        .replace(/<blockquote/g, '<blockquote class="border-l-4 border-green-500 pl-4 italic my-6 text-gray-600"')
+                                        .replace(/<img/g, '<img class="my-6 rounded-lg shadow-md w-full h-auto"')
+                                        .replace(/<table/g, '<table class="min-w-full divide-y divide-gray-200 my-6"')
+                                        .replace(/<th/g, '<th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"')
+                                        .replace(/<td/g, '<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"')
+                                }} 
+                            />
+                        </div>
                         
                         {/* Tombol Lihat Semua Berita */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
