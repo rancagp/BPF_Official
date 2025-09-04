@@ -190,14 +190,16 @@ export default function BeritaDetail() {
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                             {berita.title}
                         </h1>
-                        <div className="max-w-4xl mx-auto">
+                        <div className="w-full">
                             <div 
-                                className="prose prose-lg max-w-none text-left"
+                                className="prose prose-lg max-w-none text-left mx-0"
                                 style={{
-                                    color: '#374151',
+                                    color: '#000000',
                                     lineHeight: '1.8',
                                     fontSize: '1.125rem',
                                     textAlign: 'left',
+                                    maxWidth: 'none',
+                                    width: '100%'
                                 }}
                                 dangerouslySetInnerHTML={{ 
                                     __html: berita.content 
@@ -223,7 +225,7 @@ export default function BeritaDetail() {
                         
                         {/* Another Posts Section */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-8">Berita Lainnya</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-8">Berita Terbaru</h3>
                             {loadingRelated ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {[1, 2, 3].map((item) => (
