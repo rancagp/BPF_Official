@@ -1,12 +1,20 @@
 {
   "title": "Tentang Kami",
-  "description": "Kami adalah perusahaan terkemuka di industri ini dengan komitmen untuk memberikan layanan terbaik kepada pelanggan kami.",
   "welcome": "Selamat Datang di",
-  "companyName": "KONTAKPERKASA FUTURES",
-  "aboutText": "PT. Kontakperkasa Futures, selaku anggota dari Bursa Berjangka Jakarta dan anggota Kliring Berjangka Indonesia, berbekal pengalaman dan kemampuan dalam mengembangkan perdagangan berjangka komoditi di tanah air.",
-  "features.derivative": "Layanan transaksi derivatif indeks saham yang lengkap",
-  "features.team": "Didukung oleh tim profesional yang berpengalaman",
-  "features.platform": "Platform trading yang canggih dan aman",
-  "headOffice": "Kantor Pusat Kontakperkasa Futures",
+  "companyName": "Equityworld Futures",
+  "since": "Sejak 2005",
+  "member": "Anggota BAPPEBTI & BBJ",
+  "trustedPartner": "Partner Investasi Terpercaya",
+  "aboutText": "PT Equityworld Futures (\"EWF\") berkomitmen menjadi partner investasi terbaik di bidang perdagangan berjangka. Dengan pelayanan yang prima, EWF terus berekspansi dan kini memiliki jaringan 7 kantor operasional di Jakarta (2 kantor), Surabaya (2 kantor), Semarang, Manado dan Cirebon.",
+  "aboutText2": "Berdiri sejak tahun 2005, PT Equityworld Futures merupakan anggota perusahaan pialang resmi yang terdaftar di Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI), PT Bursa Berjangka Jakarta (BBJ) dan PT Kliring Berjangka Indonesia (Persero).",
+  "featuresTitle": "Keunggulan Kami",
+  "features": [
+    "Dapat bertransaksi dimana dan kapan saja",
+    "Grafik dan harga live update",
+    "Mudah digunakan (user friendly)",
+    "Memantau rekening secara langsung",
+    "Penarikan dana terjamin dan aman"
+  ],
+  "ctaText": "Bergabunglah dengan ribuan investor yang telah mempercayakan investasi mereka kepada kami.",
   "learnMore": "Pelajari Lebih Lanjut"
 }

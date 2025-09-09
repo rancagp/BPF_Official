@@ -103,9 +103,20 @@ const NavBar: React.FC = () => {
   const [menuItems, setMenuItems] = useState<NavItem[]>(baseMenuItems);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({});
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => setIsClient(true), []);
+  useEffect(() => {
+    setIsClient(true);
+    
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 10;
+      setIsScrolled(scrolled);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const translatedMenuItems = baseMenuItems.map((item) => ({
@@ -137,14 +148,14 @@ const NavBar: React.FC = () => {
 
   const renderMobileMenu = (items: NavItem[], level = 0) => {
     return (
-      <div className={`${level > 0 ? `pl-4` : ""} mt-1 space-y-1`}>
+      <div className={`${level > 0 ? 'pl-4 bg-[#F8F8F8]' : ''} space-y-0.5 py-2`}>
         {items.map((item) => (
-          <div key={item.key}>
+          <div key={item.key} className="border-b border-[#9B9FA7]/10 last:border-0">
             {item.href && !item.submenu ? (
               <Link
                 href={item.href}
                 locale={i18n.language}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-700 hover:bg-gray-50"
+                className="block px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] hover:bg-[#F8F8F8] transition-colors"
                 onClick={closeAllMenus}
                 target={item.target}
                 rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
@@ -155,16 +166,20 @@ const NavBar: React.FC = () => {
               <div>
                 <button
                   onClick={() => toggleDropdown(item.key)}
-                  className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-700 hover:bg-gray-50 flex justify-between items-center"
+                  className="w-full text-left px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] flex justify-between items-center"
                 >
-                  {item.label}
+                  <span>{item.label}</span>
                   {item.submenu && (
                     <i
-                      className={`fas fa-chevron-${openDropdowns[item.key] ? "up" : "down"} text-xs`}
+                      className={`fas fa-chevron-${openDropdowns[item.key] ? "up" : "down"} text-xs text-[#9B9FA7] ml-2`}
                     />
                   )}
                 </button>
-                {item.submenu && openDropdowns[item.key] && renderMobileMenu(item.submenu, level + 1)}
+                {item.submenu && (
+                  <div className={`overflow-hidden transition-all duration-300 ${openDropdowns[item.key] ? 'max-h-96' : 'max-h-0'}`}>
+                    {renderMobileMenu(item.submenu, level + 1)}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -176,19 +191,24 @@ const NavBar: React.FC = () => {
   if (!isClient) return null;
 
   return (
-    <div className="sticky top-0 z-50 bg-white">
-      <nav className="bg-white shadow-md">
+    <div className={`sticky top-0 z-50 bg-white border-b border-[#9B9FA7]/30 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+      <nav className="bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between h-16">
-            {/* Logo */}
-            <Link href="/" locale={i18n.language} className="flex items-center gap-1 group">
-              <img
-                src="/assets/logo-kpf-full.png"
-                alt="Logo KPF"
-                width={120}
-                height={40}
-                className="h-8 w-auto md:h-10 transition-transform duration-300 group-hover:scale-105"
-              />
+          <div className={`flex justify-between items-center transition-all duration-300 ${isScrolled ? 'h-14' : 'h-20'}`}>
+            {/* Logo with Text */}
+            <Link href="/" locale={i18n.language} className="flex items-center gap-2 group">
+              <div className="flex items-center">
+                <img
+                  src="/assets/ewf-logo.png"
+                  alt="Logo EWF"
+                  width={50}
+                  height={50}
+                  className={`w-auto transition-all duration-300 group-hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'}`}
+                />
+                <span className="ml-3 text-xl md:text-2xl font-bold text-[#4C4C4C] tracking-tight">
+                  EQUITYWORLD <span className="text-[#F2AC59]">FUTURES</span>
+                </span>
+              </div>
             </Link>
 
             {/* Desktop nav */}
@@ -198,7 +218,7 @@ const NavBar: React.FC = () => {
                   <Link
                     href={item.href || "#"}
                     locale={i18n.language}
-                    className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-green-700 transition-colors flex items-center"
+                    className="px-4 py-2.5 text-sm font-medium text-[#4C4C4C] hover:text-[#F2AC59] transition-colors flex items-center group-hover:bg-[#F8F8F8] rounded-lg"
                     target={item.target}
                     rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                   >
@@ -218,13 +238,13 @@ const NavBar: React.FC = () => {
                           <Link
                             href={sub.href || "#"}
                             locale={i18n.language}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center"
+                            className="flex items-center px-4 py-2.5 text-sm text-[#4C4C4C] hover:bg-[#F8F8F8] w-full text-left hover:text-[#F2AC59] rounded-md"
                             target={sub.target}
                             rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
                           >
                             {sub.label}
                             {sub.submenu && (
-                              <i className="fas fa-chevron-right text-xs group-hover/sub:rotate-90 transition-transform duration-200" />
+                              <i className={`fas fa-chevron-right text-xs group-hover/sub:rotate-90 transition-transform duration-200`} />
                             )}
                           </Link>
                           {sub.submenu && (
@@ -256,10 +276,10 @@ const NavBar: React.FC = () => {
             </div>
 
             {/* Mobile button */}
-            <div className="md:hidden flex items-center">
+            <div className="flex items-center md:hidden">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-700"
+                className="inline-flex items-center justify-center p-2 rounded-md text-[#4C4C4C] hover:text-[#F2AC59] hover:bg-[#F8F8F8] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#F2AC59]"
               >
                 <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"} text-xl`} />
               </button>
@@ -268,7 +288,40 @@ const NavBar: React.FC = () => {
         </div>
 
         {/* Mobile menu */}
-        {menuOpen && <div className="md:hidden animate-slideDown bg-white">{renderMobileMenu(menuItems)}</div>}
+        <div className={`fixed inset-0 z-40 bg-[#4C4C4C] bg-opacity-70 transition-opacity md:hidden ${
+          menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}>
+          <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+            menuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}>
+            <div className="flex items-center justify-between p-4 border-b border-[#9B9FA7]/30">
+              <div className="flex items-center">
+                <img
+                  src="/assets/ewf-logo.png"
+                  alt="Logo EWF"
+                  className="h-10 w-auto"
+                />
+                <span className="ml-2 text-lg font-bold text-[#4C4C4C]">
+                  EWF
+                </span>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="p-2 rounded-full hover:bg-[#F8F8F8]"
+              >
+                <i className="fas fa-times text-[#4C4C4C]"></i>
+              </button>
+            </div>
+            <div className="h-[calc(100%-64px)] overflow-y-auto py-2">
+              {renderMobileMenu(menuItems)}
+              <div className="p-4 border-t border-[#9B9FA7]/10">
+                <div className="text-xs text-[#9B9FA7] text-center">
+                  © {new Date().getFullYear()} EquityWorld Futures. All rights reserved.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
 
       <MarketUpdate />

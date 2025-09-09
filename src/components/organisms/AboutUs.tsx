@@ -1,132 +1,114 @@
-import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-
-// Daftar fitur sudah tidak digunakan karena akan ditulis langsung
+import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 function AboutUs() {
     const { t, i18n, ready } = useTranslation('aboutus');
     const router = useRouter();
     const { locale } = router;
     
-    // Sinkronkan i18n.language dengan locale dari router
     useEffect(() => {
         if (i18n.language !== locale) {
             i18n.changeLanguage(locale);
         }
     }, [locale, i18n]);
 
-    // Dapatkan semua terjemahan dengan fallback
-    const getTranslation = (key: string, fallback: string) => {
-        return t(key, { ns: 'aboutus', defaultValue: fallback });
-    };
-
-    // Tampilkan loading jika i18n belum siap
     if (!ready) {
         return (
-            <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+            <div className="bg-white py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="animate-pulse">
-                        <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto"></div>
-                        <div className="h-4 bg-gray-200 rounded w-1/2 mt-4 mx-auto"></div>
+                        <div className="h-10 bg-[#9B9FA7]/20 rounded w-1/3 mx-auto"></div>
+                        <div className="h-4 bg-[#9B9FA7]/20 rounded w-1/2 mt-4 mx-auto"></div>
                     </div>
                 </div>
             </div>
         );
     }
 
-    // Dapatkan terjemahan
-    const translations = {
-      title: getTranslation('title', 'Tentang Kami'),
-      description: getTranslation('description', 'Kami adalah perusahaan terkemuka di industri ini'),
-      welcome: getTranslation('welcome', 'Selamat Datang di'),
-      companyName: getTranslation('companyName', 'KONTAKPERKASA FUTURES'),
-      aboutText: getTranslation('aboutText', 'PT. Kontakperkasa Futures, selamat anggota dari Bursa Berjangka Jakarta dan anggota Kliring Berjangka Indonesia, berbekal pengalaman dan kemampuan dalam mengembangkan perdagangan berjangka komoditi di tanah air.'),
-      learnMore: getTranslation('learnMore', 'Pelajari Lebih Lanjut'),
-      features: {
-        derivative: getTranslation('features.derivative', 'Layanan transaksi derivatif indeks saham yang lengkap'),
-        team: getTranslation('features.team', 'Didukung oleh tim profesional yang berpengalaman'),
-        platform: getTranslation('features.platform', 'Platform trading yang canggih dan aman')
-      }
-    };
-    
-    // Destructure untuk memudahkan penggunaan
-    const { title, description, welcome: welcomeText, companyName, aboutText, learnMore, features } = translations;
+    const features = t('features', { returnObjects: true }) as string[];
 
     return (
-        <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                        {title}
+        <section className="py-12 md:py-20">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                {/* Header */}
+                <div className="text-center mb-12 md:mb-16">
+                    <span className="inline-block px-4 py-1.5 text-sm font-medium text-[#F2AC59] bg-[#F2AC59]/10 rounded-full mb-4">
+                        {t('title')}
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#4C4C4C] mb-4">
+                        {t('welcome')} <span className="text-[#F2AC59]">{t('companyName')}</span>
                     </h2>
-                    <div className="mt-2 h-1 w-24 bg-green-600 mx-auto"></div>
-                </div>
-                
-                <div className="text-center mb-8">
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                        {description}
-                    </p>
+                    <div className="w-20 h-1 bg-[#F2AC59] mx-auto rounded-full"></div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div className="relative rounded-lg overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-105">
-                        <img
-                            src="/assets/gedung-kpf.png"
-                            alt="Kontakperkasa Futures"
-                            className="w-full h-auto rounded-lg"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <p className="text-white text-sm">{t('headOffice', 'Kantor Pusat Kontakperkasa Futures')}</p>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                    {/* Image Section */}
+                    <div className="relative h-full">
+                        <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
+                            <Image
+                                src="/assets/gedung-kpf.png"
+                                alt="Equityworld Futures Office"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                        <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-lg shadow-md max-w-[280px] w-full">
+                            <div className="flex items-center">
+                                <div className="bg-[#F2AC59]/10 p-2 rounded-lg mr-3">
+                                    <CheckCircle className="h-6 w-6 text-[#F2AC59]" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-[#4C4C4C]">{t('since')}</p>
+                                    <p className="text-xs text-[#4C4C4C]/70">{t('member')}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Konten */}
+                    {/* Content Section */}
                     <div className="space-y-6">
-                        <h1 className="text-3xl font-bold text-gray-900">
-                            {welcomeText} <span className="text-green-600">{companyName}</span>
-                        </h1>
-                        
-                        <p className="text-gray-600 leading-relaxed">
-                            {aboutText}
-                        </p>
-                        
                         <div className="space-y-4">
-                            <div className="flex items-start">
-                                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
-                                <p className="ml-3 text-gray-700">
-                                    {features.derivative}
-                                </p>
-                            </div>
-                            <div className="flex items-start">
-                                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
-                                <p className="ml-3 text-gray-700">
-                                    {features.team}
-                                </p>
-                            </div>
-                            <div className="flex items-start">
-                                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
-                                <p className="ml-3 text-gray-700">
-                                    {features.platform}
-                                </p>
+                            <h3 className="text-xl font-semibold text-[#4C4C4C]">
+                                {t('trustedPartner')}
+                            </h3>
+                            <div className="space-y-4 text-[#4C4C4C]/90 leading-relaxed">
+                                <p>{t('aboutText')}</p>
+                                <p>{t('aboutText2')}</p>
                             </div>
                         </div>
-                        
-                        <div className="pt-4">
+
+                        <div className="bg-[#F9FAFB] p-5 rounded-xl">
+                            <h4 className="font-medium text-[#4C4C4C] mb-3">
+                                {t('featuresTitle')}
+                            </h4>
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {features.map((feature, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <CheckCircle className="h-5 w-5 text-[#F2AC59] mt-0.5 mr-2 flex-shrink-0" />
+                                        <span className="text-sm text-[#4C4C4C]">{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="pt-2 flex justify-center">
                             <Link 
                                 href="/profil/perusahaan" 
-                                className="inline-block px-6 py-3 bg-green-600 text-white font-medium rounded-md hover:bg-green-800"
-                                locale={router.locale}
+                                className="inline-flex items-center w-full sm:w-auto bg-[#F2AC59] hover:bg-[#e69e4d] text-white font-medium py-2.5 px-6 rounded-lg transition-colors justify-center"
                             >
-                                {learnMore}
+                                {t('learnMore')}
+                                <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 

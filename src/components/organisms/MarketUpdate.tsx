@@ -135,14 +135,14 @@ export default function MarketUpdate() {
             content: (
                 <div key={`news-${news.id}`} className="flex items-center h-full">
                     <div className="flex items-center gap-2 px-4">
-                        <span className="text-yellow-200 font-semibold">
+                        <span className="text-[#F2AC59] font-semibold">
                             {news.kategori?.name || 'Berita'}:
                         </span>
                         <span className="whitespace-nowrap">
                             {news.title}
                         </span>
                     </div>
-                    <span className="mx-4 h-full text-white/50">|</span>
+                    <span className="mx-4 h-full text-[#9B9FA7]">|</span>
                 </div>
             )
         })),
@@ -156,25 +156,25 @@ export default function MarketUpdate() {
                         <span>{formatPrice(item.symbol, item.last)}</span>
                         <span className={`font-medium ${item.percentChange > 0 ? 'text-green-300' :
                                 item.percentChange < 0 ? 'text-red-300' :
-                                    'text-white/80'
+                                    'text-[#9B9FA7]'
                             }`}>
                             ({formatPercent(item.percentChange)})
                         </span>
                     </div>
-                    <span className="mx-4 h-full text-white/50">|</span>
+                    <span className="mx-4 h-full text-[#9B9FA7]">|</span>
                 </div>
             )
         }))
     ];
 
     return (
-        <div className="bg-zinc-900 text-white overflow-hidden shadow group">
+        <div className="bg-[#4C4C4C] text-white overflow-hidden shadow group">
             <div className="flex items-center h-10">
-                <div className="bg-yellow-500 px-4 h-full flex items-center font-bold text-xs sm:text-sm md:text-base whitespace-nowrap">
-                    Market Update
+                <div className="bg-[#F2AC59] px-4 h-full flex items-center font-bold text-xs sm:text-sm md:text-base whitespace-nowrap text-white">
+                    TOP NEWS
                 </div>
 
-                <div className="relative overflow-hidden w-full bg-green-500 h-10 flex items-center min-w-0">
+                <div className="relative overflow-hidden w-full bg-[#4C4C4C] h-10 flex items-center min-w-0">
                     {errorMessage ? (
                         <div className="px-4 text-xs sm:text-sm md:text-base font-semibold text-white">
                             {errorMessage}

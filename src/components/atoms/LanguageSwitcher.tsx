@@ -73,20 +73,20 @@ export default function LanguageSwitcher() {
   if (typeof window === 'undefined') {
     return (
       <div className="relative w-16">
-        <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+        <div className="h-8 bg-[#4C4C4C] rounded animate-pulse"></div>
       </div>
     );
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative group" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="flex items-center justify-between w-16 px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-green-500"
+        className="flex items-center justify-between w-16 px-3 py-1 text-sm font-medium text-white bg-[#4C4C4C] border border-[#9B9FA7] rounded hover:bg-[#F2AC59] hover:text-black focus:outline-none focus:ring-1 focus:ring-[#F2AC59]"
       >
         {currentLang}
         <svg 
-          className={`w-3 h-3 ml-1 text-green-600 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} 
+          className={`w-3 h-3 ml-1 text-[#F2AC59] transition-all duration-200 group-hover:text-black ${isOpen ? 'transform rotate-180' : ''}`} 
           fill="none" 
           viewBox="0 0 20 20"
           stroke="currentColor"
@@ -96,14 +96,14 @@ export default function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 z-[60] w-32 mt-1 bg-white rounded-md shadow-lg border border-gray-200">
+        <div className="absolute right-0 z-[60] w-32 mt-1 bg-[#4C4C4C] rounded-md shadow-lg border border-[#9B9FA7]">
           <div className="py-1">
             <button
               onClick={() => changeLanguage('id')}
               className={`w-full text-left px-3 py-2 text-sm ${
                 i18n.language === 'id' 
-                  ? 'bg-green-50 text-green-700 font-medium' 
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-[#F2AC59] text-black font-medium' 
+                  : 'text-white hover:bg-[#9B9FA7] hover:text-black'
               }`}
             >
               Indonesian
@@ -112,8 +112,8 @@ export default function LanguageSwitcher() {
               onClick={() => changeLanguage('en')}
               className={`w-full text-left px-3 py-2 text-sm ${
                 i18n.language === 'en' 
-                  ? 'bg-green-50 text-green-700 font-medium' 
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-[#F2AC59] text-black font-medium' 
+                  : 'text-white hover:bg-[#9B9FA7] hover:text-black'
               }`}
             >
               English

@@ -12,20 +12,20 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
   const { t } = useTranslation('welcome');
   return (
     <ModalPopup isOpen={isOpen} onClose={onClose}>
-      <div className="relative p-1 text-center max-w-2xl w-full">
+      <div className="relative p-4 md:p-6 text-center max-w-md w-full">
         {/* Decorative elements */}
-        <div className="absolute -top-4 -right-4 w-24 h-24 bg-green-100 rounded-full -z-10"></div>
-        <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-green-100 rounded-full -z-10"></div>
+        <div className="absolute -top-3 -right-3 w-16 h-16 bg-[#F2AC59]/20 rounded-full -z-10"></div>
+        <div className="absolute -bottom-3 -left-3 w-24 h-24 bg-[#F2AC59]/10 rounded-full -z-10"></div>
         
         {/* Logo with border */}
-        <div className="mb-6">
-          <div className="mx-auto w-32 h-32 p-1 bg-white border-2 border-green-500 rounded-2xl shadow-md">
-            <div className="bg-white p-4 rounded-xl h-full flex items-center justify-center">
+        <div className="mb-4">
+          <div className="mx-auto w-24 h-24 p-1.5 bg-white border-2 border-[#F2AC59] rounded-xl shadow-sm">
+            <div className="bg-white p-2 rounded-lg h-full flex items-center justify-center">
               <Image 
-                src="/assets/logo-kpf.png" 
-                alt="KontakPerkasa Futures" 
-                width={128}
-                height={128}
+                src="/assets/ewf-logo.png" 
+                alt="Equityworld Futures" 
+                width={96}
+                height={96}
                 className="h-full w-auto object-contain"
               />
             </div>
@@ -33,18 +33,18 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <h1 className="text-3xl md:text-4xl font-bold text-green-600 mb-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#4C4C4C] mb-4">
           {t('title')}
         </h1>
         
-        <p className="text-black text-lg mb-8 max-w-lg mx-auto">
+        <p className="text-[#4C4C4C] text-base mb-6 max-w-md mx-auto leading-relaxed">
           {t('description')}
         </p>
         
         <div className="space-y-4">
           <a 
             href="https://regol.kontak-perkasa-futures.co.id/" 
-            className="inline-block w-full max-w-xs mx-auto bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:-translate-y-1"
+            className="inline-block w-full max-w-[280px] mx-auto bg-[#F2AC59] hover:bg-[#e69e4d] text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm hover:shadow transition-all duration-200"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -52,7 +52,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
           </a>
           <button 
             onClick={onClose}
-            className="w-full max-w-xs mx-auto text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors duration-200 block"
+            className="w-full max-w-[280px] mx-auto text-[#9B9FA7] hover:text-[#4C4C4C] text-xs font-medium transition-colors duration-200 block mt-2"
           >
             {t('laterButton')}
           </button>

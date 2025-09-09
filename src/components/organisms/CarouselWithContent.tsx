@@ -462,9 +462,9 @@ export default function CarouselWithContent() {
     }
 
     return (
-        <div className="relative w-full overflow-hidden text-white">
+        <div className="relative w-full h-auto min-h-[60vh] md:h-[74vh] overflow-hidden text-white">
             <div
-                className="flex"
+                className="flex h-full"
                 style={{
                     transform: `translateX(-${index * 100}%)`,
                     transition: transitioning ? "transform 2s ease-in-out" : "none",
@@ -474,10 +474,10 @@ export default function CarouselWithContent() {
                 {fullSlides.map((slide: Slide, i: number) => (
                     <div
                         key={i}
-                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-8 md:px-16 lg:px-32"
+                        className="flex-shrink-0 w-full h-full flex flex-col-reverse md:flex-row items-center justify-center gap-4 md:gap-8 px-4 py-6 md:px-16 lg:px-32"
                     >
                         {/* Teks */}
-                        <div className="text-center md:text-left max-w-xl">
+                        <div className="text-center md:text-left max-w-xl px-4 md:px-0">
                             <h1 className="text-2xl md:text-4xl font-bold mb-4">{slide.title}</h1>
                             <p className="text-base md:text-lg mb-6">{slide.description}</p>
                             <div className="flex flex-col md:flex-row gap-3">
@@ -495,8 +495,8 @@ export default function CarouselWithContent() {
                         </div>
 
                         {/* Gambar */}
-                        <div className="mt-8 md:mt-0 w-full md:w-1/2 flex-shrink-0">
-                            <div className="relative w-full h-[300px] md:h-[450px] lg:h-[420px]">
+                        <div className="mt-4 md:mt-0 w-full md:w-1/2 flex-shrink-0 px-4 md:px-0">
+                            <div className="relative w-full h-[40vh] md:h-[60vh] lg:h-[70vh]">
                                 {slide.hasError ? (
                                     <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                                         <span className="text-gray-500">Gambar tidak tersedia</span>
@@ -522,7 +522,7 @@ export default function CarouselWithContent() {
             </div>
 
             {/* Dots */}
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
+            <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center gap-2 px-4">
                 {slides.map((_, i) => (
                     <button
                         key={i}
