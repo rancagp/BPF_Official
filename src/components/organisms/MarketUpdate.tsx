@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { fetchLatestNews, NewsItem } from "@/services/newsService";
+import Link from "next/link";
 
 interface MarketItem {
   symbol: string;
@@ -6,9 +8,35 @@ interface MarketItem {
   percentChange: number;
 }
 
+interface NewsItemWithCategory extends Omit<NewsItem, 'category_id'> {
+  kategori: {
+    id: number;
+    name: string;
+    slug: string;
+  };
+}
+
 export default function MarketUpdate() {
     const [marketData, setMarketData] = useState<MarketItem[]>([]);
+    const [latestNews, setLatestNews] = useState<NewsItemWithCategory[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const [errorMessage, setErrorMessage] = useState<string>("");
+
+    // Fungsi untuk update berita
+    const updateNews = (news: NewsItem[]) => {
+        const newsWithCategory = news
+            .sort((a, b) => a.id - b.id) // Sort by ID in ascending order (oldest first)
+            .slice(-3) // Take the 3 most recent news (last 3 items)
+            .map(item => ({
+                ...item,
+                kategori: item.kategori || { 
+                    id: 0, 
+                    name: 'Berita', 
+                    slug: 'berita' 
+                }
+            }));
+        setLatestNews(newsWithCategory);
+    };
 
     useEffect(() => {
         const fetchMarketData = async () => {
@@ -42,11 +70,35 @@ export default function MarketUpdate() {
             }
         };
 
-        fetchMarketData();
+        const fetchData = async () => {
+            try {
+                await Promise.all([
+                    fetchMarketData(),
+                    fetchLatestNews(5).then(updateNews),
+                ]);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        const interval = setInterval(fetchMarketData, 10000);
+        fetchData();
 
-        return () => clearInterval(interval);
+        // Fetch data market lebih sering (setiap 10 detik)
+        const marketInterval = setInterval(() => {
+            fetchMarketData();
+        }, 10000);
+
+        // Fetch data berita lebih jarang (setiap 5 menit)
+        const newsInterval = setInterval(() => {
+            fetchLatestNews(5).then(updateNews);
+        }, 5 * 60 * 1000);
+
+        return () => {
+            clearInterval(marketInterval);
+            clearInterval(newsInterval);
+        };
     }, []);
 
     const formatPrice = (symbol: string, price: number): string => {
@@ -63,6 +115,58 @@ export default function MarketUpdate() {
         return `${sign}${formatted}%`;
     };
 
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+    };
+
+    // Sort news by ID in descending order (newest first)
+    const sortedNews = [...latestNews].sort((a, b) => b.id - a.id);
+
+    // Combine news and market data into a single array of items to display (news first, then market data)
+    const tickerItems = [
+        ...sortedNews.map(news => ({
+            type: 'news',
+            id: `news-${news.id}`,
+            content: (
+                <div key={`news-${news.id}`} className="flex items-center h-full">
+                    <div className="flex items-center gap-2 px-4">
+                        <span className="text-yellow-200 font-semibold">
+                            {news.kategori?.name || 'Berita'}:
+                        </span>
+                        <span className="whitespace-nowrap">
+                            {news.title}
+                        </span>
+                    </div>
+                    <span className="mx-4 h-full text-white/50">|</span>
+                </div>
+            )
+        })),
+        ...marketData.map(item => ({
+            type: 'market',
+            id: `market-${item.symbol}`,
+            content: (
+                <div key={`market-${item.symbol}`} className="flex items-center h-full">
+                    <div className="flex items-center gap-2 px-4">
+                        <span className="font-semibold">{item.symbol}:</span>
+                        <span>{formatPrice(item.symbol, item.last)}</span>
+                        <span className={`font-medium ${item.percentChange > 0 ? 'text-green-300' :
+                                item.percentChange < 0 ? 'text-red-300' :
+                                    'text-white/80'
+                            }`}>
+                            ({formatPercent(item.percentChange)})
+                        </span>
+                    </div>
+                    <span className="mx-4 h-full text-white/50">|</span>
+                </div>
+            )
+        }))
+    ];
+
     return (
         <div className="bg-zinc-900 text-white overflow-hidden shadow group">
             <div className="flex items-center h-10">
@@ -70,33 +174,56 @@ export default function MarketUpdate() {
                     Market Update
                 </div>
 
-                <div className="relative overflow-hidden w-full bg-green-500 h-full flex items-center min-w-0">
+                <div className="relative overflow-hidden w-full bg-green-500 h-10 flex items-center min-w-0">
                     {errorMessage ? (
                         <div className="px-4 text-xs sm:text-sm md:text-base font-semibold text-white">
                             {errorMessage}
                         </div>
-                    ) : marketData.length === 0 ? (
+                    ) : loading ? (
                         <div className="px-4 text-xs sm:text-sm md:text-base font-semibold text-white">
                             Memuat data...
                         </div>
+                    ) : tickerItems.length === 0 ? (
+                        <div className="px-4 text-xs sm:text-sm md:text-base font-semibold text-white">
+                            Tidak ada data yang tersedia
+                        </div>
                     ) : (
-                        <div className="flex animate-marquee whitespace-nowrap items-center text-xs sm:text-sm md:text-base group-hover:[animation-play-state:paused]">
-                            {[...marketData, ...marketData].map((item: MarketItem, idx: number) => (
-                                <div key={`${item.symbol}-${idx}`} className="flex items-center">
-                                    <div className="flex items-center gap-2 px-4">
-                                        <span className="font-semibold">{item.symbol}:</span>
-                                        <span>{formatPrice(item.symbol, item.last)}</span>
-                                        <span className={`font-medium ${item.percentChange > 0 ? 'text-green-300' :
-                                                item.percentChange < 0 ? 'text-red-400' :
-                                                    'text-white/60'
-                                            }`}>
-                                            ({formatPercent(item.percentChange)})
-                                        </span>
-                                    </div>
-                                    <span className="mx-4 h-full text-white/50">|</span>
+                        <div 
+                        className="relative flex whitespace-nowrap items-center text-xs sm:text-sm md:text-base h-full"
+                        onMouseEnter={() => {
+                            const container = document.querySelector('.marquee-container');
+                            container?.classList.add('paused');
+                        }}
+                        onMouseLeave={() => {
+                            const container = document.querySelector('.marquee-container');
+                            container?.classList.remove('paused');
+                        }}
+                    >
+                        <style jsx>{`
+                            .marquee-container {
+                                display: flex;
+                                animation: scroll 60s linear infinite;
+                            }
+                            @keyframes scroll {
+                                0% { transform: translateX(0); }
+                                100% { transform: translateX(-50%); }
+                            }
+                            .marquee-container.paused {
+                                animation-play-state: paused;
+                            }
+                            .marquee-item {
+                                white-space: nowrap;
+                                padding-right: 2rem;
+                            }
+                        `}</style>
+                        <div className="marquee-container">
+                            {[...tickerItems, ...tickerItems].map((item, idx) => (
+                                <div key={`${item.id}-${idx}`} className="marquee-item flex items-center">
+                                    {item.content}
                                 </div>
                             ))}
                         </div>
+                    </div>
                     )}
                 </div>
             </div>

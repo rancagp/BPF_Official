@@ -18,7 +18,11 @@ export interface NewsItem {
   slug: string;
   content: string;
   category_id: number;
-  kategori: NewsCategory;
+  kategori?: {
+    id: number;
+    name: string;
+    slug: string;
+  };
   images: string[];
   created_at: string;
   updated_at: string;
@@ -31,11 +35,11 @@ export interface NewsApiResponse {
   from: number;
   last_page: number;
   last_page_url: string;
-  links: Array<{
+  links: {
     url: string | null;
     label: string;
     active: boolean;
-  }>;
+  }[];
   next_page_url: string | null;
   path: string;
   per_page: number;
@@ -43,6 +47,24 @@ export interface NewsApiResponse {
   to: number;
   total: number;
 }
+
+export const fetchLatestNews = async (limit = 3): Promise<NewsItem[]> => {
+  try {
+    const response = await fetch(
+      `https://portalnews.newsmaker.id/api/berita?per_page=${limit}&sort_by=created_at&order=desc`
+    );
+    
+    if (!response.ok) {
+      throw new Error('Gagal mengambil berita terbaru');
+    }
+    
+    const data = await response.json();
+    return data.data || [];
+  } catch (error) {
+    console.error('Error fetching latest news:', error);
+    return [];
+  }
+};
 
 export const fetchNews = async (page = 1, perPage = 9, sortBy = 'created_at', order = 'desc'): Promise<NewsApiResponse> => {
   try {
