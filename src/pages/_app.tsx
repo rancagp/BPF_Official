@@ -36,12 +36,20 @@ function App({ Component, pageProps }: AppProps) {
     const currentPath = router.asPath;
     const currentLocale = locale || 'id';
     
+    // Set the language in localStorage for persistence
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('preferred-locale', currentLocale);
+    }
+    
+    // Update i18n language
+    i18n.changeLanguage(currentLocale);
+    
     // Skip if we're already on the correct path
-    if (currentLocale === 'id' && !currentPath.startsWith('/id')) return;
+    if (currentLocale === 'id' && !currentPath.startsWith('/id') && !currentPath.startsWith('/en')) return;
     if (currentLocale !== 'id' && currentPath.startsWith(`/${currentLocale}`)) return;
 
     // For default locale (id), ensure no /id prefix
-    if (currentLocale === 'id' && currentPath.startsWith('/id')) {
+    if (currentLocale === 'id' && (currentPath.startsWith('/id/') || currentPath === '/id')) {
       const newPath = currentPath.replace(/^\/id(\/|$)/, '/') || '/';
       if (newPath !== currentPath) {
         router.replace(

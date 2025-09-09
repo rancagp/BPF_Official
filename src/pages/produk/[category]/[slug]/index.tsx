@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'next-i18next';
 import PageTemplate from "@/components/templates/PageTemplate";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 
@@ -15,6 +16,7 @@ type Product = {
 };
 
 export default function ProductDetail() {
+    const { t } = useTranslation('produk');
     const router = useRouter();
     const { category, slug } = router.query;
 
@@ -112,42 +114,82 @@ export default function ProductDetail() {
         <PageTemplate title={product?.name || 'Detail Produk'}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title={product?.name || 'Detail Produk'}>
-                    <div className="flex flex-col items-center gap-8">
+                    <div className="flex flex-col gap-8">
                         {/* Gambar Produk */}
-                        <div className="w-full max-w-2xl mx-auto">
+                        <div className="w-full bg-white rounded-xl shadow-sm overflow-hidden">
+                            <div className="relative w-full h-64 md:h-96 lg:h-[500px]">
                                 <img
                                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product?.image}`}
                                     alt={product?.name}
-                                className="w-full h-auto object-contain"
-                                    style={{ maxHeight: '500px' }}
+                                    className="w-full h-full object-contain p-4"
+                                    loading="lazy"
                                 />
                             </div>
+                        </div>
 
                         {/* Deskripsi */}
                         {product?.deskripsi && (
-                            <div className="w-full max-w-4xl mx-auto py-6 border-b border-gray-200">
-                                <h2 className="text-xl font-semibold text-gray-800 mb-4">Deskripsi Produk</h2>
-                                <div className="prose max-w-none text-gray-700 leading-relaxed" 
-                                     dangerouslySetInnerHTML={{ __html: product.deskripsi }} />
+                            <div className="w-full py-6 border-b border-gray-200">
+                                <h2 className="text-xl font-semibold text-gray-800 mb-6">Deskripsi Produk</h2>
+                                <div 
+                                    className="prose max-w-none text-gray-700 leading-relaxed text-base sm:text-lg"
+                                    style={{
+                                        '--tw-prose-headings': 'text-gray-900',
+                                        '--tw-prose-body': 'text-gray-700',
+                                        '--tw-prose-links': 'text-blue-600 hover:text-blue-800',
+                                        '--tw-prose-underline': 'text-blue-600',
+                                        '--tw-prose-underline-shadow': 'shadow-[inset_0_-2px_0_0_rgba(37,99,235,0.3)]',
+                                        '--tw-prose-underline-underline': 'text-blue-600',
+                                        '--tw-prose-underline-underline-offset': '2px',
+                                        '--tw-prose-underline-underline-thickness': '2px',
+                                        '--tw-prose-underline-hover': 'text-blue-800',
+                                        '--tw-prose-underline-hover-shadow': 'shadow-[inset_0_calc(-1*var(--tw-prose-underline-underline-thickness))_0_0_var(--tw-prose-underline-hover)]',
+                                    } as React.CSSProperties}
+                                    dangerouslySetInnerHTML={{ 
+                                        __html: product.deskripsi 
+                                            .replace(/<img/g, '<img class="w-full h-auto my-6 rounded-lg shadow-sm mx-auto max-w-full" loading="lazy"')
+                                            .replace(/<table/g, '<div class="overflow-x-auto my-6"><table class="min-w-full divide-y divide-gray-200"')
+                                            .replace(/<\/table>/g, '</table></div>')
+                                            .replace(/<th/g, '<th class="px-4 py-3 bg-gray-50 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider"')
+                                            .replace(/<td/g, '<td class="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-900 border-b border-gray-200"')
+                                    }} 
+                                />
                             </div>
                         )}
 
                         {/* Spesifikasi */}
                         {product?.specs && (
-                            <div className="w-full max-w-4xl mx-auto py-6">
-                                <div className="prose max-w-none text-sm" 
-                                     dangerouslySetInnerHTML={{ __html: product.specs }} />
+                            <div className="w-full py-6">
+                                <h2 className="text-xl font-semibold text-gray-800 mb-6">Spesifikasi</h2>
+                                <div 
+                                    className="prose max-w-none text-gray-700 leading-relaxed text-base sm:text-lg"
+                                    style={{
+                                        '--tw-prose-headings': 'text-gray-900',
+                                        '--tw-prose-body': 'text-gray-700',
+                                        '--tw-prose-lists': 'list-disc pl-6 sm:pl-8',
+                                        '--tw-prose-li': 'my-2',
+                                    } as React.CSSProperties}
+                                    dangerouslySetInnerHTML={{ 
+                                        __html: product.specs
+                                            .replace(/<img/g, '<img class="w-full h-auto my-6 rounded-lg shadow-sm mx-auto max-w-full" loading="lazy"')
+                                            .replace(/<table/g, '<div class="w-full my-6 overflow-hidden"><table class="w-full max-w-full border-collapse"')
+                                            .replace(/<\/table>/g, '</table></div>')
+                                            .replace(/<th/g, '<th class="p-2 sm:p-3 bg-gray-50 text-left text-xs sm:text-sm font-medium text-gray-500 align-top break-words"')
+                                            .replace(/<td/g, '<td class="p-2 sm:p-3 text-sm sm:text-base text-gray-900 border-b border-gray-200 align-top break-words"')
+                                            .replace(/<tr/g, '<tr class="hover:bg-gray-50"')
+                                    }} 
+                                />
                             </div>
                         )}
 
                         {/* Tombol Lihat Semua Produk */}
-                        <div className="mt-4 w-full max-w-4xl mx-auto text-center">
+                        <div className="mt-6 w-full text-center">
                             <button 
                                 onClick={() => router.push('/produk')}
-                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors inline-flex items-center"
+                                className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base font-medium rounded-lg transition-colors duration-200"
                             >
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
                                 </svg>
                                 Lihat Semua Produk
                             </button>

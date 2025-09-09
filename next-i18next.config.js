@@ -6,7 +6,11 @@ module.exports = {
     defaultLocale: 'id',
     locales: ['id', 'en'],
     localeDetection: true,
-    localePath: path.resolve('./public/locales')
+    localePath: path.resolve('./public/locales'),
+    localeSubpaths: {
+      en: 'en',
+      id: 'id'
+    }
   },
   
   // Namespace yang digunakan di seluruh aplikasi
@@ -15,7 +19,8 @@ module.exports = {
     'aboutus', 
     'footer', 
     'produk', 
-    'berita', 
+    'berita',
+    'informasi',
     'profil_perusahaan', 
     'market', 
     'pengumuman', 
@@ -25,8 +30,7 @@ module.exports = {
     'badan_regulasi', 
     'fasilitas_layanan', 
     'penghargaan', 
-    'sertifikat', 
-    'informasi', 
+    'sertifikat',
     'video', 
     'symbol-indeks',
     'loco-london-gold',
@@ -37,17 +41,30 @@ module.exports = {
     'mekanisme-perdagangan',
     'pivot-fibonacci',
     'prosedur',
+    'header',
+    'analisis'
   ],
   
   defaultNS: 'common',
   
   // Konfigurasi React
   react: {
-    useSuspense: false
+    useSuspense: true,
+    bindI18n: 'languageChanged loaded',
+    bindI18nStore: 'added removed',
+    nsMode: 'default'
   },
   
   // Mode development
-  reloadOnPrerender: true, // Always true for development
+  reloadOnPrerender: process.env.NODE_ENV === 'development',
+  
+  // Debug mode
+  debug: process.env.NODE_ENV === 'development',
+  
+  // Interpolation configuration
+  interpolation: {
+    escapeValue: false, // React already escapes values
+  },
   debug: process.env.NODE_ENV === 'development',
   
   // Konfigurasi dasar

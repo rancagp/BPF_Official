@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PageTemplate from '@/components/templates/PageTemplate';
 import Container from '@/components/templates/PageContainer/Container';
 import NotFound from '@/components/moleculs/NotFound';
@@ -8,6 +9,18 @@ import { fetchNews, fetchNewsDetail } from '@/services/newsService';
 import { NewsItem } from '@/services/newsService';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export async function getServerSideProps({ locale, params }: { locale: string; params: { slug: string } }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'id', [
+        'common',
+        'berita',
+        'footer',
+      ])),
+    },
+  };
+}
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
 // Mengambil gambar ketiga (indeks 2) atau keempat (indeks 3) dari API
@@ -29,7 +42,14 @@ const getFullImageUrl = (images: string[] | undefined): string => {
 export default function BeritaDetail() {
     const router = useRouter();
     const { slug } = router.query;
-    const { t } = useTranslation('berita');
+    const { t, i18n } = useTranslation(['berita', 'common']);
+    
+    // Ensure language is set on component mount
+    useEffect(() => {
+        if (router.locale) {
+            i18n.changeLanguage(router.locale);
+        }
+    }, [router.locale, i18n]);
     const [berita, setBerita] = useState<NewsItem | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -104,14 +124,24 @@ export default function BeritaDetail() {
     }, [fetchRelatedBerita]);
 
     const formatDate = (inputDate: string) => {
+        if (!inputDate) return '';
+        
         const options: Intl.DateTimeFormatOptions = {
             weekday: "long",
             day: "2-digit",
             month: "long",
             year: "numeric",
         };
+        
+        const language = i18n.language || router.locale || 'id';
         const parsedDate = new Date(inputDate);
-        return parsedDate.toLocaleDateString("id-ID", options);
+        
+        // Fallback if date is invalid
+        if (isNaN(parsedDate.getTime())) {
+            return inputDate;
+        }
+        
+        return parsedDate.toLocaleDateString(language === 'en' ? 'en-US' : 'id-ID', options);
     };
 
 
@@ -225,7 +255,7 @@ export default function BeritaDetail() {
                         
                         {/* Another Posts Section */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-8">Berita Terbaru</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-8">{t('latest_news', 'Latest News')}</h3>
                             {loadingRelated ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {[1, 2, 3].map((item) => (
@@ -306,13 +336,16 @@ export default function BeritaDetail() {
                         {/* Tombol Lihat Semua Berita */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
                             <button 
-                                onClick={() => router.push('/analisis/berita')}
+                                onClick={() => {
+                                    const lang = i18n.language || router.locale || 'id';
+                                    router.push(`/${lang}/analisis/berita`);
+                                }}
                                 className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
                             >
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                                 </svg>
-                                Lihat Semua Berita
+                                {t('view_all_news', 'View All News')}
                             </button>
                         </div>
                     </div>

@@ -27,7 +27,7 @@ type DaftarBerita = {
     total: number;
 };
 
-// ✅ formatDate hanya didefinisikan sekali
+// formatDate hanya didefinisikan sekali
 const formatDate = (inputDate: string, language: 'id' | 'en' = 'id'): string => {
     try {
         const parsedDate = new Date(inputDate);
@@ -71,6 +71,7 @@ export default function DetailBerita() {
     const router = useRouter();
     const { slug } = router.query;
     const { t, i18n } = useTranslation(['common', 'informasi', 'footer']);
+    const { t: tInfo } = useTranslation('informasi');
     const [berita, setBerita] = useState<Berita | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -195,10 +196,10 @@ export default function DetailBerita() {
                             <h2 className="text-xl font-semibold text-gray-800 mb-2">Terjadi Kesalahan</h2>
                             <p className="text-gray-600 mb-6">{error}</p>
                             <button
-                                onClick={() => router.push('/umum/informasi')}
+                                onClick={() => router.push(`/${i18n.language === 'en' ? 'en' : 'id'}/umum/informasi`)}
                                 className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
-                                Kembali ke Daftar Informasi
+                                {tInfo('back_to_information_list')}
                             </button>
                         </div>
                     </ProfilContainer>
@@ -232,68 +233,74 @@ export default function DetailBerita() {
     return (
         <PageTemplate title={berita.judul}>
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title={t('detail_information', 'Detail Informasi')}>
-                    <div className="max-w-4xl mx-auto">
+                <ProfilContainer title={tInfo('detail_information')}>
+                    <div className="flex flex-col gap-8">
                         {berita.image && (
-                            <div className="mb-8 flex justify-center">
-                                <div className="relative w-full max-w-3xl">
-                                    <div className="relative aspect-video max-h-[500px] bg-gray-50 rounded-lg overflow-hidden">
-                                        <Image
-                                            src={berita.image}
-                                            alt={berita.judul}
-                                            fill
-                                            sizes="(max-width: 768px) 100vw, 800px"
-                                            className="object-contain p-2"
-                                            quality={85}
-                                            priority
-                                            unoptimized={!berita.image.startsWith('http')}
-                                        />
-                                    </div>
+                            <div className="w-full bg-white rounded-xl shadow-sm overflow-hidden">
+                                <div className="relative w-full h-64 md:h-96 lg:h-[500px]">
+                                    <Image
+                                        src={berita.image}
+                                        alt={berita.judul}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 800px"
+                                        className="object-contain p-4 sm:p-6"
+                                        quality={85}
+                                        priority
+                                        unoptimized={!berita.image.startsWith('http')}
+                                    />
                                 </div>
                             </div>
                         )}
 
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-4">
+                        <div className="flex flex-wrap items-center gap-3 text-sm sm:text-base text-gray-500 mb-6">
                             <time dateTime={berita.created_at} className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                                 {formatDate(berita.created_at, (i18n.language === 'id' || i18n.language === 'en' ? i18n.language : 'id') as 'id' | 'en')}
                             </time>
-                            <span className="text-gray-300">•</span>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+                            <span className="text-gray-300 hidden sm:inline">•</span>
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-green-50 text-green-700 border border-green-100">
                                 {berita.kategori || 'Informasi Umum'}
                             </span>
                         </div>
 
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                             {berita.judul}
                         </h1>
 
                         <div 
-                            className="prose prose-lg max-w-none text-gray-700"
+                            className="prose prose-sm sm:prose-base max-w-none text-gray-700 leading-relaxed"
                             style={{
-                                color: '#374151',
-                                lineHeight: '1.8',
-                            }}
+                                '--tw-prose-body': '#374151',
+                                '--tw-prose-headings': '#111827',
+                                '--tw-prose-links': '#059669',
+                                '--tw-prose-links-hover': '#047857',
+                                '--tw-prose-underline': 'rgba(5, 150, 105, 0.3)',
+                                '--tw-prose-underline-hover': '#047857',
+                                lineHeight: '1.75',
+                            } as React.CSSProperties}
                             dangerouslySetInnerHTML={{ 
                                 __html: berita.isi
-                                    .replace(/<p>/g, '<p class="mb-4">')
-                                    .replace(/<h2/g, '<h2 class="text-2xl font-bold mt-10 mb-4 text-gray-800"')
-                                    .replace(/<h3/g, '<h3 class="text-xl font-semibold mt-8 mb-3 text-gray-800"')
-                                    .replace(/<ul/g, '<ul class="list-disc pl-6 space-y-2 my-6"')
-                                    .replace(/<ol/g, '<ol class="list-decimal pl-6 space-y-2 my-6"')
-                                    .replace(/<a/g, '<a class="text-green-600 hover:text-green-700 hover:underline"')
-                                    .replace(/<blockquote/g, '<blockquote class="border-l-4 border-green-500 pl-4 italic my-6 text-gray-600"')
-                                    .replace(/<img/g, '<img class="my-6 rounded-lg shadow-md w-full h-auto"')
-                                    .replace(/<table/g, '<table class="min-w-full divide-y divide-gray-200 my-6"')
-                                    .replace(/<th/g, '<th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"')
-                                    .replace(/<td/g, '<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"')
+                                    .replace(/<p>/g, '<p class="mb-4 sm:mb-6"')
+                                    .replace(/<h2/g, '<h2 class="text-xl sm:text-2xl font-bold mt-10 sm:mt-12 mb-4 sm:mb-6 text-gray-900"')
+                                    .replace(/<h3/g, '<h3 class="text-lg sm:text-xl font-semibold mt-8 sm:mt-10 mb-3 sm:mb-4 text-gray-900"')
+                                    .replace(/<ul/g, '<ul class="list-disc pl-5 sm:pl-6 space-y-2 my-4 sm:my-6"')
+                                    .replace(/<ol/g, '<ol class="list-decimal pl-5 sm:pl-6 space-y-2 my-4 sm:my-6"')
+                                    .replace(/<li>/g, '<li class="pl-1">')
+                                    .replace(/<a/g, '<a class="text-green-600 hover:text-green-700 hover:underline underline-offset-2"')
+                                    .replace(/<blockquote/g, '<blockquote class="border-l-4 border-green-500 pl-4 sm:pl-6 italic my-6 sm:my-8 text-gray-600"')
+                                    .replace(/<img/g, '<img class="my-6 sm:my-8 rounded-lg shadow-sm w-full h-auto mx-auto max-w-full" loading="lazy"')
+                                    .replace(/<table/g, '<div class="w-full my-6 sm:my-8 overflow-hidden"><table class="w-full max-w-full border-collapse"')
+                                    .replace(/<\/table>/g, '</table></div>')
+                                    .replace(/<th/g, '<th class="p-2 sm:p-3 bg-gray-50 text-left text-xs sm:text-sm font-medium text-gray-500 align-top break-words"')
+                                    .replace(/<td/g, '<td class="p-2 sm:p-3 text-sm sm:text-base text-gray-900 border-b border-gray-200 align-top break-words"')
+                                    .replace(/<tr/g, '<tr class="hover:bg-gray-50"')
                             }}
                         />
 
-                        <div className="mt-10 pt-6 border-t border-gray-200 w-full">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-8">Informasi Terbaru</h3>
+                        <div className="mt-8 sm:mt-10 pt-6 border-t border-gray-200 w-full">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{tInfo('latest_information')}</h3>
                             {loadingRelated ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {[1, 2, 3].map((item) => (
@@ -312,7 +319,7 @@ export default function DetailBerita() {
                                             item && item.id && (
                                                 <div key={item.id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                                     <a 
-                                                        href={`/umum/informasi/${item.slug}`}
+                                                        href={`${i18n.language === 'en' ? '/en' : ''}/umum/informasi/${item.slug}`}
                                                         className="block h-full flex flex-col"
                                                     >
                                                         <div className="relative h-48 w-full overflow-hidden">
@@ -368,7 +375,7 @@ export default function DetailBerita() {
                                         ))
                                     ) : (
                                         <div className="col-span-full text-center py-4 text-gray-500">
-                                            Tidak ada informasi terkait yang tersedia
+                                            {tInfo('no_related_information')}
                                         </div>
                                     )}
                                 </div>
@@ -377,13 +384,13 @@ export default function DetailBerita() {
 
                         <div className="mt-12 pt-8 border-t border-gray-100">
                             <button 
-                                onClick={() => router.push('/umum/informasi')}
+                                onClick={() => router.push(`/${i18n.language === 'en' ? 'en' : 'id'}/umum/informasi`)}
                                 className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto text-sm font-medium"
                             >
                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                 </svg>
-                                {t('back_to_information', 'Kembali ke Daftar Informasi')}
+                                {tInfo('back_to_information')}
                             </button>
                         </div>
                     </div>

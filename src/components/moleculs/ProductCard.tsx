@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 interface ProductCardProps {
     product: {
@@ -26,6 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     onClick, 
     className = '' 
 }) => {
+    const { t } = useTranslation('produk');
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
         if (onClick) {
@@ -78,7 +80,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     )}
                     <div className="mt-auto pt-4 border-t border-gray-100">
                         <button className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300 text-sm font-medium">
-                            Lihat Detail
+                            {t('viewDetails')}
                         </button>
                     </div>
                 </div>

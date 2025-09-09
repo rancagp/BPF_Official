@@ -3,10 +3,15 @@
   "content": "Konten informasi umum akan ditampilkan di sini.",
   "view_all_information": "Lihat Semua Informasi",
   "back_to_list": "Kembali ke Daftar",
+  "back_to_information": "Kembali ke Daftar Informasi",
+  "back_to_information_list": "Kembali ke Daftar Informasi",
+  "latest_information": "Informasi Terbaru",
+  "no_related_information": "Tidak ada informasi terkait yang tersedia",
   "published_on": "Dipublikasikan pada",
   "category": "Kategori",
   "error_loading": "Gagal memuat informasi. Silakan coba lagi nanti.",
   "not_found": "Informasi tidak ditemukan",
   "not_found_message": "Informasi yang Anda cari tidak dapat ditemukan.",
+  "detail_information": "Detail Informasi",
   "back_to_home": "Kembali ke Beranda"
 }
