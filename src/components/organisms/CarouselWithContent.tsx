@@ -421,11 +421,17 @@ export default function CarouselWithContent() {
     const debouncedGoToPrev = useCallback(debounce(prev, 300), [prev]);
 
     const handleImageError = useCallback((index: number) => {
-        console.log('Gambar gagal dimuat:', index);
-        const newBanners = [...banners];
-        newBanners[index].hasError = true;
-        setBanners(newBanners);
-    }, [banners]);
+        console.log('Gambar gagal dimuat pada index:', index);
+        setBanners(prevBanners => {
+            if (!prevBanners[index]) return prevBanners;
+            const newBanners = [...prevBanners];
+            newBanners[index] = {
+                ...newBanners[index],
+                hasError: true
+            };
+            return newBanners;
+        });
+    }, []);
 
     // Tampilkan loading hanya jika benar-benar loading dan belum ada banner
     if (loading && banners.length === 0) {

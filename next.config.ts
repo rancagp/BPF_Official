@@ -52,6 +52,7 @@ const nextConfig: NextConfig = {
       'localhost',
       '127.0.0.1',
       'kpf-backend.test',
+      'ewf-backend.test',
       'kpf-backpanel-production.up.railway.app',
       'kpf-backpanel-production.up.railway.app:443',
       'placehold.co',
@@ -81,7 +82,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'http',
-        hostname: 'kpf-backend.test',
+        hostname: 'ewf-backend.test',
         port: '',
         pathname: '/storage/**',
       },
