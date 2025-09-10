@@ -20,9 +20,9 @@ export default function LoadingScreen({ show }: LoadingScreenProps) {
         <div className={`fixed inset-0 bg-white z-[9999] flex items-center justify-center transition-opacity duration-500 ${show ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex flex-col items-center gap-4">
                 <div className="animate-bounce-slow">
-                    <img src="/assets/logo-kpf.png" alt="Loading" className="w-24 h-24" />
+                    <img src="/assets/ewf-logo.png" alt="Loading" className="w-24 h-24" />
                 </div>
-                <p className="text-lg font-semibold text-green-800">Memuat...</p>
+                <p className="text-lg font-semibold text-[#F2AC59]">Memuat...</p>
             </div>
         </div>
     ) : null;
