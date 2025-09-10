@@ -7,7 +7,7 @@ interface NewsCard2Props {
     date: string;
     title: string;
     content: string;
-    link: string;
+    link?: string;
     image?: string;
     category?: string;
     index?: number;
@@ -64,7 +64,7 @@ export default function NewsCard2({ date, title, content, link, image, category,
     const truncatedTitle = truncate(stripHtml(title), 70);
 
     return (
-        <div className="group flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-green-100">
+        <div className="group flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#F2AC59]/30">
             {/* Image Container */}
             <div className="relative w-full h-48 overflow-hidden">
                 {image ? (
@@ -96,7 +96,7 @@ export default function NewsCard2({ date, title, content, link, image, category,
             <div className="p-6 flex flex-col flex-1">
                 <div className="flex flex-col gap-2 mb-3">
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 break-words max-w-full">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#F2AC59]/10 text-[#F2AC59] break-words max-w-full">
                             {displayCategory}
                         </span>
                         <time 
@@ -109,17 +109,13 @@ export default function NewsCard2({ date, title, content, link, image, category,
                     </div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-300 line-clamp-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors duration-300 line-clamp-2">
                     {truncatedTitle}
                 </h3>
                 
                 <p className="text-gray-600 mb-4 text-sm line-clamp-3 flex-grow">
                     {truncatedContent}
                 </p>
-                
-                <div className="pt-4 border-t border-gray-100 mt-auto">
-                    <CardDetail link={link} />
-                </div>
             </div>
         </div>
     );

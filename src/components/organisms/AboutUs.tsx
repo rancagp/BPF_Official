@@ -41,7 +41,7 @@ function AboutUs() {
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-[#4C4C4C] mb-4">
                         <div className="block">{t('welcome')}</div>
-                        <div className="text-[#F2AC59]">{t('companyName')}</div>
+                        <div className="text-[#4C4C4C]">{t('companyName')}</div>
                     </h2>
                     <div className="w-20 h-1 bg-[#F2AC59] mx-auto rounded-full"></div>
                 </div>

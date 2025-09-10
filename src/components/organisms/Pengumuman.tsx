@@ -101,17 +101,31 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
     return (
         <div className={`${className} mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}>
             {showHeader && (
-                <div className="text-center mb-12">
-                    <span className="inline-block px-4 py-1.5 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">
-                        {t('updateLabel')}
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        {t('title')}
-                    </h2>
-                    <div className="w-24 h-1 bg-green-600 rounded-full mx-auto mb-6"></div>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        {t('description')}
-                    </p>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
+                    <div className="flex-1 max-w-3xl">
+                        <div className="flex flex-col space-y-4">
+                            <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#F2AC59] bg-[#F2AC59]/10 rounded-full">
+                                <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
+                                {t('updateLabel')}
+                            </span>
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent whitespace-nowrap">
+                                {t('title')}
+                            </h2>
+                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></div>
+                        </div>
+                    </div>
+                    <div className="hidden md:flex items-center h-full mt-6">
+                        <Link 
+                            href="/umum/informasi"
+                            locale={router.locale}
+                            className="px-8 py-3.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap self-center"
+                        >
+                            {t('viewAll')}
+                            <svg className="ml-2 -mr-1 w-5 h-5 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                        </Link>
+                    </div>
                 </div>
             )}
 
@@ -141,9 +155,11 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                 <div className="space-y-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {pengumumanList.slice(0, 6).map((item) => (
-                            <div 
+                            <Link 
                                 key={item.id}
-                                className="transform transition-transform duration-300 hover:-translate-y-1"
+                                href={`/umum/informasi/${item.slug}`}
+                                locale={router.locale}
+                                className="block transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg rounded-xl overflow-hidden"
                                 data-aos="fade-up"
                                 data-aos-delay={`${(item.id % 3) * 100}`}
                             >
@@ -152,25 +168,12 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                                     date={item.created_at}
                                     content={item.isi}
                                     image={item.image}
-                                    link={`/umum/informasi/${item.slug}`}
                                     category={item.kategori || t('category')}
                                 />
-                            </div>
+                            </Link>
                         ))}
                     </div>
                     
-                    <div className="text-center mt-12">
-                        <Link 
-                            href="/umum/informasi"
-                            locale={router.locale}
-                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-800 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                            <span>{t('viewAll')}</span>
-                            <svg className="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                        </Link>
-                    </div>
                 </div>
             ) : (
                 <div className="text-center py-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-dashed border-gray-200">

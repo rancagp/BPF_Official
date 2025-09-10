@@ -71,7 +71,7 @@ export default function ProdukContainer() {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
                     <div className="flex-1 max-w-3xl">
                         <div className="flex flex-col space-y-4">
-                            <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#F2AC59] bg-[#F2AC59]/10 rounded-full">
+                            <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#4C4C4C] bg-[#F2AC59]/10 rounded-full">
                                 <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
                                 {t('featuredBadge')}
                             </span>

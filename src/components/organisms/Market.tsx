@@ -7,13 +7,16 @@ const LastUpdatedTime = () => {
   const { t } = useTranslation('market');
   
   useEffect(() => {
-    // Update waktu hanya di sisi klien
     const updateTime = () => {
-      setCurrentTime(new Date().toLocaleTimeString('id-ID'));
+      setCurrentTime(new Date().toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      }));
     };
     
     updateTime();
-    const timer = setInterval(updateTime, 60000);
+    const timer = setInterval(updateTime, 1000);
     
     return () => clearInterval(timer);
   }, []);
@@ -22,9 +25,12 @@ const LastUpdatedTime = () => {
   
   return (
     <div className="mt-8 text-center">
-      <p className="text-sm text-gray-500">
-        {t('lastUpdated')} {currentTime}
-      </p>
+      <div className="inline-flex items-center bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+        <div className="w-2 h-2 rounded-full bg-green-400 mr-2 animate-pulse"></div>
+        <span className="text-sm text-gray-600 font-medium">
+          {t('lastUpdated')} <span className="text-gray-900">{currentTime}</span>
+        </span>
+      </div>
     </div>
   );
 };
@@ -43,13 +49,11 @@ const MarketCard = ({ item, index }: { item: MarketItem; index: number }) => {
   const [currentTime, setCurrentTime] = useState<string>('');
   
   useEffect(() => {
-    // Update waktu hanya di sisi klien
     setCurrentTime(new Date().toLocaleTimeString('id-ID', { 
       hour: '2-digit', 
       minute: '2-digit' 
     }));
     
-    // Update waktu setiap menit
     const timer = setInterval(() => {
       setCurrentTime(new Date().toLocaleTimeString('id-ID', { 
         hour: '2-digit', 
@@ -60,10 +64,18 @@ const MarketCard = ({ item, index }: { item: MarketItem; index: number }) => {
     return () => clearInterval(timer);
   }, []);
   
-  const formatPrice = (symbol: string, price: number): string => {
-    if (symbol.includes('IDR')) return `Rp${price.toLocaleString('id-ID')}`;
-    if (symbol.includes('USD')) return `$${price.toLocaleString('en-US')}`;
-    return price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const formatPrice = (symbol: string, price: number | undefined): string => {
+    // Handle undefined or null price
+    if (price === undefined || price === null) return '-.-';
+    
+    try {
+      if (symbol?.includes('IDR')) return `Rp${price.toLocaleString('id-ID')}`;
+      if (symbol?.includes('USD')) return `$${price.toLocaleString('en-US')}`;
+      return price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    } catch (error) {
+      console.error('Error formatting price:', { symbol, price, error });
+      return price.toString();
+    }
   };
 
   return (
@@ -71,52 +83,57 @@ const MarketCard = ({ item, index }: { item: MarketItem; index: number }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
-      whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-      className={`relative bg-white rounded-xl p-5 border ${
-        isPositive ? 'border-green-100' : 'border-red-100'
-      } overflow-hidden transition-all duration-300 hover:shadow-lg`}
+      whileHover={{ 
+        y: -3,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+      }}
+      className="bg-white rounded-lg border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
     >
-      <div className="flex justify-between items-start">
-        <div>
-          <span className="text-sm font-medium text-gray-500">{item.symbol}</span>
-          <h3 className="text-xl font-bold text-gray-900 mt-1">
-            {formatPrice(item.symbol, item.last)}
-          </h3>
-        </div>
-        
-        <div className={`flex items-center justify-center w-10 h-10 rounded-full ${
-          isPositive ? 'bg-green-50' : 'bg-red-50'
-        }`}>
-          <svg
-            className={`w-5 h-5 ${isPositive ? 'text-green-500' : 'text-red-500'} ${
-              isPositive ? 'rotate-0' : 'rotate-180'
-            }`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
+      {/* Card Header */}
+      <div className="px-5 pt-5 pb-3">
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">
+              {formatPrice(item.symbol, item.last)}
+            </h3>
+            <p className="text-sm text-gray-500 mt-1">{item.symbol}</p>
+          </div>
+          
+          {/* Status Dot */}
+          <div className={`w-3 h-3 rounded-full ${isPositive ? 'bg-green-400' : 'bg-red-400'}`}></div>
         </div>
       </div>
       
-      <div className="mt-4 flex items-center justify-between">
-        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-          isPositive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-        }`}>
-          {isPositive ? '↑' : '↓'} {Math.abs(item.percentChange).toFixed(2)}%
-        </span>
-        
-        {currentTime && (
-          <span className="text-xs text-gray-400">
-            {currentTime}
-          </span>
-        )}
+      {/* Divider */}
+      <div className="border-t border-gray-100 mx-5"></div>
+      
+      {/* Card Footer */}
+      <div className="px-5 py-3 bg-[#4C4C4C] bg-opacity-10 ">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <span className={`text-sm font-medium ${
+              isPositive ? 'text-green-400' : 'text-red-600'
+            }`}>
+              {isPositive ? '↑' : '↓'} {Math.abs(item.percentChange).toFixed(2)}%
+            </span>
+            <span className="text-xs text-white ml-1">
+              {isPositive ? 'Naik' : 'Turun'} • {currentTime}
+            </span>
+          </div>
+          
+          {/* Mini Chart Placeholder */}
+          <div className="flex items-end h-8 space-x-px">
+            {[3, 6, 4, 8, 5, 9, 7].map((h, i) => (
+              <div 
+                key={i}
+                className={`w-1 rounded-t-sm ${
+                  isPositive ? 'bg-green-200' : 'bg-red-200'
+                }`}
+                style={{ height: `${h}px` }}
+              ></div>
+            ))}
+          </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -188,13 +205,23 @@ export default function Market() {
   }, []);
 
   return (
-    <section className="bg-gray-50">
+    <section className="bg-gray-50 py-12 md:py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+        <div className="text-center mb-4">
+          
+            <span className="inline-flex items-center w-fit px-4 py-2 mb-2 text-xs font-bold tracking-wide uppercase text-[#4C4C4C] bg-[#F2AC59]/10 rounded-full">
+               <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
+               {t('marketUpdate', 'Market Update')}
+             </span>
+          
+          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
             {t('title')}
           </h2>
-          <div className="mt-2 h-1 w-16 bg-green-500 mx-auto rounded-full"></div>
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            {t('subtitle', 'Update harga real-time untuk instrumen keuangan terkini')}
+          </p>
+          <div className="mt-6 flex justify-center space-x-4">
+          </div>
         </div>
 
         {isLoading ? (

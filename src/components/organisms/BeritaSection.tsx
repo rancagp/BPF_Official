@@ -71,7 +71,7 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
                         <div className="flex-1 max-w-3xl">
                             <div className="flex flex-col space-y-4">
-                                <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#F2AC59] bg-[#F2AC59]/10 rounded-full">
+                                <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#4C4C4C] bg-[#F2AC59]/10 rounded-full">
                                     <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
                                     {t('latestUpdate')}
                                 </span>
@@ -83,7 +83,7 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
                         </div>
                         <div className="hidden md:flex items-center h-full mt-6">
                             <Link 
-                                href="/berita" 
+                                href="/analisis/berita" 
                                 className="px-8 py-3.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap self-center"
                             >
                                 {t('viewAllNews')}
