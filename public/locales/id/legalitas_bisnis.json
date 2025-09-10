@@ -1,57 +1,67 @@
 {
   "pageTitle": "Legalitas Bisnis",
-  "pageDescription": "Legalitas dan perizinan resmi PT Kontakperkasa Futures",
+  "pageDescription": "Legalitas dan perizinan resmi PT Equityworld Futures",
   "aboutTitle": "Tentang Legalitas Kami",
-  "aboutDescription": "PT Kontakperkasa Futures merupakan pialang berjangka yang telah mendapatkan izin usaha dari BAPPEBTI, sesuai dengan Undang-Undang RI No. 32 Tahun 1997 tentang Perdagangan Berjangka Komoditi yang telah diubah dengan Undang-Undang No. 10 Tahun 2011.",
+  "aboutDescription": "Industri berjangka di Indonesia dinaungi oleh lembaga-lembaga resmi milik pemerintah yang berfungsi mengawasi, mengatur dan menjaga stabilitas dan integritas pasar. Lembaga yang dimaksud adalah BAPPEBTI, BURSA BERJANGKA JAKARTA (BBJ) dan LEMBAGA KLIRING BERJANGKA INDONESIA (KBI).",
   "importantNotice": {
-    "title": "Informasi Penting:",
-    "description": "PT Kontakperkasa Futures berkomitmen untuk selalu beroperasi sesuai dengan peraturan perundang-undangan yang berlaku dan menjaga kepercayaan nasabah dengan menjunjung tinggi prinsip kehati-hatian dan profesionalisme."
+    "title": "Legalitas PT. Equityworld Futures:",
+    "description": ""
   },
   "partnersTitle": "Mitra & Lembaga Terkait",
   "legalitasItems": [
     {
-      "title": "Surat Persetujuan Anggota Bursa (SPAB)",
-      "description": "Surat Persetujuan Anggota Bursa (SPAB) di Bursa Berjangka Jakarta (Nomor: SPAB-002/BBJ/09/00).",
+      "title": "Akta Pendirian Perseroan Terbatas",
+      "description": "Nomor: 01 tanggal 2 Juli 2005 oleh Notaris Tan Susy, SH, PT. Goldmany Futures.",
       "icon": "📜"
     },
     {
-      "title": "Surat Persetujuan Pengalihan Keanggotaan Bursa (SPPKB)",
-      "description": "Surat Persetujuan Pengalihan Keanggotaan Bursa (SPPKB) di Bursa Berjangka Jakarta (Nomor: SPPKB-006/BBJ/12/00).",
+      "title": "Pengesahan Departemen Hukum dan HAM",
+      "description": "Nomor: C-29097 HT.01.010 TH.2005",
       "icon": "📋"
     },
     {
-      "title": "Izin Usaha Pialang Berjangka",
-      "description": "Keputusan Kepala Bappebti (Nomor: 41/BAPPEBTI/SI/XXI/2000).",
+      "title": "Akta Perubahan Nama",
+      "description": "PT. Goldmany Futures menjadi PT. Equity-world Futures Nomor: 11 tanggal 4 November 2008, oleh Notaris Tan Susy, SH.",
       "icon": "🏛️"
     },
     {
-      "title": "Keanggotaan Kliring Berjangka Indonesia",
-      "description": "Keanggotaan Kliring Berjangka Indonesia (Nomor: 08/AK-KJBK/XII/2000).",
+      "title": "Pengesahan Kementerian Hukum dan HAM",
+      "description": "Nomor: AHU-95798. AH .01.02.TAHUN.2008",
       "icon": "🔗"
     },
     {
-      "title": "Pengesahan Departemen Kehakiman dan HAM",
-      "description": "Pengesahan Departemen Kehakiman dan HAM: C-16764 HT.01.04.TH.2002.",
+      "title": "Surat Persetujuan Anggota Bursa (SPAB)",
+      "description": "SPAB di Bursa Berjangka Jakarta Nomor: SPAB-143/BBJ/09/05",
       "icon": "⚖️"
     },
     {
-      "title": "Akta Berita Acara Rapat",
-      "description": "Akta berita acara rapat: No. 161 Tanggal 19 Juli 2002 oleh Notaris Noor Irawati SH, PT Kontakperkasa Futures.",
+      "title": "Izin Usaha Pialang Berjangka",
+      "description": "Keputusan Kepala BAPPEBTI Nomor: 850/BAPPEBTI/SI/12/2005",
       "icon": "📄"
     },
     {
-      "title": "Peserta Sistem Perdagangan Alternatif (SPA)",
-      "description": "SK Bappebti (Nomor: 1145/BAPPEBTI/SP3/2007) tentang Pemberian Persetujuan sebagai peserta Sistem Perdagangan Alternatif (SPA) kepada PT Kontakperkasa Futures.",
+      "title": "Keanggotaan Lembaga Kliring Berjangka Indonesia",
+      "description": "Nomor: 36/AK-KBI/IV/2006",
       "icon": "💼"
     },
     {
-      "title": "Keanggotaan ASPEBTINDO",
-      "description": "Keanggotaan ASPEBTINDO (Nomor: 0040/ASPEBTINDO/AANG-B/7/2015).",
+      "title": "Perjanjian Kerjasama dengan Pedagang Penyelenggara",
+      "description": "Sistem Perdagangan Alternatif PT. Royal Assetindo, Surat Perjanjian Kerjasama, Nomor: 162/GM/DIR/V/2006",
       "icon": "🏢"
     },
     {
-      "title": "Penerimaan Nasabah Elektronik On-Line",
-      "description": "Penetapan Sebagai Pialang Berjangka yang melakukan Kegiatan Penerimaan Nasabah secara Elektronik On-Line di Bidang Perdagangan Berjangka Komoditi kepada PT Kontakperkasa Futures (Nomor: 25/BAPPEBTI/KEP-PBK/08/2014).",
+      "title": "SK BAPPEBTI Peserta SPA",
+      "description": "Nomor: 1524/BAPPEBTI/SP/4/2007 tentang Pemberian Persetujuan sebagai Peserta Sistem Perdagangan Alternatif (SPA) kepada PT. Goldmany Futures",
+      "icon": "📝"
+    },
+    {
+      "title": "SK BAPPEBTI Perubahan Nama",
+      "description": "Nomor: 05/BAPPEBTI/PN/3/2009 tentang Persetujuan Perubahan Nama PT. Goldmany Futures menjadi PT. Equityworld Futures",
+      "icon": "📑"
+    },
+    {
+      "title": "Pialang Berjangka Online",
+      "description": "Penetapan sebagai Pialang Berjangka yang melakukan kegiatan penerimaan Nasabah secara Elektronik On-Line di Bidang Perdagangan Berjangka Komoditi kepada PT. Equityworld Futures Nomor: 26/BAPPEBTI/KEP-PBK/08/2014",
       "icon": "💻"
     }
   ]

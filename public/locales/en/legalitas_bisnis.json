@@ -1,57 +1,67 @@
 {
   "pageTitle": "Business Legality",
-  "pageDescription": "Official licenses and permits of PT Kontakperkasa Futures",
+  "pageDescription": "Official licenses and permits of PT Equityworld Futures",
   "aboutTitle": "About Our Legality",
-  "aboutDescription": "PT Kontakperkasa Futures is a futures broker that has obtained a business license from BAPPEBTI, in accordance with Law No. 32 of 1997 concerning Commodity Futures Trading as amended by Law No. 10 of 2011.",
+  "aboutDescription": "The futures industry in Indonesia is overseen by official government institutions that function to supervise, regulate, and maintain market stability and integrity. These institutions are BAPPEBTI, JAKARTA FUTURES EXCHANGE (JFX), and INDONESIA CLEARING HOUSE (KBI).",
   "importantNotice": {
-    "title": "Important Information:",
-    "description": "PT Kontakperkasa Futures is committed to always operating in accordance with applicable laws and regulations and maintaining customer trust by upholding the principles of prudence and professionalism."
+    "title": "PT. Equityworld Futures Legality:",
+    "description": ""
   },
   "partnersTitle": "Partners & Related Institutions",
   "legalitasItems": [
     {
-      "title": "Stock Exchange Member Approval Letter (SPAB)",
-      "description": "Stock Exchange Member Approval Letter (SPAB) at Jakarta Futures Exchange (Number: SPAB-002/BBJ/09/00).",
+      "title": "Deed of Establishment of Limited Liability Company",
+      "description": "Number: 01 dated July 2, 2005 by Notary Tan Susy, SH, PT. Goldmany Futures.",
       "icon": "📜"
     },
     {
-      "title": "Stock Exchange Membership Transfer Approval Letter (SPPKB)",
-      "description": "Stock Exchange Membership Transfer Approval Letter (SPPKB) at Jakarta Futures Exchange (Number: SPPKB-006/BBJ/12/00).",
+      "title": "Ministry of Law and Human Rights Ratification",
+      "description": "Number: C-29097 HT.01.010 TH.2005",
       "icon": "📋"
     },
     {
-      "title": "Futures Brokerage Business License",
-      "description": "Decision of the Head of Bappebti (Number: 41/BAPPEBTI/SI/XXI/2000).",
+      "title": "Deed of Name Change",
+      "description": "PT. Goldmany Futures to PT. Equity-world Futures Number: 11 dated November 4, 2008, by Notary Tan Susy, SH.",
       "icon": "🏛️"
     },
     {
-      "title": "Indonesia Clearing Membership",
-      "description": "Indonesia Clearing Membership (Number: 08/AK-KJBK/XII/2000).",
+      "title": "Ministry of Law and Human Rights Ratification",
+      "description": "Number: AHU-95798. AH .01.02.YEAR.2008",
       "icon": "🔗"
     },
     {
-      "title": "Ministry of Law and Human Rights Endorsement",
-      "description": "Endorsement from the Ministry of Law and Human Rights: C-16764 HT.01.04.TH.2002.",
+      "title": "Stock Exchange Member Approval Letter (SPAB)",
+      "description": "SPAB at Jakarta Futures Exchange Number: SPAB-143/BBJ/09/05",
       "icon": "⚖️"
     },
     {
-      "title": "Meeting Minutes Deed",
-      "description": "Meeting minutes deed: No. 161 dated July 19, 2002 by Notary Noor Irawati SH, PT Kontakperkasa Futures.",
+      "title": "Futures Brokerage Business License",
+      "description": "Decision of the Head of BAPPEBTI Number: 850/BAPPEBTI/SI/12/2005",
       "icon": "📄"
     },
     {
-      "title": "Alternative Trading System (SPA) Participant",
-      "description": "Bappebti Decree (Number: 1145/BAPPEBTI/SP3/2007) regarding Approval as a Participant of the Alternative Trading System (SPA) for PT Kontakperkasa Futures.",
+      "title": "Indonesia Clearing House Membership",
+      "description": "Number: 36/AK-KBI/IV/2006",
       "icon": "💼"
     },
     {
-      "title": "ASPEBTINDO Membership",
-      "description": "ASPEBTINDO Membership (Number: 0040/ASPEBTINDO/AANG-B/7/2015).",
+      "title": "Cooperation Agreement with Organizing Trader",
+      "description": "Alternative Trading System PT. Royal Assetindo, Cooperation Agreement Letter, Number: 162/GM/DIR/V/2006",
       "icon": "🏢"
     },
     {
-      "title": "Electronic Online Customer Acceptance",
-      "description": "Designation as a Futures Broker conducting Electronic Online Customer Acceptance Activities in the Field of Commodity Futures Trading for PT Kontakperkasa Futures (Number: 25/BAPPEBTI/KEP-PBK/08/2014).",
+      "title": "BAPPEBTI Decree for SPA Participant",
+      "description": "Number: 1524/BAPPEBTI/SP/4/2007 concerning Approval as a Participant of the Alternative Trading System (SPA) for PT. Goldmany Futures",
+      "icon": "📝"
+    },
+    {
+      "title": "BAPPEBTI Decree for Name Change",
+      "description": "Number: 05/BAPPEBTI/PN/3/2009 concerning Approval of Name Change from PT. Goldmany Futures to PT. Equityworld Futures",
+      "icon": "📑"
+    },
+    {
+      "title": "Online Futures Broker",
+      "description": "Designation as a Futures Broker conducting Electronic On-Line Customer Acceptance in the Field of Commodity Futures Trading for PT. Equityworld Futures Number: 26/BAPPEBTI/KEP-PBK/08/2014",
       "icon": "💻"
     }
   ]
