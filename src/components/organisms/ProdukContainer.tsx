@@ -60,76 +60,87 @@ export default function ProdukContainer() {
     }, []);
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-                <span className="inline-block px-4 py-1.5 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">
-                    {t('featuredBadge')}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 bg-black bg-clip-text text-transparent">
-                    {t('title')}
-                </h2>
-                <div className="w-24 h-1 bg-green-600 rounded-full mx-auto mb-6"></div>
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    {t('description')}
-                </p>
+        <div className="relative py-16 sm:py-4">
+            {/* Background elements */}
+            <div className="absolute inset-0 -z-10 overflow-hidden">
+                <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#F2AC59]/5 to-[#e09c4a]/5 rounded-full blur-3xl"></div>
             </div>
-
-            {loading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {[...Array(6)].map((_, index) => (
-                        <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300">
-                            <div className="h-48 bg-gray-100 animate-pulse"></div>
-                            <div className="p-6">
-                                <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
-                                <div className="h-4 bg-gray-100 rounded w-1/2"></div>
-                                <div className="mt-4 pt-4 border-t border-gray-100">
-                                    <div className="h-10 bg-gray-200 rounded-lg"></div>
-                                </div>
-                            </div>
+            
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header Section */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
+                    <div className="flex-1 max-w-3xl">
+                        <div className="flex flex-col space-y-4">
+                            <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#F2AC59] bg-[#F2AC59]/10 rounded-full">
+                                <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
+                                {t('featuredBadge')}
+                            </span>
+                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                                {t('title')}
+                            </h2>
+                            <div className="w-32 h-1.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></div>
                         </div>
-                    ))}
-                </div>
-            ) : productList.length > 0 ? (
-                <div className="space-y-10">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {productList.filter(Boolean).slice(0, 6).map((product) => {
-                        if (!product || !product.category || !product.slug) {
-                            console.warn('Invalid product data:', product);
-                            return null;
-                        }
-                        return (
-                            <ProductCard 
-                                key={`${product.category}-${product.id}`}
-                                product={product}
-                                onClick={handleProductClick}
-                            />
-                        );
-                    })}
-                </div>
-                    
-                    <div className="text-center pt-6">
+                    </div>
+                    <div className="hidden md:flex items-center h-full mt-6">
                         <Link 
-                            href="/produk"
-                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-800 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+                            href="/produk" 
+                            className="px-8 py-3.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap"
                         >
                             {t('viewAllProducts')}
-                            <svg className="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
                         </Link>
                     </div>
                 </div>
-            ) : (
-                <div className="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-dashed border-gray-200">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50 text-green-500 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
+
+                {/* Loading State */}
+                {loading ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[...Array(6)].map((_, index) => (
+                            <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-500 group">
+                                <div className="h-60 bg-gradient-to-br from-gray-50 to-gray-100 animate-pulse"></div>
+                                <div className="p-6">
+                                    <div className="h-6 bg-gray-200 rounded-full w-3/4 mb-4"></div>
+                                    <div className="space-y-2">
+                                        <div className="h-4 bg-gray-100 rounded-full w-full"></div>
+                                        <div className="h-4 bg-gray-100 rounded-full w-5/6"></div>
+                                    </div>
+                                    <div className="mt-6 pt-5 border-t border-gray-100">
+                                        <div className="h-12 bg-gray-200 rounded-xl"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Produk Belum Tersedia</h3>
-                    <p className="text-gray-600 max-w-md mx-auto">Maaf, saat ini belum ada produk yang tersedia. Silakan cek kembali nanti untuk update terbaru.</p>
-                </div>
-            )}
+                ) : productList.length > 0 ? (
+                    <div className="space-y-16">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {productList.filter(Boolean).slice(0, 6).map((product) => {
+                                if (!product || !product.category || !product.slug) {
+                                    console.warn('Invalid product data:', product);
+                                    return null;
+                                }
+                                return (
+                                    <ProductCard 
+                                        key={`${product.category}-${product.id}`}
+                                        product={product}
+                                        onClick={handleProductClick}
+                                        className="group hover:-translate-y-2 transition-transform duration-500"
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="text-center py-20 bg-gradient-to-br from-white to-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-[#F2AC59]/10 to-[#e09c4a]/10 text-[#F2AC59] mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4.5L4 7m16 0l-8 4.5M4 7v10l8 4.5m0 0l8-4.5M4 7l8 4.5m0 0L12 16m8-9v10l-8 4.5" />
+                            </svg>
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-3">Produk Belum Tersedia</h3>
+                        <p className="text-gray-600 max-w-md mx-auto text-lg">Maaf, saat ini belum ada produk yang tersedia. Silakan cek kembali nanti untuk update terbaru.</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

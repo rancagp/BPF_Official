@@ -32,7 +32,7 @@ function AboutUs() {
     const features = t('features', { returnObjects: true }) as string[];
 
     return (
-        <section className="py-12 md:py-20">
+        <section className="py-12 md:py-18">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">
@@ -99,7 +99,7 @@ function AboutUs() {
                         <div className="pt-2 flex justify-center">
                             <Link 
                                 href="/profil/perusahaan" 
-                                className="inline-flex items-center w-full sm:w-auto bg-[#F2AC59] hover:bg-[#e69e4d] text-white font-medium py-2.5 px-6 rounded-lg transition-colors justify-center"
+                                className="inline-flex items-center px-8 py-3.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                             >
                                 {t('learnMore')}
                                 <ArrowRight className="ml-2 h-4 w-4" />

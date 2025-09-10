@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import NewsCard from "@/components/moleculs/Newscard";
+import NewsCard, { NewsCardVariant } from "@/components/moleculs/Newscard";
 import { NewsItem, fetchFeaturedNews } from '@/services/newsService';
 
 // Fungsi untuk mendapatkan URL gambar yang lengkap
@@ -76,16 +76,32 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
                 </div>
             )}
             {isLoading ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {[...Array(limit)].map((_, index) => (
-                        <div key={index} className="animate-pulse">
-                            <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
-                            <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                            <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
-                            <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
-                            <div className="h-3 bg-gray-200 rounded w-2/3"></div>
-                        </div>
-                    ))}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* Loading state untuk berita utama */}
+                    <div className="lg:col-span-2 row-span-2 animate-pulse">
+                        <div className="h-64 md:h-80 bg-gray-200 rounded-lg mb-4"></div>
+                        <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                        <div className="h-3 bg-gray-200 rounded w-full mb-1"></div>
+                        <div className="h-3 bg-gray-200 rounded w-5/6 mb-1"></div>
+                        <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                    </div>
+                    
+                    {/* Loading state untuk daftar berita kecil */}
+                    <div className="lg:col-span-1 space-y-6">
+                        {[...Array(4)].map((_, index) => (
+                            <div key={index} className="animate-pulse">
+                                <div className="flex gap-4">
+                                    <div className="w-1/3 h-24 bg-gray-200 rounded"></div>
+                                    <div className="flex-1">
+                                        <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                                        <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
+                                        <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ) : error ? (
                 <div className="text-center py-12">
@@ -98,24 +114,47 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
                     </button>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {news.slice(0, 6).map((berita, index) => (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Berita Utama (Kiri) */}
+                {news.length > 0 && (
+                    <div className="lg:col-span-2 row-span-2">
+                        <div 
+                            className="h-full transform transition-transform duration-300 hover:-translate-y-1"
+                            data-aos="fade-up"
+                        >
+                            <NewsCard
+                                title={news[0].title}
+                                date={news[0].created_at}
+                                content={news[0].content?.replace(/<[^>]*>?/gm, '').substring(0, 200) + '...'}
+                                slug={news[0].slug}
+                                img={getFullImageUrl(news[0].images)}
+                                variant="large"
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {/* Daftar Berita Kecil (Kanan) */}
+                <div className="lg:col-span-1 space-y-6">
+                    {news.slice(1, 5).map((berita, index) => (
                         <div 
                             key={berita.id}
                             className="transform transition-transform duration-300 hover:-translate-y-1"
                             data-aos="fade-up"
-                            data-aos-delay={`${(index % 3) * 100}`}
+                            data-aos-delay={`${(index + 1) * 50}`}
                         >
                             <NewsCard
                                 title={berita.title}
                                 date={berita.created_at}
-                                content={berita.content?.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...'}
+                                content={berita.content?.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...'}
                                 slug={berita.slug}
                                 img={getFullImageUrl(berita.images)}
+                                variant="small"
                             />
                         </div>
                     ))}
                 </div>
+            </div>
             )}
             
             {(!limit || news.length > 0) && (
