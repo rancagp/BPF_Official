@@ -6,13 +6,24 @@ interface VideoItem {
     title: string;
     description: string;
     videoUrl: string;
+    category?: string;
+    duration?: string;
+    date?: string;
 }
 
 export default function VideoSection() {
     const { t } = useTranslation('video');
     const [modalState, setModalState] = useState({ isOpen: false, videoUrl: '' });
+    const [activeCategory, setActiveCategory] = useState('all');
     const videoData = t('videos', { returnObjects: true });
     const videoList = Array.isArray(videoData) ? videoData : [];
+
+    // Extract unique categories
+    const categories = ['all', ...new Set(videoList.map((video: VideoItem) => video.category || 'Uncategorized'))];
+
+    const filteredVideos = activeCategory === 'all' 
+        ? videoList 
+        : videoList.filter((video: VideoItem) => video.category === activeCategory);
 
     const handleOpenModal = (videoUrl: string) => {
         setModalState({ isOpen: true, videoUrl });
@@ -24,14 +35,18 @@ export default function VideoSection() {
 
     return (
         <>
-            <section className="py-2 px-4 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
-                    {videoList.map((item: VideoItem, index: number) => (
+            <section className="py-8 px-4 max-w-7xl mx-auto">
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredVideos.map((item: VideoItem, index: number) => (
                         <VideoCard
                             key={index}
                             title={item.title}
                             description={item.description}
                             videoUrl={item.videoUrl}
+                            category={item.category}
+                            duration={item.duration}
+                            date={item.date}
                             onClick={() => handleOpenModal(item.videoUrl)}
                         />
                     ))}
