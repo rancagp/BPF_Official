@@ -60,48 +60,58 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
     }, [limit]);
 
     return (
-        <div className={`${className} mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}>
-            {showHeader && (
-                <div className="text-center mb-12">
-                    <span className="inline-block px-4 py-1.5 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">
-                        {t('latestUpdate')}
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 bg-black bg-clip-text text-transparent">
-                        {t('title')}
-                    </h2>
-                    <div className="w-24 h-1 bg-green-600 rounded-full mx-auto mb-6"></div>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        {t('description')}
-                    </p>
-                </div>
-            )}
+        <section className={`${className} relative py-16 sm:py-4`}>
+            {/* Background elements */}
+            <div className="absolute inset-0 -z-10 overflow-hidden">
+                <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#F2AC59]/5 to-[#e09c4a]/5 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {showHeader && (
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
+                        <div className="flex-1 max-w-3xl">
+                            <div className="flex flex-col space-y-4">
+                                <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#F2AC59] bg-[#F2AC59]/10 rounded-full">
+                                    <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
+                                    {t('latestUpdate')}
+                                </span>
+                                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent whitespace-nowrap">
+                                    {t('title')}
+                                </h2>
+                                <div className="w-32 h-1.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></div>
+                            </div>
+                        </div>
+                        <div className="hidden md:flex items-center h-full mt-6">
+                            <Link 
+                                href="/berita" 
+                                className="px-8 py-3.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap self-center"
+                            >
+                                {t('viewAllNews')}
+                            </Link>
+                        </div>
+                    </div>
+                )}
             {isLoading ? (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Loading state untuk berita utama */}
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    {/* Loading state untuk 2 berita besar */}
                     <div className="lg:col-span-2 row-span-2 animate-pulse">
                         <div className="h-64 md:h-80 bg-gray-200 rounded-lg mb-4"></div>
                         <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
                         <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
-                        <div className="h-3 bg-gray-200 rounded w-full mb-1"></div>
-                        <div className="h-3 bg-gray-200 rounded w-5/6 mb-1"></div>
-                        <div className="h-3 bg-gray-200 rounded w-2/3"></div>
                     </div>
-                    
-                    {/* Loading state untuk daftar berita kecil */}
-                    <div className="lg:col-span-1 space-y-6">
-                        {[...Array(4)].map((_, index) => (
-                            <div key={index} className="animate-pulse">
-                                <div className="flex gap-4">
-                                    <div className="w-1/3 h-24 bg-gray-200 rounded"></div>
-                                    <div className="flex-1">
-                                        <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                                        <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
-                                        <div className="h-3 bg-gray-200 rounded w-3/4"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="lg:col-span-2 row-span-2 animate-pulse">
+                        <div className="h-64 md:h-80 bg-gray-200 rounded-lg mb-4"></div>
+                        <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
                     </div>
+                    {/* Loading state untuk 4 berita kecil */}
+                    {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="animate-pulse">
+                            <div className="h-40 bg-gray-200 rounded-lg mb-2"></div>
+                            <div className="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
+                            <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    ))}
                 </div>
             ) : error ? (
                 <div className="text-center py-12">
@@ -114,63 +124,53 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
                     </button>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Berita Utama (Kiri) */}
-                {news.length > 0 && (
-                    <div className="lg:col-span-2 row-span-2">
-                        <div 
-                            className="h-full transform transition-transform duration-300 hover:-translate-y-1"
-                            data-aos="fade-up"
-                        >
-                            <NewsCard
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    {/* 2 Berita besar di atas */}
+                    {news.length > 0 && (
+                        <div className="lg:col-span-2 row-span-2">
+                            <NewsCard 
+                                variant="large" 
                                 title={news[0].title}
+                                content={news[0].content}
                                 date={news[0].created_at}
-                                content={news[0].content?.replace(/<[^>]*>?/gm, '').substring(0, 200) + '...'}
                                 slug={news[0].slug}
                                 img={getFullImageUrl(news[0].images)}
-                                variant="large"
+                                className="h-full"
                             />
                         </div>
-                    </div>
-                )}
-
-                {/* Daftar Berita Kecil (Kanan) */}
-                <div className="lg:col-span-1 space-y-6">
-                    {news.slice(1, 5).map((berita, index) => (
-                        <div 
-                            key={berita.id}
-                            className="transform transition-transform duration-300 hover:-translate-y-1"
-                            data-aos="fade-up"
-                            data-aos-delay={`${(index + 1) * 50}`}
-                        >
-                            <NewsCard
-                                title={berita.title}
-                                date={berita.created_at}
-                                content={berita.content?.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...'}
-                                slug={berita.slug}
-                                img={getFullImageUrl(berita.images)}
-                                variant="small"
+                    )}
+                    
+                    {news.length > 1 && (
+                        <div className="lg:col-span-2 row-span-2">
+                            <NewsCard 
+                                variant="large" 
+                                title={news[1].title}
+                                content={news[1].content}
+                                date={news[1].created_at}
+                                slug={news[1].slug}
+                                img={getFullImageUrl(news[1].images)}
+                                className="h-full"
+                            />
+                        </div>
+                    )}
+                    
+                    {/* 4 Berita kecil di bawah */}
+                    {news.slice(2, 6).map((item) => (
+                        <div key={item.id} className="lg:col-span-1">
+                            <NewsCard 
+                                variant="default"
+                                title={item.title}
+                                content={item.content}
+                                date={item.created_at}
+                                slug={item.slug}
+                                img={getFullImageUrl(item.images)}
+                                className="h-full"
                             />
                         </div>
                     ))}
                 </div>
+            )}
             </div>
-            )}
-            
-            {(!limit || news.length > 0) && (
-                <div className="text-center mt-12">
-                    <Link 
-                        href="/analisis/berita"
-                        locale={locale}
-                        className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-800 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
-                    >
-                        {t('viewAllNews')}
-                        <svg className="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                    </Link>
-                </div>
-            )}
-        </div>
+        </section>    
     );
 }

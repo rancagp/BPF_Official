@@ -32,7 +32,7 @@ function AboutUs() {
     const features = t('features', { returnObjects: true }) as string[];
 
     return (
-        <section className="py-12 md:py-18">
+        <section className="py-12 md:py-12">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">
@@ -40,24 +40,26 @@ function AboutUs() {
                         {t('title')}
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-[#4C4C4C] mb-4">
-                        {t('welcome')} <span className="text-[#F2AC59]">{t('companyName')}</span>
+                        <div className="block">{t('welcome')}</div>
+                        <div className="text-[#F2AC59]">{t('companyName')}</div>
                     </h2>
                     <div className="w-20 h-1 bg-[#F2AC59] mx-auto rounded-full"></div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="grid md:grid-cols-2 gap-8 items-stretch">
                     {/* Image Section */}
-                    <div className="relative h-full">
-                        <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
+                    <div className="relative h-80 md:h-auto -mx-4 md:mx-0">
+                        <div className="relative w-full h-full md:rounded-xl overflow-hidden shadow-lg">
                             <Image
                                 src="/assets/gedung-kpf.png"
                                 alt="Equityworld Futures Office"
                                 fill
-                                className="object-cover"
+                                className="object-cover object-top"
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 priority
                             />
                         </div>
-                        <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-lg shadow-md max-w-[280px] w-full">
+                        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 bg-white p-4 rounded-lg shadow-md w-[calc(100%-3rem)] md:max-w-[280px] mx-4 md:mx-0">
                             <div className="flex items-center">
                                 <div className="bg-[#F2AC59]/10 p-2 rounded-lg mr-3">
                                     <CheckCircle className="h-6 w-6 text-[#F2AC59]" />
