@@ -1,6 +1,7 @@
 {
   "pageTitle": "Badan Regulasi",
   "pageDescription": "Informasi tentang badan regulasi yang mengawasi kegiatan perdagangan berjangka",
+  "profile_description": "Berikut adalah daftar badan regulasi dan lembaga terkait yang mengawasi dan mendukung kegiatan perdagangan berjangka di Indonesia. Setiap lembaga memiliki peran dan tanggung jawab masing-masing dalam menciptakan ekosistem perdagangan yang transparan, adil, dan berkelanjutan.",
   "bappebti": {
     "title": "BADAN PENGAWAS PERDAGANGAN BERJANGKA KOMODITI (BAPPEBTI)",
     "description": "BAPPEBTI atau Badan Pengawas Perdagangan Berjangka Komoditi dibentuk berdasarkan Undang-Undang Nomor 32 Tahun 1997, BAPPEBTI merupakan salah satu unit eselon I berada di bawah Departemen Perdagangan. BAPPEBTI mempunyai tugas melaksanakan pembinaan, pengaturan, dan pengawasan kegiatan perdagangan berjangka berdasarkan kebijakan yang ditetapkan oleh Menteri dan peraturan perundang-undangan yang berlaku."
@@ -12,5 +13,9 @@
   "kbi": {
     "title": "KLIRING BERJANGKA INDONESIA (KBI)",
     "description": "PT KLIRING BERJANGKA INDONESIA (Persero) merupakan suatu Badan Usaha Milik Negara yang bercita-cita untuk menjadi suatu perusahaan domestik yang efektif dan pada akhirnya menjadi suatu perusahaan global yang berstandar international. Didirikan untuk mengkliringkan dan menjamin penyelesaian transaksi kontrak Berjangka/Derivatif/Spot & Forward dan Resi Gudang secara teratur, wajar, dan efisien sehingga mampu memelihara Integritas Finansial Pasar."
+  },
+  "sitna": {
+    "title": "SISTEM INFORMASI TRANSAKSI NASIONAL (SITNA)",
+    "description": "Sistem Informasi Transaksi Nasional (SITNA) adalah sistem elektronik yang dibentuk oleh BAPPEBTI untuk mencatat dan melaporkan seluruh transaksi perdagangan berjangka komoditi yang dilakukan oleh Bursa Berjangka, Kliring Berjangka, dan Pialang Berjangka di Indonesia. SITNA berfungsi untuk meningkatkan transparansi, efisiensi, dan pengawasan di pasar modal berjangka, serta melindungi kepentingan masyarakat investor."
   }
 }

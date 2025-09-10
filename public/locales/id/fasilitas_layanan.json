@@ -1,26 +1,31 @@
 {
   "pageTitle": "Fasilitas & Layanan",
-  "pageDescription": "Berbagai fasilitas dan layanan terbaik untuk mendukung aktivitas trading Anda dengan aman dan nyaman",
+  "pageDescription": "Informasi tentang fasilitas dan layanan yang tersedia di PT. Equity World Futures",
   "services": [
     {
-      "title": "Wakil Pialang Berjangka (WPB)",
-      "description": "Perusahaan didukung oleh Wakil Pialang Berjangka Profesional yang telah disertifikasi oleh Bappebti."
+      "title": "Wakil Pialang Berjangka Profesional",
+      "description": "Perusahaan didukung oleh Wakil Pialang Berjangka Profesional yang telah disertifikasi oleh Bappebti.",
+      "icon": ""
     },
     {
-      "title": "Fasilitas Registrasi Online",
-      "description": "Kami menyediakan fasilitas bagi Calon Nasabah yang ingin bergabung pada PT. Kontakperkasa Futures dengan melakukan registrasi secara online dengan mengakses website: www.kp-futures.com."
-    },
-    {
-      "title": "Sistem Keamanan Autentifikasi Dua Faktor (2FA)",
-      "description": "Penerapan One Time Password (OTP) pada saat login ke dalam sistem transaksi online trading."
+      "title": "Sistem Keamanan 2FA",
+      "description": "Penerapan One Time Password (OTP) pada saat login ke dalam sistem transaksi online trading.",
+      "icon": ""
     },
     {
       "title": "Online Trading & Demo Account",
-      "description": "Portal khusus untuk bertransaksi secara online melalui internet. Dilengkapi dengan spread price real-time, tampilan chart, dan informasi market. Juga tersedia fasilitas Demo Account untuk simulasi transaksi."
+      "description": "Portal khusus untuk bertransaksi online dengan spread price real-time, chart, dan informasi market. Dilengkapi fasilitas Demo Account untuk simulasi transaksi.",
+      "icon": ""
     },
     {
-      "title": "Pelaporan Transaksi Harian",
-      "description": "Laporan transaksi harian dikirim melalui email nasabah, selain bisa dipantau langsung melalui sistem online trading."
+      "title": "Registrasi Online",
+      "description": "Fasilitas pendaftaran online bagi calon nasabah melalui website resmi PT. Equity World Futures.",
+      "icon": ""
+    },
+    {
+      "title": "Laporan Transaksi Harian",
+      "description": "Laporan transaksi harian yang dikirimkan melalui email nasabah, mencatat seluruh aktivitas transaksi yang telah dilakukan.",
+      "icon": ""
     },
     {
       "title": "Penarikan Dana (Withdrawal)",

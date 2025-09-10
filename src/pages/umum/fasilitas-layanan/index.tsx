@@ -1,26 +1,13 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import CardFasilitas from "@/components/moleculs/CardFasilitas";
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
 
 type ServiceItem = {
-  id: number;
-  icon: string;
+  title: string;
+  description: string;
+  icon?: string;
 };
-
-const serviceIcons: ServiceItem[] = [
-  { id: 1, icon: "👨‍💼" },
-  { id: 2, icon: "💻" },
-  { id: 3, icon: "🔒" },
-  { id: 4, icon: "📊" },
-  { id: 5, icon: "📧" },
-  { id: 6, icon: "💸" },
-  { id: 7, icon: "🏦" },
-  { id: 8, icon: "🔄" },
-  { id: 9, icon: "⚖️" },
-  { id: 10, icon: "👁️" },
-];
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -32,9 +19,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
 
 export default function FasilitasLayanan() {
   const { t } = useTranslation('fasilitas_layanan');
-  const services = t('services', { returnObjects: true });
-  
-  // Ensure services is an array before mapping
+  const services = t('services', { returnObjects: true }) as ServiceItem[];
   const servicesList = Array.isArray(services) ? services : [];
 
   return (
@@ -42,27 +27,66 @@ export default function FasilitasLayanan() {
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={t('pageTitle')}>
           <div className="space-y-12">
-            <div className="max-w-4xl mx-auto">
-              <p className="text-lg text-gray-600 text-center">
+            <div className="max-w-4xl mx-auto text-center">
+              <p className="text-[#4C4C4C] leading-relaxed">
                 {t('pageDescription')}
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {servicesList.map((service: { title: string; description: string }, index: number) => (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+              {servicesList.map((service: ServiceItem, index: number) => (
                 <div 
-                  key={serviceIcons[index].id}
-                  className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+                  key={index}
+                  className="bg-white p-6 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-shadow"
                 >
-                  <div className="text-4xl mb-4">{serviceIcons[index].icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  {service.icon && (
+                    <div className="w-12 h-12 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-xl text-[#F2AC59] mb-4">
+                      {service.icon}
+                    </div>
+                  )}
+                  <h3 className="text-lg font-semibold text-[#4C4C4C] mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-[#4C4C4C] text-opacity-80 text-sm">
                     {service.description}
                   </p>
                 </div>
               ))}
+            </div>
+
+            <div className="bg-[#F9FAFB] p-8 rounded-lg mt-12">
+              <h2 className="text-xl font-semibold text-[#4C4C4C] mb-6 text-center">
+                {t('whyChooseUs', 'Mengapa Memilih Kami?')}
+              </h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center p-4">
+                  <div className="w-16 h-16 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-2xl text-[#F2AC59] mx-auto mb-3">
+                    🔒
+                  </div>
+                  <h3 className="font-medium text-[#4C4C4C] mb-2">{t('secure', 'Aman & Terpercaya')}</h3>
+                  <p className="text-sm text-[#4C4C4C] text-opacity-80">
+                    {t('secureDesc', 'Diawasi oleh BAPPEBTI')}
+                  </p>
+                </div>
+                <div className="text-center p-4">
+                  <div className="w-16 h-16 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-2xl text-[#F2AC59] mx-auto mb-3">
+                    ⚡
+                  </div>
+                  <h3 className="font-medium text-[#4C4C4C] mb-2">{t('fast', 'Proses Cepat')}</h3>
+                  <p className="text-sm text-[#4C4C4C] text-opacity-80">
+                    {t('fastDesc', 'Transaksi dan penarikan dana yang cepat')}
+                  </p>
+                </div>
+                <div className="text-center p-4">
+                  <div className="w-16 h-16 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-2xl text-[#F2AC59] mx-auto mb-3">
+                    👨‍💼
+                  </div>
+                  <h3 className="font-medium text-[#4C4C4C] mb-2">{t('support', 'Dukungan 24/7')}</h3>
+                  <p className="text-sm text-[#4C4C4C] text-opacity-80">
+                    {t('supportDesc', 'Tim profesional siap membantu')}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </ProfilContainer>

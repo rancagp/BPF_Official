@@ -1,26 +1,31 @@
 {
   "pageTitle": "Facilities & Services",
-  "pageDescription": "Various best facilities and services to support your trading activities safely and comfortably",
+  "pageDescription": "Information about the facilities and services available at PT. Equity World Futures",
   "services": [
     {
-      "title": "Futures Broker Dealer (WPB)",
-      "description": "The company is supported by Professional Futures Broker Dealers certified by Bappebti."
+      "title": "Professional Futures Broker Representatives",
+      "description": "The company is supported by Professional Futures Broker Representatives who are certified by Bappebti.",
+      "icon": ""
     },
     {
-      "title": "Online Registration Facility",
-      "description": "We provide facilities for Prospective Customers who want to join PT. Kontakperkasa Futures by registering online at www.kp-futures.com."
-    },
-    {
-      "title": "Two-Factor Authentication (2FA) Security System",
-      "description": "Implementation of One Time Password (OTP) when logging into the online trading transaction system."
+      "title": "2FA Security System",
+      "description": "Implementation of One Time Password (OTP) when logging into the online trading transaction system.",
+      "icon": ""
     },
     {
       "title": "Online Trading & Demo Account",
-      "description": "A special portal for online transactions via the internet. Equipped with real-time price spreads, chart views, and market information. Also includes a Demo Account facility for transaction simulations."
+      "description": "A dedicated portal for online transactions with real-time spread prices, charts, and market information. Equipped with a Demo Account feature for transaction simulations.",
+      "icon": ""
+    },
+    {
+      "title": "Online Registration",
+      "description": "Online registration facility for prospective clients through PT. Equity World Futures' official website.",
+      "icon": ""
     },
     {
       "title": "Daily Transaction Reports",
-      "description": "Daily transaction reports are sent to customer emails and can also be monitored directly through the online trading system."
+      "description": "Daily transaction reports sent via client email, recording all transaction activities that have been carried out.",
+      "icon": ""
     },
     {
       "title": "Fund Withdrawal",

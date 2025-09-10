@@ -6,7 +6,7 @@ import PageTemplate from "@/components/templates/PageTemplate";
 
 type LegalitasItem = {
     id: number;
-    key: 'bappebti' | 'bbj' | 'kbi';
+    key: 'bappebti' | 'bbj' | 'kbi' | 'sitna';
     image: string;
 };
 
@@ -26,6 +26,11 @@ const legalitasData: LegalitasItem[] = [
         key: 'kbi',
         image: "/assets/logo-kbi.png",
     },
+    {
+        id: 4,
+        key: 'sitna',
+        image: "/assets/sitna-logo.png",
+    },
 ];
 
 export async function getStaticProps({ locale }: { locale: string }) {
@@ -44,11 +49,18 @@ export default function Legalitas() {
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title={t('pageTitle')}>
                     <div className="space-y-16">
+                        <div className="mb-8">
+                            <h2 className="text-2xl font-bold text-[#4C4C4C] mb-4">Profil Badan Regulasi</h2>
+                            <p className="text-[#4C4C4C] leading-relaxed">
+                                {t('profile_description')}
+                            </p>
+                        </div>
+                        
                         {legalitasData.map((item) => (
                             <div key={item.id} className="flex flex-col md:flex-row items-center gap-8">
                                 {/* Image Container */}
                                 <div className="md:w-1/3 flex-shrink-0 w-full">
-                                    <div className="relative aspect-video bg-white rounded-lg overflow-hidden shadow-md p-4">
+                                    <div className={`relative ${item.key === 'sitna' ? 'aspect-square' : 'aspect-video'} bg-white rounded-lg overflow-hidden shadow-md p-4`}>
                                         <Image
                                             src={item.image}
                                             alt={t(`${item.key}.title`)}
@@ -60,10 +72,10 @@ export default function Legalitas() {
                                 </div>
                                 {/* Text Content */}
                                 <div className="md:w-2/3">
-                                    <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                                    <h3 className="text-2xl font-bold text-[#4C4C4C] mb-3 flex items-center gap-2">
                                         {t(`${item.key}.title`)}
                                     </h3>
-                                    <p className="text-gray-600 text-base leading-relaxed text-justify">
+                                    <p className="text-[#4C4C4C] text-base leading-relaxed text-justify">
                                         {t(`${item.key}.description`)}
                                     </p>
                                 </div>

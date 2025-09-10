@@ -1,6 +1,7 @@
 {
   "pageTitle": "Regulatory Bodies",
   "pageDescription": "Information about regulatory bodies overseeing futures trading activities",
+  "profile_description": "The following is a list of regulatory bodies and related institutions that oversee and support futures trading activities in Indonesia. Each institution has its own role and responsibility in creating a transparent, fair, and sustainable trading ecosystem.",
   "bappebti": {
     "title": "COMMODITY FUTURES TRADING REGULATORY AGENCY (BAPPEBTI)",
     "description": "BAPPEBTI or the Commodity Futures Trading Regulatory Agency was established based on Law Number 32 of 1997. BAPPEBTI is one of the echelon I units under the Ministry of Trade. BAPPEBTI is responsible for fostering, regulating, and supervising futures trading activities based on policies set by the Minister and applicable laws and regulations."
@@ -12,5 +13,9 @@
   "kbi": {
     "title": "INDONESIA COMMODITY & DERIVATIVES EXCHANGE (ICDX)",
     "description": "PT Kliring Berjangka Indonesia (Persero) is a State-Owned Enterprise that aspires to become an effective domestic company and eventually a global company with international standards. It was established to clear and guarantee the settlement of Futures/Derivatives/Spot & Forward contracts and Warehouse Receipts in an orderly, fair, and efficient manner to maintain Market Financial Integrity."
+  },
+  "sitna": {
+    "title": "NATIONAL TRANSACTION INFORMATION SYSTEM (SITNA)",
+    "description": "The National Transaction Information System (SITNA) is an electronic system established by BAPPEBTI to record and report all commodity futures trading transactions conducted by Futures Exchanges, Clearing Houses, and Futures Brokers in Indonesia. SITNA functions to enhance transparency, efficiency, and supervision in the futures capital market, as well as to protect the interests of investor communities."
   }
 }
