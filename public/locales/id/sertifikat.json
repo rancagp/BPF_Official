@@ -1,21 +1,84 @@
 {
   "pageTitle": "Sertifikat",
-  "certificates": [
+  "sections": [
     {
-      "image": "/assets/sertifikat-1.jpg",
-      "description": "PT. KontakPerkasa Futures Mendapatkan Sertifikat \"The Best Reliable Futures Company Of The Year\" pada Tahun 2014"
+      "title": "Legalitas Pusat Jakarta",
+      "certificates": [
+        {
+          "image": "/assets/legal-jakarta1.jpg",
+          "description": "Sertifikat Legalitas Pusat Jakarta 1"
+        },
+        {
+          "image": "/assets/legal-jakarta2.jpg",
+          "description": "Sertifikat Legalitas Pusat Jakarta 2"
+        },
+        {
+          "image": "/assets/legal-jakarta3.jpg",
+          "description": "Sertifikat Legalitas Pusat Jakarta 3"
+        },
+        {
+          "image": "/assets/legal-jakarta4.jpg",
+          "description": "Sertifikat Legalitas Pusat Jakarta 4"
+        }
+      ]
     },
     {
-      "image": "/assets/sertifikat-kbi.jpg",
-      "description": "Sertifikat Keanggotaan Kliring Berjangka"
+      "title": "Legalitas Cabang Surabaya - Trillium",
+      "certificates": [
+        {
+          "image": "/assets/legal-surabaya.jpg",
+          "description": "Sertifikat Legalitas Cabang Surabaya - Trillium"
+        }
+      ]
     },
     {
-      "image": "/assets/sertifikat-izin.png",
-      "description": "Sertifikat Izin Usaha Pialang Berjangka"
+      "title": "Legalitas Cabang Manado",
+      "certificates": [
+        {
+          "image": "/assets/legal-manado.jpg",
+          "description": "Sertifikat Legalitas Cabang Manado"
+        }
+      ]
     },
     {
-      "image": "/assets/sertifikat-apbi.png",
-      "description": "Sertifikat Keanggotaan Asosiasi Pialang Berjangka Indonesia"
+      "title": "Legalitas Cabang Jakarta",
+      "certificates": [
+        {
+          "image": "/assets/legal-cabjakarta1.jpg",
+          "description": "Sertifikat Legalitas Cabang Jakarta 1"
+        },
+        {
+          "image": "/assets/legal-cabjakarta2.jpg",
+          "description": "Sertifikat Legalitas Cabang Jakarta 2"
+        }
+      ]
+    },
+    {
+      "title": "Legalitas Cabang Semarang",
+      "certificates": [
+        {
+          "image": "/assets/legal-semarang.jpg",
+          "description": "Sertifikat Legalitas Cabang Semarang"
+        }
+      ]
+    },
+    {
+      "title": "Legalitas Cabang Cirebon",
+      "certificates": [
+        {
+          "image": "/assets/legal-cirebon.jpg",
+          "description": "Sertifikat Legalitas Cabang Cirebon"
+        }
+      ]
+    },
+    {
+      "title": "Legalitas Surabaya - Praxis",
+      "certificates": [
+        {
+          "image": "/assets/legal-surabayaprakis.jpg",
+          "description": "Sertifikat Legalitas Surabaya - Praxis"
+        }
+      ]
     }
   ]
 }

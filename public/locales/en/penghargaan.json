@@ -2,16 +2,32 @@
   "pageTitle": "Awards",
   "awards": [
     {
-      "image": "/assets/penghargaan-majalahinvestor.jpg",
+      "image": "/assets/penghargaan1.png",
       "description": "PT. KontakPerkasa Futures Receives Award from Investor Magazine for Best Futures Broker Category 2013 - Most Active in Gold Contracts"
     },
     {
-      "image": "/assets/penghargaan-kompetisi-tbbj.jpg",
+      "image": "/assets/penghargaan2.png",
       "description": "Participation in BBJ Trading Competition for OLE01 & GOL10 Products - 2022"
     },
     {
-      "image": "/assets/penghargaan-bumn.jpg",
+      "image": "/assets/penghargaan3.png",
       "description": "Margin Placement Compliance 2024 - 4th Best"
+    },
+    {
+      "image": "/assets/penghargaan4.png",
+      "description": "Best Financial Performance Award"
+    },
+    {
+      "image": "/assets/penghargaan5.png",
+      "description": "Technology Innovation Award"
+    },
+    {
+      "image": "/assets/penghargaan6.png",
+      "description": "Best Customer Service Award"
+    },
+    {
+      "image": "/assets/penghargaan7.png",
+      "description": "Sustainable Company Award"
     }
   ]
 }

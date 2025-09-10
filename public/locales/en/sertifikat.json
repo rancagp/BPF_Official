@@ -1,21 +1,84 @@
 {
   "pageTitle": "Certificates",
-  "certificates": [
+  "sections": [
     {
-      "image": "/assets/sertifikat-1.jpg",
-      "description": "PT. KontakPerkasa Futures Receives \"The Best Reliable Futures Company Of The Year\" Certificate in 2014"
+      "title": "Jakarta Head Office Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-jakarta1.jpg",
+          "description": "Jakarta Head Office Legality Certificate 1"
+        },
+        {
+          "image": "/assets/legal-jakarta2.jpg",
+          "description": "Jakarta Head Office Legality Certificate 2"
+        },
+        {
+          "image": "/assets/legal-jakarta3.jpg",
+          "description": "Jakarta Head Office Legality Certificate 3"
+        },
+        {
+          "image": "/assets/legal-jakarta4.jpg",
+          "description": "Jakarta Head Office Legality Certificate 4"
+        }
+      ]
     },
     {
-      "image": "/assets/sertifikat-kbi.jpg",
-      "description": "Futures Clearing Membership Certificate"
+      "title": "Surabaya - Trillium Branch Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-surabaya.jpg",
+          "description": "Surabaya - Trillium Branch Legality Certificate"
+        }
+      ]
     },
     {
-      "image": "/assets/sertifikat-izin.png",
-      "description": "Futures Brokerage Business License Certificate"
+      "title": "Manado Branch Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-manado.jpg",
+          "description": "Manado Branch Legality Certificate"
+        }
+      ]
     },
     {
-      "image": "/assets/sertifikat-apbi.png",
-      "description": "Indonesian Futures Brokers Association Membership Certificate"
+      "title": "Jakarta Branch Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-cabjakarta1.jpg",
+          "description": "Jakarta Branch Legality Certificate 1"
+        },
+        {
+          "image": "/assets/legal-cabjakarta2.jpg",
+          "description": "Jakarta Branch Legality Certificate 2"
+        }
+      ]
+    },
+    {
+      "title": "Semarang Branch Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-semarang.jpg",
+          "description": "Semarang Branch Legality Certificate"
+        }
+      ]
+    },
+    {
+      "title": "Cirebon Branch Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-cirebon.jpg",
+          "description": "Cirebon Branch Legality Certificate"
+        }
+      ]
+    },
+    {
+      "title": "Surabaya - Praxis Legality",
+      "certificates": [
+        {
+          "image": "/assets/legal-surabayaprakis.jpg",
+          "description": "Surabaya - Praxis Legality Certificate"
+        }
+      ]
     }
   ]
 }

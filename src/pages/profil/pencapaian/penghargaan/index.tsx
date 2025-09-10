@@ -29,10 +29,10 @@ export default function PenghargaanPage() {
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {awards.map((item: { image: string; description: string }, idx: number) => (
                                 <div key={idx} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
-                                    <div className="relative aspect-video w-full h-48 bg-gray-100 flex items-center justify-center cursor-pointer" onClick={() => setSelectedImage(item.image)}>
-                                        <Image src={item.image} alt={item.description.slice(0,40)} fill className="object-contain" />
+                                    <div className="relative aspect-video w-full h-48 bg-white flex items-center justify-center cursor-pointer" onClick={() => setSelectedImage(item.image)}>
+                                        <Image src={item.image} alt={item.description.slice(0,40)} fill className="object-contain p-4" />
                                     </div>
-                                    <div className="p-6 flex-1">
+                                    <div className="p-6 flex-1 border-t border-gray-100">
                                         <p className="text-gray-700 text-base leading-relaxed">{item.description}</p>
                                     </div>
                                 </div>
