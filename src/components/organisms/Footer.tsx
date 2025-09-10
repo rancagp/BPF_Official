@@ -183,21 +183,22 @@ const Footer = () => {
 
                 {/* Bottom Bar */}
                 <div className="mt-12 pt-6 border-t border-gray-100">
-                    <div className="flex flex-col md:flex-row justify-between items-center">
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                         <p 
-                            className="text-xs text-[#999999] mb-4 md:mb-0 text-center md:text-left"
+                            className="text-xs text-[#4C4C4C] whitespace-nowrap"
                             dangerouslySetInnerHTML={{ 
                                 __html: copyright.replace('{{year}}', currentYear.toString())
                             }} 
                         />
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <a href="/syarat-ketentuan" className="text-xs text-[#666666] hover:text-[#F2AC59] transition-colors">
+                        <span className="text-xs text-[#4C4C4C]">|</span>
+                        <div className="flex items-center gap-4">
+                            <a href="/syarat-ketentuan" className="text-xs text-[#666666] hover:text-[#F2AC59] transition-colors whitespace-nowrap">
                                 {termsConditions}
                             </a>
-                            <a href="/kebijakan-privasi" className="text-xs text-[#666666] hover:text-[#F2AC59] transition-colors">
+                            <a href="/kebijakan-privasi" className="text-xs text-[#666666] hover:text-[#F2AC59] transition-colors whitespace-nowrap">
                                 {privacyPolicy}
                             </a>
-                            <a href="/disclaimer" className="text-xs text-[#666666] hover:text-[#F2AC59] transition-colors">
+                            <a href="/disclaimer" className="text-xs text-[#666666] hover:text-[#F2AC59] transition-colors whitespace-nowrap">
                                 {disclaimer}
                             </a>
                         </div>
