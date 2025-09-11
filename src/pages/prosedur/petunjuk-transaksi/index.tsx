@@ -28,41 +28,41 @@ export default function PetunjukTransaksi() {
     <PageTemplate title={t('petunjukTransaksi.title', 'Petunjuk Transaksi')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={t('petunjukTransaksi.title', 'Petunjuk Transaksi')}>
-          <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed text-justify">
-            <p>{t('petunjukTransaksi.description')}</p>
-            <p>{t('petunjukTransaksi.description2')}</p>
-
-            <ol className="list-decimal pl-5 sm:pl-8 space-y-3">
-              {requirements.map((item, index) => {
-                if (typeof item === 'string') {
-                  return <li key={index}>{item}</li>;
-                }
-                
-                return (
-                  <li key={index}>
-                    {item.text}{' '}
-                    <a
-                      href={item.link?.url}
-                      className="text-green-600 hover:text-green-700 underline break-all"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.link?.text}
-                    </a>
+          <div className="space-y-6 text-[#4B5563] text-sm sm:text-base leading-relaxed">
+            <p className="text-justify">{t('petunjukTransaksi.description')}</p>
+            <p className="text-justify">{t('petunjukTransaksi.description2')}</p>
+            
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-[#4C4C4C]">
+                {t('petunjukTransaksi.onlineRequirements')}
+              </h3>
+              
+              <ul className="space-y-3 pl-2">
+                {requirements.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="bg-[#F2AC59] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 flex-shrink-0">
+                      {index + 1}
+                    </span>
+                    <div>
+                      {typeof item === 'string' ? (
+                        <span>{item}</span>
+                      ) : (
+                        <span>
+                          {item.text}{' '}
+                          <a
+                            href={item.link?.url}
+                            className="text-[#F2AC59] hover:underline break-all"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {item.link?.text}
+                          </a>
+                        </span>
+                      )}
+                    </div>
                   </li>
-                );
-              })}
-            </ol>
-
-            <p className="font-semibold">
-              {t('petunjukTransaksi.note')}
-            </p>
-
-            <div className="p-4 border-l-4 border-yellow-500 bg-yellow-50 text-yellow-800">
-              <p className="font-bold">{t('petunjukTransaksi.attention.title')}</p>
-              <p className="mt-1">
-                {t('petunjukTransaksi.attention.content')}
-              </p>
+                ))}
+              </ul>
             </div>
           </div>
         </ProfilContainer>

@@ -350,19 +350,20 @@
   },
   
   "petunjukTransaksi": {
-    "title": "Petunjuk Transaksi",
-    "description": "Nasabah dapat memberi atau menyampaikan amanat dengan cara online dan atau bisa juga melalui telephone seperti yang di anjurkan kepada nasabah ketika melakukan simulasi trading melalui akun Demo terlebih dahulu sebelum memakai Real online trading.",
-    "description2": "Nasabah yang memberikan atau menyampaikan pesan dengan cara online akan mendapatkan USER ID beserta password nya dari PT. KONTAKPERKASA FUTURES. Dan untuk melakukan transaksi dengan cara online, syarat yang harus Anda penuhi ialah:",
+    "title": "PETUNJUK TRANSAKSI",
+    "description": "Nasabah dapat menyampaikan amanat secara online dan atau melalui telepon (dianjurkan nasabah melakukan simulasi terlebih dulu sebelum menggunakan real online trading).",
+    "description2": "Nasabah yang menyampaikan amanat secara online akan memperoleh User ID dan Password dari PT. Equityworld Futures.",
+    "onlineRequirements": "Untuk melakukan transaksi secara online, harus terpenuhi antara lain:",
     "requirements": [
-      "Adanya jaringan internet",
+      "Tersedia Jaringan Internet",
       {
-        "text": "Akses ke link berikut:",
+        "text": "Akses ke",
         "link": {
-          "url": "http://etrade.kontakperkasafutures.com/login.php",
-          "text": "http://etrade.kontakperkasafutures.com/login.php"
+          "url": "http://etrade.ew-futures.com/login.php",
+          "text": "http://etrade.ew-futures.com/login.php"
         }
       },
-      "Nasabah sudah memiliki user ID beserta passwordnya dari PT. Kontakperkasa Futures (password ini bisa diganti oleh nasabah dengan sendirinya)."
+      "Nasabah sudah mempunyai User ID dan Password dari PT. Equityworld Futures (Password dapat diganti oleh nasabah)"
     ],
     "note": "Catatan: Untuk setiap transaksi, nasabah hanya dapat membeli atau menjual maksimum 50 lot.",
     "attention": {

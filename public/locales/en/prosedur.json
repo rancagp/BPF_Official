@@ -302,19 +302,20 @@
   },
   
   "petunjukTransaksi": {
-    "title": "Trading Instructions",
-    "description": "Clients can submit orders online or via telephone as recommended when practicing with a Demo account before using Real online trading.",
-    "description2": "Clients who submit orders online will receive a USER ID and password from PT. KONTAKPERKASA FUTURES. To conduct online transactions, you must meet the following requirements:",
+    "title": "TRADING INSTRUCTIONS",
+    "description": "Clients can submit orders online or via telephone (it is recommended that clients conduct simulations first before using real online trading).",
+    "description2": "Clients who submit orders online will receive a User ID and Password from PT. Equityworld Futures.",
+    "onlineRequirements": "To conduct online transactions, the following requirements must be met:",
     "requirements": [
-      "Internet connection",
+      "Internet Connection Available",
       {
-        "text": "Access to the following link:",
+        "text": "Access to",
         "link": {
-          "url": "http://etrade.kontakperkasafutures.com/login.php",
-          "text": "http://etrade.kontakperkasafutures.com/login.php"
+          "url": "http://etrade.ew-futures.com/login.php",
+          "text": "http://etrade.ew-futures.com/login.php"
         }
       },
-      "The client already has a user ID and password from PT. Kontakperkasa Futures (this password can be changed by the client themselves)."
+      "Client already has a User ID and Password from PT. Equityworld Futures (Password can be changed by the client)"
     ],
     "note": "Note: For each transaction, clients can only buy or sell a maximum of 50 lots.",
     "attention": {
