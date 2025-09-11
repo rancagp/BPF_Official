@@ -3,19 +3,19 @@
   "sectionTitle": "Video Umum",
   "videos": [
     {
-      "title": "Kemeriahan 17 Agustus 2024 PT. Kontakperkasa Futures Jakarta",
-      "description": "Perayaan Hari Kemerdekaan 17 Agustus 2024 di KPF Jakarta",
-      "videoUrl": "https://www.youtube.com/embed/ZW7CWB8fnZs"
-    },
-    {
       "title": "Bulan Literasi PBK 2024 - 5 Agustus 2024",
-      "description": "Kegiatan Bulan Literasi Perdagangan Berjangka Komoditi di tahun 2024",
-      "videoUrl": "https://www.youtube.com/embed/GW0TRluwfC0"
+      "description": "Kegiatan Bulan Literasi Perdagangan Berjangka Komoditi 2024",
+      "videoUrl": "https://www.youtube.com/embed/kpm1ohowalU"
     },
     {
-      "title": "Bulan Literasi PBK KPF Marein 2023",
-      "description": "Kegiatan Literasi PBK bersama KPF Marein tahun 2023",
-      "videoUrl": "https://www.youtube.com/embed/bIKJmN-sPS4"
+      "title": "MoU Rektor UNNES & Perjanjian Kerjasama FE UNNES dengan EWF Semarang",
+      "description": "Kerjasama antara UNNES dengan EWF Semarang dalam rangka pengembangan pendidikan dan pelatihan trading berjangka",
+      "videoUrl": "https://www.youtube.com/embed/Fmu5mF16BYk"
+    },
+    {
+      "title": "Dies Natalis Fakultas Hukum UNDIP ke-66 - Kerjasama FH UNDIP & EWF Semarang",
+      "description": "Acara Dies Natalis ke-66 Fakultas Hukum UNDIP dan penandatanganan kerjasama dengan EWF Semarang",
+      "videoUrl": "https://www.youtube.embed/UqRWm5OuO4U"
     }
   ]
 }

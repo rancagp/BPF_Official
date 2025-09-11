@@ -79,8 +79,8 @@ export default function ProfilPerusahaan() {
   const anggotaLogos = [
     { src: "/assets/logo-jfx.png", alt: t('sections.membership.logos.jfx') },
     { src: "/assets/logo-kbi.png", alt: t('sections.membership.logos.kbi') },
-    { src: "/assets/logo-aspebtindo.png", alt: t('sections.membership.logos.aspebtindo') },
-    { src: "/assets/logo-bappebti.png", alt: t('sections.membership.logos.bappebti') },
+    { src: "/assets/logo-kemendag.png", alt: t('sections.membership.logos.aspebtindo') },
+    { src: "/assets/sitna-logo.png", alt: t('sections.membership.logos.bappebti') },
   ];
 
   return (

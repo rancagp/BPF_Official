@@ -10,6 +10,58 @@ interface DetailItem {
   value: string;
 }
 
+interface CalculationExample {
+  title: string;
+  description: string;
+  calculation: string[];
+  alternative?: {
+    description: string;
+    calculation: string[];
+  };
+}
+
+interface ProfitLossExample {
+  title: string;
+  calculation: string[];
+}
+
+interface CalculationIllustration {
+  title: string;
+  description: string;
+  profit: ProfitLossExample;
+  loss: ProfitLossExample;
+}
+
+interface TransactionExample {
+  title: string;
+  description: string;
+  calculation: string[];
+  alternative?: {
+    description: string;
+    calculation: string[];
+  };
+}
+
+interface DayTradeExample extends TransactionExample {
+  alternative?: {
+    description: string;
+    calculation: string[];
+  };
+}
+
+interface OvernightTradeExample extends TransactionExample {}
+
+interface TransactionExamples {
+  dayTrade: {
+    title: string;
+    examples: DayTradeExample[];
+  };
+  overnightTrade: {
+    title: string;
+    examples: OvernightTradeExample[];
+  };
+}
+
 interface ContractCode {
   kodeKontrak: string;
   dasar: string;
@@ -70,67 +122,58 @@ export default function IlustrasiTransaksi() {
               </h2>
               <div className="w-20 h-1 bg-green-500 mb-6"></div>
               <div className="space-y-6">
-                {/* Day Trade Profit */}
-                <div className="p-6 border rounded-lg">
-                  <h4 className="font-bold mb-2">
-                    {t('ilustrasiTransaksi.contohTransaksi.dayTradeProfit.title')}
-                  </h4>
-                  <p className="mb-4">
-                    {t('ilustrasiTransaksi.contohTransaksi.dayTradeProfit.description')}
-                  </p>
-                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
-                    {(t('ilustrasiTransaksi.contohTransaksi.dayTradeProfit.calculation', { returnObjects: true }) as string[]).map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
-                    <div className="mt-1">
-                      <strong className="text-green-600">
-                        {t('ilustrasiTransaksi.contohTransaksi.dayTradeProfit.result')}
-                      </strong>
+                {/* Day Trade Examples */}
+                <div className="space-y-6">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {t('ilustrasiTransaksi.contohTransaksi.dayTrade.title')}
+                  </h3>
+                  
+                  {(t('ilustrasiTransaksi.contohTransaksi.dayTrade.examples', { returnObjects: true }) as DayTradeExample[]).map((example, index) => (
+                    <div key={index} className="p-6 border rounded-lg">
+                      <h4 className="font-bold mb-2">
+                        {example.title}
+                      </h4>
+                      <p className="mb-4">
+                        {example.description}
+                      </p>
+                      <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
+                        {example.calculation.map((line, i) => (
+                          <div key={i}>{line}</div>
+                        ))}
+                        {example.alternative && (
+                          <div className="mt-4">
+                            <p className="font-medium">{example.alternative.description}</p>
+                            {example.alternative.calculation.map((line: string, i: number) => (
+                              <div key={`alt-${i}`}>{line}</div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
 
-                {/* Day Trade Loss */}
-                <div className="p-6 border rounded-lg">
-                  <h4 className="font-bold mb-2">
-                    {t('ilustrasiTransaksi.contohTransaksi.dayTradeLoss.title')}
-                  </h4>
-                  <p className="mb-4">
-                    {t('ilustrasiTransaksi.contohTransaksi.dayTradeLoss.description')}
-                  </p>
-                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
-                    {(t('ilustrasiTransaksi.contohTransaksi.dayTradeLoss.calculation', { returnObjects: true }) as string[]).map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
-                    <div className="mt-1">
-                      <strong className="text-red-600">
-                        {t('ilustrasiTransaksi.contohTransaksi.dayTradeLoss.result')}
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Overnight Trade */}
-                <div className="p-6 border rounded-lg">
-                  <h4 className="font-bold mb-2">
+                {/* Overnight Trade Examples */}
+                <div className="space-y-6 mt-8">
+                  <h3 className="text-xl font-semibold text-gray-800">
                     {t('ilustrasiTransaksi.contohTransaksi.overnightTrade.title')}
-                  </h4>
-                  <p className="mb-4">
-                    {t('ilustrasiTransaksi.contohTransaksi.overnightTrade.description')}
-                  </p>
-                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
-                    {(t('ilustrasiTransaksi.contohTransaksi.overnightTrade.calculation', { returnObjects: true }) as string[]).map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
-                    <div className="mt-1">
-                      <strong className="text-green-600">
-                        {t('ilustrasiTransaksi.contohTransaksi.overnightTrade.result')}
-                      </strong>
+                  </h3>
+                  
+                  {(t('ilustrasiTransaksi.contohTransaksi.overnightTrade.examples', { returnObjects: true }) as OvernightTradeExample[]).map((example, index) => (
+                    <div key={index} className="p-6 border rounded-lg">
+                      <h4 className="font-bold mb-2">
+                        {example.title}
+                      </h4>
+                      <p className="mb-4">
+                        {example.description}
+                      </p>
+                      <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
+                        {example.calculation.map((line, i) => (
+                          <div key={i}>{line}</div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <p className="mt-2 text-sm text-gray-600">
-                    *{t('ilustrasiTransaksi.contohTransaksi.overnightTrade.note')}
-                  </p>
+                  ))}
                 </div>
               </div>
             </section>
@@ -138,52 +181,46 @@ export default function IlustrasiTransaksi() {
             {/* Catatan Penting */}
             <section className="p-6 bg-yellow-50 border-l-4 border-yellow-400 rounded">
               <h3 className="text-lg font-bold text-gray-800 mb-3">
-                {t('ilustrasiTransaksi.catatanPenting.title')}
+                Catatan Penting
               </h3>
               <ul className="list-disc list-inside space-y-2">
-                {(t('ilustrasiTransaksi.catatanPenting.items', { returnObjects: true }) as string[]).map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
+                <li>Transaksi dapat dilakukan kapan saja selama jam perdagangan berlangsung</li>
+                <li>Biaya dan komisi akan dikenakan sesuai dengan ketentuan yang berlaku</li>
+                <li>Nilai tukar dapat berubah sewaktu-waktu sesuai dengan kondisi pasar</li>
+                <li>Pastikan saldo mencukupi sebelum melakukan transaksi</li>
               </ul>
             </section>
 
             {/* Kode & Jenis Kontrak */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                {t('ilustrasiTransaksi.kodeJenisKontrak.title')}
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                {t('ilustrasiTransaksi.kodeKontrak.title')}
               </h2>
-              <div className="w-20 h-1 bg-green-500 mb-6"></div>
               <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-collapse text-xs sm:text-sm">
                   <thead className="bg-gray-100">
                     <tr>
                       <th className="py-2 px-4 border-b border-r">
-                        {t('ilustrasiTransaksi.kodeJenisKontrak.table.headers.kodeKontrak')}
+                        {t('ilustrasiTransaksi.kodeKontrak.table.headers.0')}
                       </th>
                       <th className="py-2 px-4 border-b border-r">
-                        {t('ilustrasiTransaksi.kodeJenisKontrak.table.headers.dasar')}
+                        {t('ilustrasiTransaksi.kodeKontrak.table.headers.1')}
                       </th>
                       <th className="py-2 px-4 border-b border-r">
-                        {t('ilustrasiTransaksi.kodeJenisKontrak.table.headers.kategori')}
+                        {t('ilustrasiTransaksi.kodeKontrak.table.headers.2')}
                       </th>
                       <th className="py-2 px-4 border-b">
-                        {t('ilustrasiTransaksi.kodeJenisKontrak.table.headers.jenisKontrak')}
+                        {t('ilustrasiTransaksi.kodeKontrak.table.headers.3')}
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {[
-                      { kodeKontrak: 'GU1010_BBJ', dasar: 'GBP/USD', kategori: 'DIRECT', jenisKontrak: t('ilustrasiTransaksi.kodeJenisKontrak.types.spotGbpUsd') },
-                      { kodeKontrak: 'EU1010_BBJ', dasar: 'EUR/USD', kategori: 'DIRECT', jenisKontrak: t('ilustrasiTransaksi.kodeJenisKontrak.types.spotEurUsd') },
-                      { kodeKontrak: 'AU1010_BBJ', dasar: 'AUD/USD', kategori: 'DIRECT', jenisKontrak: t('ilustrasiTransaksi.kodeJenisKontrak.types.spotAudUsd') },
-                      { kodeKontrak: 'UC1010_BBJ', dasar: 'USD/CHF', kategori: 'INDIRECT', jenisKontrak: t('ilustrasiTransaksi.kodeJenisKontrak.types.spotUsdChf') },
-                      { kodeKontrak: 'UJ1010_BBJ', dasar: 'USD/JPY', kategori: 'INDIRECT', jenisKontrak: t('ilustrasiTransaksi.kodeJenisKontrak.types.spotUsdJpy') }
-                    ].map((item, index) => (
+                    {(t('ilustrasiTransaksi.kodeKontrak.table.rows', { returnObjects: true }) as string[][]).map((row, index) => (
                       <tr key={index}>
-                        <td className="py-2 px-4 border-b border-r">{item.kodeKontrak}</td>
-                        <td className="py-2 px-4 border-b border-r">{item.dasar}</td>
-                        <td className="py-2 px-4 border-b border-r">{item.kategori}</td>
-                        <td className="py-2 px-4 border-b">{item.jenisKontrak}</td>
+                        <td className="py-2 px-4 border-b border-r">{row[0]}</td>
+                        <td className="py-2 px-4 border-b border-r">{row[1]}</td>
+                        <td className="py-2 px-4 border-b border-r">{row[2]}</td>
+                        <td className="py-2 px-4 border-b">{row[3]}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -194,57 +231,63 @@ export default function IlustrasiTransaksi() {
             {/* Ilustrasi Perhitungan Transaksi */}
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                {t('ilustrasiTransaksi.ilustrasiPerhitungan.title')}
+                {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.title')}
               </h2>
               <div className="w-20 h-1 bg-green-500 mb-6"></div>
               <div className="space-y-6">
                 {/* Direct Rates Example */}
                 <div className="p-6 border rounded-lg">
                   <h4 className="font-bold mb-2">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.directRates.title')}
+                    {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.directRates.title')}
                   </h4>
                   <div className="p-4 mb-4 font-mono text-center text-white bg-gray-800 rounded-md text-xs sm:text-sm">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.directRates.formula')}
+                    {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.directRates.formula')}
                   </div>
                   <p className="mb-4">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.directRates.example1')}
+                    {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example1.description')}
                   </p>
-                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm mb-4">
-                    P/L = (1.3540 - 1.3530) x 100.000 x 2 - [(US$30 + US$3.3) x 2]<br />
-                    P/L = 0,0010 x 100.000 x 2 - (US$33.3 x 2)<br />
-                    <strong className="text-green-600">
-                      {t('ilustrasiTransaksi.ilustrasiPerhitungan.directRates.results.profit')}
-                    </strong>
-                  </div>
-                  <p className="mb-4">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.directRates.example2')}
-                  </p>
-                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
-                    P/L = (1.3525 - 1.3530) x 100.000 x 2 - [(US$30 + US$3.3) x 2]<br />
-                    P/L = -0,0005 x 100.000 x 2 - (US$33.3 x 2)<br />
-                    <strong className="text-red-600">
-                      {t('ilustrasiTransaksi.ilustrasiPerhitungan.directRates.results.loss')}
-                    </strong>
+                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm space-y-2">
+                    <div className="font-semibold">
+                      {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example1.profit.title')}:
+                    </div>
+                    {(t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example1.profit.calculation', { returnObjects: true }) as string[]).map((line, i) => (
+                      <div key={i} className="ml-4">{line}</div>
+                    ))}
+                    
+                    <div className="font-semibold mt-4">
+                      {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example1.loss.title')}:
+                    </div>
+                    {(t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example1.loss.calculation', { returnObjects: true }) as string[]).map((line, i) => (
+                      <div key={`loss-${i}`} className="ml-4">{line}</div>
+                    ))}
                   </div>
                 </div>
 
                 {/* Indirect Rates Example */}
                 <div className="p-6 border rounded-lg">
                   <h4 className="font-bold mb-2">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.indirectRates.title')}
+                    {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.indirectRates.title')}
                   </h4>
                   <div className="p-4 mb-4 font-mono text-center text-white bg-gray-800 rounded-md text-xs sm:text-sm">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.indirectRates.formula')}
+                    {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.indirectRates.formula')}
                   </div>
                   <p className="mb-4">
-                    {t('ilustrasiTransaksi.ilustrasiPerhitungan.indirectRates.example')}
+                    {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example2.description')}
                   </p>
-                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm">
-                    P/L = ((102.20 - 102.12) / 102.12) x 100.000 x 1 - [(US$30 + US$3.3) x 1]<br />
-                    P/L = (0.0007834 x 100.000) - US$33.3<br />
-                    <strong className="text-green-600">
-                      {t('ilustrasiTransaksi.ilustrasiPerhitungan.indirectRates.result')}
-                    </strong>
+                  <div className="p-4 bg-gray-100 rounded-md font-mono text-xs sm:text-sm space-y-2">
+                    <div className="font-semibold">
+                      {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example2.profit.title')}:
+                    </div>
+                    {(t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example2.profit.calculation', { returnObjects: true }) as string[]).map((line, i) => (
+                      <div key={i} className="ml-4">{line}</div>
+                    ))}
+                    
+                    <div className="font-semibold mt-4">
+                      {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example2.loss.title')}:
+                    </div>
+                    {(t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.example2.loss.calculation', { returnObjects: true }) as string[]).map((line, i) => (
+                      <div key={`loss-${i}`} className="ml-4">{line}</div>
+                    ))}
                   </div>
                 </div>
               </div>

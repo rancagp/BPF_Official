@@ -1,6 +1,9 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
+import { FaCheckCircle, FaExchangeAlt, FaChartLine, FaDollarSign } from 'react-icons/fa';
+import PageTemplate from "@/components/templates/PageTemplate";
+import ProfilContainer from "@/components/templates/PageContainer/Container";
 
 interface Advantage {
   title: string;
@@ -27,19 +30,6 @@ interface ProductAdvantages {
   investmentTypes: InvestmentTypes;
 }
 
-type TranslationKey = keyof typeof translations;
-
-const translations = {
-  id: {
-    productAdvantages: {} as ProductAdvantages
-  },
-  en: {
-    productAdvantages: {} as ProductAdvantages
-  }
-};
-import ProfilContainer from "@/components/templates/PageContainer/Container";
-import PageTemplate from "@/components/templates/PageTemplate";
-
 export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => {
   return {
     props: {
@@ -48,48 +38,90 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => {
   };
 };
 
+const AdvantageCard = ({ title, description, icon: Icon }: { 
+  title: string; 
+  description: string; 
+  icon: React.ComponentType<{ className?: string }> 
+}) => (
+  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+    <div className="text-[#F2AC59] mb-4">
+      <Icon className="w-8 h-8" />
+    </div>
+    <h3 className="text-lg font-semibold text-[#4C4C4C] mb-2">{title}</h3>
+    <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+  </div>
+);
+
+const InvestmentTypeCard = ({ title, points }: { title: string; points: string[] }) => (
+  <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+    <h3 className="text-lg font-semibold text-[#4C4C4C] mb-3">{title}</h3>
+    <ul className="space-y-2">
+      {points.map((point, index) => (
+        <li key={index} className="flex items-start">
+          <span className="text-[#F2AC59] mr-2 mt-1">•</span>
+          <span className="text-gray-600 text-sm">{point}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 export default function KeunggulanProduk() {
-    const { t } = useTranslation('produk');
-    return (
-        <PageTemplate title={t('productAdvantages.title')}>
-            <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-                <ProfilContainer title={t('productAdvantages.title')}>
-                    <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed text-justify">
-                        <p>{t('productAdvantages.description')}</p>
+  const { t } = useTranslation('produk');
+  const productAdvantages = t('productAdvantages', { returnObjects: true }) as ProductAdvantages;
+  const advantages = productAdvantages.advantages as Advantage[];
+  const investmentTypes = productAdvantages.investmentTypes as InvestmentTypes;
 
-                        <h2 className="text-lg font-semibold text-gray-800 pt-4">{t('productAdvantages.advantagesTitle')}</h2>
-                        <ul className="list-disc pl-5 space-y-3">
-                            {(t('productAdvantages.advantages', { returnObjects: true }) as Advantage[]).map((advantage, index) => (
-                                <li key={index}>
-                                    <span className="font-semibold">{advantage.title}:</span> {advantage.description}
-                                </li>
-                            ))}
-                        </ul>
+  const advantageIcons = [FaDollarSign, FaExchangeAlt, FaChartLine, FaCheckCircle];
 
-                        <h2 className="text-lg font-semibold text-gray-800 pt-4">{t('productAdvantages.investmentTypes.title')}</h2>
-                        <p>{t('productAdvantages.investmentTypes.description')}</p>
-                        <div className="pl-5 space-y-4">
-                            <div>
-                                <h3 className="font-semibold">{t('productAdvantages.investmentTypes.fixedRate.title')}</h3>
-                                <ul className="list-disc pl-6 space-y-1 mt-1">
-                                    {(t('productAdvantages.investmentTypes.fixedRate.points', { returnObjects: true }) as string[]).map((point, index) => (
-                                        <li key={`fixed-${index}`}>{point}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold">{t('productAdvantages.investmentTypes.floatingRate.title')}</h3>
-                                <ul className="list-disc pl-6 space-y-1 mt-1">
-                                    {(t('productAdvantages.investmentTypes.floatingRate.points', { returnObjects: true }) as string[]).map((point, index) => (
-                                        <li key={`floating-${index}`}>{point}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
+  return (
+    <PageTemplate title={t('productAdvantages.title')}>
+      <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
+        <ProfilContainer title={t('productAdvantages.title')}>
+          <div className="space-y-8">
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed text-justify">
+              {t('productAdvantages.description')}
+            </p>
 
-                    </div>
-                </ProfilContainer>
+            <div className="space-y-6">
+              <h2 className="text-lg font-semibold text-gray-800 pt-4">
+                {t('productAdvantages.advantagesTitle')}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {advantages.map((advantage, index) => (
+                  <AdvantageCard
+                    key={index}
+                    title={advantage.title}
+                    description={advantage.description}
+                    icon={advantageIcons[index % advantageIcons.length]}
+                  />
+                ))}
+              </div>
             </div>
-        </PageTemplate>
-    );
+
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold text-gray-800 pt-4">
+                {investmentTypes.title}
+              </h2>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed text-justify">
+                {investmentTypes.description}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <InvestmentTypeCard
+                  key="fixed-rate"
+                  title={investmentTypes.fixedRate.title}
+                  points={investmentTypes.fixedRate.points}
+                />
+                <InvestmentTypeCard
+                  key="floating-rate"
+                  title={investmentTypes.floatingRate.title}
+                  points={investmentTypes.floatingRate.points}
+                />
+              </div>
+            </div>
+          </div>
+        </ProfilContainer>
+      </div>
+    </PageTemplate>
+  );
 }

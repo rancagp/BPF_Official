@@ -9,45 +9,41 @@
   "defaultDescription": "Discover the best investment opportunities with our featured products.",
   "productAdvantages": {
     "title": "Product Advantages",
-    "description": "PT. KONTAKPERKASA FUTURES is a futures brokerage company engaged in commodity trading and is consistent in its mission to develop the investment climate in Indonesia. The company also provides the best service for every customer, including market information services and education about Commodity Futures Trading, its opportunities and risks, as well as online transaction facilities.",
+    "description": "PT. KONTAKPERKASA FUTURES is a futures brokerage company engaged in commodity trading and is consistent in its mission to develop the investment climate in Indonesia.",
     "advantagesTitle": "PT. KONTAKPERKASA FUTURES Product Advantages:",
     "advantages": [
       {
         "title": "Capital Efficiency",
-        "description": "In trading activities using margin funds, investors can conduct relatively large transactions with relatively small funds. In this case, you do not need funds up to 100% as in stocks."
+        "description": "In trading using Margin Trading (margin funds), investors can conduct large transactions with relatively small capital. With a minimum fund of 10% of the total transaction value, 100% capital is not required."
       },
       {
         "title": "Transaction Flexibility",
-        "description": "Transactions that utilize two-way trends allow investors to profit whether the price trend moves up or down."
+        "description": "Two-way transactions allow investors to take advantage of opportunities whether the market is moving up or down."
       },
       {
         "title": "Highly Fluctuating Price Movements",
-        "description": "Significant daily price movements ranging from 20 to 500 points provide substantial profit opportunities with a contract size of US $5 per point, and customers are only charged a very small transaction fee, equivalent to just 6 points."
+        "description": "Large daily price movements ranging from 100-500 points provide significant profit opportunities with a contract size of US $5/point and only charged a transaction fee/Fee of 3 (Three) points plus 11% VAT."
       },
       {
         "title": "High Liquidity",
-        "description": "These financial products have a high level of liquidity, allowing customers to conduct buying and selling transactions anywhere and anytime as long as the market is running smoothly, supported by a number of services and facilities with an online system."
-      },
-      {
-        "title": "No Time Limit for Open Positions",
-        "description": "All customers are free to determine how long they want to conduct transactions without any penalties or administrative fees at the time of account closure or fund withdrawal."
+        "description": "This product has a very high level of liquidity, allowing investors to conduct buy and sell transactions at any time during market hours, without having to queue at market prices."
       }
     ],
     "investmentTypes": {
-      "title": "PT. Kontakperkasa Futures Investment Types",
-      "description": "In the investment business activities at PT. KONTAKPERKASA FUTURES, there are 2 types of investments, and these investment types are as follows:",
+      "title": "Investment Types",
+      "description": "There are two types of investments:",
       "fixedRate": {
         "title": "a. Fixed Rate",
         "points": [
-          "US $1 = Rp. 10,000, this is a fixed rate.",
-          "With this fixed rate, you will be protected from the risk of loss due to USD or Rupiah fluctuations."
+          "US $1 = Rp. 10,000 (fixed rate)",
+          "Protected from the risk of loss due to USD/Rupiah fluctuations"
         ]
       },
       "floatingRate": {
         "title": "b. Floating Rate",
         "points": [
-          "US $1 = US $1, this follows the USD exchange rate against the Rupiah.",
-          "With this floating rate, there are no fees for opening and withdrawing USD funds, either in whole or in part."
+          "US $1 = US $1 (according to USD to Rupiah exchange rate)",
+          "No fees for opening and withdrawing USD funds, either partially or in full"
         ]
       }
     }

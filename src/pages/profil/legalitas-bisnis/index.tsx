@@ -28,7 +28,7 @@ export default function LegalitasBisnis() {
   const legalitasItems = t('legalitasItems', { returnObjects: true }) as LegalitasItem[];
   
   const organizations: Organization[] = [
-    { name: "BAPPEBTI", logo: "/assets/logo-bappebti.png" },
+    { name: "Kementrian Perdagangan Republik Indonesia", logo: "/assets/logo-kemendag.png" },
     { name: "Jakarta Futures Exchange", logo: "/assets/logo-jfx.png" },
     { name: "Kliring Berjangka Indonesia", logo: "/assets/logo-kbi.png" },
     { name: "SITNa", logo: "/assets/sitna-logo.png" }

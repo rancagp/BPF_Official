@@ -3,7 +3,7 @@
     "steps": [
       {
         "title": "Open Company Website",
-        "description": "Prospective clients visit the official website of PT Rifan Financindo Berjangka.",
+        "description": "Prospective clients visit the official website of PT Equityworld Futures.",
         "items": []
       },
       {
@@ -55,7 +55,6 @@
       }
     ]
   },
-
   
   "registrasiOnline": {
     "title": "Online Registration Procedure",
@@ -81,7 +80,6 @@
       "You will receive a confirmation email once your account is activated"
     ]
   },
-
   
   "ilustrasiTransaksi": {
     "title": "Transaction Illustration",
@@ -94,97 +92,168 @@
         {"key": "contractSize", "label": "Contract Size", "value": "US $5 per point for stock index rolling spot contracts and 100 troy ounces for Loco London gold daily rolling contracts."},
         {"key": "lot", "label": "n Lot", "value": "n is the number of lots transacted."},
         {"key": "facilityFee", "label": "Facility Fee (commission)", "value": "US $15 per lot per side (buy or sell). Total commission fee is US $30 for 1 lot settlement."},
-        {"key": "vat", "label": "VAT (Value Added Tax)", "value": "11% of the commission fee, which is US $1.65 per lot/side. Total VAT fee is US $3.3 for 1 lot settlement."},
+        {"key": "vat", "label": "VAT (Value Added Tax)", "value": "11% of the commission fee which is US $1.65 /lot/side. Total VAT fee is US $3.3 for 1 lot settlement."},
         {"key": "overnight", "label": "Overnight/Roll Over Fee", "value": "If the transaction settlement is done for more than one day (overnight), each transaction lot will be charged an overnight/roll over fee."}
       ],
       "rollOverFee": {
-        "title": "Roll over fee / storage:",
+        "title": "Roll over fee / storage (overnight fee):",
         "items": [
-          "HKK5U and HKK50 at US $3/night.",
-          "JPK5U and JPK50 at US $2/night.",
-          "XULF and XUL10 at US $5/night.",
-          "XAGF and XAG10 at US $5/night."
+          "HKK5U and HKK50 at US $3/night",
+          "JPK5U and JPK50 at US $2/night",
+          "XULF and XUL10 at US $5/night",
+          "XAGF and XAG10 at US $5/night"
         ]
       }
     },
     "contohTransaksi": {
       "title": "Transaction Examples",
-      "dayTradeProfit": {
-        "title": "Example 1: Day Trade (Profit)",
-        "description": "A customer takes a buy position on HKK5U at 24,600 points for 2 lots. The investor then closes/liquidates the 2-lot buy position when the index is at 24,700 points.",
-        "calculation": [
-          "P/L = [(24,700 – 24,600) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
-          "P/L = (100 x US$5 x 2) – (US$33.3 x 2)",
-          "P/L = US$1000 – US$66.6"
-        ],
-        "result": "P/L = US$933.4 (net profit)"
-      },
-      "dayTradeLoss": {
-        "title": "Example 2: Day Trade (Loss)",
-        "description": "A customer takes a sell position on HKK5U at 24,700 points for 2 lots. The investor then closes/liquidates the 2-lot sell position when the index is at 24,800 points.",
-        "calculation": [
-          "P/L = [(24,700 – 24,800) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
-          "P/L = (-100 x US$5 x 2) – (US$33.3 x 2)",
-          "P/L = -US$1000 – US$66.6"
-        ],
-        "result": "P/L = -US$1,066.6 (net loss)"
+      "dayTrade": {
+        "title": "Day Trade Examples",
+        "examples": [
+          {
+            "title": "Example 1",
+            "description": "A client takes a buy position on HKK5U at 24,600 points for 2 lots. Then the client closes/liquidates the buy position of 2 lots when the index is at 24,700 points.",
+            "calculation": [
+              "P/L = [ ( Selling Price – Buying Price ) x Contract Size x n Lot ] – [ ( Fee US $ 30 + VAT ) x n Lot ]",
+              "P/L = [ ( 24,700 – 24,600 ) x US $ 5 x 2 lot ] – [ ( US $ 30 + US $ 3.3 ) x 2 lot ]",
+              "P/L = ( 100 points x US $ 5 x 2 lot ) – ( US $ 33.3 x 2 )",
+              "P/L = US $ 1000 – US $ 66.6",
+              "P/L = US $ 933.4 (net profit)"
+            ]
+          },
+          {
+            "title": "Example 2",
+            "description": "A client predicts that the Hang Seng Index will strengthen, so they open a buy position on HKK5U at 24,600 points for 1 lot. However, the index movement does not match their prediction, so the client closes/liquidates the buy position of 1 lot at a loss when the index is at 24,550 points.",
+            "calculation": [
+              "P/L = [ ( Selling Price – Buying Price ) x Contract Size x n Lot ] – [ ( Fee US $ 30 + VAT ) x n Lot ]",
+              "P/L = [ ( 24,550 – 24,600 ) x US $ 5 x 1 lot ] – [ ( US $ 30 + US $ 3.3 ) x 1 lot ]",
+              "P/L = ( – 50 points x US $ 5 x 1 lot ) – ( US $ 33.3 x 1 lot )",
+              "P/L = – US $ 250 – US $ 33.3",
+              "P/L = – US $ 283.3 (net loss)"
+            ]
+          },
+          {
+            "title": "Example 3",
+            "description": "A client predicts that the price of Loco London silver will rise, so they take a buy position on XAGF contract at $24.175/troy ounce for 1 lot. The client liquidates their position at $24.200.",
+            "calculation": [
+              "P/L = [ ( Selling Price – Buying Price ) x Contract Size x n Lot ] - [ ( Facility Fee + VAT ) x n Lot ]",
+              "P/L = [ ( US $ 24,200 / troy ounce – US $ 24,175 / troy ounce ) x 100 troy ounce x 1 lot ] – [ ( US $ 30 + US $ 3.3 ) x 1 lot ]",
+              "P/L = ( 0.025 / troy ounce x 100 troy ounce x 1 lot ) – ( US $ 33.3 )",
+              "P/L = US$ 91.70",
+              "The client makes a profit of US$ 91.70"
+            ],
+            "alternative": {
+              "description": "If liquidated at $24.155:",
+              "calculation": [
+                "P/L = [ ( US $ 24,155 / troy ounce – US $ 24,175 / troy ounce ) x 100 troy ounce x 1 lot ] – [ ( US $ 30 + US $ 3.3 ) x 1 lot ]",
+                "P/L = (- 0.020 / troy ounce x 100 troy ounce x 1 lot ) – ( US $ 33.3 )",
+                "P/L = - US$ 133.30",
+                "The client incurs a loss of - US$ 133.30"
+              ]
+            }
+          }
+        ]
       },
       "overnightTrade": {
-        "title": "Example 3: Overnight Trade",
-        "description": "A customer takes a buy position on HKK5U at 24,600 points for 2 lots. The investor then closes/liquidates the 2-lot buy position the next day (overnight) when the index is at 24,700 points.",
-        "calculation": [
-          "P/L = [(24,700 – 24,600) x US$5 x 2] – [(US$30 + US$3.3) x 2] – (US$3 x 2)",
-          "P/L = (100 x US$5 x 2) – (US$33.3 x 2) – US$6",
-          "P/L = US$1000 – US$66.6 – US$6"
-        ],
-        "result": "P/L = US$927.4 (net profit)",
-        "note": "*Note: Overnight fee (roll over fee) for HKK5U is US$3/lot/night (assuming 1 night)."
+        "title": "Overnight Transaction Examples",
+        "examples": [
+          {
+            "title": "Example 4",
+            "description": "An investor predicts that the Nikkei 225 Index will weaken (bearish), so on June 10 the investor opens a sell position at 14,850 points for 2 lots. Two days later (June 12), the investor closes/liquidates the sell position of 2 lots when the index is at 14,650 points.",
+            "calculation": [
+              "P/L = [ ( Selling Price – Buying Price ) x Contract Size x n Lot ] - [ ( Fee US $ 30 + VAT ) x n Lot ]",
+              "P/L = [ ( 14,850 – 14,650 ) x US $ 5 x 2 lot ] – [ ( US $ 30 + US $ 3.3 ) x 2 lot ]",
+              "P/L = ( 200 points x US $ 5 x 2 lot ) – ( US $ 33.3 x 2 lot )",
+              "P/L = US $ 2000 – US $ 66.6",
+              "P/L = US $ 1933.4 (gross profit)",
+              "Roll over fee (US $ 2 x 2 lot x 2 nights) = US $ 8",
+              "Net profit = US $ 1925.4"
+            ]
+          },
+          {
+            "title": "Example 5",
+            "description": "An investor predicts that the Loco London gold index trend will strengthen (bullish), so today the investor opens a buy position on the daily rolling Loco London gold contract (XUL10) at US $ 1170.25 / troy ounce for 2 lots. The next day the investor closes/liquidates the buy position of 2 lots of XUL10 contract when the index is at US $ 1185.25 / troy ounce.",
+            "calculation": [
+              "P/L = [ ( Selling Price – Buying Price ) x Contract Size x n Lot ] - [ ( Fee US $ 10 + VAT ) x n Lot ]",
+              "P/L = [ ( US $ 1185.25 / troy ounce – US $ 1170.25 / troy ounce ) x 100 troy ounce x 2 lot ] – [ ( US $ 30 + US $ 3.3 ) x 2 lot ]",
+              "P/L = ( US $ 15.00 x 100 x 2 lot ) – ( US $ 33.3 x 2 lot )",
+              "P/L = US $ 3000 – US $ 66.6",
+              "P/L = US $ 2933.4 (gross profit)",
+              "Roll over fee (US $ 5 x 2 lot x 1 night) = US $ 10",
+              "Net profit = US $ 2923.4 or Rp 29,234,000 (fixed rate US $ 1 = Rp 10,000.00)"
+            ]
+          }
+        ]
       }
     },
-    "catatanPenting": {
-      "title": "Important Notes",
-      "items": [
-        "Financial market transactions involve the risk of loss. Please ensure you understand the risks before trading.",
-        "The examples above are for illustration purposes only and are not a guarantee of future profits.",
-        "Fees and terms are subject to change at any time according to company policy.",
-        "For more information, please contact our customer service."
-      ]
-    },
-    "kodeJenisKontrak": {
+    "kodeKontrak": {
       "title": "Contract Codes & Types",
       "table": {
-        "headers": {
-          "kodeKontrak": "Contract Code",
-          "dasar": "Base",
-          "kategori": "Category",
-          "jenisKontrak": "Contract Type"
-        }
+        "headers": ["Contract Code", "Base", "Category", "Contract Type"],
+        "rows": [
+          ["GU1010_BBJ", "GBP/USD", "DIRECT", "Daily Rolling Spot Great Britain Pound Sterling (GBP) against US Dollar (USD)"],
+          ["EU1010_BBJ", "EUR/USD", "DIRECT", "Daily Rolling Spot Euro (EUR) against US Dollar (USD)"],
+          ["AU1010_BBJ", "AUD/USD", "DIRECT", "Daily Rolling Spot Australian Dollar (AUD) against US Dollar (USD)"],
+          ["UC1010_BBJ", "USD/CHF", "INDIRECT", "Daily Rolling Spot US Dollar (USD) against Swiss Franc (CHF)"],
+          ["UJ1010_BBJ", "USD/JPY", "INDIRECT", "Daily Rolling Spot US Dollar (USD) against Japanese Yen (JPY)"]
+        ]
       },
-      "types": {
-        "spotGbpUsd": "Daily Rolling Spot GBP/USD Contract",
-        "spotEurUsd": "Daily Rolling Spot EUR/USD Contract",
-        "spotAudUsd": "Daily Rolling Spot AUD/USD Contract",
-        "spotUsdChf": "Daily Rolling Spot USD/CHF Contract",
-        "spotUsdJpy": "Daily Rolling Spot USD/JPY Contract"
-      }
-    },
-    "ilustrasiPerhitungan": {
-      "title": "Transaction Calculation Illustration",
-      "directRates": {
-        "title": "Direct Rates (Example: EU1010_BBJ)",
-        "formula": "P/L = (Selling Price - Buying Price) x Contract Size x Number of Lots – [(Facility Fee + VAT) x n Lot]",
-        "example1": "A customer takes a buy position on EU1010_BBJ at 1.3530 (2 lots), then liquidates at 1.3540.",
-        "example2": "However, if liquidated at 1.3525:",
-        "results": {
-          "profit": "P/L = US$133.4 (net profit)",
-          "loss": "P/L = -US$166.6 (net loss)"
-        }
-      },
-      "indirectRates": {
-        "title": "Indirect Rates (Example: UJ1010_BBJ)",
-        "formula": "P/L = ((Selling Price - Buying Price) / Liquidation Price) x Contract Size x Number of Lots",
-        "example": "A customer takes a sell position on UJ1010_BBJ at 102.20 (1 lot), then liquidates at 102.12.",
-        "result": "P/L = US$45.04 (net profit)"
+      "ilustrasiPerhitungan": {
+        "title": "Calculation Illustration",
+        "directRates": {
+          "title": "For DIRECT RATES:",
+          "formula": "P/L = (Selling Price - Buying Price) x Contract Size x Number of Lots"
+        },
+        "indirectRates": {
+          "title": "For INDIRECT RATES:",
+          "formula": "P/L = (Selling Price - Buying Price) / Selling Price x Contract Size x Number of Lots"
+        },
+        "examples": [
+          {
+            "title": "EU1010_BBJ Transaction (Day Trade)",
+            "description": "A client predicts that the Euro spot price will increase, then takes a buy position on EU1010_BBJ at 1.3530 for 2 lots. Shortly after, the client liquidates their open position at 1.3540 for 2 lots (clear position).",
+            "profit": {
+              "title": "Profit Calculation:",
+              "calculation": [
+                "P/L = (1.3540-1.3530) x 100,000 x 2 - [ (US$ 30 + US$ 3.3) x 2 Lot ]",
+                "P/L = 0.0010 x 100,000 x 2 - [(US$ 33.3) x 2 lot )",
+                "P/L = USD 133.4",
+                "The client makes a profit of USD 133.4"
+              ]
+            },
+            "loss": {
+              "title": "If liquidated at 1.3525:",
+              "calculation": [
+                "P/L = (1.3525-1.3530) x 100,000 x 2 - [ (US$ 30 + US$ 3.3) x 2 Lot ]",
+                "P/L = -0.0005 x 100,000 x 2 - [(US$ 33.3) x 2 lot )",
+                "P/L = -USD 166.6",
+                "The client incurs a loss of USD 166.6"
+              ]
+            }
+          },
+          {
+            "title": "UJ10101_BBJ Transaction (Day Trade)",
+            "description": "A client predicts that the USD/JPY spot price will fall, then takes a sell position on UJ1010_BBJ at 102.20 for 1 lot. A few hours later, the client liquidates at 102.12.",
+            "profit": {
+              "title": "Profit Calculation:",
+              "calculation": [
+                "P/L = (102.20-102.12)/102.12 x 100,000 x 1 - [ (US$ 30 + US$ 3.3) x 1 Lot ]",
+                "P/L = 0.0007834 x 100,000 x 1 - [(US$ 33.3) x 1 lot )",
+                "P/L = USD 45.04",
+                "The client makes a profit of USD 45.04"
+              ]
+            },
+            "loss": {
+              "title": "If the USD/JPY rises to 102.27 and is liquidated at the same price:",
+              "calculation": [
+                "P/L = (102.20-102.27)/102.27 x 100,000 x 1 - [ (US$ 30 + US$ 3.3) x 1 Lot ]",
+                "P/L = -0.0006844 x 100,000 x 1 - [(US$ 33.3) x 1 lot )",
+                "P/L = -USD 101.74",
+                "The client incurs a loss of USD 101.74"
+              ]
+            }
+          }
+        ]
       }
     }
   },
@@ -197,7 +266,7 @@
       "Client logs in to the <span class='font-medium'>Withdrawal</span> menu on the real trading account to submit a withdrawal request in accordance with the applicable terms and conditions.",
       "Client fills out the withdrawal application form completely and correctly.",
       "Funds can only be transferred to an account under the Client's name that matches the previously approved Account Opening Application document.",
-      "The standard withdrawal process takes a maximum of <span class='font-medium'>three working days (T+3)</span>. However, PT. Rifan Financindo Berjangka is committed to expediting the process to be completed within <span class='font-medium'>one working day (T+1)</span>."
+      "The standard withdrawal process takes a maximum of <span class='font-medium'>three working days (T+3)</span>. However, PT Equityworld Futures is committed to expediting the process to be completed within <span class='font-medium'>one working day (T+1)</span>."
     ]
   },
   

@@ -9,45 +9,41 @@
   "defaultDescription": "Temukan peluang investasi terbaik dengan produk unggulan kami.",
   "productAdvantages": {
     "title": "Keunggulan Produk",
-    "description": "PT. KONTAKPERKASA FUTURES adalah salah satu perusahaan pialang berjangka yang bergerak dibidang perdagangan komoditi dan konsisten dalam misi pengembangan iklim investasi di Indonesia. Perusahaan juga memberikan pelayanan terbaik bagi setiap nasabah termasuk layanan informasi pasar dan edukasi tentang Perdagangan Berjangka Komoditi, peluang dan risikonya serta fasilitas dalam bertransaksi secara online.",
+    "description": "PT. KONTAKPERKASA FUTURES adalah salah satu perusahaan pialang berjangka yang bergerak dibidang perdagangan komoditi dan konsisten dalam misi pengembangan iklim investasi di Indonesia.",
     "advantagesTitle": "Keunggulan Produk PT. KONTAKPERKASA FUTURES:",
     "advantages": [
       {
         "title": "Efisiensi Modal",
-        "description": "Di dalam kegiatan bertransaksi memakai dana jaminan atau dengan nama lain yaitu margin tranding, dengan begitu para investor dapat melakukan transaksi yang cukup besar dengan mengeluarkan dana yang relatif kecil, dalam hal ini anda tidak memerlukan dana sampai sebesar 100% sebagaimana yang tertera di saham."
+        "description": "Dalam bertransaksi menggunakan Margin Trading (dana jaminan), dengan demikian para investor dapat melakukan transaksi yang besar dengan modal yang relatif kecil. Dengan dana minimal sebesar 10% dari nilai total transaksi, tidak perlu dana 100%."
       },
       {
         "title": "Fleksibilitas Transaksi",
-        "description": "Transaksi yang memanfaatkan dua arah trend yang sangat memungkinkan para investor untuk mendapatkan suatu peluang keuntungan di saat trend harga bergerak naik maupun bergerak turun."
+        "description": "Transaksi dua arah yang memungkinkan para investor untuk mendapatkan peluang pada saat pasar bergerak naik maupun turun."
       },
       {
         "title": "Pergerakan Harga Sangat Fluktuatif",
-        "description": "Pergerak harga harian yang cukup besar dengan kisaran 20 hingga 500 point akan memberikan peluang keuntungan yang cukup besar dengan contract size atau nilai kontrak sebesar US $ 5 / point dan juga nasabah hanya dibebankan biaya transaksi atau fee yang sangat kecil, yang setara dengan 6 point saja."
+        "description": "Pergerakan harga harian yang besar dengan range berkisar 100 - 500 poin memberikan peluang keuntungan yang besar dengan kontrak size US $ 5 / point dan hanya dibebankan biaya transaksi / Fee sebesar 3 (Tiga) poin ditambah PPN 11%."
       },
       {
         "title": "Likuiditas Tinggi",
-        "description": "Produk produk finansial ini mempunyai tingkat likuiditas yang begitu tinggi, dengan demikian para nasabah bisa melakukan transaksi jual dan juga beli di mana saja dan kapan saja selama market berjalan dengan lancar, hal ini akan didukung dengan sejumlah layanan dan fasilitas dengan sistem online atau online system."
-      },
-      {
-        "title": "Tanpa Batasan Waktu Untuk Posisi Terbuka",
-        "description": "Semua nasabah dengan bebas dan leluasa bisa menentukan sendiri berapa lama waktu untuk melakukan transaksi tanpa adanya pinalti atau biaya administrasi di saat penutupan akun atau saat penarikan dana."
+        "description": "Produk ini memiliki tingkat likuiditas yang sangat tinggi, dengan begitu para investor dapat melakukan transaksi beli dan jual kapan saja selama market berjalan, tanpa harus ada antrian di harga pasar."
       }
     ],
     "investmentTypes": {
-      "title": "Jenis Investasi PT. Kontakperkasa Futures",
-      "description": "Didalam kegiatan bisnis investasi di PT. KONTAKPERKASA FUTURES ini memiliki 2 jenis investasi, dan jenis investasi tersebut ialah sebagai berikut:",
+      "title": "Jenis Investasi",
+      "description": "Ada dua jenis investasi yaitu:",
       "fixedRate": {
-        "title": "a. Fixed Rate atau Kurs Tetap",
+        "title": "a. Fixed Rate / Kurs Tetap",
         "points": [
-          "US $ 1 = Rp. 10.000 hal ini merupakan kurs tetap.",
-          "Di dalam kurs tetap atau fixed rate ini anda akan terhindar dari resiko kerugian akibat adanya fluktuasi USD atau Rp."
+          "US $ 1 = Rp. 10.000 (kurs tetap)",
+          "Terhindar dari resiko kerugian akibat fluktuasi USD/Rp"
         ]
       },
       "floatingRate": {
-        "title": "b. Floating Rate atau Kurs Berjalan",
+        "title": "b. Floating Rate/Kurs Berjalan",
         "points": [
-          "US $ 1 = US $ 1 hal ini sesuai dengan kurs USD terhadap nilai rupiah.",
-          "Di dalam kurs berjalan atau floating rate ini tidak ada fee yang berasal dari pembukaan dan juga penarikan dana USD seluruh maupun sebagian."
+          "US $ 1 = US $ 1 (sesuai kurs USD terhadap Rupiah)",
+          "Tidak dikenakan fee dari pembukaan dan penarikan dana USD baik sebagian/seluruh"
         ]
       }
     }

@@ -3,7 +3,7 @@
     "steps": [
       {
         "title": "Membuka Website Perusahaan",
-        "description": "Calon Nasabah mengunjungi website resmi PT Rifan Financindo Berjangka.",
+        "description": "Calon Nasabah mengunjungi website resmi PT Equityworld Futures.",
         "items": []
       },
       {
@@ -88,103 +88,172 @@
     "description": "Untuk Anda yang ingin melakukan investasi dengan produk-produk dari PT. KONTAKPERKASA FUTURES, Anda dapat melihat ilustrasi transaksi dibawah ini, guna untuk mempertimbangkan lebih dalam lagi apakah Anda yakin dalam hal ini:",
     "rumusPerhitungan": {
       "title": "Rumus Perhitungan Transaksi",
-      "formula": "[(Selling Price – Buying Price) x Contract Size x n Lot] – [(Facility Fee + VAT) x n Lot]",
+      "formula": "[(Harga Jual – Harga Beli) x Nilai Kontrak x n Lot] – [(Biaya Fasilitas + PPN) x n Lot]",
       "keterangan": "Keterangan:",
       "details": [
-        {"key": "contractSize", "label": "Contract Size (nilai kontrak)", "value": "sebesar US $5 per poin untuk kontrak gulir berkala indeks saham dan 100 troy ounce untuk kontak gulir harian emas Loco London."},
-        {"key": "lot", "label": "n Lot", "value": "n adalah banyaknya lot yang ditransaksikan."},
-        {"key": "facilityFee", "label": "Facility Fee (biaya komisi)", "value": "sebesar US $15 per lot per sisi (beli atau jual). Total biaya komisi sebesar US $30 untuk 1 lot settlement."},
-        {"key": "vat", "label": "VAT (Pajak Pertambahan Nilai)", "value": "sebesar 11% dari biaya komisi yaitu US $1.65 / lot/side. Total biaya VAT sebesar US $3.3 untuk 1 lot settlement."},
-        {"key": "overnight", "label": "Biaya Inap/Roll Over", "value": "Apabila penyelesaian transaksi dilakukan lebih dari satu hari (overnight) maka setiap lot transaksi akan dikenakan biaya inap / roll over."}
+        {"key": "contractSize", "label": "Nilai Kontrak", "value": "US $5 per poin untuk kontrak gulir berkala indeks saham dan 100 troy ons untuk kontrak gulir harian emas Loco London."},
+        {"key": "lot", "label": "n Lot", "value": "n adalah jumlah lot yang ditransaksikan."},
+        {"key": "facilityFee", "label": "Biaya Fasilitas (komisi)", "value": "US $15 per lot per sisi (beli atau jual). Total biaya komisi adalah US $30 untuk penyelesaian 1 lot."},
+        {"key": "vat", "label": "PPN (Pajak Pertambahan Nilai)", "value": "11% dari biaya komisi yaitu US $1,65 /lot/sisi. Total biaya PPN adalah US $3,3 untuk penyelesaian 1 lot."},
+        {"key": "overnight", "label": "Biaya Menginap/Roll Over", "value": "Jika penyelesaian transaksi dilakukan lebih dari satu hari (menginap), setiap lot transaksi akan dikenakan biaya menginap/roll over."}
       ],
       "rollOverFee": {
-        "title": "Roll over fee / storage (biaya inap):",
+        "title": "Biaya roll over / penyimpanan (biaya menginap):",
         "items": [
-          "HKK5U dan HKK50 sebesar US $3 / malam.",
-          "JPK5U dan JPK50 sebesar US $2 / malam.",
-          "XULF dan XUL10 sebesar US $5 / malam.",
-          "XAGF dan XAG10 sebesar US $5 / malam."
+          "HKK5U dan HKK50 sebesar US $3/malam",
+          "JPK5U dan JPK50 sebesar US $2/malam",
+          "XULF dan XUL10 sebesar US $5/malam",
+          "XAGF dan XAG10 sebesar US $5/malam"
         ]
       }
     },
     "contohTransaksi": {
       "title": "Contoh Transaksi",
-      "dayTradeProfit": {
-        "title": "Contoh 1: Day Trade (Profit)",
-        "description": "Seorang nasabah mengambil posisi beli HKK5U pada level 24.600 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi beli 2 lot tersebut ketika indeks berada pada level 24.700 poin.",
-        "calculation": [
-          "P/L = [(24.700 – 24.600) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
-          "P/L = (100 x US$5 x 2) – (US$33.3 x 2)",
-          "P/L = US$1000 – US$66.6"
-        ],
-        "result": "P/L = US$933.4 (laba bersih)"
-      },
-      "dayTradeLoss": {
-        "title": "Contoh 2: Day Trade (Rugi)",
-        "description": "Seorang nasabah mengambil posisi jual HKK5U pada level 24.700 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi jual 2 lot tersebut ketika indeks berada pada level 24.800 poin.",
-        "calculation": [
-          "P/L = [(24.700 – 24.800) x US$5 x 2] – [(US$30 + US$3.3) x 2]",
-          "P/L = (-100 x US$5 x 2) – (US$33.3 x 2)",
-          "P/L = -US$1000 – US$66.6"
-        ],
-        "result": "P/L = -US$1,066.6 (rugi bersih)"
+      "dayTrade": {
+        "title": "Contoh Transaksi Harian",
+        "examples": [
+          {
+            "title": "Contoh 1",
+            "description": "Seorang nasabah mengambil posisi beli HKK5U pada level 24.600 poin sebanyak 2 lot. Kemudian nasabah menutup/melikuidasi posisi beli 2 lot tersebut ketika indeks berada pada level 24.700 poin.",
+            "calculation": [
+              "L/R = [ ( Harga Jual – Harga Beli ) x Nilai Kontrak x n Lot ] – [ ( Biaya US $ 30 + PPN ) x n Lot ]",
+              "L/R = [ ( 24.700 – 24.600 ) x US $ 5 x 2 lot ] – [ ( US $ 30 + US $ 3,3 ) x 2 lot ]",
+              "L/R = ( 100 poin x US $ 5 x 2 lot ) – ( US $ 33,3 x 2 )",
+              "L/R = US $ 1000 – US $ 66,6",
+              "L/R = US $ 933,4 (laba bersih)"
+            ]
+          },
+          {
+            "title": "Contoh 2",
+            "description": "Seorang investor memprediksi Indeks Hang Seng akan menguat, sehingga membuka posisi beli HKK5U pada level 24.600 poin sebanyak 1 lot. Namun pergerakan indeks tidak sesuai prediksi, sehingga investor menutup/melikuidasi posisi beli 1 lot tersebut dalam keadaan rugi ketika indeks berada pada level 24.550 poin.",
+            "calculation": [
+              "L/R = [ ( Harga Jual – Harga Beli ) x Nilai Kontrak x n Lot ] – [ ( Biaya US $ 30 + PPN ) x n Lot ]",
+              "L/R = [ ( 24.550 – 24.600 ) x US $ 5 x 1 lot ] – [ ( US $ 30 + US $ 3,3 ) x 1 lot ]",
+              "L/R = ( – 50 poin x US $ 5 x 1 lot ) – ( US $ 33,3 x 1 lot )",
+              "L/R = – US $ 250 – US $ 33,3",
+              "L/R = – US $ 283,3 (rugi bersih)"
+            ]
+          },
+          {
+            "title": "Contoh 3",
+            "description": "Seorang nasabah memprediksi harga perak Loco London akan naik, sehingga mengambil posisi beli kontrak XAGF pada harga $24,175/troy ons untuk 1 lot. Nasabah melikuidasi posisinya pada harga $24,200.",
+            "calculation": [
+              "L/R = [ ( Harga Jual – Harga Beli ) x Nilai Kontrak x n Lot ] - [ ( Biaya Fasilitas + PPN ) x n Lot ]",
+              "L/R = [ ( US $ 24.200 / troy ons – US $ 24.175 / troy ons ) x 100 troy ons x 1 lot ] – [ ( US $ 30 + US $ 3,3 ) x 1 lot ]",
+              "L/R = ( 0,025 / troy ons x 100 troy ons x 1 lot ) – ( US $ 33,3 )",
+              "L/R = US$ 91,70",
+              "Nasabah memperoleh keuntungan sebesar US$ 91,70"
+            ],
+            "alternative": {
+              "description": "Jika dilikuidasi pada harga $24,155:",
+              "calculation": [
+                "L/R = [ ( US $ 24.155 / troy ons – US $ 24.175 / troy ons ) x 100 troy ons x 1 lot ] – [ ( US $ 30 + US $ 3,3 ) x 1 lot ]",
+                "L/R = (- 0,020 / troy ons x 100 troy ons x 1 lot ) – ( US $ 33,3 )",
+                "L/R = - US$ 133,30",
+                "Nasabah mengalami kerugian sebesar - US$ 133,30"
+              ]
+            }
+          }
+        ]
       },
       "overnightTrade": {
-        "title": "Contoh 3: Overnight Trade",
-        "description": "Seorang nasabah mengambil posisi beli HKK5U pada level 24.600 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi beli 2 lot tersebut pada hari berikutnya (overnight) ketika indeks berada pada level 24.700 poin.",
-        "calculation": [
-          "P/L = [(24.700 – 24.600) x US$5 x 2] – [(US$30 + US$3.3) x 2] – (US$3 x 2)",
-          "P/L = (100 x US$5 x 2) – (US$33.3 x 2) – US$6",
-          "P/L = US$1000 – US$66.6 – US$6"
-        ],
-        "result": "P/L = US$927.4 (laba bersih)",
-        "note": "*Keterangan: Biaya inap (roll over fee) untuk HKK5U adalah US$3/lot/malam (asumsi 1 malam)."
+        "title": "Contoh Transaksi Overnight",
+        "examples": [
+          {
+            "title": "Contoh 4",
+            "description": "Seorang investor memprediksi Indeks Nikkei 225 akan melemah (bearish), maka pada tanggal 10 Juni investor membuka posisi jual pada level 14.850 poin sebanyak 2 lot. Dua hari kemudian (12 Juni), investor menutup/melikuidasi posisi jual 2 lot tersebut ketika indeks berada pada level 14.650 poin.",
+            "calculation": [
+              "L/R = [ ( Harga Jual – Harga Beli ) x Nilai Kontrak x n Lot ] - [ ( Biaya US $ 30 + PPN ) x n Lot ]",
+              "L/R = [ ( 14.850 – 14.650 ) x US $ 5 x 2 lot ] – [ ( US $ 30 + US $ 3,3 ) x 2 lot ]",
+              "L/R = ( 200 poin x US $ 5 x 2 lot ) – ( US $ 33,3 x 2 lot )",
+              "L/R = US $ 2000 – US $ 66,6",
+              "L/R = US $ 1933,4 (laba kotor)",
+              "Biaya roll over (US $ 2 x 2 lot x 2 malam) = US $ 8",
+              "Laba bersih = US $ 1925,4"
+            ]
+          },
+          {
+            "title": "Contoh 5",
+            "description": "Seorang investor memprediksi tren indeks emas Loco London akan menguat (bullish), maka pada hari ini investor membuka posisi beli kontrak emas Loco London harian (XUL10) pada US $ 1170,25 / troy ons sebanyak 2 lot. Keesokan harinya investor menutup/melikuidasi posisi beli 2 lot kontrak XUL10 tersebut ketika indeks berada pada level US $ 1185,25 / troy ons.",
+            "calculation": [
+              "L/R = [ ( Harga Jual – Harga Beli ) x Nilai Kontrak x n Lot ] - [ ( Biaya US $ 10 + PPN ) x n Lot ]",
+              "L/R = [ ( US $ 1185,25 / troy ons – US $ 1170,25 / troy ons ) x 100 troy ons x 2 lot ] – [ ( US $ 30 + US $ 3,3 ) x 2 lot ]",
+              "L/R = ( US $ 15,00 x 100 x 2 lot ) – ( US $ 33,3 x 2 lot )",
+              "L/R = US $ 3000 – US $ 66,6",
+              "L/R = US $ 2933,4 (laba kotor)",
+              "Biaya roll over (US $ 5 x 2 lot x 1 malam) = US $ 10",
+              "Laba bersih = US $ 2923,4 atau Rp 29.234.000 (kurs US $ 1 = Rp 10.000,00)"
+            ]
+          }
+        ]
       }
     },
-    "catatanPenting": {
-      "title": "Catatan Penting",
-      "items": [
-        "Transaksi di pasar keuangan mengandung risiko kerugian. Pastikan Anda memahami risikonya sebelum bertransaksi.",
-        "Contoh di atas hanya sebagai ilustrasi dan bukan merupakan jaminan keuntungan di masa depan.",
-        "Biaya dan ketentuan dapat berubah sewaktu-waktu sesuai dengan kebijakan perusahaan.",
-        "Untuk informasi lebih lanjut, silakan hubungi customer service kami."
-      ]
-    },
-    "kodeJenisKontrak": {
+    "kodeKontrak": {
       "title": "Kode & Jenis Kontrak",
       "table": {
-        "headers": {
-          "kodeKontrak": "Kode Kontrak",
-          "dasar": "Dasar",
-          "kategori": "Kategori",
-          "jenisKontrak": "Jenis Kontrak"
-        }
+        "headers": ["Kode Kontrak", "Dasar", "Kategori", "Jenis Kontrak"],
+        "rows": [
+          ["GU1010_BBJ", "GBP/USD", "LANGSUNG", "Kontrak Gulir Harian Harga Spot Pound Sterling Inggris (GBP) terhadap Dolar AS (USD)"],
+          ["EU1010_BBJ", "EUR/USD", "LANGSUNG", "Kontrak Gulir Harian Harga Spot Euro (EUR) terhadap Dolar AS (USD)"],
+          ["AU1010_BBJ", "AUD/USD", "LANGSUNG", "Kontrak Gulir Harian Harga Spot Dolar Australia (AUD) terhadap Dolar AS (USD)"],
+          ["UC1010_BBJ", "USD/CHF", "TIDAK LANGSUNG", "Kontrak Gulir Harian Harga Spot Dolar AS (USD) terhadap Franc Swiss (CHF)"],
+          ["UJ1010_BBJ", "USD/JPY", "TIDAK LANGSUNG", "Kontrak Gulir Harian Harga Spot Dolar AS (USD) terhadap Yen Jepang (JPY)"]
+        ]
       },
-      "types": {
-        "spotGbpUsd": "Kontrak Gulir Harian Harga Spot GBP/USD",
-        "spotEurUsd": "Kontrak Gulir Harian Harga Spot EUR/USD",
-        "spotAudUsd": "Kontrak Gulir Harian Harga Spot AUD/USD",
-        "spotUsdChf": "Kontrak Gulir Harian Harga Spot USD/CHF",
-        "spotUsdJpy": "Kontrak Gulir Harian Harga Spot USD/JPY"
-      }
-    },
-    "ilustrasiPerhitungan": {
-      "title": "Ilustrasi Perhitungan Transaksi",
-      "directRates": {
-        "title": "Direct Rates (Contoh: EU1010_BBJ)",
-        "formula": "P/L = (Harga Jual - Harga Beli) x Contract Size x Jumlah Lot – [(Facility Fee + VAT) x n Lot]",
-        "example1": "Nasabah mengambil posisi beli EU1010_BBJ pada harga 1.3530 (2 lot), kemudian melikuidasi pada harga 1.3540.",
-        "example2": "Namun apabila dilikuidasi pada harga 1.3525:",
-        "results": {
-          "profit": "P/L = US$133.4 (laba bersih)",
-          "loss": "P/L = -US$166.6 (rugi bersih)"
+      "ilustrasiPerhitungan": {
+        "title": "Ilustrasi Perhitungan",
+        "directRates": {
+          "title": "Untuk NILAI TUKAR LANGSUNG:",
+          "formula": "L/R = (Harga Jual - Harga Beli) x Nilai Kontrak x Jumlah Lot"
+        },
+        "indirectRates": {
+          "title": "Untuk NILAI TUKAR TIDAK LANGSUNG:",
+          "formula": "L/R = (Harga Jual - Harga Beli) / Harga Jual x Nilai Kontrak x Jumlah Lot"
+        },
+        "example1": {
+          "title": "Transaksi EU1010_BBJ (Harian)",
+          "description": "Seorang nasabah memprediksi harga spot Euro akan naik, kemudian mengambil posisi beli EU1010_BBJ pada 1,3530 untuk 2 lot. Tak lama kemudian, nasabah melikuidasi posisi terbukanya pada 1,3540 untuk 2 lot (clear position).",
+          "profit": {
+            "title": "Perhitungan Keuntungan:",
+            "calculation": [
+              "L/R = (1,3540-1,3530) x 100.000 x 2 - [ (US$ 30 + US$ 3,3) x 2 Lot ]",
+              "L/R = 0,0010 x 100.000 x 2 - [(US$ 33,3) x 2 lot )",
+              "L/R = US$ 133,4",
+              "Nasabah memperoleh keuntungan sebesar US$ 133,4"
+            ]
+          },
+          "loss": {
+            "title": "Jika dilikuidasi pada harga 1,3525:",
+            "calculation": [
+              "L/R = (1,3525-1,3530) x 100.000 x 2 - [ (US$ 30 + US$ 3,3) x 2 Lot ]",
+              "L/R = -0,0005 x 100.000 x 2 - [(US$ 33,3) x 2 lot )",
+              "L/R = -US$ 166,6",
+              "Nasabah mengalami kerugian sebesar US$ 166,6"
+            ]
+          }
+        },
+        "example2": {
+          "title": "Transaksi UJ10101_BBJ (Harian)",
+          "description": "Seorang nasabah memprediksi harga spot USD/JPY akan turun, kemudian mengambil posisi jual UJ1010_BBJ pada 102,20 untuk 1 lot. Beberapa jam kemudian, nasabah melikuidasi pada 102,12.",
+          "profit": {
+            "title": "Perhitungan Keuntungan:",
+            "calculation": [
+              "L/R = (102,20-102,12)/102,12 x 100.000 x 1 - [ (US$ 30 + US$ 3,3) x 1 Lot ]",
+              "L/R = 0,0007834 x 100.000 x 1 - [(US$ 33,3) x 1 lot )",
+              "L/R = US$ 45,04",
+              "Nasabah memperoleh keuntungan sebesar US$ 45,04"
+            ]
+          },
+          "loss": {
+            "title": "Jika USD/JPY naik ke 102,27 dan dilikuidasi pada harga yang sama:",
+            "calculation": [
+              "L/R = (102,20-102,27)/102,27 x 100.000 x 1 - [ (US$ 30 + US$ 3,3) x 1 Lot ]",
+              "L/R = -0,0006844 x 100.000 x 1 - [(US$ 33,3) x 1 lot )",
+              "L/R = -US$ 101,74",
+              "Nasabah mengalami kerugian sebesar US$ 101,74"
+            ]
+          }
         }
-      },
-      "indirectRates": {
-        "title": "Indirect Rates (Contoh: UJ1010_BBJ)",
-        "formula": "P/L = ((Harga Jual - Harga Beli) / Harga Likuidasi) x Contract Size x Jumlah Lot",
-        "example": "Nasabah mengambil posisi jual UJ1010_BBJ pada harga 102.20 (1 lot), kemudian melikuidasi pada harga 102.12.",
-        "result": "P/L = US$45.04 (laba bersih)"
       }
     }
   },
@@ -197,7 +266,7 @@
       "Nasabah masuk ke menu <span class='font-medium'>Withdrawal</span> pada akun transaksi riil untuk melakukan permohonan penarikan dana dengan mengikuti syarat dan ketentuan yang berlaku.",
       "Nasabah mengisi formulir permohonan penarikan dana secara lengkap dan benar.",
       "Dana hanya dapat ditransfer ke rekening atas nama Nasabah yang sesuai dengan dokumen Aplikasi Pembukaan Rekening yang telah disahkan sebelumnya.",
-      "Proses penarikan dana melalui mekanisme standar memerlukan waktu maksimum <span class='font-medium'>tiga hari kerja (T+3)</span>. Namun, PT. Rifan Financindo Berjangka berkomitmen untuk mempercepat proses agar dapat diselesaikan dalam waktu <span class='font-medium'>satu hari kerja (T+1)</span>."
+      "Proses penarikan dana melalui mekanisme standar memerlukan waktu maksimum <span class='font-medium'>tiga hari kerja (T+3)</span>. Namun, PT Equityworld Futures berkomitmen untuk mempercepat proses agar dapat diselesaikan dalam waktu <span class='font-medium'>satu hari kerja (T+1)</span>."
     ]
   },
   
