@@ -30,8 +30,8 @@ export default function HistoricalData() {
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
                                     className={`px-4 py-2 font-medium ${activeTab === tab
-                                        ? "border-b-2 border-green-500 text-green-600"
-                                        : "text-gray-500 hover:text-green-500"
+                                        ? "border-b-2 border-[#F2AC59] text-[#F2AC59]"
+                                        : "text-gray-500 hover:text-[#F2AC59]"
                                         }`}
                                 >
                                     {t(`tabs.${tab.toLowerCase()}`)}

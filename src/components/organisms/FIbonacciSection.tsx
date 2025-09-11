@@ -58,16 +58,16 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
     const formatNumber = (num: number | undefined) => num !== undefined ? num.toFixed(2) : "0.00";
     const isUptrend = trend === 'Uptrend';
     const gradient = isUptrend 
-        ? 'from-green-400 to-blue-500' 
-        : 'from-red-400 to-purple-500';
-    const bgColor = isUptrend ? 'bg-green-50' : 'bg-red-50';
-    const borderColor = isUptrend ? 'border-green-100' : 'border-red-100';
+        ? 'from-[#F2AC59] to-[#F7D2C4]' 
+        : 'from-[#FFC080] to-[#FFA07A]';
+    const bgColor = isUptrend ? 'bg-[#F7F7F7]' : 'bg-[#F7F7F7]';
+    const borderColor = isUptrend ? 'border-[#F2AC59]' : 'border-[#FFC080]';
 
     return (
-        <div className={`bg-white p-6 rounded-xl shadow-lg border ${borderColor} transition-all duration-300 hover:shadow-xl`}>
+        <div className={`bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow duration-300 h-full`}>
             <div className="mb-6">
                 <div className="text-center mb-2">
-                    <h3 className={`text-2xl font-bold ${isUptrend ? 'text-green-700' : 'text-red-700'}`}>
+                    <h3 className={`text-2xl font-bold text-[#F2AC59]`}>
                         {isUptrend ? t('fibonacci.uptrend', 'UPTREND') : t('fibonacci.downtrend', 'DOWNTREND')}
                     </h3>
                 </div>
@@ -90,7 +90,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                             type="text"
                             value={priceA}
                             onChange={(e) => handleInputChange(setPriceA, e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200"
+                            className="w-full px-4 py-2 border border-[#9B9FA7] rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59]"
                             placeholder={isUptrend ? t('fibonacci.low', 'Low') : t('fibonacci.high', 'High')}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -107,7 +107,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                             type="text"
                             value={priceB}
                             onChange={(e) => handleInputChange(setPriceB, e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200"
+                            className="w-full px-4 py-2 border border-[#9B9FA7] rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59]"
                             placeholder={isUptrend ? t('fibonacci.high', 'High') : t('fibonacci.low', 'Low')}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -120,7 +120,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <button
                     onClick={handleCalculate}
-                    className={`px-6 py-3 bg-gradient-to-r ${gradient} text-white font-medium rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md hover:shadow-lg transition-all duration-200 flex-1 flex items-center justify-center`}
+                    className={`px-6 py-3 bg-[#F2AC59] text-white font-medium rounded-lg hover:bg-[#E09B4A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F2AC59] shadow-md hover:shadow-lg flex-1 flex items-center justify-center`}
                 >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -133,7 +133,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                         setPriceB("");
                         setResults({ retracement: {}, projection: {} });
                     }}
-                    className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+                    className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 flex items-center justify-center"
                 >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -145,12 +145,13 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
             {results && (
                 <div className="mt-6">
                     <div className="text-center mb-6">
+                        <h3 className="text-xl font-semibold text-[#4C4C4C] mb-4">{t(`fibonacci.${trend}`, trend)}</h3>
                         <h4 className="text-lg font-semibold text-gray-800">{t('fibonacci.retracementLevels', 'Tingkat Retracement')}</h4>
-                        <div className={`w-24 h-1 ${isUptrend ? 'bg-gradient-to-r from-green-400 to-blue-500' : 'bg-gradient-to-r from-red-400 to-purple-500'} mx-auto mt-2 rounded-full`}></div>
+                        <div className={`w-24 h-1 ${isUptrend ? 'bg-gradient-to-r from-[#F2AC59] to-[#F7D2C4]' : 'bg-gradient-to-r from-[#FFC080] to-[#FFA07A]'} mx-auto mt-2 rounded-full`}></div>
                     </div>
                     <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden mb-8">
                         <table className="min-w-full divide-y divide-gray-100">
-                            <thead className={`${isUptrend ? 'bg-gradient-to-r from-green-50 to-blue-50' : 'bg-gradient-to-r from-red-50 to-purple-50'}`}>
+                            <thead className={`${isUptrend ? 'bg-gradient-to-r from-[#F7F7F7] to-[#F7F7F7]' : 'bg-gradient-to-r from-[#F7F7F7] to-[#F7F7F7]'}`}>
                                 <tr>
                                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                         {t('fibonacci.level', 'Level')}
@@ -165,7 +166,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                                     <tr key={`retrace-${level}`} className="hover:bg-gray-50 transition-colors">
                                         <td className="px-6 py-3 whitespace-nowrap">
                                             <div className="flex items-center">
-                                                <span className={`w-2 h-2 rounded-full mr-2 ${isUptrend ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                                                <span className="w-2 h-2 rounded-full mr-2 bg-[#4C4C4C]"></span>
                                                 <span className="text-sm font-medium text-gray-800">{level}%</span>
                                             </div>
                                         </td>
@@ -180,7 +181,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
 
                     <div className="text-center mb-6">
                         <h4 className="text-lg font-semibold text-gray-800">{t('fibonacci.projectionLevels', 'Tingkat Proyeksi')}</h4>
-                        <div className={`w-24 h-1 ${isUptrend ? 'bg-gradient-to-r from-green-400 to-blue-500' : 'bg-gradient-to-r from-red-400 to-purple-500'} mx-auto mt-2 rounded-full`}></div>
+                        <div className={`w-24 h-1 ${isUptrend ? 'bg-gradient-to-r from-[#F2AC59] to-[#F7D2C4]' : 'bg-gradient-to-r from-[#FFC080] to-[#FFA07A]'} mx-auto mt-2 rounded-full`}></div>
                     </div>
                     <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
                         <table className="min-w-full divide-y divide-gray-100">
@@ -199,7 +200,7 @@ const CalculatorSection = ({ trend }: { trend: 'Uptrend' | 'Downtrend' }) => {
                                     <tr key={`projection-${level}`} className="hover:bg-gray-50 transition-colors">
                                         <td className="px-6 py-3 whitespace-nowrap">
                                             <div className="flex items-center">
-                                                <span className={`w-2 h-2 rounded-full mr-2 ${isUptrend ? 'bg-blue-500' : 'bg-purple-500'}`}></span>
+                                                <span className="w-2 h-2 rounded-full mr-2 bg-[#4C4C4C]"></span>
                                                 <span className="text-sm font-medium text-gray-800">{level}%</span>
                                             </div>
                                         </td>
@@ -227,7 +228,7 @@ export default function FibonacciSection() {
                 <p className="mt-2 text-lg text-gray-600">
                     {t('fibonacci.subtitle', 'Hitung level retracement dan proyeksi Fibonacci untuk analisis teknis Anda')}
                 </p>
-                <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-blue-500 mx-auto mt-4 rounded-full"></div>
+                <div className="w-24 h-1 bg-[#F2AC59] mx-auto mt-4 rounded-full"></div>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
