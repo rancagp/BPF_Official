@@ -1,6 +1,7 @@
 {
   "title": "Index Symbols",
   "pageTitle": "Index Symbols - PT. Kresna Berjangka Investama",
+  "symbolIndexTitle": "Index Symbols List",
   "contractMonthSymbol": "Contract Month Symbols",
   "symbolIndexData": [
     { "symbol": "HSIV9", "description": "Hang Seng Index (Futures) for October 2009 contract" },
