@@ -91,7 +91,7 @@ const baseMenuItems: NavItem[] = [
       {
         key: "education_marketingTools",
         label: "Alat Pemasaran",
-        href: "https://digitalmarketing.kp-futures.com/",
+        href: "https://digitalmarketing.equityworld-futures.com/",
         target: "_blank",
       },
     ],
