@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import MarketUpdate from "./MarketUpdate";
@@ -108,14 +107,14 @@ const NavBar: React.FC = () => {
 
   useEffect(() => {
     setIsClient(true);
-    
+
     const handleScroll = () => {
       const scrolled = window.scrollY > 10;
       setIsScrolled(scrolled);
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -131,10 +130,14 @@ const NavBar: React.FC = () => {
         })),
       })),
     }));
+
     setMenuItems(translatedMenuItems);
   }, [i18n.language, t]);
 
-  const toggleDropdown = (key: string) => {
+  const toggleDropdown = (key: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     setOpenDropdowns((prev) => ({
       ...prev,
       [key]: !prev[key],
@@ -146,44 +149,64 @@ const NavBar: React.FC = () => {
     setOpenDropdowns({});
   };
 
-  const renderMobileMenu = (items: NavItem[], level = 0) => {
+  // 🔧 FIXED: pakai max-h-screen + bg-white + z-20 biar tidak ketutup
+  const renderMobileMenu = (items: NavItem[], level = 0, parentKey = "") => {
     return (
-      <div className={`${level > 0 ? 'pl-4 bg-[#F8F8F8]' : ''} space-y-0.5 py-2`}>
-        {items.map((item) => (
-          <div key={item.key} className="border-b border-[#9B9FA7]/10 last:border-0">
-            {item.href && !item.submenu ? (
-              <Link
-                href={item.href}
-                locale={i18n.language}
-                className="block px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] hover:bg-[#F8F8F8] transition-colors"
-                onClick={closeAllMenus}
-                target={item.target}
-                rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <div>
+      <div className={`${level > 0 ? "pl-4 bg-[#F8F8F8]" : ""} space-y-0.5 py-2`}>
+        {items.map((item) => {
+          const itemKey = parentKey ? `${parentKey}.${item.key}` : item.key;
+
+          if (item.submenu && item.submenu.length > 0) {
+            return (
+              <div key={itemKey} className="border-b border-[#9B9FA7]/10 last:border-0">
                 <button
-                  onClick={() => toggleDropdown(item.key)}
+                  onClick={(e) => toggleDropdown(itemKey, e)}
                   className="w-full text-left px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] flex justify-between items-center"
+                  aria-expanded={openDropdowns[itemKey] || false}
+                  aria-controls={`submenu-${itemKey}`}
                 >
                   <span>{item.label}</span>
-                  {item.submenu && (
-                    <i
-                      className={`fas fa-chevron-${openDropdowns[item.key] ? "up" : "down"} text-xs text-[#9B9FA7] ml-2`}
-                    />
-                  )}
+                  <i
+                    className={`fas fa-chevron-${openDropdowns[itemKey] ? "up" : "down"} text-xs text-[#4C4C4C] ml-2`}
+                  />
                 </button>
-                {item.submenu && (
-                  <div className={`overflow-hidden transition-all duration-300 ${openDropdowns[item.key] ? 'max-h-96' : 'max-h-0'}`}>
-                    {renderMobileMenu(item.submenu, level + 1)}
-                  </div>
-                )}
+                <div
+                  id={`submenu-${itemKey}`}
+                  className={`overflow-hidden transition-all duration-300 bg-white relative z-20 ${
+                    openDropdowns[itemKey] ? "max-h-screen" : "max-h-0"
+                  }`}
+                >
+                  {renderMobileMenu(item.submenu, level + 1, itemKey)}
+                </div>
               </div>
-            )}
-          </div>
-        ))}
+            );
+          }
+
+          if (item.href) {
+            return (
+              <div key={itemKey} className="border-b border-[#9B9FA7]/10 last:border-0">
+                <Link
+                  href={item.href}
+                  locale={i18n.language}
+                  className="block px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] hover:bg-[#F8F8F8] transition-colors"
+                  onClick={closeAllMenus}
+                  target={item.target}
+                  rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+                >
+                  {item.label}
+                </Link>
+              </div>
+            );
+          }
+
+          return (
+            <div key={itemKey} className="border-b border-[#9B9FA7]/10 last:border-0">
+              <span className="block px-6 py-3 text-base font-medium text-[#4C4C4C]">
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -191,11 +214,18 @@ const NavBar: React.FC = () => {
   if (!isClient) return null;
 
   return (
-    <div className={`sticky top-0 z-50 bg-white border-b border-[#9B9FA7]/30 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+    <div
+      className={`sticky top-0 z-50 bg-white border-b border-[#9B9FA7]/30 transition-all duration-300 ${
+        isScrolled ? "shadow-md" : ""
+      }`}
+    >
       <nav className="bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className={`flex justify-between items-center transition-all duration-300 ${isScrolled ? 'h-14' : 'h-20'}`}>
-            {/* Logo with Text */}
+          <div
+            className={`flex justify-between items-center transition-all duration-300 ${
+              isScrolled ? "h-14" : "h-20"
+            }`}
+          >
             <Link href="/" locale={i18n.language} className="flex items-center gap-2 group">
               <div className="flex items-center">
                 <img
@@ -203,7 +233,9 @@ const NavBar: React.FC = () => {
                   alt="Logo EWF"
                   width={50}
                   height={50}
-                  className={`w-auto transition-all duration-300 group-hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'}`}
+                  className={`w-auto transition-all duration-300 group-hover:scale-105 ${
+                    isScrolled ? "h-10 md:h-12" : "h-12 md:h-14"
+                  }`}
                 />
                 <span className="ml-3 text-xl md:text-2xl font-bold text-[#4C4C4C] tracking-tight">
                   EQUITYWORLD <span className="text-[#F2AC59]">FUTURES</span>
@@ -224,7 +256,7 @@ const NavBar: React.FC = () => {
                   >
                     {item.label}
                     {item.submenu && (
-                      <i className="fas fa-chevron-down text-xs ml-1 transition-transform duration-200 group-hover:rotate-180" />
+                      <i className="fas fa-chevron-down text-xs text-[#4C4C4C] ml-1 transition-transform duration-200 group-hover:rotate-180" />
                     )}
                   </Link>
                   {item.submenu && (
@@ -235,24 +267,26 @@ const NavBar: React.FC = () => {
                     >
                       {item.submenu.map((sub) => (
                         <div key={sub.key} className="relative group/sub">
-                          <Link
-                            href={sub.href || "#"}
-                            locale={i18n.language}
-                            className="flex items-center px-4 py-2.5 text-sm text-[#4C4C4C] hover:bg-[#F8F8F8] w-full text-left hover:text-[#F2AC59] rounded-md"
-                            target={sub.target}
-                            rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
-                          >
-                            {sub.label}
+                          <div className="flex items-center justify-between w-full">
+                            <Link
+                              href={sub.href || "#"}
+                              locale={i18n.language}
+                              className="flex-1 px-4 py-2.5 text-sm text-[#4C4C4D] hover:bg-[#F8F8F8] text-left hover:text-[#F2AC59] rounded-md"
+                              target={sub.target}
+                              rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
+                            >
+                              {sub.label}
+                            </Link>
                             {sub.submenu && (
-                              <i className={`fas fa-chevron-right text-xs group-hover/sub:rotate-90 transition-transform duration-200`} />
+                              <i
+                                className={`fas fa-chevron-right text-xs text-[#4C4C4C] mx-3 group-hover/sub:rotate-90 transition-transform duration-200`}
+                              />
                             )}
-                          </Link>
+                          </div>
                           {sub.submenu && (
                             <div
                               className={`absolute top-0 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 transform ${
-                                index >= menuItems.length - 2
-                                  ? "right-full mr-1"
-                                  : "left-full ml-1"
+                                index >= menuItems.length - 2 ? "right-full mr-1" : "left-full ml-1"
                               }`}
                             >
                               {sub.submenu.map((child) => (
@@ -288,22 +322,20 @@ const NavBar: React.FC = () => {
         </div>
 
         {/* Mobile menu */}
-        <div className={`fixed inset-0 z-40 bg-[#4C4C4C] bg-opacity-70 transition-opacity md:hidden ${
-          menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}>
-          <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
-            menuOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}>
+        <div
+          className={`fixed inset-0 z-40 bg-[#4C4C4C] bg-opacity-70 transition-opacity md:hidden ${
+            menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
+          <div
+            className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+              menuOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
             <div className="flex items-center justify-between p-4 border-b border-[#9B9FA7]/30">
               <div className="flex items-center">
-                <img
-                  src="/assets/ewf-logo.png"
-                  alt="Logo EWF"
-                  className="h-10 w-auto"
-                />
-                <span className="ml-2 text-lg font-bold text-[#4C4C4C]">
-                  EWF
-                </span>
+                <img src="/assets/ewf-logo.png" alt="Logo EWF" className="h-10 w-auto" />
+                <span className="ml-2 text-lg font-bold text-[#4C4C4C]">EquityWorld Futures</span>
               </div>
               <button
                 onClick={() => setMenuOpen(false)}
