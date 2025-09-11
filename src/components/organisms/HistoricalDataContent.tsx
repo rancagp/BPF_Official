@@ -148,9 +148,9 @@ export default function HistoricalDataContent() {
                 throw new Error('Tidak ada data yang tersedia untuk diunduh');
             }
             const header = `${t('table.date')},${t('table.open')},${t('table.high')},${t('table.low')},${t('table.close')}\n`;
-        const rows = dataToDownload.map((row: HistoricalData) =>
-            `${row.tanggal},${row.open},${row.high},${row.low},${row.close}`
-        ).join("\n");
+            const rows = dataToDownload.map((row: HistoricalData) =>
+                `${row.tanggal},${row.open},${row.high},${row.low},${row.close}`
+            ).join("\n");
 
             const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
             const url = URL.createObjectURL(blob);
@@ -167,6 +167,15 @@ export default function HistoricalDataContent() {
         }
     };
 
+    // Hitung total halaman
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    
+    // Ambil data untuk halaman saat ini
+    const currentItems = filteredData.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
     return (
         <div className="space-y-4 px-1 py-2 md:p-4">
             {/* Filter Section */}
@@ -178,9 +187,9 @@ export default function HistoricalDataContent() {
                             id="instrument"
                             value={selectedInstrument}
                             onChange={(e) => setSelectedInstrument(e.target.value)}
-                            className="w-full text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                            className="w-full text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59]"
                         >
-                            <option value="">Semua Instrumen</option>
+                            <option value="">{t('filters.allInstruments')}</option>
                             {instruments.map((instrument: string) => (
                                 <option key={instrument} value={instrument}>
                                     {instrument}
@@ -196,15 +205,15 @@ export default function HistoricalDataContent() {
                             id="from"
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
-                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 w-full md:w-36"
+                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59] w-full md:w-36"
                         />
-                        <span className="text-gray-500">to</span>
+                        <span className="text-gray-500">{t('filters.to')}</span>
                         <input
                             type="date"
                             id="to"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
-                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 w-full md:w-36"
+                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59] w-full md:w-36"
                         />
                     </div>
 
@@ -213,7 +222,7 @@ export default function HistoricalDataContent() {
                         <button
                             onClick={applyFilters}
                             disabled={isLoading}
-                            className="flex-1 md:flex-none px-3 py-1.5 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5"
+                            className="flex-1 md:flex-none px-3 py-1.5 bg-[#F2AC59] text-white rounded-md hover:bg-[#E09B4A] transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5"
                         >
                             <FiFilter className="w-3.5 h-3.5" />
                             <span className="truncate">{t('filters.apply')}</span>
@@ -221,9 +230,9 @@ export default function HistoricalDataContent() {
                         <button
                             onClick={resetFilters}
                             disabled={isLoading || (!fromDate && !toDate && !selectedInstrument)}
-                            className="flex-1 md:flex-none px-3 py-1.5 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="flex-1 md:flex-none px-3 py-1.5 bg-[#F2AC59] text-white rounded-md hover:bg-[#E09B4A] transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            <span className="truncate">Reset</span>
+                            <span className="truncate">{t('filters.reset')}</span>
                         </button>
                     </div>
                 </div>
@@ -233,7 +242,7 @@ export default function HistoricalDataContent() {
                     <button
                         onClick={() => handleDownload(true)}
                         disabled={isLoading || filteredData.length === 0}
-                        className="px-3 py-1.5 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-xs md:text-sm whitespace-nowrap w-full md:w-auto flex items-center gap-1.5 justify-center"
+                        className="px-3 py-1.5 bg-[#F2AC59] text-white rounded-md hover:bg-[#E09B4A] transition-colors text-xs md:text-sm whitespace-nowrap w-full md:w-auto flex items-center gap-1.5 justify-center"
                     >
                         <FiDownload className="w-3.5 h-3.5" />
                         {t('actions.downloadAll')}
@@ -241,184 +250,172 @@ export default function HistoricalDataContent() {
                 </div>
             </div>
 
-            {/* Data Table */}
-            <div className="overflow-x-auto -mx-1 md:mx-0">
-                {isLoading ? (
-                    <div className="text-center py-8">Memuat data...</div>
-                ) : error ? (
-                    <div className="text-center py-8 text-red-500">{error}</div>
-                ) : filteredData.length > 0 ? (
-                    <div className="bg-white shadow-sm border border-gray-200 overflow-hidden">
-                        <div className="overflow-x-auto">
-                            <table className="min-w-full divide-y divide-gray-200 text-[10px] sm:text-xs md:text-sm">
-                                <thead className="bg-gray-50">
-                                    <tr>
-                                        <th className="px-2 py-2 border border-black text-left text-xs font-bold text-black uppercase tracking-wider">
-                                            {t('table.date')}
-                                        </th>
-                                        <th className="px-2 py-2 border border-black text-left text-xs font-bold text-black uppercase tracking-wider">
-                                            {t('table.open')}
-                                        </th>
-                                        <th className="px-2 py-2 border border-black text-left text-xs font-bold text-black uppercase tracking-wider">
-                                            {t('table.high')}
-                                        </th>
-                                        <th className="px-2 py-2 border border-black text-left text-xs font-bold text-black uppercase tracking-wider">
-                                            {t('table.low')}
-                                        </th>
-                                        <th className="px-2 py-2 border border-black text-left text-xs font-bold text-black uppercase tracking-wider">
-                                            {t('table.close')}
-                                        </th>
+            {/* Error Message */}
+            {error && (
+                <div className="p-4 text-sm text-red-600 bg-red-50 rounded-md">
+                    {error}
+                </div>
+            )}
+
+            {/* Loading State */}
+            {isLoading ? (
+                <div className="flex justify-center items-center p-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#F2AC59]"></div>
+                </div>
+            ) : (
+                /* Data Table */
+                <div className="bg-white rounded-lg shadow-sm border border-[#E5E7EB] overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-[#E5E7EB]">
+                            <thead className="bg-[#4C4C4C]">
+                                <tr>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Tanggal
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Open
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        High
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Low
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Close
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Instrumen
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-[#E5E7EB]">
+                                {currentItems.map((item, index) => (
+                                    <tr key={item.id} className={index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB] hover:bg-[#FFF9F5]'}>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                            {formatDate(item.tanggal)}
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                            {item.open}
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                            {item.high}
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                            {item.low}
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                            {item.close}
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                            {item.category}
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody className="bg-white divide-y divide-gray-200">
-                                    {/* Menghitung indeks untuk pagination */}
-                                    {filteredData
-                                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                                        .map((row: HistoricalData, index: number) => (
-                                        <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                                            <td className="px-1.5 py-1.5 sm:px-2 sm:py-2 whitespace-nowrap text-[10px] sm:text-xs md:text-sm text-gray-900 border border-black">
-                                                {formatDate(row.tanggal)}
-                                            </td>
-                                            <td className="px-1.5 py-1.5 sm:px-2 sm:py-2 whitespace-nowrap text-[10px] sm:text-xs md:text-sm text-gray-900 border border-black">
-                                                {Number(row.open).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                            </td>
-                                            <td className="px-1.5 py-1.5 sm:px-2 sm:py-2 whitespace-nowrap text-[10px] sm:text-xs md:text-sm text-gray-900 border border-black">
-                                                {Number(row.high).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                            </td>
-                                            <td className="px-1.5 py-1.5 sm:px-2 sm:py-2 whitespace-nowrap text-[10px] sm:text-xs md:text-sm text-gray-900 border border-black">
-                                                {Number(row.low).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                            </td>
-                                            <td className="px-1.5 py-1.5 sm:px-2 sm:py-2 whitespace-nowrap text-[10px] sm:text-xs md:text-sm text-gray-900 border border-black">
-                                                {Number(row.close).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        {/* Pagination */}
-                        {filteredData.length > itemsPerPage && (
-                            <div className="flex items-center justify-between px-2 py-3 bg-white border-t border-gray-200 sm:px-6">
-                                {/* Mobile and Desktop Pagination */}
-                                <div className="w-full sm:hidden">
-                                    <div className="flex justify-between items-center">
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Pagination */}
+                    {filteredData.length > itemsPerPage && (
+                        <div className="flex items-center justify-between px-2 py-3 bg-white border-t border-[#E5E7EB] sm:px-6">
+                            {/* Mobile Pagination */}
+                            <div className="w-full sm:hidden">
+                                <div className="flex justify-between items-center">
+                                    <button
+                                        onClick={() => paginate(currentPage - 1)}
+                                        disabled={currentPage === 1}
+                                        className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'text-[#9B9FA7] cursor-not-allowed' : 'text-[#4C4C4C] hover:bg-[#F5F5F5]'}`}
+                                    >
+                                        &larr; Sebelumnya
+                                    </button>
+                                    
+                                    <div className="text-sm text-[#4C4C4C]">
+                                        Halaman {currentPage} dari {totalPages}
+                                    </div>
+                                    
+                                    <button
+                                        onClick={() => paginate(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
+                                        className={`px-3 py-1 rounded-md ${currentPage === totalPages ? 'text-[#9B9FA7] cursor-not-allowed' : 'text-[#4C4C4C] hover:bg-[#F5F5F5]'}`}
+                                    >
+                                        Selanjutnya &rarr;
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            {/* Desktop Pagination */}
+                            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p className="text-sm text-[#4C4C4C]">
+                                        Menampilkan <span className="font-medium">
+                                            {(currentPage - 1) * itemsPerPage + 1}
+                                        </span> - <span className="font-medium">
+                                            {Math.min(currentPage * itemsPerPage, filteredData.length)}
+                                        </span> dari <span className="font-medium">
+                                            {filteredData.length}
+                                        </span> hasil
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <nav className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                                         <button
                                             onClick={() => paginate(currentPage - 1)}
                                             disabled={currentPage === 1}
-                                            className="relative inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-[#4C4C4C] bg-white border border-[#9B9FA7] rounded-l-md hover:bg-[#F5F5F5] disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
+                                            <span className="sr-only">Sebelumnya</span>
                                             &larr;
                                         </button>
                                         
-                                        <div className="flex space-x-1">
-                                            {Array.from({ length: Math.min(3, Math.ceil(filteredData.length / itemsPerPage)) }, (_, i) => {
-                                                // Show first, last and current page with neighbors
-                                                let pageNum;
-                                                if (currentPage <= 2) {
-                                                    pageNum = i + 1;
-                                                } else if (currentPage >= Math.ceil(filteredData.length / itemsPerPage) - 1) {
-                                                    pageNum = Math.ceil(filteredData.length / itemsPerPage) - 2 + i;
-                                                } else {
-                                                    pageNum = currentPage - 1 + i;
-                                                }
-                                                
-                                                if (pageNum > 0 && pageNum <= Math.ceil(filteredData.length / itemsPerPage)) {
-                                                    return (
-                                                        <button
-                                                            key={pageNum}
-                                                            onClick={() => paginate(pageNum)}
-                                                            className={`px-3 py-1 text-sm rounded-md ${
-                                                                currentPage === pageNum
-                                                                    ? 'bg-emerald-600 text-white'
-                                                                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                                                            }`}
-                                                        >
-                                                            {pageNum}
-                                                        </button>
-                                                    );
-                                                }
-                                                return null;
-                                            })}
+                                        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                                            let pageNum;
+                                            if (totalPages <= 5) {
+                                                pageNum = i + 1;
+                                            } else if (currentPage <= 3) {
+                                                pageNum = i + 1;
+                                            } else if (currentPage >= totalPages - 2) {
+                                                pageNum = totalPages - 4 + i;
+                                            } else {
+                                                pageNum = currentPage - 2 + i;
+                                            }
                                             
-                                            {Math.ceil(filteredData.length / itemsPerPage) > 3 && currentPage < Math.ceil(filteredData.length / itemsPerPage) - 1 && (
-                                                <span className="px-2 py-1">...</span>
-                                            )}
-                                            
-                                            {Math.ceil(filteredData.length / itemsPerPage) > 3 && currentPage < Math.ceil(filteredData.length / itemsPerPage) - 2 && (
+                                            return (
                                                 <button
-                                                    onClick={() => paginate(Math.ceil(filteredData.length / itemsPerPage))}
-                                                    className="px-3 py-1 text-sm bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+                                                    key={pageNum}
+                                                    onClick={() => paginate(pageNum)}
+                                                    className={`relative inline-flex items-center px-4 py-2 text-sm font-medium ${
+                                                        currentPage === pageNum
+                                                            ? 'z-10 bg-[#F2AC59] border-[#F2AC59] text-white'
+                                                            : 'bg-white border-[#9B9FA7] text-[#4C4C4C] hover:bg-[#F5F5F5]'
+                                                    } border`}
                                                 >
-                                                    {Math.ceil(filteredData.length / itemsPerPage)}
+                                                    {pageNum}
                                                 </button>
-                                            )}
-                                        </div>
+                                            );
+                                        })}
                                         
                                         <button
                                             onClick={() => paginate(currentPage + 1)}
-                                            disabled={currentPage * itemsPerPage >= filteredData.length}
-                                            className="relative inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            disabled={currentPage === totalPages}
+                                            className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-[#4C4C4C] bg-white border border-[#9B9FA7] rounded-r-md hover:bg-[#F5F5F5] disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
+                                            <span className="sr-only">Selanjutnya</span>
                                             &rarr;
                                         </button>
-                                    </div>
-                                    
-                                    <div className="mt-2 text-center text-sm text-gray-700">
-                                        Halaman {currentPage} dari {Math.ceil(filteredData.length / itemsPerPage)}
-                                    </div>
-                                </div>
-                                
-                                {/* Desktop Pagination */}
-                                <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                                    <div>
-                                        <p className="text-sm text-gray-700">
-                                            Menampilkan <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> - <span className="font-medium">{
-                                                Math.min(currentPage * itemsPerPage, filteredData.length)
-                                            }</span> dari <span className="font-medium">{filteredData.length}</span> hasil
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <nav className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                                            <button
-                                                onClick={() => paginate(currentPage - 1)}
-                                                disabled={currentPage === 1}
-                                                className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                <span className="sr-only">Sebelumnya</span>
-                                                &larr;
-                                            </button>
-                                            {Array.from({ length: Math.ceil(filteredData.length / itemsPerPage) }, (_, i) => i + 1).map((number) => (
-                                                <button
-                                                    key={number}
-                                                    onClick={() => paginate(number)}
-                                                    className={`relative inline-flex items-center px-4 py-2 text-sm font-medium ${
-                                                        currentPage === number
-                                                            ? 'z-10 bg-emerald-50 border-emerald-500 text-emerald-600'
-                                                            : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                                                    } border`}
-                                                >
-                                                    {number}
-                                                </button>
-                                            ))}
-                                            <button
-                                                onClick={() => paginate(currentPage + 1)}
-                                                disabled={currentPage * itemsPerPage >= filteredData.length}
-                                                className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                <span className="sr-only">Selanjutnya</span>
-                                                &rarr;
-                                            </button>
-                                        </nav>
-                                    </div>
+                                    </nav>
                                 </div>
                             </div>
-                        )}
-                    </div>
-                ) : (
-                    <div className="text-center py-8 text-gray-500">Tidak ada data yang sesuai dengan filter</div>
-                )}
-            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+            
+            {/* No Data Message */}
+            {!isLoading && filteredData.length === 0 && (
+                <div className="text-center py-8">{t('messages.noData')}</div>
+            )}
         </div>
     );
 }

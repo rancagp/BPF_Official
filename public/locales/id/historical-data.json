@@ -2,16 +2,17 @@
   "title": "Data Historis",
   "filters": {
     "from": "Dari:",
-    "to": "Sampai:",
+    "to": "-",
     "apply": "Terapkan",
-    "reset": "Reset"
+    "reset": "Reset",
+    "allInstruments": "Semua Instrumen"
   },
   "table": {
     "date": "Tanggal",
-    "open": "Buka",
+    "open": "Pembukaan",
     "high": "Tertinggi",
     "low": "Terendah",
-    "close": "Tutup",
+    "close": "Penutupan",
     "noData": "Tidak ada data yang tersedia untuk rentang tanggal yang dipilih"
   },
   "actions": {
@@ -21,6 +22,10 @@
   },
   "messages": {
     "selectDateRange": "Silakan pilih rentang tanggal",
-    "downloading": "Mengunduh data..."
+    "downloading": "Mengunduh data...",
+    "noDataAvailable": "Tidak ada data yang tersedia untuk diunduh",
+    "loading": "Memuat...",
+    "noMatchingData": "Tidak ada data yang sesuai dengan filter",
+    "noData": "Tidak ada data"
   }
 }

@@ -2,9 +2,10 @@
   "title": "Historical Data",
   "filters": {
     "from": "From:",
-    "to": "To:",
+    "to": "-",
     "apply": "Apply",
-    "reset": "Reset"
+    "reset": "Reset",
+    "allInstruments": "All Instruments"
   },
   "table": {
     "date": "Date",
@@ -21,6 +22,10 @@
   },
   "messages": {
     "selectDateRange": "Please select a date range",
-    "downloading": "Downloading data..."
+    "downloading": "Downloading data...",
+    "noDataAvailable": "No data available for download",
+    "loading": "Loading...",
+    "noMatchingData": "No data matches the filter",
+    "noData": "No data available"
   }
 }

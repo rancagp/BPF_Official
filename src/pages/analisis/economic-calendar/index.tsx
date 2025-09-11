@@ -134,18 +134,34 @@ export default function EconomicCalendar() {
     return `${day}-${month}-${year}`;
   };
 
-  // Format impact menjadi bintang
+  // Format impact menjadi bintang dengan warna yang sesuai
   const formatImpact = (impact: string) => {
-    if (!impact) return '★☆☆';
+    if (!impact) return <span className="text-gray-300">★☆☆</span>;
+    
+    const getImpactColor = (level: string) => {
+      switch (level.toLowerCase()) {
+        case 'high':
+          return 'text-red-500';
+        case 'medium':
+          return 'text-yellow-500';
+        case 'low':
+          return 'text-green-500';
+        default:
+          return 'text-gray-300';
+      }
+    };
+    
+    const colorClass = getImpactColor(impact);
+    
     switch (impact.toLowerCase()) {
       case 'high':
-        return '★★★';
+        return <span className={`${colorClass} font-bold`}>★★★</span>;
       case 'medium':
-        return '★★☆';
+        return <span className={`${colorClass} font-bold`}>★★<span className="text-gray-300">☆</span></span>;
       case 'low':
-        return '★☆☆';
+        return <span className={`${colorClass} font-bold`}>★<span className="text-gray-300">☆☆</span></span>;
       default:
-        return '★☆☆';
+        return <span className="text-gray-300">★☆☆</span>;
     }
   };
   
@@ -157,7 +173,7 @@ export default function EconomicCalendar() {
         <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
           <ProfilContainer title={t('title')}>
             <div className="space-y-5">
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
                 <div className="flex">
                   <div className="flex-shrink-0">
                     <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -166,55 +182,66 @@ export default function EconomicCalendar() {
                   </div>
                   <div className="ml-3">
                     <p className="text-sm text-yellow-700">
-                      Tidak ada data yang cocok dengan filter yang dipilih. Menampilkan semua data yang tersedia.
+                      {t('noDataMessage')}
                     </p>
                   </div>
                 </div>
               </div>
               
               {/* Tampilkan semua data */}
-              <div className="overflow-x-auto rounded-lg border border-zinc-200">
-                <table className="w-full text-sm md:text-base min-w-[700px]">
-                  <thead className="bg-green-600 text-white">
+              <div className="overflow-hidden rounded-lg border border-[#E5E7EB] shadow-sm">
+                <table className="min-w-full divide-y divide-[#E5E7EB]">
+                  <thead className="bg-[#4C4C4C]">
                     <tr>
-                      <th className="p-3 text-center">Date</th>
-                      <th className="p-3 text-center">Time</th>
-                      <th className="p-3 text-center">Country</th>
-                      <th className="p-3 text-center">Impact</th>
-                      <th className="p-3 text-left">Figures</th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.date')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.time')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.country')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.impact')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.figures')}
+                      </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="bg-white divide-y divide-[#E5E7EB]">
                     {events.map((event) => (
-                      <tr key={event.id} className="border-b border-zinc-200 hover:bg-zinc-50">
-                        <td className="p-3 text-center whitespace-nowrap">
+                      <tr key={event.id} className="hover:bg-[#FFF9F0] transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C] font-medium">
                           {formatDate(event.date)}
                         </td>
-                        <td className="p-3 text-center whitespace-nowrap">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
                           {event.time}
                         </td>
-                        <td className="p-3 text-center whitespace-nowrap">
-                          {event.country}
-                        </td>
-                        <td className="p-3 text-center whitespace-nowrap">
-                          <span className="text-yellow-500 font-bold">
-                            {formatImpact(event.impact)}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="px-2 py-1 text-xs rounded-full bg-[#F5F5F5] text-[#4C4C4C]">
+                            {event.country}
                           </span>
                         </td>
-                        <td className="p-3">
-                          <div className="font-medium">{event.figures}</div>
-                          <div className="text-sm text-gray-600 mt-1">
-                            <span>Previous: <span className="font-medium">{event.previous}</span></span>
-                            <span className="mx-2">|</span>
-                            <span>Forecast: <span className="font-medium">{event.forecast}</span></span>
-                            <span className="mx-2">|</span>
-                            <span>Actual: <span className="font-medium">
-                              {event.actual}
-                            </span></span>
-                          </div>
-                          {event.measures && (
-                            <div className="text-xs text-gray-500 mt-1">
-                              {event.measures}
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          {formatImpact(event.impact)}
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="font-medium text-[#4C4C4C]">{event.figures}</div>
+                          {event.actual && (
+                            <div className="text-xs text-[#9B9FA7] mt-1">
+                              <span className="font-medium">{t('table.actual')}:</span> {event.actual}
+                            </div>
+                          )}
+                          {event.forecast && (
+                            <div className="text-xs text-[#9B9FA7]">
+                              <span className="font-medium">{t('table.forecast')}:</span> {event.forecast}
+                            </div>
+                          )}
+                          {event.previous && (
+                            <div className="text-xs text-[#9B9FA7]">
+                              <span className="font-medium">{t('table.previous')}:</span> {event.previous}
                             </div>
                           )}
                         </td>
@@ -235,109 +262,103 @@ export default function EconomicCalendar() {
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={t('title')}>
           <div className="space-y-5">
-            {/* Filter Button Section */}
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:gap-3 gap-3">
-              {filters.map(({ key, value }) => (
+            {/* Filter Buttons */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {filters.map((filter) => (
                 <button
-                  key={key}
-                  onClick={() => handleFilterClick(key)}
-                  className={`w-full sm:w-fit px-4 py-2 rounded-lg transition-all duration-300 text-sm md:text-base text-center ${
-                    activeFilter === key
-                      ? 'bg-green-600 text-white'
-                      : 'bg-zinc-200 hover:bg-green-300'
+                  key={filter.key}
+                  onClick={() => handleFilterClick(filter.key)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    activeFilter === filter.key
+                      ? 'bg-[#F2AC59] text-white shadow-md'
+                      : 'bg-[#F5F5F5] text-[#4C4C4C] hover:bg-[#E5E7EB]'
                   }`}
                 >
-                  {value}
+                  {filter.value}
                 </button>
               ))}
             </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto rounded-lg border border-zinc-200">
-              <table className="w-full text-sm md:text-base min-w-[700px]">
-                <thead className="bg-green-600 text-white">
-                  <tr>
-                    <th className="p-3 text-center">Date</th>
-                    <th className="p-3 text-center">Time</th>
-                    <th className="p-3 text-center">Country</th>
-                    <th className="p-3 text-center">Impact</th>
-                    <th className="p-3 text-left">Figures</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {loading ? (
+            {loading ? (
+              <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#F2AC59]"></div>
+              </div>
+            ) : error ? (
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-red-700">{error}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="overflow-hidden rounded-lg border border-[#E5E7EB] shadow-sm">
+                <table className="min-w-full divide-y divide-[#E5E7EB]">
+                  <thead className="bg-[#4C4C4C]">
                     <tr>
-                      <td colSpan={5} className="p-4 text-center">
-                        <div className="flex justify-center items-center py-8">
-                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
-                        </div>
-                      </td>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.date')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.time')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.country')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.impact')}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                        {t('table.figures')}
+                      </th>
                     </tr>
-                  ) : error ? (
-                    <tr>
-                      <td colSpan={5} className="p-4 text-center text-red-500">
-                        {error}
-                      </td>
-                    </tr>
-                  ) : filteredEvents.length === 0 ? (
-                    <tr>
-                      <td colSpan={5} className="p-4 text-center text-gray-500">
-                        Tidak ada data yang tersedia untuk periode ini.
-                      </td>
-                    </tr>
-                  ) : (
-                    filteredEvents.map((event) => (
-                      <React.Fragment key={event.id}>
-                        <tr className="border-b border-zinc-200 hover:bg-zinc-50">
-                          <td className="p-3 text-center whitespace-nowrap">
-                            {formatDate(event.date)}
-                          </td>
-                          <td className="p-3 text-center whitespace-nowrap">
-                            {event.time}
-                          </td>
-                          <td className="p-3 text-center whitespace-nowrap">
+                  </thead>
+                  <tbody className="bg-white divide-y divide-[#E5E7EB]">
+                    {filteredEvents.map((event) => (
+                      <tr key={event.id} className="hover:bg-[#FFF9F0] transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C] font-medium">
+                          {formatDate(event.date)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
+                          {event.time}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="px-2 py-1 text-xs rounded-full bg-[#F5F5F5] text-[#4C4C4C]">
                             {event.country}
-                          </td>
-                          <td className="p-3 text-center whitespace-nowrap">
-                            <span className="text-yellow-500 font-bold">
-                              {formatImpact(event.impact)}
-                            </span>
-                          </td>
-                          <td className="p-3">
-                            <div className="font-medium">{event.figures}</div>
-                            <div className="text-sm text-gray-600 mt-1">
-                              <span>Previous: <span className="font-medium">{event.previous}</span></span>
-                              <span className="mx-2">|</span>
-                              <span>Forecast: <span className="font-medium">{event.forecast}</span></span>
-                              <span className="mx-2">|</span>
-                              <span>Actual: <span className={`font-medium ${
-                                event.actual > event.forecast 
-                                  ? 'text-green-600' 
-                                  : event.actual < event.forecast 
-                                    ? 'text-red-600' 
-                                    : 'text-gray-800'
-                              }`}>
-                                {event.actual}
-                              </span></span>
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          {formatImpact(event.impact)}
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="font-medium text-[#4C4C4C]">{event.figures}</div>
+                          {event.actual && (
+                            <div className="text-xs text-[#9B9FA7] mt-1">
+                              <span className="font-medium">{t('table.actual')}:</span> {event.actual}
                             </div>
-                            {event.measures && (
-                              <div className="text-xs text-gray-500 mt-1">
-                                {event.measures}
-                              </div>
-                            )}
-                            {event.usual_effect && (
-                              <div className="text-xs text-blue-600 mt-1">
-                                {event.usual_effect}
-                              </div>
-                            )}
-                          </td>
-                        </tr>
-                      </React.Fragment>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                          )}
+                          {event.forecast && (
+                            <div className="text-xs text-[#9B9FA7]">
+                              <span className="font-medium">{t('table.forecast')}:</span> {event.forecast}
+                            </div>
+                          )}
+                          {event.previous && (
+                            <div className="text-xs text-[#9B9FA7]">
+                              <span className="font-medium">{t('table.previous')}:</span> {event.previous}
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </ProfilContainer>
       </div>
