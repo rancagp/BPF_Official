@@ -120,7 +120,7 @@ export default function IlustrasiTransaksi() {
               <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 {t('ilustrasiTransaksi.contohTransaksi.title')}
               </h2>
-              <div className="w-20 h-1 bg-green-500 mb-6"></div>
+              <div className="w-20 h-1 bg-[#F2AC59] mb-6"></div>
               <div className="space-y-6">
                 {/* Day Trade Examples */}
                 <div className="space-y-6">
@@ -193,9 +193,10 @@ export default function IlustrasiTransaksi() {
 
             {/* Kode & Jenis Kontrak */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 {t('ilustrasiTransaksi.kodeKontrak.title')}
               </h2>
+              <div className="w-20 h-1 bg-[#F2AC59] mb-6"></div>
               <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-collapse text-xs sm:text-sm">
                   <thead className="bg-gray-100">
@@ -233,7 +234,7 @@ export default function IlustrasiTransaksi() {
               <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 {t('ilustrasiTransaksi.kodeKontrak.ilustrasiPerhitungan.title')}
               </h2>
-              <div className="w-20 h-1 bg-green-500 mb-6"></div>
+              <div className="w-20 h-1 bg-[#F2AC59] mb-6"></div>
               <div className="space-y-6">
                 {/* Direct Rates Example */}
                 <div className="p-6 border rounded-lg">

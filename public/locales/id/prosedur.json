@@ -1,5 +1,7 @@
 {
   "registrationFlow": {
+    "title": "Registrasi Online",
+    "stepsDescription": "Berikut adalah langkah-langkah untuk melakukan registrasi akun trading online di platform kami.",
     "steps": [
       {
         "title": "Membuka Website Perusahaan",
@@ -58,27 +60,75 @@
 
   
   "registrasiOnline": {
-    "title": "Prosedur Registrasi Online",
-    "description": "Daftar akun trading Anda secara online dengan mudah dan cepat melalui PT. KONTAKPERKASA FUTURES. Ikuti langkah-langkah pendaftaran berikut ini:",
+    "title": "PROSEDUR PEMBUKAAN REKENING (REGISTRASI ONLINE)",
     "steps": [
-      "Isi formulir pendaftaran online dengan data diri yang valid",
-      "Unggah dokumen yang diperlukan (KTP/Paspor, NPWP, dll)",
-      "Verifikasi data dan dokumen oleh tim kami",
-      "Pembukaan akun selesai dan Anda akan menerima detail akun"
-    ],
-    "documentsRequired": {
-      "title": "Dokumen yang Diperlukan",
-      "items": [
-        "KTP (WNI) atau Paspor (WNA)",
-        "NPWP",
-        "Bukti alamat (jika alamat di KTP berbeda dengan domisili)",
-        "Dokumen pendukung lainnya sesuai ketentuan"
-      ]
-    },
-    "notes": [
-      "Pastikan data yang diisi sesuai dengan dokumen asli",
-      "Proses verifikasi membutuhkan waktu 1-2 hari kerja",
-      "Setelah akun aktif, Anda akan menerima email konfirmasi"
+      {
+        "title": "Membuka website perusahaan"
+      },
+      {
+        "title": "Registrasi Demo Account",
+        "items": [
+          "Input Data",
+          "Demo Account",
+          "Melakukan simulasi transaksi"
+        ]
+      },
+      {
+        "title": "Input Dokumen Perjanjian",
+        "items": [
+          "Aplikasi Perjanjian",
+          "Dokumen Pemberitahuan Adanya Risiko (DPAR)",
+          "Perjanjian Pemberian Amanat (PPA)",
+          "Mekanisme Transaksi (Trading Rules)",
+          "Input data pendukung (KTP dan lainnya)"
+        ]
+      },
+      {
+        "title": "Wakil Pialang yang ditunjuk melakukan verifikasi data calon Nasabah",
+        "items": [
+          "Data pribadi calon Nasabah",
+          "Penyetoran Dana Calon Nasabah ke Rekening Terpisah Pialang"
+        ]
+      },
+      {
+        "title": "Rekening Terpisah / Segregated Account",
+        "description": "Rekening Terpisah / Segregated Account diperlukan untuk menjamin bahwa dana nasabah tidak bisa digunakan untuk tujuan lain kecuali kepentingan transaksi",
+        "accounts": [
+          {
+            "bank": "Bank BCA Cabang Sudirman, Jakarta",
+            "idr": "No. Rekening IDR : 035-310-982-8",
+            "usd": "No. Rekening USD: 035-313-815-1"
+          },
+          {
+            "bank": "Bank CIMB Niaga Cabang Gajahmada, Jakarta",
+            "idr": "No. Rekening IDR : 809-50-50509-00",
+            "usd": "No. Rekening USD: 809-63-63631-40"
+          },
+          {
+            "bank": "Bank BNI Cabang Gambir, Jakarta",
+            "idr": "No. Rekening IDR : 017-500-1902",
+            "usd": "No. Rekening USD: 017-501-9636"
+          },
+          {
+            "bank": "Bank Mandiri Cabang Imam Bonjol, Jakarta",
+            "idr": "No. Rekening IDR : 122-000-665-3045",
+            "usd": "No. Rekening USD: 122-000-665-3060"
+          },
+          {
+            "bank": "Bank Artha Graha Cabang KPO Sudirman, Jakarta",
+            "idr": "No. Rekening IDR : 107-996-4391"
+          }
+        ]
+      },
+      {
+        "title": "Pialang memproses Registrasi tersebut"
+      },
+      {
+        "title": "Pialang melakukan aktivasi Account kepada calon Nasabah"
+      },
+      {
+        "title": "Nasabah dapat melakukan transaksi"
+      }
     ]
   },
 
@@ -258,6 +308,35 @@
     }
   },
   
+  "bankAccounts": [
+    {
+      "bank": "Bank BCA Cabang Sudirman, Jakarta",
+      "idr": "No. Rekening IDR : 035-310-982-8",
+      "usd": "No. Rekening USD: 035-313-815-1"
+    },
+    {
+      "bank": "Bank CIMB Niaga Cabang Gajahmada, Jakarta",
+      "idr": "No. Rekening IDR : 809-50-50509-00",
+      "usd": "No. Rekening USD: 809-63-63631-40"
+    },
+    {
+      "bank": "Bank BNI Cabang Gambir, Jakarta",
+      "idr": "No. Rekening IDR : 017-500-1902",
+      "usd": "No. Rekening USD: 017-501-9636"
+    },
+    {
+      "bank": "Bank Mandiri Cabang Imam Bonjol, Jakarta",
+      "idr": "No. Rekening IDR : 122-000-665-3045",
+      "usd": "No. Rekening USD: 122-000-665-3060"
+    },
+    {
+      "bank": "Bank Artha Graha Cabang KPO Sudirman, Jakarta",
+      "idr": "No. Rekening IDR : 107-996-4391"
+    }
+  ],
+  
+  "segregatedAccountNote": "(Rekening Terpisah / Segregated Account diperlukan untuk menjamin bahwa dana nasabah tidak bisa digunakan untuk tujuan lain kecuali kepentingan transaksi)",
+
   "penarikanDana": {
     "title": "Prosedur Penarikan",
     "description": "Penarikan Dana (<span class='italic'>Withdrawal</span>) dapat dilakukan kapan saja oleh Nasabah apabila diinginkan, dengan catatan dana yang ditarik tidak melebihi jumlah <span class='font-medium'>Effective Margin</span> yang tercantum dalam laporan transaksi harian Nasabah (<span class='italic'>Statement Report</span>).",

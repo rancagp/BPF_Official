@@ -1,5 +1,7 @@
 {
   "registrationFlow": {
+    "title": "Online Registration",
+    "stepsDescription": "The following are the steps to register an online trading account on our platform.",
     "steps": [
       {
         "title": "Open Company Website",
@@ -258,6 +260,35 @@
     }
   },
   
+  "bankAccounts": [
+    {
+      "bank": "BCA Sudirman Branch, Jakarta",
+      "idr": "IDR Account No. : 035-310-982-8",
+      "usd": "USD Account No.: 035-313-815-1"
+    },
+    {
+      "bank": "CIMB Niaga Gajahmada Branch, Jakarta",
+      "idr": "IDR Account No. : 809-50-50509-00",
+      "usd": "USD Account No.: 809-63-63631-40"
+    },
+    {
+      "bank": "BNI Gambir Branch, Jakarta",
+      "idr": "IDR Account No. : 017-500-1902",
+      "usd": "USD Account No.: 017-501-9636"
+    },
+    {
+      "bank": "Bank Mandiri Imam Bonjol Branch, Jakarta",
+      "idr": "IDR Account No. : 122-000-665-3045",
+      "usd": "USD Account No.: 122-000-665-3060"
+    },
+    {
+      "bank": "Bank Artha Graha KPO Sudirman Branch, Jakarta",
+      "idr": "IDR Account No. : 107-996-4391"
+    }
+  ],
+  
+  "segregatedAccountNote": "(Segregated Account is required to ensure that client funds cannot be used for any other purpose except for transaction purposes)",
+
   "penarikanDana": {
     "title": "Withdrawal Procedure",
     "description": "Funds Withdrawal can be made at any time by the Client as desired, provided that the withdrawn amount does not exceed the <span class='font-medium'>Effective Margin</span> stated in the Client's daily transaction report (<span class='italic'>Statement Report</span>).",
