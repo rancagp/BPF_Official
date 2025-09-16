@@ -281,8 +281,14 @@ export default function DetailBerita() {
                                 lineHeight: '1.75',
                             } as React.CSSProperties}
                             dangerouslySetInnerHTML={{ 
-                                __html: berita.isi
-                                    .replace(/<p>/g, '<p class="mb-4 sm:mb-6"')
+                                __html: (berita.isi || '')
+                                    .toString()
+                                    .replace(/<p(\s+[^>]*)?>/g, (match, p1) => {
+                                        // Jika paragraf kosong atau hanya berisi whitespace, abaikan
+                                        if (/^\s*$/.test(match)) return match;
+                                        // Tambahkan class untuk spasi yang lebih besar
+                                        return `<p class="mb-4 sm:mb-6"${p1 || ''}>`;
+                                    })
                                     .replace(/<h2/g, '<h2 class="text-xl sm:text-2xl font-bold mt-10 sm:mt-12 mb-4 sm:mb-6 text-gray-900"')
                                     .replace(/<h3/g, '<h3 class="text-lg sm:text-xl font-semibold mt-8 sm:mt-10 mb-3 sm:mb-4 text-gray-900"')
                                     .replace(/<ul/g, '<ul class="list-disc pl-5 sm:pl-6 space-y-2 my-4 sm:my-6"')
