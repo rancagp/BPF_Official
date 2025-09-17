@@ -43,7 +43,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
         
         <div className="space-y-4">
           <a 
-            href="https://regol.kontak-perkasa-futures.co.id/" 
+            href="https://regol.equityworld-futures.co.id/" 
             className="inline-block w-full max-w-[280px] mx-auto bg-[#F2AC59] hover:bg-[#e69e4d] text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm hover:shadow transition-all duration-200"
             target="_blank"
             rel="noopener noreferrer"
