@@ -59,7 +59,26 @@ export const fetchLatestNews = async (limit = 3): Promise<NewsItem[]> => {
     }
     
     const data = await response.json();
-    return data.data || [];
+    
+    // Process each news item to prioritize EWF title and use 4th image
+    const processedData = data.data.map((item: NewsItem) => {
+      // For images, we want to use the 4th image (index 3) if it exists
+      let mainImage = null;
+      if (item.images?.length > 3) {
+        mainImage = item.images[3];
+      } else if (item.images?.length > 0) {
+        mainImage = item.images[0]; // Fallback to first image if no 4th image
+      }
+      
+      return {
+        ...item,
+        title: item.titles?.ewf || item.title, // Use EWF title if available, fallback to default title
+        // If we have a main image, use it as the only image
+        images: mainImage ? [mainImage] : []
+      };
+    });
+    
+    return processedData || [];
   } catch (error) {
     console.error('Error fetching latest news:', error);
     return [];
@@ -78,16 +97,27 @@ export const fetchNews = async (page = 1, perPage = 9, sortBy = 'created_at', or
     
     const data = await response.json();
     
-    // Map data untuk memastikan title menggunakan title KPF
-    const mappedData = {
-      ...data,
-      data: data.data.map((item: any) => ({
-        ...item,
-        title: item.titles?.kpf || item.title // Gunakan title KPF jika tersedia
-      }))
-    };
+    // Process each news item to prioritize EWF title and use 4th image
+    if (data.data && Array.isArray(data.data)) {
+      data.data = data.data.map((item: NewsItem) => {
+        // For images, we want to use the 4th image (index 3) if it exists
+        let mainImage = null;
+        if (item.images?.length > 3) {
+          mainImage = item.images[3];
+        } else if (item.images?.length > 0) {
+          mainImage = item.images[0]; // Fallback to first image if no 4th image
+        }
+        
+        return {
+          ...item,
+          title: item.titles?.ewf || item.title, // Use EWF title if available, fallback to default title
+          // If we have a main image, use it as the only image
+          images: mainImage ? [mainImage] : []
+        };
+      });
+    }
     
-    return mappedData;
+    return data;
   } catch (error) {
     console.error('Error fetching news:', error);
     throw error;
@@ -116,9 +146,22 @@ export const fetchNewsDetail = async (slug: string): Promise<NewsItem | null> =>
     
     const result = await response.json();
     
-    // Pastikan title menggunakan title KPF
     if (result.data) {
-      result.data.title = result.data.titles?.kpf || result.data.title;
+      // For images, we want to use the 4th image (index 3) if it exists
+      let mainImage = null;
+      if (result.data.images?.length > 3) {
+        mainImage = result.data.images[3];
+      } else if (result.data.images?.length > 0) {
+        mainImage = result.data.images[0]; // Fallback to first image if no 4th image
+      }
+      
+      // Update the data with EWF title and processed images
+      result.data = {
+        ...result.data,
+        title: result.data.titles?.ewf || result.data.title, // Use EWF title if available, fallback to default title
+        // If we have a main image, use it as the only image
+        images: mainImage ? [mainImage] : []
+      };
     }
     
     return result.data || null;
