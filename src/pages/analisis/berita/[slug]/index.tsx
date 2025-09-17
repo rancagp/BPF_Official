@@ -177,7 +177,7 @@ export default function BeritaDetail() {
                             <div className="mt-6">
                                 <a 
                                     href="/analisis/berita" 
-                                    className='inline-block bg-green-500 hover:bg-green-600 px-6 py-2 rounded-md text-white transition-all duration-300'
+                                    className='inline-block bg-[#F2AC59] hover:bg-[#e09c4a] px-6 py-2 rounded-md text-white transition-all duration-300'
                                 >
                                     &#129032; Kembali ke Halaman Berita
                                 </a>
@@ -212,7 +212,7 @@ export default function BeritaDetail() {
                                 <span className="mx-2">•</span>
                             )}
                             {berita.kategori?.name && (
-                                <span className="text-green-600 font-medium">
+                                <span className="text-[#F2AC59] font-medium">
                                     {berita.kategori.name}
                                 </span>
                             )}
@@ -243,8 +243,8 @@ export default function BeritaDetail() {
                                         .replace(/<h3/g, '<h3 class="text-xl font-semibold mt-8 mb-3 text-gray-800"')
                                         .replace(/<ul/g, '<ul class="list-disc pl-6 space-y-2 my-6"')
                                         .replace(/<ol/g, '<ol class="list-decimal pl-6 space-y-2 my-6"')
-                                        .replace(/<a/g, '<a class="text-green-600 hover:text-green-700 hover:underline"')
-                                        .replace(/<blockquote/g, '<blockquote class="border-l-4 border-green-500 pl-4 italic my-6 text-gray-600"')
+                                        .replace(/<a/g, '<a class="text-[#F2AC59] hover:text-[#e09c4a] hover:underline"')
+                                        .replace(/<blockquote/g, '<blockquote class="border-l-4 border-[#F2AC59] pl-4 italic my-6 text-gray-600"')
                                         .replace(/<img/g, '<img class="my-6 rounded-lg shadow-md w-full h-auto"')
                                         .replace(/<table/g, '<table class="min-w-full divide-y divide-gray-200 my-6"')
                                         .replace(/<th/g, '<th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"')
@@ -289,17 +289,15 @@ export default function BeritaDetail() {
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {relatedBerita.map((item) => (
-                                        <div key={item.id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                        <div key={item.id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 hover:border-[#F2AC59]/30">
                                             <Link 
                                                 href={`/analisis/berita/${item.slug}`}
                                                 className="block h-full flex flex-col"
                                             >
                                                 <div className="relative h-48 w-full overflow-hidden">
-                                                    {item.images?.length ? (
+                                                    {item.images?.[0] ? (
                                                         <Image
-                                                            src={item.images[2] 
-                                                                ? `https://portalnews.newsmaker.id/${item.images[2].replace(/^\/+/, '')}`
-                                                                : `https://portalnews.newsmaker.id/${item.images[1].replace(/^\/+/, '')}`}
+                                                            src={`https://portalnews.newsmaker.id/${item.images[0].replace(/^\/+/, '')}`}
                                                             alt={item.titles?.kpf || item.title || 'Berita terkait'}
                                                             fill
                                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -317,7 +315,7 @@ export default function BeritaDetail() {
                                                 <div className="p-5 flex-1 flex flex-col">
                                                     <div className="mb-2">
                                                         {item.kategori?.name && (
-                                                            <div className="text-xs font-medium text-green-600 mb-1">
+                                                            <div className="text-xs font-medium text-[#F2AC59] mb-1">
                                                                 {item.kategori.name}
                                                             </div>
                                                         )}
@@ -325,7 +323,7 @@ export default function BeritaDetail() {
                                                             {formatDate(item.created_at)}
                                                         </div>
                                                     </div>
-                                                    <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2" style={{
+                                                    <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors line-clamp-2" style={{
                                                         display: '-webkit-box',
                                                         WebkitLineClamp: 2,
                                                         WebkitBoxOrient: 'vertical',
