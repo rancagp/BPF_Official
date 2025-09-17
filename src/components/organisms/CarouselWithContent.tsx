@@ -98,6 +98,11 @@ export default function CarouselWithContent() {
                         imageUrl = imageUrl.replace('http://', 'https://');
                     }
                     
+                    // Pastikan URL gambar lengkap
+                    if (!imageUrl.startsWith('http') && !imageUrl.startsWith('/')) {
+                        imageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://ewf-backend.test'}/storage/banners/${imageUrl}`;
+                    }
+                    
                     // Tambahkan timestamp cache-busting
                     const timestamp = new Date().getTime();
                     imageUrl = `${imageUrl}${imageUrl.includes('?') ? '&' : '?'}t=${timestamp}`;

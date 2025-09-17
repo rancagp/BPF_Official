@@ -44,8 +44,8 @@ export default async function handler(
                 cleanPath = cleanPath.replace(/^storage\//, '');
             }
                 
-            // Buat URL lengkap
-            const fullUrl = `${apiUrl}/storage/${cleanPath}`;
+            // Buat URL lengkap dengan path storage yang benar
+            const fullUrl = `${apiUrl}/storage/banners/${cleanPath}`;
             
             console.log('Processed image URL:', {
                 original: banner.image,
