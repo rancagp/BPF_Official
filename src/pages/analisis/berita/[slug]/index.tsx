@@ -255,7 +255,26 @@ export default function BeritaDetail() {
                         
                         {/* Another Posts Section */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-8">{t('latest_news', 'Latest News')}</h3>
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+                                <div className="relative">
+                                    <h3 className="text-2xl font-bold text-gray-900 inline-block relative">
+                                        {t('latest_news', 'Latest News')}
+                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></span>
+                                    </h3>
+                                </div>
+                                <button 
+                                    onClick={() => {
+                                        const lang = i18n.language || router.locale || 'id';
+                                        router.push(`/${lang}/analisis/berita`);
+                                    }}
+                                    className="px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-sm sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap"
+                                >
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                    </svg>
+                                    {t('view_all_news', 'View All News')}
+                                </button>
+                            </div>
                             {loadingRelated ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {[1, 2, 3].map((item) => (
@@ -333,21 +352,6 @@ export default function BeritaDetail() {
                             )}
                         </div>
 
-                        {/* Tombol Lihat Semua Berita */}
-                        <div className="mt-10 pt-6 border-t border-gray-200 w-full">
-                            <button 
-                                onClick={() => {
-                                    const lang = i18n.language || router.locale || 'id';
-                                    router.push(`/${lang}/analisis/berita`);
-                                }}
-                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
-                            >
-                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-                                </svg>
-                                {t('view_all_news', 'View All News')}
-                            </button>
-                        </div>
                     </div>
                 </Container>
             </div>

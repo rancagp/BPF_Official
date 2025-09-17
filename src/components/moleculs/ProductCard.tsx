@@ -86,15 +86,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             {product.deskripsi}
                         </p>
                     )}
-                    
-                    <div className="mt-auto pt-4 border-t border-gray-100">
-                        <button className="w-full py-3 px-6 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d18c3a] text-white rounded-xl transition-all duration-300 text-sm font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center space-x-2">
-                            <span>{t('viewDetails')}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
                 
                 {/* Decorative elements */}

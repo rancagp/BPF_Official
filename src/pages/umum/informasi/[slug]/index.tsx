@@ -221,7 +221,7 @@ export default function DetailBerita() {
                     <p className="text-gray-600 mb-6">Maaf, berita yang Anda cari tidak dapat ditemukan.</p>
                     <button
                         onClick={() => router.push('/')}
-                        className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                        className="px-6 py-2.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                     >
                         Kembali ke Beranda
                     </button>
@@ -252,7 +252,7 @@ export default function DetailBerita() {
                             </div>
                         )}
 
-                        <div className="flex flex-wrap items-center gap-3 text-sm sm:text-base text-gray-500 mb-6">
+                        <div className="flex flex-wrap items-center gap-3 text-sm sm:text-base text-gray-500">
                             <time dateTime={berita.created_at} className="flex items-center">
                                 <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -260,7 +260,7 @@ export default function DetailBerita() {
                                 {formatDate(berita.created_at, (i18n.language === 'id' || i18n.language === 'en' ? i18n.language : 'id') as 'id' | 'en')}
                             </time>
                             <span className="text-gray-300 hidden sm:inline">•</span>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-green-50 text-green-700 border border-green-100">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-[#FEF6E6] text-[#F2AC59] border border-[#FEE9C7]">
                                 {berita.kategori || 'Informasi Umum'}
                             </span>
                         </div>
@@ -274,8 +274,8 @@ export default function DetailBerita() {
                             style={{
                                 '--tw-prose-body': '#374151',
                                 '--tw-prose-headings': '#111827',
-                                '--tw-prose-links': '#059669',
-                                '--tw-prose-links-hover': '#047857',
+                                '--tw-prose-links': '#F2AC59',
+                                '--tw-prose-links-hover': '#e09c4a',
                                 '--tw-prose-underline': 'rgba(5, 150, 105, 0.3)',
                                 '--tw-prose-underline-hover': '#047857',
                                 lineHeight: '1.75',
@@ -306,7 +306,26 @@ export default function DetailBerita() {
                         />
 
                         <div className="mt-8 sm:mt-10 pt-6 border-t border-gray-200 w-full">
-                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{tInfo('latest_information')}</h3>
+                            <div className="flex flex-row justify-between items-center mb-6 sm:mb-8 gap-2 sm:gap-4">
+                                <div className="relative flex-shrink">
+                                    <h3 className="text-lg sm:text-2xl font-bold text-gray-900 inline-block relative pb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
+                                        {tInfo('latest_information')}
+                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></span>
+                                    </h3>
+                                </div>
+                                <button 
+                                    onClick={() => {
+                                        const lang = i18n.language || 'id';
+                                        router.push(`/${lang}/umum/informasi`);
+                                    }}
+                                    className="px-3 py-1.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-xs sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap flex-shrink-0"
+                                >
+                                    <svg className="w-3 h-3 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                    </svg>
+                                    {tInfo('view_all_news', 'View All News')}
+                                </button>
+                            </div>
                             {loadingRelated ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {[1, 2, 3].map((item) => (
@@ -348,14 +367,14 @@ export default function DetailBerita() {
                                                         </div>
                                                         <div className="p-5 flex-1 flex flex-col">
                                                             <div className="mb-2">
-                                                                <div className="text-xs font-medium text-green-600 mb-1">
+                                                                <div className="text-xs font-medium text-[#F2AC59] mb-1">
                                                                     {item.kategori || 'Informasi'}
                                                                 </div>
                                                                 <div className="text-xs text-gray-500">
                                                                     {formatDate(item.created_at, (i18n.language === 'id' || i18n.language === 'en' ? i18n.language : 'id') as 'id' | 'en')}
                                                                 </div>
                                                             </div>
-                                                            <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2" style={{
+                                                            <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors line-clamp-2" style={{
                                                                 display: '-webkit-box',
                                                                 WebkitLineClamp: 2,
                                                                 WebkitBoxOrient: 'vertical',
@@ -386,18 +405,6 @@ export default function DetailBerita() {
                                     )}
                                 </div>
                             )}
-                        </div>
-
-                        <div className="mt-12 pt-8 border-t border-gray-100">
-                            <button 
-                                onClick={() => router.push(`/${i18n.language === 'en' ? 'en' : 'id'}/umum/informasi`)}
-                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto text-sm font-medium"
-                            >
-                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                </svg>
-                                {tInfo('back_to_information')}
-                            </button>
                         </div>
                     </div>
                 </ProfilContainer>
