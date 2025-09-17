@@ -45,7 +45,10 @@ export default async function handler(
             }
                 
             // Buat URL lengkap dengan path storage yang benar
-            const fullUrl = `${apiUrl}/storage/banners/${cleanPath}`;
+            // Gunakan URL lengkap untuk production, relative path untuk development
+            const isProduction = process.env.NODE_ENV === 'production';
+            const basePath = isProduction ? `${apiUrl}/storage` : '/storage';
+            const fullUrl = `${basePath}/banners/${cleanPath}`;
             
             console.log('Processed image URL:', {
                 original: banner.image,
