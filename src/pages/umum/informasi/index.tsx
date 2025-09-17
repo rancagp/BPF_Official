@@ -83,7 +83,11 @@ export default function InformasiUmum() {
                             {beritaList.map((item) => (
                                 <div 
                                     key={item.id}
-                                    className="transform transition-transform duration-300 hover:-translate-y-1"
+                                    className="transform transition-transform duration-300 hover:-translate-y-1 cursor-pointer"
+                                    onClick={() => {
+                                        const lang = window.location.pathname.startsWith('/en/') ? 'en' : 'id';
+                                        window.location.href = `/${lang}/umum/informasi/${item.slug}`;
+                                    }}
                                 >
                                     <NewsCard2
                                         title={item.judul}

@@ -171,7 +171,7 @@ const Footer = () => {
                             </div>
                             <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm flex-1 min-w-[200px]">
                                 <img 
-                                    src="/assets/ISO.png" 
+                                    src="/assets/iso_tsi.png" 
                                     alt="ISO 9001:2015 Certified" 
                                     className="h-10 w-auto object-contain mb-2 mx-auto"
                                 />
