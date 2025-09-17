@@ -255,9 +255,9 @@ export default function BeritaDetail() {
                         
                         {/* Another Posts Section */}
                         <div className="mt-10 pt-6 border-t border-gray-200 w-full">
-                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-                                <div className="relative">
-                                    <h3 className="text-2xl font-bold text-gray-900 inline-block relative">
+                            <div className="flex flex-row justify-between items-center mb-6 sm:mb-8 gap-2 sm:gap-4">
+                                <div className="relative flex-shrink">
+                                    <h3 className="text-lg sm:text-2xl font-bold text-gray-900 inline-block relative pb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
                                         {t('latest_news', 'Latest News')}
                                         <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></span>
                                     </h3>
@@ -267,9 +267,9 @@ export default function BeritaDetail() {
                                         const lang = i18n.language || router.locale || 'id';
                                         router.push(`/${lang}/analisis/berita`);
                                     }}
-                                    className="px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-sm sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap"
+                                    className="px-3 py-1.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-xs sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap flex-shrink-0"
                                 >
-                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg className="w-3 h-3 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                                     </svg>
                                     {t('view_all_news', 'View All News')}
