@@ -323,12 +323,16 @@ const NavBar: React.FC = () => {
 
         {/* Mobile menu */}
         <div
-          className={`fixed inset-0 z-40 bg-[#4C4C4C] bg-opacity-70 transition-opacity md:hidden ${
+          onClick={() => setMenuOpen(false)}
+          className={`fixed inset-0 z-40 md:hidden transition-opacity ${
             menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
+          {/* Backdrop overlay */}
+          <div className={`absolute inset-0 bg-black/50 ${menuOpen ? 'opacity-100' : 'opacity-0'} transition-opacity`} />
           <div
-            className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+            onClick={(e) => e.stopPropagation()}
+            className={`fixed inset-y-0 left-0 z-50 w-2/3 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
               menuOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
@@ -337,12 +341,6 @@ const NavBar: React.FC = () => {
                 <img src="/assets/ewf-logo.png" alt="Logo EWF" className="h-10 w-auto" />
                 <span className="ml-2 text-lg font-bold text-[#4C4C4C]">EquityWorld Futures</span>
               </div>
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="p-2 rounded-full hover:bg-[#F8F8F8]"
-              >
-                <i className="fas fa-times text-[#4C4C4C]"></i>
-              </button>
             </div>
             <div className="h-[calc(100%-64px)] overflow-y-auto py-2">
               {renderMobileMenu(menuItems)}
