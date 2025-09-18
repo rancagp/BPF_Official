@@ -59,17 +59,56 @@ export default function HistoricalDataContent() {
                     (a, b) => new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime()
                 );
                 
-                // Extract unique categories from data
+                // Define the instrument order
+                const instrumentOrder = [
+                    'LGD Daily',
+                    'BCO Daily',
+                    'LSI Daily',
+                    'HSI Daily',
+                    'SNI Daily',
+                    'USD/CHF',
+                    'USD/JPY',
+                    'GBP/USD',
+                    'AUD/USD',
+                    'EUR/USD'
+                ];
+                
+                // Extract unique categories from data and sort according to the defined order
                 const uniqueCategories = Array.from(new Set(sortedData.map(item => item.category)));
-                setInstruments(uniqueCategories.sort());
                 
-                // Set default selected instrument if not set
-                if (uniqueCategories.length > 0 && !selectedInstrument) {
-                    setSelectedInstrument(uniqueCategories[0]);
+                // Sort the categories based on the defined order
+                const sortedInstruments = uniqueCategories.sort((a, b) => {
+                    const indexA = instrumentOrder.indexOf(a);
+                    const indexB = instrumentOrder.indexOf(b);
+                    
+                    // If both are in the order list, sort them according to the list
+                    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                    // If only a is in the list, it comes first
+                    if (indexA !== -1) return -1;
+                    // If only b is in the list, it comes first
+                    if (indexB !== -1) return 1;
+                    // If neither is in the list, sort alphabetically
+                    return a.localeCompare(b);
+                });
+                
+                setInstruments(sortedInstruments);
+                
+                // Determine default instrument (prefer 'LGD Daily' if available)
+                const defaultInstrument = sortedInstruments.includes('LGD Daily')
+                    ? 'LGD Daily'
+                    : (sortedInstruments[0] || '');
+
+                // Set selected instrument and filter data accordingly
+                if (defaultInstrument) {
+                    setSelectedInstrument(defaultInstrument);
                 }
-                
+
                 setDataHistorical(sortedData);
-                setFilteredData(sortedData);
+                setFilteredData(
+                    defaultInstrument
+                        ? sortedData.filter(item => item.category === defaultInstrument)
+                        : sortedData
+                );
                 setError(null);
             } catch (err) {
                 console.error('Error fetching data:', err);
@@ -136,8 +175,14 @@ export default function HistoricalDataContent() {
     const resetFilters = () => {
         setFromDate('');
         setToDate('');
-        setSelectedInstrument('');
-        setFilteredData([...dataHistorical]);
+        // Default back to LGD Daily or first instrument
+        const defaultInstrument = instruments.includes('LGD Daily') ? 'LGD Daily' : (instruments[0] || '');
+        setSelectedInstrument(defaultInstrument);
+        setFilteredData(
+            defaultInstrument
+                ? dataHistorical.filter(item => item.category === defaultInstrument)
+                : [...dataHistorical]
+        );
         setCurrentPage(1);
     };
 
@@ -189,7 +234,6 @@ export default function HistoricalDataContent() {
                             onChange={(e) => setSelectedInstrument(e.target.value)}
                             className="w-full text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59]"
                         >
-                            <option value="">{t('filters.allInstruments')}</option>
                             {instruments.map((instrument: string) => (
                                 <option key={instrument} value={instrument}>
                                     {instrument}
