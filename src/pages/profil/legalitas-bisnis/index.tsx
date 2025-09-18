@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
-import { AboutUsAffiliations } from "@/components/organisms/AboutUs";
+import Image from "next/image";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -76,12 +76,6 @@ export default function LegalitasBisnis() {
               ))}
             </div>
           </div>
-
-          {/* Affiliations moved to component */}
-          <AboutUsAffiliations 
-            supervisedTitle={t('supervisedTitle')}
-            memberOfTitle={t('memberOfTitle')}
-          />
         </ProfilContainer>
       </div>
     </PageTemplate>
