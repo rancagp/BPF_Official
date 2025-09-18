@@ -5,6 +5,83 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+type AffiliationsProps = {
+    supervisedTitle: string;
+    memberOfTitle: string;
+};
+
+export function AboutUsAffiliations({ supervisedTitle, memberOfTitle }: AffiliationsProps) {
+    const supervisedOrgs = [
+        { name: 'BAPPEBTI', logo: '/assets/logo-bappebti.png' },
+        { name: 'Otoritas Jasa Keuangan', logo: '/assets/OJK_Logo.png' },
+        { name: 'Bank Indonesia', logo: '/assets/BI_Logo.png' },
+    ];
+
+    const memberOrgs = [
+        { name: 'Jakarta Futures Exchange', logo: '/assets/logo-jfx.png' },
+        { name: 'Kliring Berjangka Indonesia', logo: '/assets/logo-kbi.png' },
+        { name: 'Asosiasi Perdagangan Berjangka Komoditi Indonesia', logo: '/assets/logo-aspebtindo.png' },
+    ];
+
+    return (
+        <div className="space-y-12">
+            {/* Section 1: Berizin dan Diawasi */}
+            <section className="mb-4">
+                <h2 className="text-2xl font-bold text-center text-gray-800 mb-8 relative">
+                    <span className="relative z-10 px-4 bg-white">{supervisedTitle}</span>
+                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-0"></div>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {supervisedOrgs.map((org, index) => (
+                        <div
+                            key={`supervised-${index}`}
+                            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-ewf-orange/30"
+                        >
+                            <div className="relative w-40 h-24 mb-2">
+                                <Image
+                                    src={org.logo}
+                                    alt={org.name}
+                                    fill
+                                    className="object-contain"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                />
+                            </div>
+                            <p className="text-sm text-[#4C4C4C] mt-1 text-center">{org.name}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Section 2: Anggota Dari */}
+            <section>
+                <h2 className="text-2xl font-bold text-center text-gray-800 mb-8 relative">
+                    <span className="relative z-10 px-4 bg-white">{memberOfTitle}</span>
+                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-0"></div>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {memberOrgs.map((org, index) => (
+                        <div
+                            key={`member-${index}`}
+                            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-ewf-orange/30"
+                        >
+                            <div className="relative w-40 h-24 mb-2">
+                                <Image
+                                    src={org.logo}
+                                    alt={org.name}
+                                    fill
+                                    className="object-contain"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                />
+                            </div>
+                            <p className="text-sm text-[#4C4C4C] mt-1 text-center">{org.name}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </div>
+    );
+}
+
 function AboutUs() {
     const { t, i18n, ready } = useTranslation('aboutus');
     const router = useRouter();
@@ -108,6 +185,13 @@ function AboutUs() {
                             </Link>
                         </div>
                     </div>
+                </div>
+                {/* Affiliations appended below main content */}
+                <div className="mt-16">
+                    <AboutUsAffiliations 
+                        supervisedTitle={t('supervisedTitle', { defaultValue: 'Berizin dan Diawasi' })}
+                        memberOfTitle={t('memberOfTitle', { defaultValue: 'Anggota Dari' })}
+                    />
                 </div>
             </div>
         </section>

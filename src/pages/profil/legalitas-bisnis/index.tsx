@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ProfilContainer from "@/components/templates/PageContainer/Container";
 import PageTemplate from "@/components/templates/PageTemplate";
-import Image from "next/image";
+import { AboutUsAffiliations } from "@/components/organisms/AboutUs";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -18,21 +18,9 @@ type LegalitasItem = {
   icon: string;
 };
 
-type Organization = {
-  name: string;
-  logo: string;
-};
-
 export default function LegalitasBisnis() {
   const { t } = useTranslation('legalitas_bisnis');
   const legalitasItems = t('legalitasItems', { returnObjects: true }) as LegalitasItem[];
-  
-  const organizations: Organization[] = [
-    { name: "Kementrian Perdagangan Republik Indonesia", logo: "/assets/logo-kemendag.png" },
-    { name: "Jakarta Futures Exchange", logo: "/assets/logo-jfx.png" },
-    { name: "Kliring Berjangka Indonesia", logo: "/assets/logo-kbi.png" },
-    { name: "SITNa", logo: "/assets/sitna-logo.png" }
-  ];
 
   return (
     <PageTemplate 
@@ -89,69 +77,11 @@ export default function LegalitasBisnis() {
             </div>
           </div>
 
-          {/* Section 1: Berizin dan Diawasi */}
-          <div className="mb-16">
-            <h2 className="text-2xl font-bold text-center text-gray-800 mb-8 relative">
-              <span className="relative z-10 px-4 bg-white">
-                {t('supervisedTitle')}
-              </span>
-              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-0"></div>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { name: "BAPPEBTI", logo: "/assets/logo-bappebti.png" },
-                { name: "Otoritas Jasa Keuangan", logo: "/assets/OJK_Logo.png" },
-                { name: "Bank Indonesia", logo: "/assets/BI_Logo.png" }
-              ].map((org, index) => (
-                <div 
-                  key={`supervised-${index}`}
-                  className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-ewf-orange/30"
-                >
-                  <div className="relative w-40 h-24 mb-4">
-                    <Image 
-                      src={org.logo} 
-                      alt={org.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section 2: Anggota Dari */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-center text-gray-800 mb-8 relative">
-              <span className="relative z-10 px-4 bg-white">
-                {t('memberOfTitle')}
-              </span>
-              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-0"></div>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { name: "Jakarta Futures Exchange", logo: "/assets/logo-jfx.png" },
-                { name: "Kliring Berjangka Indonesia", logo: "/assets/logo-kbi.png" },
-                { name: "Asosiasi Perdagangan Berjangka Komoditi Indonesia", logo: "/assets/logo-aspebtindo.png" }
-              ].map((org, index) => (
-                <div 
-                  key={`member-${index}`}
-                  className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-ewf-orange/30"
-                >
-                  <div className="relative w-40 h-24">
-                    <Image 
-                      src={org.logo} 
-                      alt={org.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Affiliations moved to component */}
+          <AboutUsAffiliations 
+            supervisedTitle={t('supervisedTitle')}
+            memberOfTitle={t('memberOfTitle')}
+          />
         </ProfilContainer>
       </div>
     </PageTemplate>
