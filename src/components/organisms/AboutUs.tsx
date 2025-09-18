@@ -8,6 +8,7 @@ import Link from 'next/link';
 type Organization = {
   name: string;
   logo: string;
+  url?: string;
 };
 
 function AboutUs() {
@@ -125,12 +126,15 @@ function AboutUs() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
-                            { name: "BAPPEBTI", logo: "/assets/logo-bappebti.png" },
-                            { name: "Otoritas Jasa Keuangan", logo: "/assets/OJK_Logo.png" },
-                            { name: "Bank Indonesia", logo: "/assets/BI_Logo.png" }
+                            { name: "BAPPEBTI", logo: "/assets/logo-bappebti.png", url: "https://bappebti.go.id/" },
+                            { name: "Otoritas Jasa Keuangan", logo: "/assets/OJK_Logo.png", url: "https://ojk.go.id/id/Default.aspx" },
+                            { name: "Bank Indonesia", logo: "/assets/BI_Logo.png", url: "https://www.bi.go.id/id/default.aspx" }
                         ].map((org: Organization, index: number) => (
-                            <div 
+                            <a 
                                 key={`supervised-${index}`}
+                                href={org.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[#F2AC59]/30"
                             >
                                 <div className="relative w-32 h-16 mb-2">
@@ -142,7 +146,7 @@ function AboutUs() {
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                     />
                                 </div>
-                            </div>
+                            </a>
                         ))}
                     </div>
                 </div>
@@ -157,12 +161,15 @@ function AboutUs() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
-                            { name: "Jakarta Futures Exchange", logo: "/assets/logo-jfx.png" },
-                            { name: "Kliring Berjangka Indonesia", logo: "/assets/logo-kbi.png" },
-                            { name: "Asosiasi Perdagangan Berjangka Komoditi Indonesia", logo: "/assets/logo-aspebtindo.png" }
+                            { name: "Jakarta Futures Exchange", logo: "/assets/logo-jfx.png", url: "https://jfx.co.id/" },
+                            { name: "Kliring Berjangka Indonesia", logo: "/assets/logo-kbi.png", url: "https://www.ptkbi.com/index.php" },
+                            { name: "Asosiasi Perdagangan Berjangka Komoditi Indonesia", logo: "/assets/logo-aspebtindo.png", url: "https://aspebtindo.org/" }
                         ].map((org: Organization, index: number) => (
-                            <div 
+                            <a 
                                 key={`member-${index}`}
+                                href={org.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[#F2AC59]/30"
                             >
                                 <div className="relative w-32 h-16">
@@ -174,7 +181,7 @@ function AboutUs() {
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                     />
                                 </div>
-                            </div>
+                            </a>
                         ))}
                     </div>
                 </div>
