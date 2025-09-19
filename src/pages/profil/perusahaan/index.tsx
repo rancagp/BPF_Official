@@ -76,13 +76,6 @@ export default function ProfilPerusahaan() {
     }
   ];
 
-  const anggotaLogos = [
-    { src: "/assets/logo-jfx.png", alt: t('sections.membership.logos.jfx') },
-    { src: "/assets/logo-kbi.png", alt: t('sections.membership.logos.kbi') },
-    { src: "/assets/logo-kemendag.png", alt: t('sections.membership.logos.aspebtindo') },
-    { src: "/assets/sitna-logo.png", alt: t('sections.membership.logos.bappebti') },
-  ];
-
   return (
     <PageTemplate title={t('pageTitle')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
@@ -148,27 +141,6 @@ export default function ProfilPerusahaan() {
                   <p className="text-gray-600">
                     {nilai.description}
                   </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Anggota & Afiliasi */}
-          <section className="bg-gray-50 rounded-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
-              {t('sections.membership.title')}
-            </h2>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-              {anggotaLogos.map((logo, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                  <div className="h-16 w-32 relative">
-                    <Image
-                      src={logo.src}
-                      alt={logo.alt}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
                 </div>
               ))}
             </div>
