@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
       'portalnews.test',
       'localhost',
       '127.0.0.1',
-      'kpf-backend.test',
+      'bpf-backend.test',
       'ewf-backend.test',
       'kpf-backpanel-production.up.railway.app',
       'kpf-backpanel-production.up.railway.app:443',
@@ -90,7 +90,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'http',
-        hostname: 'ewf-backend.test',
+        hostname: 'bpf-backend.test',
         port: '',
         pathname: '/storage/**',
       },
