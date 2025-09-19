@@ -53,9 +53,9 @@ const defaultBanners: Banner[] = [
 ];
 
 const CTA_ITEMS = [
-    { label: "Daftar Sekarang", link: "https://regol.equityworld-futures.co.id/" },
-    { label: "Demo", link: "https://demo.ew-futures.com/login" },
-    { label: "Live", link: "https://etrade.ew-futures.com/login" },
+    { label: "Daftar Sekarang", link: "https://regol.kontak-perkasa-futures.co.id/" },
+    { label: "Demo", link: "https://demo.kontakperkasafutures.com/login" },
+    { label: "Live", link: "https://etrade.kontakperkasafutures.com/login" },
 ];
 
 export default function CarouselWithContent() {
@@ -96,11 +96,6 @@ export default function CarouselWithContent() {
                     // Pastikan URL menggunakan HTTPS untuk production
                     if (process.env.NODE_ENV === 'production') {
                         imageUrl = imageUrl.replace('http://', 'https://');
-                    }
-                    
-                    // Pastikan URL gambar lengkap
-                    if (!imageUrl.startsWith('http') && !imageUrl.startsWith('/')) {
-                        imageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://ewf-backend.test'}/storage/banners/${imageUrl}`;
                     }
                     
                     // Tambahkan timestamp cache-busting
@@ -425,18 +420,37 @@ export default function CarouselWithContent() {
     const debouncedGoToNext = useCallback(debounce(next, 300), [next]);
     const debouncedGoToPrev = useCallback(debounce(prev, 300), [prev]);
 
-    const handleImageError = useCallback((index: number) => {
-        console.log('Gambar gagal dimuat pada index:', index);
-        setBanners(prevBanners => {
-            if (!prevBanners[index]) return prevBanners;
-            const newBanners = [...prevBanners];
-            newBanners[index] = {
-                ...newBanners[index],
-                hasError: true
-            };
-            return newBanners;
+    const handleImageError = useCallback((viewIndex: number) => {
+        console.log('Gambar gagal dimuat:', viewIndex);
+
+        // Map index pada tampilan (fullSlides) ke index asli banner
+        const hasClones = slides.length > 1 && fullSlides.length === slides.length + 2;
+        let bannerIndex = viewIndex;
+        if (hasClones) {
+            if (viewIndex === 0) {
+                // Clone dari slide terakhir
+                bannerIndex = slides.length - 1;
+            } else if (viewIndex === fullSlides.length - 1) {
+                // Clone dari slide pertama
+                bannerIndex = 0;
+            } else {
+                // Index normal digeser 1 ke kiri karena ada clone di depan
+                bannerIndex = viewIndex - 1;
+            }
+        }
+
+        setBanners((prev) => {
+            if (!Array.isArray(prev) || prev.length === 0) return prev;
+            if (bannerIndex < 0 || bannerIndex >= prev.length) return prev;
+
+            const copy = [...prev];
+            const target = copy[bannerIndex];
+            if (!target) return prev;
+
+            copy[bannerIndex] = { ...target, hasError: true };
+            return copy;
         });
-    }, []);
+    }, [slides.length, fullSlides.length]);
 
     // Tampilkan loading hanya jika benar-benar loading dan belum ada banner
     if (loading && banners.length === 0) {
@@ -467,9 +481,9 @@ export default function CarouselWithContent() {
     }
 
     return (
-        <div className="relative w-full h-auto min-h-[60vh] md:h-[74vh] overflow-hidden text-white">
+        <div className="relative w-full overflow-hidden text-white">
             <div
-                className="flex h-full"
+                className="flex"
                 style={{
                     transform: `translateX(-${index * 100}%)`,
                     transition: transitioning ? "transform 2s ease-in-out" : "none",
@@ -479,10 +493,10 @@ export default function CarouselWithContent() {
                 {fullSlides.map((slide: Slide, i: number) => (
                     <div
                         key={i}
-                        className="flex-shrink-0 w-full h-full flex flex-col-reverse md:flex-row items-center justify-center gap-4 md:gap-8 px-4 py-6 md:px-16 lg:px-32"
+                        className="flex-shrink-0 w-full flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-6 py-8 md:px-16 lg:px-32"
                     >
                         {/* Teks */}
-                        <div className="text-center md:text-left max-w-xl px-4 md:px-0">
+                        <div className="text-center md:text-left max-w-xl">
                             <h1 className="text-2xl md:text-4xl font-bold mb-4">{slide.title}</h1>
                             <p className="text-base md:text-lg mb-6">{slide.description}</p>
                             <div className="flex flex-col md:flex-row gap-3">
@@ -491,7 +505,7 @@ export default function CarouselWithContent() {
                                         key={i}
                                         href={item.link}
                                         target="_blank"
-                                        className="inline-block bg-white hover:bg-gray-100 transition text-[#4C4C4C] rounded-full px-5 py-3 font-semibold shadow"
+                                        className="inline-block bg-white hover:bg-gray-100 transition text-green-800 rounded-full px-5 py-3 font-semibold shadow"
                                     >
                                         {item.label}
                                     </a>
@@ -500,8 +514,8 @@ export default function CarouselWithContent() {
                         </div>
 
                         {/* Gambar */}
-                        <div className="mt-4 md:mt-0 w-full md:w-1/2 flex-shrink-0 px-4 md:px-0">
-                            <div className="relative w-full h-[40vh] md:h-[60vh] lg:h-[70vh]">
+                        <div className="mt-8 md:mt-0 w-full md:w-1/2 flex-shrink-0">
+                            <div className="relative w-full h-[300px] md:h-[450px] lg:h-[420px]">
                                 {slide.hasError ? (
                                     <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                                         <span className="text-gray-500">Gambar tidak tersedia</span>
@@ -527,7 +541,7 @@ export default function CarouselWithContent() {
             </div>
 
             {/* Dots */}
-            <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center gap-2 px-4">
+            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
                 {slides.map((_, i) => (
                     <button
                         key={i}
