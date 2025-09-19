@@ -328,9 +328,6 @@ export default function HistoricalDataContent() {
                                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                         Close
                                     </th>
-                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                        Instrumen
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-[#E5E7EB]">
@@ -350,9 +347,6 @@ export default function HistoricalDataContent() {
                                         </td>
                                         <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
                                             {item.close}
-                                        </td>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
-                                            {item.category}
                                         </td>
                                     </tr>
                                 ))}
