@@ -1,22 +1,57 @@
 {
   "title": "Tentang Kami",
   "welcome": "Selamat Datang di",
-  "companyName": "Equityworld Futures",
-  "since": "Sejak 2005",
-  "member": "Anggota BAPPEBTI & BBJ",
-  "trustedPartner": "Partner Investasi Terpercaya",
-  "aboutText": "PT Equityworld Futures (\"EWF\") berkomitmen menjadi partner investasi terbaik di bidang perdagangan berjangka. Dengan pelayanan yang prima, EWF terus berekspansi dan kini memiliki jaringan 7 kantor operasional di Jakarta (2 kantor), Surabaya (2 kantor), Semarang, Manado dan Cirebon.",
-  "aboutText2": "Berdiri sejak tahun 2005, PT Equityworld Futures merupakan anggota perusahaan pialang resmi yang terdaftar di Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI), PT Bursa Berjangka Jakarta (BBJ) dan PT Kliring Berjangka Indonesia (Persero).",
-  "featuresTitle": "Keunggulan Kami",
-  "features": [
-    "Dapat bertransaksi dimana dan kapan saja",
-    "Grafik dan harga live update",
-    "Mudah digunakan (user friendly)",
-    "Memantau rekening secara langsung",
-    "Penarikan dana terjamin dan aman"
+  "companyName": "Bestprofit Futures",
+  "trustedPartner": "Mitra Perdagangan Berjangka Terpercaya Anda",
+  "aboutText": "PT Bestprofit Futures (\"BPF\") adalah perusahaan pialang berjangka resmi yang terdaftar di Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI) sejak tahun 2004. Anggota dari PT Bursa Berjangka Jakarta dan PT Kliring Berjangka Indonesia (Persero), PT Bestprofit Futures memiliki 12 kantor operasional di seluruh Indonesia.",
+  "ourPresence": "Kehadiran Kami",
+  "presenceText": "Kami telah hadir di berbagai kota di Indonesia dengan kantor operasional di:",
+  "locations": [
+    "Jakarta (2 kantor)",
+    "Bandung",
+    "Semarang",
+    "Surabaya",
+    "Malang",
+    "Medan",
+    "Banjarmasin",
+    "Pontianak",
+    "Jambi",
+    "Pekanbaru",
+    "Bandar Lampung"
   ],
-  "ctaText": "Bergabunglah dengan ribuan investor yang telah mempercayakan investasi mereka kepada kami.",
-  "learnMore": "Pelajari Lebih Lanjut",
-  "supervisedTitle": "Berizin dan Diawasi",
-  "memberOfTitle": "Anggota Dari"
+  "learnMore": "Pelajari Lebih Lanjut Tentang Kami",
+  "supervisedTitle": "Berizin & Diawasi Oleh",
+  "partnersTitle": "Mitra & Regulator Kami",
+  "organizations": [
+    {
+      "name": "BAPPEBTI",
+      "logo": "/assets/logo-bappebti.png",
+      "url": "https://bappebti.go.id/"
+    },
+    {
+      "name": "Otoritas Jasa Keuangan",
+      "logo": "/assets/OJK_Logo.png",
+      "url": "https://ojk.go.id/id/Default.aspx"
+    },
+    {
+      "name": "Bank Indonesia",
+      "logo": "/assets/BI_Logo.png",
+      "url": "https://www.bi.go.id/id/default.aspx"
+    },
+    {
+      "name": "Jakarta Futures Exchange",
+      "logo": "/assets/logo-jfx.png",
+      "url": "https://jfx.co.id/"
+    },
+    {
+      "name": "Kliring Berjangka Indonesia",
+      "logo": "/assets/logo-kbi.png",
+      "url": "https://www.ptkbi.com/index.php"
+    },
+    {
+      "name": "Asosiasi Perdagangan Berjangka Komoditi Indonesia",
+      "logo": "/assets/logo-aspebtindo.png",
+      "url": "https://aspebtindo.org/"
+    }
+  ]
 }

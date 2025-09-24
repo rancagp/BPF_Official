@@ -1,22 +1,57 @@
 {
   "title": "About Us",
   "welcome": "Welcome to",
-  "companyName": "Equityworld Futures",
-  "since": "Since 2005",
-  "member": "BAPPEBTI & BBJ Member",
-  "trustedPartner": "Trusted Investment Partner",
-  "aboutText": "PT Equityworld Futures (\"EWF\") is committed to being the best investment partner in the futures trading sector. With excellent service, EWF continues to expand and now has a network of 7 operational offices in Jakarta (2 offices), Surabaya (2 offices), Semarang, Manado, and Cirebon.",
-  "aboutText2": "Established in 2005, PT Equityworld Futures is an official broker member registered with the Commodity Futures Trading Regulatory Agency (BAPPEBTI), Jakarta Futures Exchange (BBJ), and Indonesia Clearing House (Persero).",
-  "featuresTitle": "Our Advantages",
-  "features": [
-    "Trade anytime and anywhere",
-    "Live updated charts and prices",
-    "Easy to use (user friendly)",
-    "Monitor your account directly",
-    "Guaranteed and secure withdrawals"
+  "companyName": "Bestprofit Futures",
+  "trustedPartner": "Your Trusted Futures Trading Partner",
+  "aboutText": "PT Bestprofit Futures (\"BPF\") is an official futures brokerage company registered with the Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI) since 2004. Members of PT Bursa Berjangka Jakarta and PT Kliring Berjangka Indonesia (Persero), PT Bestprofit Futures has 12 operational offices in Indonesia.",
+  "ourPresence": "Our Presence",
+  "presenceText": "We have established our presence across Indonesia with operational offices in:",
+  "locations": [
+    "Jakarta (2 offices)",
+    "Bandung",
+    "Semarang",
+    "Surabaya",
+    "Malang",
+    "Medan",
+    "Banjarmasin",
+    "Pontianak",
+    "Jambi",
+    "Pekanbaru",
+    "Bandar Lampung"
   ],
-  "ctaText": "Join thousands of investors who have entrusted their investments to us.",
-  "learnMore": "Learn More",
-  "supervisedTitle": "Licensed and Supervised",
-  "memberOfTitle": "Member Of"
+  "learnMore": "Learn More About Us",
+  "supervisedTitle": "Registered & Supervised By",
+  "partnersTitle": "Our Partners & Regulators",
+  "organizations": [
+    {
+      "name": "BAPPEBTI",
+      "logo": "/assets/logo-bappebti.png",
+      "url": "https://bappebti.go.id/"
+    },
+    {
+      "name": "Otoritas Jasa Keuangan",
+      "logo": "/assets/OJK_Logo.png",
+      "url": "https://ojk.go.id/id/Default.aspx"
+    },
+    {
+      "name": "Bank Indonesia",
+      "logo": "/assets/BI_Logo.png",
+      "url": "https://www.bi.go.id/id/default.aspx"
+    },
+    {
+      "name": "Jakarta Futures Exchange",
+      "logo": "/assets/logo-jfx.png",
+      "url": "https://jfx.co.id/"
+    },
+    {
+      "name": "Kliring Berjangka Indonesia",
+      "logo": "/assets/logo-kbi.png",
+      "url": "https://www.ptkbi.com/index.php"
+    },
+    {
+      "name": "Asosiasi Perdagangan Berjangka Komoditi Indonesia",
+      "logo": "/assets/logo-aspebtindo.png",
+      "url": "https://aspebtindo.org/"
+    }
+  ]
 }
