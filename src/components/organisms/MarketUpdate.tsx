@@ -135,7 +135,7 @@ export default function MarketUpdate() {
             content: (
                 <div key={`news-${news.id}`} className="flex items-center h-full">
                     <div className="flex items-center gap-2 px-4">
-                        <span className="text-[#F2AC59] font-semibold">
+                        <span className="text-[#FF0000] font-semibold">
                             {news.kategori?.name || 'Berita'}:
                         </span>
                         <span className="whitespace-nowrap">
@@ -154,8 +154,8 @@ export default function MarketUpdate() {
                     <div className="flex items-center gap-2 px-4">
                         <span className="font-semibold">{item.symbol}:</span>
                         <span>{formatPrice(item.symbol, item.last)}</span>
-                        <span className={`font-medium ${item.percentChange > 0 ? 'text-green-300' :
-                                item.percentChange < 0 ? 'text-red-300' :
+                        <span className={`font-medium ${item.percentChange > 0 ? 'text-green-400' :
+                                item.percentChange < 0 ? 'text-red-400' :
                                     'text-[#9B9FA7]'
                             }`}>
                             ({formatPercent(item.percentChange)})
@@ -168,13 +168,13 @@ export default function MarketUpdate() {
     ];
 
     return (
-        <div className="bg-[#4C4C4C] text-white overflow-hidden shadow group">
+        <div className="bg-[#080031] text-white overflow-hidden shadow group">
             <div className="flex items-center h-10">
-                <div className="bg-[#F2AC59] px-4 h-full flex items-center font-bold text-xs sm:text-sm md:text-base whitespace-nowrap text-white">
+                <div className="bg-[#FF0000] px-4 h-full flex items-center font-bold text-xs sm:text-sm md:text-base whitespace-nowrap text-white">
                     TOP NEWS
                 </div>
 
-                <div className="relative overflow-hidden w-full bg-[#4C4C4C] h-10 flex items-center min-w-0">
+                <div className="relative overflow-hidden w-full bg-[#080031] h-10 flex items-center min-w-0">
                     {errorMessage ? (
                         <div className="px-4 text-xs sm:text-sm md:text-base font-semibold text-white">
                             {errorMessage}

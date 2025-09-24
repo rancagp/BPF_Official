@@ -15,8 +15,8 @@ interface PageTemplateProps {
 }
 
 export default function PageTemplate({ title, description, children }: PageTemplateProps) {
-    const pageTitle = title ? `${title} - PT. EquityWorld Futures` : "PT. EquityWorld Futures";
-    const pageDescription = description || "PT. EquityWorld Futures adalah perusahaan pialang berjangka terpercaya di Indonesia.";
+    const pageTitle = title ? `${title} - PT. BestProfit Futures` : "PT. BestProfit Futures";
+    const pageDescription = description || "PT. BestProfit Futures adalah perusahaan pialang berjangka terpercaya di Indonesia.";
     
     return (
         <>
@@ -35,7 +35,7 @@ export default function PageTemplate({ title, description, children }: PageTempl
                 <link rel="manifest" href="/favicon/site.webmanifest" />
                 <link rel="shortcut icon" href="/favicon/favicon.ico" />
                 <meta name="theme-color" content="#ffffff" />
-                <meta name="apple-mobile-web-app-title" content="EWF" />
+                <meta name="apple-mobile-web-app-title" content="BPF" />
 
                 {/* Font: Montserrat */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />

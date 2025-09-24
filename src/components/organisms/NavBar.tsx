@@ -161,13 +161,13 @@ const NavBar: React.FC = () => {
               <div key={itemKey} className="border-b border-[#9B9FA7]/10 last:border-0">
                 <button
                   onClick={(e) => toggleDropdown(itemKey, e)}
-                  className="w-full text-left px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] flex justify-between items-center"
+                  className="w-full text-left px-6 py-3 text-base font-medium text-[#080031] hover:text-[#FF0000] flex justify-between items-center"
                   aria-expanded={openDropdowns[itemKey] || false}
                   aria-controls={`submenu-${itemKey}`}
                 >
                   <span>{item.label}</span>
                   <i
-                    className={`fas fa-chevron-${openDropdowns[itemKey] ? "up" : "down"} text-xs text-[#4C4C4C] ml-2`}
+                    className={`fas fa-chevron-${openDropdowns[itemKey] ? "up" : "down"} text-xs text-[#080031] ml-2`}
                   />
                 </button>
                 <div
@@ -188,7 +188,7 @@ const NavBar: React.FC = () => {
                 <Link
                   href={item.href}
                   locale={i18n.language}
-                  className="block px-6 py-3 text-base font-medium text-[#4C4C4C] hover:text-[#F2AC59] hover:bg-[#F8F8F8] transition-colors"
+                  className="block px-6 py-3 text-base font-medium text-[#080031] hover:text-[#FF0000] hover:bg-[#F8F8F8] transition-colors"
                   onClick={closeAllMenus}
                   target={item.target}
                   rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
@@ -201,7 +201,7 @@ const NavBar: React.FC = () => {
 
           return (
             <div key={itemKey} className="border-b border-[#9B9FA7]/10 last:border-0">
-              <span className="block px-6 py-3 text-base font-medium text-[#4C4C4C]">
+              <span className="block px-6 py-3 text-base font-medium text-[#080031]">
                 {item.label}
               </span>
             </div>
@@ -229,7 +229,7 @@ const NavBar: React.FC = () => {
             <Link href="/" locale={i18n.language} className="flex items-center gap-2 group">
               <div className="flex items-center">
                 <img
-                  src="/assets/ewf-logo.png"
+                  src="/assets/bpf-logo.png"
                   alt="Logo EWF"
                   width={50}
                   height={50}
@@ -237,8 +237,8 @@ const NavBar: React.FC = () => {
                     isScrolled ? "h-10 md:h-12" : "h-12 md:h-14"
                   }`}
                 />
-                <span className="ml-3 text-xl md:text-2xl font-bold text-[#4C4C4C] tracking-tight">
-                  EQUITYWORLD <span className="text-[#F2AC59]">FUTURES</span>
+                <span className="ml-3 text-xl md:text-2xl font-bold text-[#080031] tracking-tight">
+                  BESTPROFIT FUTURES
                 </span>
               </div>
             </Link>
@@ -250,13 +250,13 @@ const NavBar: React.FC = () => {
                   <Link
                     href={item.href || "#"}
                     locale={i18n.language}
-                    className="px-4 py-2.5 text-sm font-medium text-[#4C4C4C] hover:text-[#F2AC59] transition-colors flex items-center group-hover:bg-[#F8F8F8] rounded-lg"
+                    className="px-4 py-2.5 text-sm font-medium text-[#080031] hover:text-[#FF0000] transition-colors flex items-center group-hover:bg-[#F8F8F8] rounded-lg"
                     target={item.target}
                     rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                   >
                     {item.label}
                     {item.submenu && (
-                      <i className="fas fa-chevron-down text-xs text-[#4C4C4C] ml-1 transition-transform duration-200 group-hover:rotate-180" />
+                      <i className="fas fa-chevron-down text-xs text-[#080031] ml-1 transition-transform duration-200 group-hover:rotate-180" />
                     )}
                   </Link>
                   {item.submenu && (
@@ -271,7 +271,7 @@ const NavBar: React.FC = () => {
                             <Link
                               href={sub.href || "#"}
                               locale={i18n.language}
-                              className="flex-1 px-4 py-2.5 text-sm text-[#4C4C4D] hover:bg-[#F8F8F8] text-left hover:text-[#F2AC59] rounded-md"
+                              className="flex-1 px-4 py-2.5 text-sm text-[#080031] hover:bg-[#F8F8F8] text-left hover:text-[#FF0000] rounded-md"
                               target={sub.target}
                               rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
                             >
@@ -279,7 +279,7 @@ const NavBar: React.FC = () => {
                             </Link>
                             {sub.submenu && (
                               <i
-                                className={`fas fa-chevron-right text-xs text-[#4C4C4C] mx-3 group-hover/sub:rotate-90 transition-transform duration-200`}
+                                className={`fas fa-chevron-right text-xs text-[#080031] mx-3 group-hover/sub:rotate-90 transition-transform duration-200`}
                               />
                             )}
                           </div>
@@ -294,7 +294,7 @@ const NavBar: React.FC = () => {
                                   key={child.key}
                                   href={child.href || "#"}
                                   locale={i18n.language}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                  className="block px-4 py-2 text-sm text-[#080031] hover:bg-[#F8F8F8] hover:text-[#FF0000]"
                                 >
                                   {child.label}
                                 </Link>
