@@ -101,27 +101,27 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
     return (
         <div className={`${className} mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}>
             {showHeader && (
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
                     <div className="flex-1 max-w-3xl">
                         <div className="flex flex-col space-y-4">
-                            <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#F2AC59] bg-[#F2AC59]/10 rounded-full">
-                                <span className="w-2 h-2 bg-[#F2AC59] rounded-full mr-2"></span>
+                            <span className="inline-flex items-center w-fit px-4 py-2 text-xs font-bold tracking-wide uppercase text-[#080031] bg-[#080031]/5 rounded-full">
+                                <span className="w-2 h-2 bg-[#FF0000] rounded-full mr-2"></span>
                                 {t('updateLabel')}
                             </span>
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent whitespace-nowrap">
+                            <h2 className="text-3xl md:text-4xl font-bold text-[#080031] leading-tight">
                                 {t('title')}
                             </h2>
-                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></div>
+                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#080031] to-[#FF0000] rounded-full"></div>
                         </div>
                     </div>
                     <div className="hidden md:flex items-center h-full mt-6">
                         <Link 
                             href="/umum/informasi"
                             locale={router.locale}
-                            className="px-8 py-3.5 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap self-center"
+                            className="group px-6 py-3 bg-[#FF0000] hover:bg-[#CC0000] text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap self-center flex items-center"
                         >
                             {t('viewAll')}
-                            <svg className="ml-2 -mr-1 w-5 h-5 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                         </Link>
@@ -145,7 +145,7 @@ export default function PengumumanHome({ showHeader = true, className }: Pengumu
                                         <div className="h-4 bg-gray-200 rounded w-5/6"></div>
                                         <div className="h-4 bg-gray-200 rounded w-4/6"></div>
                                     </div>
-                                    <div className="mt-6 h-4 bg-gray-200 rounded w-32"></div>
+                                    <div className="mt-6 h-4 bg-[#080031]/10 rounded-full w-32"></div>
                                 </div>
                             </div>
                         ))}
