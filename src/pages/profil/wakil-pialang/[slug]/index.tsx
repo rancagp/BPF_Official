@@ -167,63 +167,63 @@ export default function WakilPialangBySlug() {
                 <ProfilContainer title={kategoriNama || "Wakil Pialang"}>
                     {wakilList.length === 0 ? (
                         <div className="text-center py-12">
-                            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
-                                <svg className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-[#080031]/5 mb-4">
+                                <svg className="h-8 w-8 text-[#080031]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">Data Tidak Ditemukan</h3>
-                            <p className="text-gray-600">Tidak ada data wakil pialang untuk wilayah ini</p>
+                            <h3 className="text-lg font-medium text-[#080031] mb-2">Data Tidak Ditemukan</h3>
+                            <p className="text-[#080031]/80">Tidak ada data wakil pialang untuk wilayah ini</p>
                         </div>
                     ) : (
                         <div className="relative w-full">
                             <div className="overflow-x-auto w-full">
                                 <div className="inline-block min-w-full py-2">
-                                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                                    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                                         <table className="min-w-full divide-y divide-gray-200">
-                                            <thead className="bg-[#4C4C4C] w-full">
-                                            <tr>
-                                                <th scope="col" className="w-12 px-2 py-3 text-left text-xs font-semibold text-white">
-                                                    {t('table.no', { ns: 'wakil_pialang' })}
-                                                </th>
-                                                <th scope="col" className="w-1/4 px-2 py-3 text-left text-xs font-semibold text-white">
-                                                    {t('table.name', { ns: 'wakil_pialang' })}
-                                                </th>
-                                                <th scope="col" className="w-1/3 px-2 py-3 text-left text-xs font-semibold text-white">
-                                                    {t('table.licenseNumber', { ns: 'wakil_pialang' })}
-                                                </th>
-                                                <th scope="col" className="w-24 px-2 py-3 text-left text-xs font-semibold text-white">
-                                                    {t('table.status', { ns: 'wakil_pialang' })}
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-gray-100 bg-white">
-                                            {wakilList.map((wpb, index) => (
-                                                <tr key={wpb.id} className="bg-white hover:bg-gray-50 transition-colors group">
-                                                    <td className="whitespace-nowrap px-2 py-3 text-xs text-gray-500">
-                                                    {index + 1}
-                                                </td>
-                                                <td className="px-2 py-3">
-                                                    <div className="text-[11px] font-medium text-gray-900 line-clamp-2 leading-tight">{wpb.name}</div>
-                                                </td>
-                                                <td className="px-2 py-3">
-                                                    <div className="text-xs text-gray-500 break-words">{wpb.nomor_izin}</div>
-                                                </td>
-                                                <td className="px-2 py-3">
-                                                        <span className={`inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium w-full justify-center ${
-                                                            wpb.status.toLowerCase() === "aktif" 
-                                                                ? 'bg-green-100 text-green-800' 
-                                                                : 'bg-red-100 text-red-800'
-                                                        }`}>
-                                                            {wpb.status.toLowerCase() === "aktif" ? t('active') : t('inactive')}
-                                                        </span>
-                                                    </td>
+                                            <thead className="bg-[#080031] w-full">
+                                                <tr>
+                                                    <th scope="col" className="w-12 px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                        {t('table.no', { ns: 'wakil_pialang' })}
+                                                    </th>
+                                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                        {t('table.name', { ns: 'wakil_pialang' })}
+                                                    </th>
+                                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                        {t('table.licenseNumber', { ns: 'wakil_pialang' })}
+                                                    </th>
+                                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                                        {t('table.status', { ns: 'wakil_pialang' })}
+                                                    </th>
                                                 </tr>
-                                            ))}
-                                                </tbody>
+                                            </thead>
+                                            <tbody className="bg-white divide-y divide-gray-200">
+                                                {wakilList.map((wpb, index) => (
+                                                    <tr key={wpb.id} className="hover:bg-[#080031]/5 transition-colors duration-150">
+                                                        <td className="whitespace-nowrap px-4 py-4 text-sm text-[#080031]/80">
+                                                            {index + 1}
+                                                        </td>
+                                                        <td className="px-4 py-4">
+                                                            <div className="text-sm font-medium text-[#080031]">{wpb.name}</div>
+                                                        </td>
+                                                        <td className="px-4 py-4">
+                                                            <div className="text-sm text-[#080031]/80">{wpb.nomor_izin}</div>
+                                                        </td>
+                                                        <td className="px-4 py-4 whitespace-nowrap">
+                                                            <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
+                                                                wpb.status.toLowerCase() === "aktif" 
+                                                                    ? 'bg-green-50 text-green-800' 
+                                                                    : 'bg-red-50 text-red-800'
+                                                            }`}>
+                                                                {wpb.status.toLowerCase() === "aktif" ? t('active') : t('inactive')}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
                                         </table>
                                     </div>
-                                    <div className="sm:hidden px-4 py-2 text-xs text-gray-500 text-center bg-gray-50 border-t border-gray-200">
+                                    <div className="sm:hidden px-4 py-3 text-xs text-[#080031]/70 text-center bg-[#080031]/5 border-t border-gray-200">
                                         Geser ke kanan untuk melihat lebih banyak
                                     </div>
                                 </div>
