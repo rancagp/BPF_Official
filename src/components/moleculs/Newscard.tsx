@@ -65,39 +65,39 @@ export default function NewsCard({
 
     // Tentukan kelas CSS berdasarkan variant
     const cardClasses = {
-        default: 'group flex flex-col rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#F2AC59]/30',
-        large: 'group flex flex-col rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#F2AC59]/30',
-        small: 'group flex flex-row rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[#F2AC59]/30',
+        default: 'group flex flex-col rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#FF0000]/30',
+        large: 'group flex flex-col rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#FF0000]/30',
+        small: 'group flex flex-row rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[#FF0000]/30',
     };
 
     const imageClasses = {
-        default: 'relative h-48 bg-gray-50 overflow-hidden',
-        large: 'relative h-64 md:h-80 bg-gray-50 overflow-hidden',
-        small: 'relative w-1/3 h-24 md:h-40 bg-gray-50 overflow-hidden flex-shrink-0',
+        default: 'relative h-48 bg-[#080031]/5 overflow-hidden',
+        large: 'relative h-64 md:h-80 bg-[#080031]/5 overflow-hidden',
+        small: 'relative w-1/3 h-24 md:h-40 bg-[#080031]/5 overflow-hidden flex-shrink-0',
     };
 
     const contentClasses = {
-        default: 'p-4 md:p-6 flex-1 flex flex-col',
-        large: 'p-6 flex-1 flex flex-col',
-        small: 'p-3 md:p-4 flex-1 flex flex-col',
+        default: 'p-4 md:p-6 flex-1 flex flex-col bg-white',
+        large: 'p-6 flex-1 flex flex-col bg-white',
+        small: 'p-3 md:p-4 flex-1 flex flex-col bg-white',
     };
 
     const titleClasses = {
-        default: 'text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-[#F2AC59] transition-colors duration-300 line-clamp-2',
-        large: 'text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors duration-300 line-clamp-2',
-        small: 'text-sm md:text-base font-bold text-gray-900 mb-1 group-hover:text-[#F2AC59] transition-colors duration-300 line-clamp-2',
+        default: 'text-lg md:text-xl font-bold text-[#080031] mb-2 group-hover:text-[#FF0000] transition-colors duration-300 line-clamp-2',
+        large: 'text-xl md:text-2xl font-bold text-[#080031] mb-3 group-hover:text-[#FF0000] transition-colors duration-300 line-clamp-2',
+        small: 'text-sm md:text-base font-bold text-[#080031] mb-1 group-hover:text-[#FF0000] transition-colors duration-300 line-clamp-2',
     };
 
     const excerptClasses = {
-        default: 'text-gray-500 mb-4 text-sm md:text-base line-clamp-3',
-        large: 'text-gray-500 mb-5 text-base md:text-lg line-clamp-4',
-        small: 'text-gray-500 text-xs md:text-sm line-clamp-2',
+        default: 'text-[#080031]/80 mb-4 text-sm md:text-base line-clamp-3',
+        large: 'text-[#080031]/80 mb-5 text-base md:text-lg line-clamp-4',
+        small: 'text-[#080031]/80 text-xs md:text-sm line-clamp-2',
     };
 
     const dateClasses = {
-        default: 'text-xs md:text-sm font-medium text-[#F2AC59] mb-2',
-        large: 'text-sm md:text-base font-medium text-[#F2AC59] mb-2',
-        small: 'text-xs text-[#F2AC59] mb-1',
+        default: 'text-xs md:text-sm font-medium text-[#FF0000] mb-2',
+        large: 'text-sm md:text-base font-medium text-[#FF0000] mb-2',
+        small: 'text-xs text-[#FF0000] mb-1',
     };
 
     const showReadMore = variant !== 'small';
