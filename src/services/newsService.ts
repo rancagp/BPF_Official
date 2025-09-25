@@ -60,19 +60,22 @@ export const fetchLatestNews = async (limit = 3): Promise<NewsItem[]> => {
     
     const data = await response.json();
     
-    // Process each news item to prioritize EWF title and use 4th image
+    // Process each news item to prioritize BPF title and use 5th image when available
     const processedData = data.data.map((item: NewsItem) => {
-      // For images, we want to use the 4th image (index 3) if it exists
+      // For images, prefer the 5th image (index 4) if it exists, then 4th (index 3), else first (index 0)
       let mainImage = null;
-      if (item.images?.length > 3) {
+      if (item.images?.length > 4) {
+        mainImage = item.images[4];
+      } else if (item.images?.length > 3) {
         mainImage = item.images[3];
       } else if (item.images?.length > 0) {
-        mainImage = item.images[0]; // Fallback to first image if no 4th image
+        mainImage = item.images[0];
       }
       
       return {
         ...item,
-        title: item.titles?.ewf || item.title, // Use EWF title if available, fallback to default title
+        // Use BPF title if available, fallback to EWF, then default title
+        title: item.titles?.bpf || item.titles?.ewf || item.title,
         // If we have a main image, use it as the only image
         images: mainImage ? [mainImage] : []
       };
@@ -97,20 +100,23 @@ export const fetchNews = async (page = 1, perPage = 9, sortBy = 'created_at', or
     
     const data = await response.json();
     
-    // Process each news item to prioritize EWF title and use 4th image
+    // Process each news item to prioritize BPF title and use 5th image when available
     if (data.data && Array.isArray(data.data)) {
       data.data = data.data.map((item: NewsItem) => {
-        // For images, we want to use the 4th image (index 3) if it exists
+        // For images, prefer the 5th image (index 4) if it exists, then 4th (index 3), else first (index 0)
         let mainImage = null;
-        if (item.images?.length > 3) {
+        if (item.images?.length > 4) {
+          mainImage = item.images[4];
+        } else if (item.images?.length > 3) {
           mainImage = item.images[3];
         } else if (item.images?.length > 0) {
-          mainImage = item.images[0]; // Fallback to first image if no 4th image
+          mainImage = item.images[0];
         }
         
         return {
           ...item,
-          title: item.titles?.ewf || item.title, // Use EWF title if available, fallback to default title
+          // Use BPF title if available, fallback to EWF, then default title
+          title: item.titles?.bpf || item.titles?.ewf || item.title,
           // If we have a main image, use it as the only image
           images: mainImage ? [mainImage] : []
         };
@@ -147,18 +153,20 @@ export const fetchNewsDetail = async (slug: string): Promise<NewsItem | null> =>
     const result = await response.json();
     
     if (result.data) {
-      // For images, we want to use the 4th image (index 3) if it exists
+      // For images, prefer the 5th image (index 4) if it exists, then 4th (index 3), else first (index 0)
       let mainImage = null;
-      if (result.data.images?.length > 3) {
+      if (result.data.images?.length > 4) {
+        mainImage = result.data.images[4];
+      } else if (result.data.images?.length > 3) {
         mainImage = result.data.images[3];
       } else if (result.data.images?.length > 0) {
-        mainImage = result.data.images[0]; // Fallback to first image if no 4th image
+        mainImage = result.data.images[0];
       }
       
-      // Update the data with EWF title and processed images
+      // Update the data with BPF title (fallback to EWF then default) and processed images
       result.data = {
         ...result.data,
-        title: result.data.titles?.ewf || result.data.title, // Use EWF title if available, fallback to default title
+        title: result.data.titles?.bpf || result.data.titles?.ewf || result.data.title,
         // If we have a main image, use it as the only image
         images: mainImage ? [mainImage] : []
       };

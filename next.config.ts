@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
   },
   // Environment variables
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://ewf-admin.newsmaker.id',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://bpf-admin.newsmaker.id',
   },
   
   // Strict Mode
@@ -48,13 +48,12 @@ const nextConfig: NextConfig = {
   // Image optimization
   images: {
     domains: [
-      'ewf-official.vercel.app',
-      'ewf-admin.newsmaker.id',
+      'bpf-official.vercel.app',
+      'bpf-admin.newsmaker.id',
       'portalnews.test',
       'localhost',
       '127.0.0.1',
       'bpf-backend.test',
-      'ewf-backend.test',
       'kpf-backpanel-production.up.railway.app',
       'kpf-backpanel-production.up.railway.app:443',
       'placehold.co',
@@ -78,7 +77,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'ewf-admin.newsmaker.id',
+        hostname: 'bpf-admin.newsmaker.id',
         port: '',
         pathname: '/storage/banners/**',
       },
