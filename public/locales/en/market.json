@@ -1,9 +1,13 @@
 {
   "title": "Current Market",
+  "marketTitle": "Real-time Market Data",
+  "marketSubtitle": "Get the latest updates on currency pairs, commodities, and indices with real-time pricing and market trends.",
+  "marketUpdate": "Market Update",
   "loading": "Loading data...",
   "error": "An error occurred while loading data",
   "lastUpdated": "Data updated every 5 seconds • Last updated:",
   "errorFetching": "Failed to fetch data",
+  "errorLoading": "Failed to Load Data",
   "invalidDataFormat": "Invalid data format",
   "reload": "Reload"
 }

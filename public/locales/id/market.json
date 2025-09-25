@@ -1,9 +1,13 @@
 {
   "title": "Pasar Saat Ini",
+  "marketTitle": "Data Pasar Real-time",
+  "marketSubtitle": "Dapatkan update terbaru pasangan mata uang, komoditas, dan indeks dengan harga real-time dan tren pasar.",
+  "marketUpdate": "Update Pasar",
   "loading": "Memuat data...",
   "error": "Terjadi kesalahan saat memuat data",
   "lastUpdated": "Data diperbarui setiap 5 detik • Terakhir diperbarui:",
   "errorFetching": "Gagal mengambil data",
+  "errorLoading": "Gagal Memuat Data",
   "invalidDataFormat": "Format data tidak valid",
   "reload": "Muat Ulang"
 }
