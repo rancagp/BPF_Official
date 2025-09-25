@@ -42,7 +42,10 @@ export default function WakilPialangSection({
 
   if (isLoading) {
     return (
-      <div className={`${className} py-16 bg-gradient-to-b from-white to-[#F8F9FF]`}>
+      <div className={`${className} relative py-16`}>
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#080031]/5 to-[#FF0000]/5 rounded-full blur-3xl"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {showHeader && (
             <div className="text-center mb-12">
@@ -69,7 +72,10 @@ export default function WakilPialangSection({
 
   if (error) {
     return (
-      <div className={`${className} py-16 bg-gradient-to-b from-white to-[#F8F9FF]`}>
+      <div className={`${className} relative py-16`}>
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#080031]/5 to-[#FF0000]/5 rounded-full blur-3xl"></div>
+        </div>
         <div className="max-w-md mx-auto text-center p-8 bg-white rounded-xl shadow-sm border border-red-100">
           <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-50 mb-4">
             <svg className="h-8 w-8 text-[#FF0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,14 +96,18 @@ export default function WakilPialangSection({
   }
 
   return (
-    <div className={`${className} py-16 bg-gradient-to-b from-white to-[#F8F9FF] relative overflow-hidden`}>
+    <div className={`${className} relative py-16`}>
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#080031]/5 to-[#FF0000]/5 rounded-full blur-3xl"></div>
+      </div>
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-32 -right-32 w-64 h-64 bg-[#FF0000]/5 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-[#080031]/5 rounded-full blur-3xl"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showHeader && (
           <div className="text-center mb-14">
             <span className="inline-block px-4 py-1.5 text-sm font-medium text-[#080031] bg-[#080031]/5 rounded-full mb-4">
