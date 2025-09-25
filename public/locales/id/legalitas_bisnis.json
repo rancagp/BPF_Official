@@ -1,70 +1,19 @@
 {
   "pageTitle": "Legalitas Bisnis",
-  "pageDescription": "Legalitas dan perizinan resmi PT Equityworld Futures",
-  "aboutTitle": "Tentang Legalitas Kami",
-  "aboutDescription": "Industri berjangka di Indonesia dinaungi oleh lembaga-lembaga resmi milik pemerintah yang berfungsi mengawasi, mengatur dan menjaga stabilitas dan integritas pasar. Lembaga yang dimaksud adalah BAPPEBTI, BURSA BERJANGKA JAKARTA (BBJ) dan LEMBAGA KLIRING BERJANGKA INDONESIA (KBI).",
+  "pageDescription": "Legalitas dan perizinan resmi PT Bestprofit Futures",
   "importantNotice": {
-    "title": "Legalitas PT. Equityworld Futures:",
+    "title": "Legalitas PT Bestprofit Futures:",
     "description": ""
   },
-  "partnersTitle": "Mitra & Lembaga Terkait",
-  "supervisedTitle": "Berizin dan Diawasi",
-  "memberOfTitle": "Anggota dari",
   "legalitasItems": [
-    {
-      "title": "Akta Pendirian Perseroan Terbatas",
-      "description": "Nomor: 01 tanggal 2 Juli 2005 oleh Notaris Tan Susy, SH, PT. Goldmany Futures.",
-      "icon": "📜"
-    },
-    {
-      "title": "Pengesahan Departemen Hukum dan HAM",
-      "description": "Nomor: C-29097 HT.01.010 TH.2005",
-      "icon": "📋"
-    },
-    {
-      "title": "Akta Perubahan Nama",
-      "description": "PT. Goldmany Futures menjadi PT. Equity-world Futures Nomor: 11 tanggal 4 November 2008, oleh Notaris Tan Susy, SH.",
-      "icon": "🏛️"
-    },
-    {
-      "title": "Pengesahan Kementerian Hukum dan HAM",
-      "description": "Nomor: AHU-95798. AH .01.02.TAHUN.2008",
-      "icon": "🔗"
-    },
-    {
-      "title": "Surat Persetujuan Anggota Bursa (SPAB)",
-      "description": "SPAB di Bursa Berjangka Jakarta Nomor: SPAB-143/BBJ/09/05",
-      "icon": "⚖️"
-    },
-    {
-      "title": "Izin Usaha Pialang Berjangka",
-      "description": "Keputusan Kepala BAPPEBTI Nomor: 850/BAPPEBTI/SI/12/2005",
-      "icon": "📄"
-    },
-    {
-      "title": "Keanggotaan Lembaga Kliring Berjangka Indonesia",
-      "description": "Nomor: 36/AK-KBI/IV/2006",
-      "icon": "💼"
-    },
-    {
-      "title": "Perjanjian Kerjasama dengan Pedagang Penyelenggara",
-      "description": "Sistem Perdagangan Alternatif PT. Royal Assetindo, Surat Perjanjian Kerjasama, Nomor: 162/GM/DIR/V/2006",
-      "icon": "🏢"
-    },
-    {
-      "title": "SK BAPPEBTI Peserta SPA",
-      "description": "Nomor: 1524/BAPPEBTI/SP/4/2007 tentang Pemberian Persetujuan sebagai Peserta Sistem Perdagangan Alternatif (SPA) kepada PT. Goldmany Futures",
-      "icon": "📝"
-    },
-    {
-      "title": "SK BAPPEBTI Perubahan Nama",
-      "description": "Nomor: 05/BAPPEBTI/PN/3/2009 tentang Persetujuan Perubahan Nama PT. Goldmany Futures menjadi PT. Equityworld Futures",
-      "icon": "📑"
-    },
-    {
-      "title": "Pialang Berjangka Online",
-      "description": "Penetapan sebagai Pialang Berjangka yang melakukan kegiatan penerimaan Nasabah secara Elektronik On-Line di Bidang Perdagangan Berjangka Komoditi kepada PT. Equityworld Futures Nomor: 26/BAPPEBTI/KEP-PBK/08/2014",
-      "icon": "💻"
-    }
+    "Akta perubahan Perseroan Terbatas dari PT. Millenium Arthapala Futures menjadi PT. Bestprofit Futures, Nomor 1, tanggal 4 Maret 2008, oleh Notaris Iwan Suhardi, S.H. MH.",
+    "Persetujuan BAPPEBTI tentang perubahan nama PT. Millenium Arthapala Futures menjadi PT. Bestprofit Futures, Nomor 32/BAPPEBTI/PNA-PP/5/2008",
+    "Pengesahan Departemen Kehakiman dan HAM : AHU-18830 A.H.01.2.TH.2008",
+    "Surat Persetujuan Anggota Bursa Nomor SPAB - 071/BBJ/05/04",
+    "Izin Usaha Pialang Berjangka dari Bappebti Nomor 499/BAPPEBTI/SI/X/2004",
+    "Keanggotaan PT Kliring Berjangka Indonesia Nomor: 48/AK-KBI/I/2007",
+    "SK BAPPEBTI Nomor 1157/BAPPEBTI/SP/3/2007 tentang Pemberian Persetujuan sebagai peserta Sistem Perdagangan Alternatif kepada PT. Bestprofit Futures",
+    "Perjanjian Kerjasama dengan Pedagang Penyelenggara Sistem Perdagangan Alternatif PT. Royal Assetindo, Surat Perjanjian Kerjasama, Nomor 038/DIR/BPF/V/2008.",
+    "Penetapan sebagai Pialang Berjangka yang Melakukan Kegiatan Penerimaan Nasabah secara Elektronik On-Line di Bidang Perdagangan Berjangka Komoditi kepada PT. Bestprofit Futures Nomor : 18/BAPPEBTI/KEP-PBK/07/2014"
   ]
 }

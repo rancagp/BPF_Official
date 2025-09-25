@@ -1,70 +1,20 @@
 {
   "pageTitle": "Business Legality",
-  "pageDescription": "Official licenses and permits of PT Equityworld Futures",
-  "aboutTitle": "About Our Legality",
-  "aboutDescription": "The futures industry in Indonesia is overseen by official government institutions that function to supervise, regulate, and maintain market stability and integrity. These institutions are BAPPEBTI, JAKARTA FUTURES EXCHANGE (JFX), and INDONESIA CLEARING HOUSE (KBI).",
+  "pageDescription": "Official licenses and permits of PT Bestprofit Futures",
   "importantNotice": {
-    "title": "PT. Equityworld Futures Legality:",
+    "title": "Legality of PT Bestprofit Futures:",
     "description": ""
   },
-  "partnersTitle": "Partners & Related Institutions",
-  "supervisedTitle": "Licensed and Supervised",
-  "memberOfTitle": "Member of",
   "legalitasItems": [
-    {
-      "title": "Deed of Establishment of Limited Liability Company",
-      "description": "Number: 01 dated July 2, 2005 by Notary Tan Susy, SH, PT. Goldmany Futures.",
-      "icon": "📜"
-    },
-    {
-      "title": "Ministry of Law and Human Rights Ratification",
-      "description": "Number: C-29097 HT.01.010 TH.2005",
-      "icon": "📋"
-    },
-    {
-      "title": "Deed of Name Change",
-      "description": "PT. Goldmany Futures to PT. Equity-world Futures Number: 11 dated November 4, 2008, by Notary Tan Susy, SH.",
-      "icon": "🏛️"
-    },
-    {
-      "title": "Ministry of Law and Human Rights Ratification",
-      "description": "Number: AHU-95798. AH .01.02.YEAR.2008",
-      "icon": "🔗"
-    },
-    {
-      "title": "Stock Exchange Member Approval Letter (SPAB)",
-      "description": "SPAB at Jakarta Futures Exchange Number: SPAB-143/BBJ/09/05",
-      "icon": "⚖️"
-    },
-    {
-      "title": "Futures Brokerage Business License",
-      "description": "Decision of the Head of BAPPEBTI Number: 850/BAPPEBTI/SI/12/2005",
-      "icon": "📄"
-    },
-    {
-      "title": "Indonesia Clearing House Membership",
-      "description": "Number: 36/AK-KBI/IV/2006",
-      "icon": "💼"
-    },
-    {
-      "title": "Cooperation Agreement with Organizing Trader",
-      "description": "Alternative Trading System PT. Royal Assetindo, Cooperation Agreement Letter, Number: 162/GM/DIR/V/2006",
-      "icon": "🏢"
-    },
-    {
-      "title": "BAPPEBTI Decree for SPA Participant",
-      "description": "Number: 1524/BAPPEBTI/SP/4/2007 concerning Approval as a Participant of the Alternative Trading System (SPA) for PT. Goldmany Futures",
-      "icon": "📝"
-    },
-    {
-      "title": "BAPPEBTI Decree for Name Change",
-      "description": "Number: 05/BAPPEBTI/PN/3/2009 concerning Approval of Name Change from PT. Goldmany Futures to PT. Equityworld Futures",
-      "icon": "📑"
-    },
-    {
-      "title": "Online Futures Broker",
-      "description": "Designation as a Futures Broker conducting Electronic On-Line Customer Acceptance in the Field of Commodity Futures Trading for PT. Equityworld Futures Number: 26/BAPPEBTI/KEP-PBK/08/2014",
-      "icon": "💻"
-    }
+    "Deed of amendment of Limited Liability Company from PT. Millenium Arthapala Futures to PT. Bestprofit Futures, Number 1, dated March 4, 2008, by Notary Iwan Suhardi, S.H. MH.",
+    "BAPPEBTI approval regarding the name change of PT. Millenium Arthapala Futures to PT. Bestprofit Futures, Number 32/BAPPEBTI/PNA-PP/5/2008",
+    "Approval of the Ministry of Law and Human Rights: AHU-18830 A.H.01.2.TH.2008",
+    "Exchange Membership Approval Letter (SPAB) Number SPAB - 071/BBJ/05/04",
+    "Futures Broker Business License from BAPPEBTI Number 499/BAPPEBTI/SI/X/2004",
+    "Membership of Indonesia Clearing House (KBI) Number: 48/AK-KBI/I/2007",
+    "BAPPEBTI Decree Number 1157/BAPPEBTI/SP/3/2007 regarding the Approval as a Participant of the Alternative Trading System (SPA) for PT. Bestprofit Futures",
+    "Cooperation Agreement with Alternative Trading System Organizer (SPA) PT. Royal Assetindo, Cooperation Agreement Letter, Number 038/DIR/BPF/V/2008.",
+    "Designation as a Futures Broker conducting Electronic Online Customer Onboarding in the Commodity Futures Trading sector for PT. Bestprofit Futures Number: 18/BAPPEBTI/KEP-PBK/07/2014"
   ]
 }
+      
