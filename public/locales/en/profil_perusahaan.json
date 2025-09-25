@@ -1,54 +1,32 @@
 {
   "pageTitle": "Company Profile",
+  "headerTitle": "PT Bestprofit Futures",
+  "description": "PT Bestprofit Futures (\"BPF\") is an officially licensed futures brokerage company registered with the Commodity Futures Trading Regulatory Agency (BAPPEBTI) since 2004. A member of the Jakarta Futures Exchange (JFX) and Indonesia Clearing House (KBI - Persero), PT Bestprofit Futures operates 12 offices across Indonesia, including: Jakarta (2 offices), Bandung, Semarang, Surabaya, Malang, Medan, Banjarmasin, Pontianak, Jambi, Pekanbaru, and Bandar Lampung.",
   "sections": {
-    "about": {
-      "title": "About Us",
-      "description1": "PT Equityworld Futures (\"EWF\") is committed to being the best investment partner in the futures trading sector. With excellent service, EWF continues to expand and now has a network of 7 operational offices in Jakarta (2 Offices), Surabaya (2 Offices), Semarang, Manado, and Cirebon.",
-      "description2": "Established in 2005, PT Equityworld Futures is an official brokerage company member registered with the Commodity Futures Trading Regulatory Agency (BAPPEBTI), Jakarta Futures Exchange (JFX), and Indonesia Clearing House (KBI)."
-    },
-    "vision": {
-      "title": "Vision",
-      "description": "To develop and advance Commodity Futures Trading and provide a positive impact on the Indonesian economy."
-    },
-    "mission": {
-      "title": "Mission",
+    "legal": {
+      "title": "Legal & Membership",
       "items": [
-        "Promote promotional and educational programs about the futures trading industry",
-        "Provide hedging instruments with KYC principles",
-        "Introduce the futures trading industry through higher education and seminars",
-        "Enhance regulatory compliance aspects",
-        "Prepare qualified human resources through training programs"
+        "Registered and supervised by BAPPEBTI since 2004",
+        "Member of Jakarta Futures Exchange (JFX)",
+        "Member of Indonesia Clearing House (KBI - Persero)"
       ]
     },
-    "values": {
-      "title": "Company Values",
-      "items": {
-        "integrity": {
-          "title": "Integrity",
-          "description": "Uphold honesty and professionalism in every service"
-        },
-        "customerSatisfaction": {
-          "title": "Customer Satisfaction",
-          "description": "Provide the best service for customer satisfaction"
-        },
-        "compliance": {
-          "title": "Compliance",
-          "description": "Always comply with applicable laws and regulations"
-        },
-        "innovation": {
-          "title": "Innovation",
-          "description": "Continue to innovate in product and service development"
-        }
-      }
-    },
-    "membership": {
-      "title": "Membership & Affiliation",
-      "logos": {
-        "jfx": "Jakarta Futures Exchange",
-        "kbi": "Indonesia Clearing House",
-        "aspebtindo": "Indonesian Futures and Commodity Exchange Association",
-        "bappebti": "Commodity Futures Trading Regulatory Agency"
-      }
+    "offices": {
+      "title": "Operational Office Network",
+      "cities": [
+        "Jakarta",
+        "Jakarta",
+        "Bandung",
+        "Semarang",
+        "Surabaya",
+        "Malang",
+        "Medan",
+        "Banjarmasin",
+        "Pontianak",
+        "Jambi",
+        "Pekanbaru",
+        "Bandar Lampung"
+      ]
     }
   }
 }

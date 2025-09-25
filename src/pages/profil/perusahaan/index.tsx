@@ -1,4 +1,4 @@
-import { FaBullseye, FaChartLine, FaHandshake, FaUsers, FaShieldAlt, FaGraduationCap } from 'react-icons/fa';
+import { FaBullseye, FaChartLine, FaHandshake, FaUsers, FaShieldAlt, FaGraduationCap, FaMapMarkerAlt } from 'react-icons/fa';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
@@ -79,70 +79,37 @@ export default function ProfilPerusahaan() {
   return (
     <PageTemplate title={t('pageTitle')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-        <ProfilContainer title="PT. KONTAKPERKASA FUTURES">
-          {/* Tentang Kami */}
-          <section className="mb-16">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                {t('sections.about.title')}
-              </h2>
-              <div className="prose max-w-none text-gray-700">
-                <p className="text-lg leading-relaxed">
-                  {t('sections.about.description1')}
-                </p>
-                <p className="mt-4 text-lg leading-relaxed">
-                  {t('sections.about.description2')}
-                </p>
-              </div>
+        <ProfilContainer title={t('headerTitle')}>
+          {/* Deskripsi Perusahaan */}
+          <section className="mb-8">
+            <p className="text-lg leading-relaxed text-[#080031]/90">{t('description')}</p>
+          </section>
+          {/* Highlight Cards */}
+          <section className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {/* Legal & Membership */}
+            <div className="rounded-xl border border-gray-100 bg-white shadow-sm p-6">
+              <h3 className="text-xl font-bold text-[#080031] mb-4">{t('sections.legal.title')}</h3>
+              <ul className="space-y-3 text-[#080031]/90">
+                {(t('sections.legal.items', { returnObjects: true }) as string[]).map((item, idx) => (
+                  <li key={idx} className="flex items-start">
+                    <FaShieldAlt className="mt-1 mr-3 text-[#FF0000]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </section>
 
-          {/* Visi & Misi */}
-          <section className="grid md:grid-cols-2 gap-8 mb-16">
-            {visiMisiItems.map((item, index) => (
-              <div key={index} className={`${item.bgColor} rounded-xl p-6 shadow-md`}>
-                <div className="flex items-center mb-4">
-                  <div className="mr-4">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
-                </div>
-                {item.description && (
-                  <p className="text-gray-700 mt-2">{item.description}</p>
-                )}
-                {Array.isArray(item.items) && item.items.length > 0 && (
-                  <ul className="mt-4 space-y-2">
-                    {(item.items as unknown as string[]).map((misi: string, i: number) => (
-                      <li key={i} className="flex items-start">
-                        <span className="text-green-500 mr-2">•</span>
-                        <span className="text-gray-700">{misi}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+            {/* Office Network */}
+            <div className="rounded-xl border border-gray-100 bg-white shadow-sm p-6">
+              <h3 className="text-xl font-bold text-[#080031] mb-4">{t('sections.offices.title')}</h3>
+              <div className="flex flex-wrap gap-2">
+                {(t('sections.offices.cities', { returnObjects: true }) as string[]).map((city, idx) => (
+                  <span key={`${city}-${idx}`} className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-[#FF0000]/10 text-[#080031] border border-[#FF0000]/20">
+                    <FaMapMarkerAlt className="mr-1.5 text-[#FF0000]" />
+                    {city}
+                  </span>
+                ))}
               </div>
-            ))}
-          </section>
-
-          {/* Nilai-Nilai Perusahaan */}
-          <section className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-              {t('sections.values.title')}
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {nilaiPerusahaan.map((nilai, index) => (
-                <div key={index} className="bg-gray-50 rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                  <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    {nilai.icon}
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                    {nilai.title}
-                  </h4>
-                  <p className="text-gray-600">
-                    {nilai.description}
-                  </p>
-                </div>
-              ))}
             </div>
           </section>
         </ProfilContainer>

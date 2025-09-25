@@ -1,54 +1,32 @@
 {
   "pageTitle": "Profil Perusahaan",
+  "headerTitle": "PT Bestprofit Futures",
+  "description": "PT Bestprofit Futures (\"BPF\") merupakan perusahaan pialang berjangka resmi yang terdaftar di Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI) sejak tahun 2004. Anggota dari PT Bursa Berjangka Jakarta dan PT Kliring Berjangka Indonesia (Persero), PT Bestprofit Futures memiliki 12 kantor operasional di Indonesia, antara lain : Jakarta (2 kantor), Bandung, Semarang, Surabaya, Malang, Medan, Banjarmasin, Pontianak, Jambi, Pekanbaru dan Bandar Lampung.",
   "sections": {
-    "about": {
-      "title": "Tentang Kami",
-      "description1": "PT Equityworld Futures (\"EWF\") berkomitmen menjadi partner investasi terbaik di bidang perdagangan berjangka. Dengan pelayanan yang prima, EWF terus berekspansi dan kini memiliki jaringan 7 kantor operasional di Jakarta (2 Kantor), Surabaya (2 Kantor), Semarang, Manado, dan Cirebon.",
-      "description2": "Berdiri sejak tahun 2005, PT Equityworld Futures merupakan anggota perusahaan pialang resmi yang terdaftar di Badan Pengawas Perdagangan Berjangka Komoditi (BAPPEBTI), PT Bursa Berjangka Jakarta (BBJ) dan PT Kliring Berjangka Indonesia (Persero)."
-    },
-    "vision": {
-      "title": "Visi",
-      "description": "Mengembangkan dan memajukan Perdagangan Berjangka Komoditi serta memberikan dampak positif untuk perekonomian di Indonesia."
-    },
-    "mission": {
-      "title": "Misi",
+    "legal": {
+      "title": "Legal & Keanggotaan",
       "items": [
-        "Menggiatkan program promosi dan edukasi tentang industri PBK",
-        "Menyediakan sarana lindung nilai (hedging) dengan prinsip KYC",
-        "Memperkenalkan industri PBK melalui pendidikan tinggi dan seminar",
-        "Meningkatkan aspek kepatuhan peraturan yang berlaku",
-        "Menyiapkan SDM berkualitas melalui program pelatihan"
+        "Terdaftar dan Diawasi BAPPEBTI sejak 2004",
+        "Anggota PT Bursa Berjangka Jakarta (JFX)",
+        "Anggota PT Kliring Berjangka Indonesia (Persero)"
       ]
     },
-    "values": {
-      "title": "Nilai-Nilai Perusahaan",
-      "items": {
-        "integrity": {
-          "title": "Integritas",
-          "description": "Menjunjung tinggi kejujuran dan profesionalisme dalam setiap layanan"
-        },
-        "customerSatisfaction": {
-          "title": "Kepuasan Nasabah",
-          "description": "Memberikan pelayanan terbaik untuk kepuasan nasabah"
-        },
-        "compliance": {
-          "title": "Kepatuhan",
-          "description": "Selalu patuh terhadap peraturan dan perundang-undangan yang berlaku"
-        },
-        "innovation": {
-          "title": "Inovasi",
-          "description": "Terus berinovasi dalam pengembangan produk dan layanan"
-        }
-      }
-    },
-    "membership": {
-      "title": "Anggota & Afiliasi",
-      "logos": {
-        "jfx": "JFX",
-        "kbi": "KBI",
-        "aspebtindo": "ASPEBTINDO",
-        "bappebti": "BAPPEBTI"
-      }
+    "offices": {
+      "title": "Jaringan Kantor Operasional",
+      "cities": [
+        "Jakarta",
+        "Jakarta",
+        "Bandung",
+        "Semarang",
+        "Surabaya",
+        "Malang",
+        "Medan",
+        "Banjarmasin",
+        "Pontianak",
+        "Jambi",
+        "Pekanbaru",
+        "Bandar Lampung"
+      ]
     }
   }
 }
