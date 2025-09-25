@@ -79,6 +79,16 @@ export default function ProdukContainer() {
                                 {t('title')}
                             </h2>
                             <div className="w-32 h-1.5 bg-gradient-to-r from-[#FF0000] to-[#080031] rounded-full"></div>
+                            {/* Mobile-only View All button */}
+                            <div className="md:hidden pt-2">
+                                <Link
+                                    href="/produk"
+                                    className="inline-flex items-center px-5 py-2.5 bg-[#FF0000] hover:bg-[#E60000] text-white font-medium rounded-lg transition-all duration-300 shadow-md"
+                                >
+                                    {t('viewAllProducts')}
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
                     <div className="hidden md:flex items-center h-full">

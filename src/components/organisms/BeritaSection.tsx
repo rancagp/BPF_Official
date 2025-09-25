@@ -79,6 +79,15 @@ export default function BeritaSection({ className, limit = 6, showHeader = true 
                                     {t('title')}
                                 </h2>
                                 <div className="w-32 h-1.5 bg-gradient-to-r from-[#080031] to-[#FF0000] rounded-full"></div>
+                                {/* Mobile-only View All button */}
+                                <div className="md:hidden pt-2">
+                                    <Link 
+                                        href="/analisis/berita"
+                                        className="inline-flex items-center px-5 py-2.5 bg-[#FF0000] hover:bg-[#CC0000] text-white font-medium rounded-lg transition-all duration-300 shadow-md"
+                                    >
+                                        {t('viewAllNews')}
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <div className="hidden md:flex items-center h-full mt-6">
