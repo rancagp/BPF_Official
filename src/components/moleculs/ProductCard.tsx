@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import { ArrowRight } from 'lucide-react';
 
 interface ProductCardProps {
     product: {
@@ -46,18 +47,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
     return (
         <div 
-            className={`group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border-0 ${className}`}
+            className={`group relative bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#FF0000]/30 ${className}`}
             onClick={handleClick}
             role="button"
             tabIndex={0}
             onKeyDown={handleKeyDown}
         >
             <Link href={`/produk/${product?.category?.toLowerCase() || 'produk'}/${product?.slug || 'produk'}`} className="flex flex-col h-full">
-                {/* Header with gradient overlay */}
-                <div className="relative h-52 overflow-hidden">
+                {/* Product Image with overlay */}
+                <div className="relative h-48 overflow-hidden">
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4 z-10">
-                        <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-[#F2AC59] text-white shadow-md">
+                        <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-[#FF0000] text-white shadow-md">
                             {product.category || 'Produk'}
                         </span>
                     </div>
@@ -68,29 +69,36 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/img/produk/${product.image}`}
                             alt={product.name}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#080031]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        {/* View More Button (shown on hover) */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="inline-flex items-center px-4 py-2 bg-white text-[#FF0000] rounded-full text-sm font-medium shadow-lg">
+                                {t('viewDetails')}
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </span>
+                        </div>
                     </div>
                 </div>
                 
                 {/* Content */}
-                <div className="p-6 flex flex-col flex-1 bg-gradient-to-br from-white to-gray-50">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors duration-300">
+                <div className="p-5 flex flex-col flex-1 bg-white">
+                    <h3 className="text-lg font-bold text-[#080031] mb-2 group-hover:text-[#FF0000] transition-colors duration-300">
                         {product.name}
                     </h3>
                     
                     {product.deskripsi && (
-                        <p className="text-gray-600 text-sm mb-5 line-clamp-2">
+                        <p className="text-[#080031]/80 text-sm mb-4 line-clamp-2">
                             {product.deskripsi}
                         </p>
                     )}
                 </div>
                 
                 {/* Decorative elements */}
-                <div className="absolute top-0 right-0 w-16 h-16 bg-[#F2AC59] opacity-10 -translate-y-1/2 translate-x-1/2 rounded-full group-hover:opacity-20 transition-opacity duration-500"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#F2AC59] opacity-5 -translate-x-1/2 translate-y-1/2 rounded-full group-hover:opacity-10 transition-opacity duration-500"></div>
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[#FF0000] opacity-5 -translate-y-1/2 translate-x-1/2 rounded-full group-hover:opacity-10 transition-opacity duration-300"></div>
             </Link>
         </div>
     );
