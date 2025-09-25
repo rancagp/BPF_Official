@@ -101,11 +101,6 @@ export default function WakilPialangSection({
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#080031]/5 to-[#FF0000]/5 rounded-full blur-3xl"></div>
       </div>
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 -right-32 w-64 h-64 bg-[#FF0000]/5 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-[#080031]/5 rounded-full blur-3xl"></div>
-      </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showHeader && (

@@ -60,7 +60,7 @@ export default function ProdukContainer() {
     }, []);
 
     return (
-        <div className="relative py-16 sm:py-20">
+        <div className="relative py-8 sm:py-8">
             {/* Background elements */}
             <div className="absolute inset-0 -z-10 overflow-hidden">
                 <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#080031]/5 to-[#FF0000]/5 rounded-full blur-3xl"></div>

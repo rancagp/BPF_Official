@@ -52,7 +52,11 @@ function AboutUs() {
     const organizations = t('organizations', { returnObjects: true }) as Organization[];
 
     return (
-        <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+        <section className="relative py-16">
+            {/* Background elements */}
+            <div className="absolute inset-0 -z-10 overflow-hidden">
+                <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80%] h-64 bg-gradient-to-r from-[#080031]/5 to-[#FF0000]/5 rounded-full blur-3xl"></div>
+            </div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">

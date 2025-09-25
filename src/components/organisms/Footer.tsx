@@ -143,17 +143,17 @@ const Footer = () => {
                             </div>
                             <div className="flex items-center group">
                                 <Icons.Phone />
-                                <a href="tel:+622127889280" className="ml-3 text-sm text-[#4C4C4C] hover:text-[#FF0000] transition-colors">
-                                    +62 21 27889280
+                                <a href="tel:+622129035005" className="ml-3 text-sm text-[#4C4C4C] hover:text-[#FF0000] transition-colors">
+                                +62 21 2903 5005
                                 </a>
                             </div>
                             <div className="flex items-center group">
                                 <Icons.Envelope />
                                 <a 
-                                    href="mailto:corporate@equityworld-futures.co.id" 
+                                    href="mailto:corporate@bestprofit-futures.co.id" 
                                     className="ml-3 text-sm text-[#4C4C4C] hover:text-[#FF0000] transition-colors break-all"
                                 >
-                                    corporate@equityworld-futures.co.id
+                                    corporate@bestprofit-futures.co.id
                                 </a>
                             </div>
                         </div>
