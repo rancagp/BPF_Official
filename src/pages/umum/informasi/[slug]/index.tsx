@@ -272,13 +272,14 @@ export default function DetailBerita() {
                         <div 
                             className="prose prose-sm sm:prose-base max-w-none text-gray-700 leading-relaxed"
                             style={{
-                                '--tw-prose-body': '#374151',
-                                '--tw-prose-headings': '#111827',
-                                '--tw-prose-links': '#F2AC59',
-                                '--tw-prose-links-hover': '#e09c4a',
-                                '--tw-prose-underline': 'rgba(5, 150, 105, 0.3)',
-                                '--tw-prose-underline-hover': '#047857',
+                                '--tw-prose-body': '#000000',
+                                '--tw-prose-headings': '#080031',
+                                '--tw-prose-links': '#FF0000',
+                                '--tw-prose-links-hover': '#E60000',
+                                '--tw-prose-underline': 'rgba(255, 0, 0, 0.3)',
+                                '--tw-prose-underline-hover': '#CC0000',
                                 lineHeight: '1.75',
+                                color: '#000000',
                             } as React.CSSProperties}
                             dangerouslySetInnerHTML={{ 
                                 __html: (berita.isi || '')
@@ -289,8 +290,8 @@ export default function DetailBerita() {
                                         // Tambahkan class untuk spasi yang lebih besar
                                         return `<p class="mb-4 sm:mb-6"${p1 || ''}>`;
                                     })
-                                    .replace(/<h2/g, '<h2 class="text-xl sm:text-2xl font-bold mt-10 sm:mt-12 mb-4 sm:mb-6 text-gray-900"')
-                                    .replace(/<h3/g, '<h3 class="text-lg sm:text-xl font-semibold mt-8 sm:mt-10 mb-3 sm:mb-4 text-gray-900"')
+                                    .replace(/<h2/g, '<h2 class="text-xl sm:text-2xl font-bold mt-10 sm:mt-12 mb-4 sm:mb-6 text-[#080031]"')
+                                    .replace(/<h3/g, '<h3 class="text-lg sm:text-xl font-semibold mt-8 sm:mt-10 mb-3 sm:mb-4 text-[#080031]"')
                                     .replace(/<ul/g, '<ul class="list-disc pl-5 sm:pl-6 space-y-2 my-4 sm:my-6"')
                                     .replace(/<ol/g, '<ol class="list-decimal pl-5 sm:pl-6 space-y-2 my-4 sm:my-6"')
                                     .replace(/<li>/g, '<li class="pl-1">')
