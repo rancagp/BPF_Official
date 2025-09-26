@@ -6,6 +6,7 @@
   },
   "pivot": {
     "title": "Pivot Point Calculator",
+    "subtitle": "Calculate support and resistance levels with various pivot point methods",
     "high": "High",
     "low": "Low",
     "close": "Close",

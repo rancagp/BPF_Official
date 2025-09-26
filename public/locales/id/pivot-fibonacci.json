@@ -6,6 +6,7 @@
   },
   "pivot": {
     "title": "Kalkulator Pivot Point",
+    "subtitle": "Hitung level support dan resistance dengan berbagai metode pivot point",
     "high": "Tertinggi",
     "low": "Terendah",
     "close": "Tutup",

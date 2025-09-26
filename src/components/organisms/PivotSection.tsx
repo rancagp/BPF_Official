@@ -103,11 +103,11 @@ export default function PivotSection() {
     return (
         <div className="space-y-6 bg-white rounded-xl shadow-lg p-6">
             <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-[#4C4C4C]">{t('pivot.title', 'Kalkulator Pivot Point')}</h2>
-                <p className="mt-2 text-lg text-[#4C4C4C]">
+                <h2 className="text-3xl font-bold text-[#080031]">{t('pivot.title', 'Kalkulator Pivot Point')}</h2>
+                <p className="mt-2 text-lg text-gray-700">
                     {t('pivot.subtitle', 'Hitung level support dan resistance dengan berbagai metode pivot point')}
                 </p>
-                <div className="w-24 h-1 bg-[#F2AC59] mx-auto mt-4 rounded-full"></div>
+                <div className="w-24 h-1 bg-[#FF0000] mx-auto mt-4 rounded-full"></div>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -122,7 +122,7 @@ export default function PivotSection() {
                                 name={field}
                                 value={inputs[field]}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-2 border border-[#9B9FA7] rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59] transition-all duration-200"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#FF0000] focus:border-[#FF0000] transition-all duration-200"
                                 placeholder={t(`pivot.${field}`)}
                             />
                             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -136,7 +136,7 @@ export default function PivotSection() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
                 <button
                     onClick={calculatePivots}
-                    className="px-6 py-3 bg-[#F2AC59] text-white font-medium rounded-lg hover:bg-[#E09B4A] focus:outline-none focus:ring-2 focus:ring-[#F2AC59] focus:ring-offset-2 shadow-md hover:shadow-lg flex items-center justify-center"
+                    className="px-6 py-3 bg-[#FF0000] text-white font-medium rounded-lg hover:bg-[#E60000] focus:outline-none focus:ring-2 focus:ring-[#FF0000] focus:ring-offset-2 shadow-md hover:shadow-lg flex items-center justify-center transition-colors"
                 >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -148,7 +148,7 @@ export default function PivotSection() {
                         setInputs({ high: "", low: "", close: "", open: "" });
                         setResults(null);
                     }}
-                    className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+                    className="px-6 py-3 bg-white border-2 border-[#080031] text-[#080031] font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#080031] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center hover:bg-gray-100"
                 >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -160,23 +160,23 @@ export default function PivotSection() {
             {results && (
                 <div className="mt-10">
                     <div className="text-center mb-6">
-                        <h3 className="text-xl font-semibold text-[#4C4C4C] mb-4">{t('pivot.results.title', 'Hasil Perhitungan')}</h3>
-                        <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-green-400 mx-auto mt-2 rounded-full"></div>
+                        <h3 className="text-xl font-semibold text-[#080031] mb-4">{t('pivot.results.title', 'Hasil Perhitungan')}</h3>
+                        <div className="w-16 h-1 bg-[#FF0000] mx-auto mt-2 rounded-full"></div>
                     </div>
                     <div className="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow duration-300 h-full">
                         <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
+                            <thead className="bg-[#080031] text-white">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-[#4C4C4C] uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                         {t('pivot.level', 'Level')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-[#4C4C4C] uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                         {t('pivot.classic', 'Klasik')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-[#4C4C4C] uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                         {t('pivot.woodie', 'Woodie')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-[#4C4C4C] uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                         {t('pivot.camarilla', 'Camarilla')}
                                     </th>
                                 </tr>
@@ -195,19 +195,19 @@ export default function PivotSection() {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                         <div className="flex items-center">
                                             <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
-                                                row.level.startsWith('R') ? 'bg-red-500' : 
-                                                row.level === 'PP' ? 'bg-blue-500' : 'bg-green-500'
+                                                row.level.startsWith('R') ? 'bg-[#FF0000]' : 
+                                                row.level === 'PP' ? 'bg-[#080031]' : 'bg-green-600'
                                             }`}></span>
                                             {row.label}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                         {formatNumber(row.classic)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                         {formatNumber(row.woodie)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                         {formatNumber(row.camarilla)}
                                     </td>
                                 </tr>
