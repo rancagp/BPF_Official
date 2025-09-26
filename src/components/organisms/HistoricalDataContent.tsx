@@ -232,7 +232,7 @@ export default function HistoricalDataContent() {
                             id="instrument"
                             value={selectedInstrument}
                             onChange={(e) => setSelectedInstrument(e.target.value)}
-                            className="w-full text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59]"
+                            className="w-full text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#FF0000] focus:border-[#FF0000]"
                         >
                             {instruments.map((instrument: string) => (
                                 <option key={instrument} value={instrument}>
@@ -249,7 +249,7 @@ export default function HistoricalDataContent() {
                             id="from"
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
-                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59] w-full md:w-36"
+                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#FF0000] focus:border-[#FF0000] w-full md:w-36"
                         />
                         <span className="text-gray-500">{t('filters.to')}</span>
                         <input
@@ -257,7 +257,7 @@ export default function HistoricalDataContent() {
                             id="to"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
-                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2AC59] focus:border-[#F2AC59] w-full md:w-36"
+                            className="text-xs md:text-sm px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#FF0000] focus:border-[#FF0000] w-full md:w-36"
                         />
                     </div>
 
@@ -266,7 +266,7 @@ export default function HistoricalDataContent() {
                         <button
                             onClick={applyFilters}
                             disabled={isLoading}
-                            className="flex-1 md:flex-none px-3 py-1.5 bg-[#F2AC59] text-white rounded-md hover:bg-[#E09B4A] transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5"
+                            className="flex-1 md:flex-none px-3 py-1.5 bg-[#FF0000] text-white rounded-md hover:bg-[#E60000] transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5"
                         >
                             <FiFilter className="w-3.5 h-3.5" />
                             <span className="truncate">{t('filters.apply')}</span>
@@ -274,7 +274,7 @@ export default function HistoricalDataContent() {
                         <button
                             onClick={resetFilters}
                             disabled={isLoading || (!fromDate && !toDate && !selectedInstrument)}
-                            className="flex-1 md:flex-none px-3 py-1.5 bg-[#F2AC59] text-white rounded-md hover:bg-[#E09B4A] transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="flex-1 md:flex-none px-3 py-1.5 bg-[#FF0000] text-white rounded-md hover:bg-[#E60000] transition-colors text-xs md:text-sm whitespace-nowrap flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span className="truncate">{t('filters.reset')}</span>
                         </button>
@@ -286,7 +286,7 @@ export default function HistoricalDataContent() {
                     <button
                         onClick={() => handleDownload(true)}
                         disabled={isLoading || filteredData.length === 0}
-                        className="px-3 py-1.5 bg-[#F2AC59] text-white rounded-md hover:bg-[#E09B4A] transition-colors text-xs md:text-sm whitespace-nowrap w-full md:w-auto flex items-center gap-1.5 justify-center"
+                        className="px-3 py-1.5 bg-[#FF0000] text-white rounded-md hover:bg-[#E60000] transition-colors text-xs md:text-sm whitespace-nowrap w-full md:w-auto flex items-center gap-1.5 justify-center"
                     >
                         <FiDownload className="w-3.5 h-3.5" />
                         {t('actions.downloadAll')}
@@ -304,14 +304,14 @@ export default function HistoricalDataContent() {
             {/* Loading State */}
             {isLoading ? (
                 <div className="flex justify-center items-center p-8">
-                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#F2AC59]"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#FF0000]"></div>
                 </div>
             ) : (
                 /* Data Table */
-                <div className="bg-white rounded-lg shadow-sm border border-[#E5E7EB] overflow-hidden">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-[#E5E7EB]">
-                            <thead className="bg-[#4C4C4C]">
+                            <thead className="bg-[#080031]">
                                 <tr>
                                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                         Tanggal
@@ -332,20 +332,20 @@ export default function HistoricalDataContent() {
                             </thead>
                             <tbody className="bg-white divide-y divide-[#E5E7EB]">
                                 {currentItems.map((item, index) => (
-                                    <tr key={item.id} className={index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB] hover:bg-[#FFF9F5]'}>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                    <tr key={item.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50 hover:bg-gray-100'}>
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
                                             {formatDate(item.tanggal)}
                                         </td>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
                                             {item.open}
                                         </td>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
                                             {item.high}
                                         </td>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
                                             {item.low}
                                         </td>
-                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-[#4C4C4C]">
+                                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
                                             {item.close}
                                         </td>
                                     </tr>
@@ -363,7 +363,7 @@ export default function HistoricalDataContent() {
                                     <button
                                         onClick={() => paginate(currentPage - 1)}
                                         disabled={currentPage === 1}
-                                        className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'text-[#9B9FA7] cursor-not-allowed' : 'text-[#4C4C4C] hover:bg-[#F5F5F5]'}`}
+                                        className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-[#080031] hover:bg-gray-100'}`}
                                     >
                                         &larr; Sebelumnya
                                     </button>
@@ -375,7 +375,7 @@ export default function HistoricalDataContent() {
                                     <button
                                         onClick={() => paginate(currentPage + 1)}
                                         disabled={currentPage === totalPages}
-                                        className={`px-3 py-1 rounded-md ${currentPage === totalPages ? 'text-[#9B9FA7] cursor-not-allowed' : 'text-[#4C4C4C] hover:bg-[#F5F5F5]'}`}
+                                        className={`px-3 py-1 rounded-md ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-[#080031] hover:bg-gray-100'}`}
                                     >
                                         Selanjutnya &rarr;
                                     </button>
@@ -401,7 +401,7 @@ export default function HistoricalDataContent() {
                                         <button
                                             onClick={() => paginate(currentPage - 1)}
                                             disabled={currentPage === 1}
-                                            className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-[#4C4C4C] bg-white border border-[#9B9FA7] rounded-l-md hover:bg-[#F5F5F5] disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-[#080031] bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             <span className="sr-only">Sebelumnya</span>
                                             &larr;
@@ -425,8 +425,8 @@ export default function HistoricalDataContent() {
                                                     onClick={() => paginate(pageNum)}
                                                     className={`relative inline-flex items-center px-4 py-2 text-sm font-medium ${
                                                         currentPage === pageNum
-                                                            ? 'z-10 bg-[#F2AC59] border-[#F2AC59] text-white'
-                                                            : 'bg-white border-[#9B9FA7] text-[#4C4C4C] hover:bg-[#F5F5F5]'
+                                                            ? 'z-10 bg-[#FF0000] border-[#FF0000] text-white'
+                                                            : 'bg-white border-gray-300 text-[#080031] hover:bg-gray-50'
                                                     } border`}
                                                 >
                                                     {pageNum}
@@ -437,7 +437,7 @@ export default function HistoricalDataContent() {
                                         <button
                                             onClick={() => paginate(currentPage + 1)}
                                             disabled={currentPage === totalPages}
-                                            className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-[#4C4C4C] bg-white border border-[#9B9FA7] rounded-r-md hover:bg-[#F5F5F5] disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-[#080031] bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             <span className="sr-only">Selanjutnya</span>
                                             &rarr;
