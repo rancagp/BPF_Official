@@ -45,7 +45,7 @@ const MekanismePerdaganganPage = () => {
                             <h2 className="text-2xl font-bold text-center text-[#000000] mb-2">
                                 {t('comparison.title')}
                             </h2>
-                            <div className="w-20 h-1 bg-[#FF0000] mx-auto mb-10"></div>
+                            <div className="w-20 h-1 bg-[#FF0000] mx-auto mb-8"></div>
                             <div className="overflow-x-auto">
                                 <table className="w-full border-collapse">
                                     <thead>

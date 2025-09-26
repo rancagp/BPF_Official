@@ -76,7 +76,7 @@ const SymbolIndeksPage = () => {
     return (
       <PageTemplate title="Loading...">
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#F2AC59]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF0000]"></div>
         </div>
       </PageTemplate>
     );
@@ -88,17 +88,20 @@ const SymbolIndeksPage = () => {
     <PageTemplate title={t('pageTitle')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={t('title')}>
-          <div className="space-y-10 text-[#4C4C4D]">
+          <div className="space-y-10 text-[#000000]">
             {/* Symbol Index Section */}
             <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm">
-              <h2 className="text-xl font-semibold text-[#4C4C4D] mb-4">
-                {t('symbolIndexTitle')}
-              </h2>
+              <div className="flex items-center mb-4">
+                <h2 className="text-xl font-semibold text-[#000000] mr-2">
+                  {t('symbolIndexTitle')}
+                </h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <div className="space-y-3">
                 {Array.isArray(symbolIndexData) && symbolIndexData.map((item: SymbolIndexItem) => (
                   <div key={item.symbol} className="flex items-start">
-                    <span className="font-semibold text-[#F2AC59] w-24 flex-shrink-0">{item.symbol}</span>
-                    <span className="text-[#4C4C4D]">{item.description}</span>
+                    <span className="font-semibold text-[#080031] w-24 flex-shrink-0">{item.symbol}</span>
+                    <span className="text-[#000000]">{item.description}</span>
                   </div>
                 ))}
               </div>
@@ -106,32 +109,35 @@ const SymbolIndeksPage = () => {
 
             {/* Contract Month Symbol Section */}
             <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm">
-              <h2 className="text-xl font-semibold text-[#4C4C4D] mb-6">
-                {t('contractMonthSymbol')}
-              </h2>
+              <div className="flex items-center mb-6">
+                <h2 className="text-xl font-semibold text-[#000000] mr-2">
+                  {t('contractMonthSymbol')}
+                </h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-[#F9FAFA] p-4 rounded-lg">
-                  <h3 className="text-lg font-semibold text-[#4C4C4D] mb-4 pb-2 border-b border-[#E5E7EB]">
+                <div className="bg-white p-4 rounded-lg border border-[#E5E7EB] hover:border-[#FF0000] transition-colors duration-300">
+                  <h3 className="text-lg font-semibold text-[#000000] mb-4 pb-2 border-b-2 border-[#FF0000]">
                     {futures.hangSeng}
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
                     {Array.isArray(hangSengMonths) && hangSengMonths.map((item: MonthItem) => (
                       <div key={item.code} className="flex items-center">
-                        <span className="font-medium text-[#F2AC59] w-12">{item.code}</span>
-                        <span className="text-[#4C4C4D]">{item.month}</span>
+                        <span className="font-medium text-[#080031] w-12">{item.code}</span>
+                        <span className="text-[#000000]">{item.month}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="bg-[#F9FAFA] p-4 rounded-lg">
-                  <h3 className="text-lg font-semibold text-[#4C4C4D] mb-4 pb-2 border-b border-[#E5E7EB]">
+                <div className="bg-white p-4 rounded-lg border border-[#E5E7EB] hover:border-[#FF0000] transition-colors duration-300">
+                  <h3 className="text-lg font-semibold text-[#000000] mb-4 pb-2 border-b-2 border-[#FF0000]">
                     {futures.nikkei225}
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
                     {Array.isArray(nikkeiMonths) && nikkeiMonths.map((item: MonthItem) => (
                       <div key={item.code} className="flex items-center">
-                        <span className="font-medium text-[#F2AC59] w-12">{item.code}</span>
-                        <span className="text-[#4C4C4D]">{item.month}</span>
+                        <span className="font-medium text-[#080031] w-12">{item.code}</span>
+                        <span className="text-[#000000]">{item.month}</span>
                       </div>
                     ))}
                   </div>
