@@ -1,0 +1,97 @@
+{
+  "title": "Ilustrasi Transaksi",
+  "formula": {
+    "subtitle": "Keterangan",
+    "rollOverTitle": "Roll over fee / storage (biaya inap)",
+    "title": "Rumus Perhitungan Transaksi",
+    "formula": "[ ( Harga Jual – Harga Beli ) x Contract Size x n Lot ] – [ ( Biaya Komisi + PPN ) x n Lot ]",
+    "items": [
+      "Contract Size (nilai kontrak): sebesar US $ 5 per poin untuk kontrak gulir berkala indeks saham dan 100 troy ounce untuk kontrak gulir harian emas Loco London.",
+      "n Lot: n adalah banyaknya lot yang ditransaksikan.",
+      "Biaya Komisi: sebesar US $ 15 per lot per sisi (beli atau jual).",
+      "Total biaya komisi sebesar US $ 30 untuk 1 lot settlement.",
+      "PPN (Pajak Pertambahan Nilai): sebesar 11% dari biaya komisi yaitu US $ 1.65 / lot/side.",
+      "Total biaya PPN sebesar US $ 3.3 untuk 1 lot settlement.",
+      "Apabila penyelesaian transaksi dilakukan lebih dari satu hari (overnight) maka setiap lot transaksi akan dikenakan biaya inap / roll over."
+    ],
+    "rollOverFees": [
+      "HKK5U dan HKK50 sebesar US $ 3 / malam.",
+      "JPK5U dan JPK50 sebesar US $ 2 / malam.",
+      "XULF dan XUL10 sebesar US $ 5 / malam"
+    ]
+  },
+  "examples": [
+    {
+      "title": "Contoh 1 (Keuntungan Day Trade)",
+      "description": "Seorang nasabah mengambil posisi beli HKK5U pada level 24.600 poin sebanyak 2 lot. Kemudian investor menutup/melikuidasi posisi beli 2 lot tersebut ketika indeks berada pada level 24.700 poin.",
+      "calculation": [
+        "P/L = [ ( Harga Jual – Harga Beli ) x Contract Size x n Lot ] – [ ( Biaya Komisi + PPN ) x n Lot ]",
+        "P/L = [ ( 24.700 – 24.600 ) x US $ 5 x 2 lot ] – [ ( US $ 30 + US $ 3.3 ) x 2 lot ]",
+        "P/L = ( 100 poin x US $ 5 x 2 lot ) – ( US $ 33.3 x 2 )",
+        "P/L = US $ 1000 – US $ 66.6"
+      ],
+      "result": "P/L = US $ 933.4 (laba bersih)",
+      "note": "Perhatikan gambar berikut untuk ilustrasi"
+    },
+    {
+      "title": "Contoh 2 (Kerugian Day Trade)",
+      "description": "Seorang Investor memprediksi Indeks Hong Kong akan mengalami penguatan, kemudian membuka posisi beli HKK5U pada level 24.600 poin sebanyak 1 lot. Akan tetapi pergerakan indeks tidak sesuai prediksi, maka investor menutup posisi beli 1 lot tersebut dalam keadaan rugi (loss) ketika indeks berada pada level 24.550 poin.",
+      "calculation": [
+        "P/L = [ ( 24.550 – 24.600 ) x US $ 5 x 1 lot ] – [ ( US $ 30 + US $ 3.3 ) x 1 lot ]",
+        "P/L = ( – 50 poin x US $ 5 x 1 lot ) – ( US $ 33.3 x 1 lot )",
+        "P/L = – US $ 250 – US $ 33.3"
+      ],
+      "result": "P/L = – US $ 283.3 (rugi bersih)"
+    },
+    {
+      "title": "Contoh 3 (Transaksi Emas Loco London)",
+      "description": "Seorang investor membeli emas Loco London pada harga US $24,175/troy ounce sebanyak 1 lot (100 troy ounce). Jika dijual pada harga US $24,200/troy ounce:",
+      "calculation": [
+        "P/L = [ ( 24,200 – 24,175 ) x 100 x 1 lot ] – [ ( US $ 30 + US $ 3.3 ) x 1 lot ]",
+        "P/L = ( 25 x 100 x 1 ) – 33.3",
+        "P/L = US$ 2,500 – US$ 33.3"
+      ],
+      "result": "P/L = US$ 2,466.7 (laba bersih)",
+      "alternative": {
+        "description": "Apabila dilikuidasi pada harga $24,155:",
+        "calculation": [
+          "P/L = [ ( 24,155 – 24,175 ) x 100 x 1 lot ] – [ ( US $30 + US $3.3 ) x 1 lot ]",
+          "P/L = ( -20 x 100 x 1 ) – 33.3",
+          "P/L = -US$ 2,000 – US$ 33.3 = -US$ 2,033.3 (rugi bersih)"
+        ]
+      }
+    }
+  ],
+  "contractCodes": [
+    {
+      "code": "GU1010_BBJ",
+      "base": "GBP/USD",
+      "rateCategory": "LANGSUNG",
+      "contractType": "Kontrak Gulir Harian Harga Spot Great Britain Pound Sterling (GBP) terhadap US Dollar (USD)"
+    },
+    {
+      "code": "EU1010_BBJ",
+      "base": "EUR/USD",
+      "rateCategory": "LANGSUNG",
+      "contractType": "Kontrak Gulir Harian Harga Spot Euro (EUR) terhadap US Dollar (USD)"
+    },
+    {
+      "code": "AU1010_BBJ",
+      "base": "AUD/USD",
+      "rateCategory": "LANGSUNG",
+      "contractType": "Kontrak Gulir Harian Harga Spot Australian Dollar (AUD) terhadap US Dollar (USD)"
+    },
+    {
+      "code": "UC1010_BBJ",
+      "base": "USD/CHF",
+      "rateCategory": "TIDAK LANGSUNG",
+      "contractType": "Kontrak Gulir Harian Harga Spot US Dollar (USD) terhadap Swiss Franc (CHF)"
+    },
+    {
+      "code": "UJ1010_BBJ",
+      "base": "USD/JPY",
+      "rateCategory": "TIDAK LANGSUNG",
+      "contractType": "Kontrak Gulir Harian Harga Spot US Dollar (USD) terhadap Japanese Yen (JPY)"
+    }
+  ]
+}
