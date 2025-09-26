@@ -141,11 +141,11 @@ export default function EconomicCalendar() {
     const getImpactColor = (level: string) => {
       switch (level.toLowerCase()) {
         case 'high':
-          return 'text-red-500';
+          return 'text-[#FF0000]';
         case 'medium':
-          return 'text-yellow-500';
+          return 'text-[#FFA500]';
         case 'low':
-          return 'text-green-500';
+          return 'text-[#008000]';
         default:
           return 'text-gray-300';
       }
@@ -173,15 +173,15 @@ export default function EconomicCalendar() {
         <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
           <ProfilContainer title={t('title')}>
             <div className="space-y-5">
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+              <div className="bg-[#FFF5F5] border-l-4 border-[#FF0000] p-4 rounded">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    <svg className="h-5 w-5 text-[#FF0000]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h2a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-yellow-700">
+                    <p className="text-sm text-[#080031]">
                       {t('noDataMessage')}
                     </p>
                   </div>
@@ -190,65 +190,67 @@ export default function EconomicCalendar() {
               
               {/* Tampilkan semua data */}
               <div className="overflow-hidden rounded-lg border border-[#E5E7EB] shadow-sm">
-                <table className="min-w-full divide-y divide-[#E5E7EB]">
-                  <thead className="bg-[#4C4C4C]">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.date')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.time')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.country')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.impact')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.figures')}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-[#E5E7EB]">
-                    {events.map((event) => (
-                      <tr key={event.id} className="hover:bg-[#FFF9F0] transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C] font-medium">
-                          {formatDate(event.date)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
-                          {event.time}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="px-2 py-1 text-xs rounded-full bg-[#F5F5F5] text-[#4C4C4C]">
-                            {event.country}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          {formatImpact(event.impact)}
-                        </td>
-                        <td className="px-6 py-4 text-sm">
-                          <div className="font-medium text-[#4C4C4C]">{event.figures}</div>
-                          {event.actual && (
-                            <div className="text-xs text-[#9B9FA7] mt-1">
-                              <span className="font-medium">{t('table.actual')}:</span> {event.actual}
-                            </div>
-                          )}
-                          {event.forecast && (
-                            <div className="text-xs text-[#9B9FA7]">
-                              <span className="font-medium">{t('table.forecast')}:</span> {event.forecast}
-                            </div>
-                          )}
-                          {event.previous && (
-                            <div className="text-xs text-[#9B9FA7]">
-                              <span className="font-medium">{t('table.previous')}:</span> {event.previous}
-                            </div>
-                          )}
-                        </td>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-[#080031]">
+                      <tr>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.date')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.time')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.country')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.impact')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.figures')}
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {events.map((event) => (
+                        <tr key={event.id} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {formatDate(event.date)}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {event.time}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
+                              {event.country}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            {formatImpact(event.impact)}
+                          </td>
+                          <td className="px-6 py-4 text-sm">
+                            <div className="font-medium text-gray-900">{event.figures}</div>
+                            {event.actual && (
+                              <div className="text-xs text-gray-500 mt-1">
+                                <span className="font-medium">{t('table.actual')}:</span> {event.actual}
+                              </div>
+                            )}
+                            {event.forecast && (
+                              <div className="text-xs text-gray-500">
+                                <span className="font-medium">{t('table.forecast')}:</span> {event.forecast}
+                              </div>
+                            )}
+                            {event.previous && (
+                              <div className="text-xs text-gray-500">
+                                <span className="font-medium">{t('table.previous')}:</span> {event.previous}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </ProfilContainer>
@@ -270,8 +272,8 @@ export default function EconomicCalendar() {
                   onClick={() => handleFilterClick(filter.key)}
                   className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeFilter === filter.key
-                      ? 'bg-[#F2AC59] text-white shadow-md'
-                      : 'bg-[#F5F5F5] text-[#4C4C4C] hover:bg-[#E5E7EB]'
+                      ? 'bg-[#FF0000] text-white shadow-md hover:bg-[#E60000]'
+                      : 'bg-white text-[#080031] border border-[#080031] hover:bg-gray-50'
                   }`}
                 >
                   {filter.value}
@@ -281,82 +283,84 @@ export default function EconomicCalendar() {
 
             {loading ? (
               <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#F2AC59]"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF0000]"></div>
               </div>
             ) : error ? (
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+              <div className="bg-red-50 border-l-4 border-[#FF0000] p-4 rounded">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="h-5 w-5 text-[#FF0000]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-red-700">{error}</p>
+                    <p className="text-sm text-[#080031]">{error}</p>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="overflow-hidden rounded-lg border border-[#E5E7EB] shadow-sm">
-                <table className="min-w-full divide-y divide-[#E5E7EB]">
-                  <thead className="bg-[#4C4C4C]">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.date')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.time')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.country')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.impact')}
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                        {t('table.figures')}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-[#E5E7EB]">
-                    {filteredEvents.map((event) => (
-                      <tr key={event.id} className="hover:bg-[#FFF9F0] transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C] font-medium">
-                          {formatDate(event.date)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4C4C4C]">
-                          {event.time}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="px-2 py-1 text-xs rounded-full bg-[#F5F5F5] text-[#4C4C4C]">
-                            {event.country}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          {formatImpact(event.impact)}
-                        </td>
-                        <td className="px-6 py-4 text-sm">
-                          <div className="font-medium text-[#4C4C4C]">{event.figures}</div>
-                          {event.actual && (
-                            <div className="text-xs text-[#9B9FA7] mt-1">
-                              <span className="font-medium">{t('table.actual')}:</span> {event.actual}
-                            </div>
-                          )}
-                          {event.forecast && (
-                            <div className="text-xs text-[#9B9FA7]">
-                              <span className="font-medium">{t('table.forecast')}:</span> {event.forecast}
-                            </div>
-                          )}
-                          {event.previous && (
-                            <div className="text-xs text-[#9B9FA7]">
-                              <span className="font-medium">{t('table.previous')}:</span> {event.previous}
-                            </div>
-                          )}
-                        </td>
+              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-[#080031]">
+                      <tr>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.date')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.time')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.country')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.impact')}
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                          {t('table.figures')}
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {filteredEvents.map((event) => (
+                        <tr key={event.id} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {formatDate(event.date)}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            {event.time}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
+                              {event.country}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            {formatImpact(event.impact)}
+                          </td>
+                          <td className="px-6 py-4 text-sm">
+                            <div className="font-medium text-gray-900">{event.figures}</div>
+                            {event.actual && (
+                              <div className="text-xs text-gray-500 mt-1">
+                                <span className="font-medium">{t('table.actual')}:</span> {event.actual}
+                              </div>
+                            )}
+                            {event.forecast && (
+                              <div className="text-xs text-gray-500">
+                                <span className="font-medium">{t('table.forecast')}:</span> {event.forecast}
+                              </div>
+                            )}
+                            {event.previous && (
+                              <div className="text-xs text-gray-500">
+                                <span className="font-medium">{t('table.previous')}:</span> {event.previous}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
