@@ -1,84 +1,14 @@
 {
-  "pageTitle": "Sertifikat",
-  "sections": [
-    {
-      "title": "Legalitas Pusat Jakarta",
-      "certificates": [
-        {
-          "image": "/assets/legal-jakarta1.jpg",
-          "description": "Sertifikat Legalitas Pusat Jakarta 1"
-        },
-        {
-          "image": "/assets/legal-jakarta2.jpg",
-          "description": "Sertifikat Legalitas Pusat Jakarta 2"
-        },
-        {
-          "image": "/assets/legal-jakarta3.jpg",
-          "description": "Sertifikat Legalitas Pusat Jakarta 3"
-        },
-        {
-          "image": "/assets/legal-jakarta4.jpg",
-          "description": "Sertifikat Legalitas Pusat Jakarta 4"
-        }
-      ]
-    },
-    {
-      "title": "Legalitas Cabang Surabaya - Trillium",
-      "certificates": [
-        {
-          "image": "/assets/legal-surabaya.jpg",
-          "description": "Sertifikat Legalitas Cabang Surabaya - Trillium"
-        }
-      ]
-    },
-    {
-      "title": "Legalitas Cabang Manado",
-      "certificates": [
-        {
-          "image": "/assets/legal-manado.jpg",
-          "description": "Sertifikat Legalitas Cabang Manado"
-        }
-      ]
-    },
-    {
-      "title": "Legalitas Cabang Jakarta",
-      "certificates": [
-        {
-          "image": "/assets/legal-cabjakarta1.jpg",
-          "description": "Sertifikat Legalitas Cabang Jakarta 1"
-        },
-        {
-          "image": "/assets/legal-cabjakarta2.jpg",
-          "description": "Sertifikat Legalitas Cabang Jakarta 2"
-        }
-      ]
-    },
-    {
-      "title": "Legalitas Cabang Semarang",
-      "certificates": [
-        {
-          "image": "/assets/legal-semarang.jpg",
-          "description": "Sertifikat Legalitas Cabang Semarang"
-        }
-      ]
-    },
-    {
-      "title": "Legalitas Cabang Cirebon",
-      "certificates": [
-        {
-          "image": "/assets/legal-cirebon.jpg",
-          "description": "Sertifikat Legalitas Cabang Cirebon"
-        }
-      ]
-    },
-    {
-      "title": "Legalitas Surabaya - Praxis",
-      "certificates": [
-        {
-          "image": "/assets/legal-surabayaprakis.jpg",
-          "description": "Sertifikat Legalitas Surabaya - Praxis"
-        }
-      ]
-    }
+  "certificates": [
+    {"image": "/assets/legal1.jpg"},
+    {"image": "/assets/legal2.jpg"},
+    {"image": "/assets/legal3.jpg"},
+    {"image": "/assets/legal4.jpg"},
+    {"image": "/assets/legal5.jpg"},
+    {"image": "/assets/legal6.jpg"},
+    {"image": "/assets/legal7.jpg"},
+    {"image": "/assets/legal8.jpg"},
+    {"image": "/assets/legal9.jpg"},
+    {"image": "/assets/legal11.jpg"}
   ]
 }

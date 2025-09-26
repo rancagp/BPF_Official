@@ -8,12 +8,6 @@ import { GetStaticProps } from 'next';
 
 type Certificate = {
   image: string;
-  description: string;
-};
-
-type Section = {
-  title: string;
-  certificates: Certificate[];
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => {
@@ -27,39 +21,27 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'id' }) => {
 export default function SertifikatPage() {
     const { t } = useTranslation('sertifikat');
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const sectionsData = t('sections', { returnObjects: true }) as Section[];
-    const sections = Array.isArray(sectionsData) ? sectionsData : [];
+    const certificates = t('certificates', { returnObjects: true }) as Certificate[];
+    const certificateList = Array.isArray(certificates) ? certificates : [];
 
     return (
-        <PageTemplate title={t('pageTitle')}>
-            <div className="px-4 sm:px-6 lg:px-8 py-8 max-w-5xl mx-auto">
-                <ProfilContainer title={t('pageTitle')}>
-                    <div className="space-y-10">
-                        {sections.map((section: Section, sectionIndex: number) => (
-                            <div key={sectionIndex} className="space-y-8">
-                                <h2 className="text-xl font-semibold text-[#4C4C4C] border-b border-[#F2AC59] pb-2">
-                                    {section.title}
-                                </h2>
-                                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-4">
-                                    {section.certificates.map((cert: Certificate, certIndex: number) => (
-                                        <div key={certIndex} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-200 border border-gray-100 flex flex-col">
-                                            <div 
-                                                className="relative aspect-[4/3] w-full bg-white flex items-center justify-center cursor-pointer" 
-                                                onClick={() => setSelectedImage(cert.image)}
-                                            >
-                                                <Image 
-                                                    src={cert.image} 
-                                                    alt={cert.description} 
-                                                    fill 
-                                                    className="object-contain p-3" 
-                                                />
-                                            </div>
-                                            <div className="p-3 border-t border-gray-100">
-                                                <p className="text-[#4C4C4C] text-xs leading-relaxed">{cert.description}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
+        <PageTemplate title="Sertifikat">
+            <div className="px-4 sm:px-6 lg:px-8 py-8 max-w-7xl mx-auto">
+                <ProfilContainer title="Sertifikat">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                        {certificateList.map((cert: Certificate, index: number) => (
+                            <div 
+                                key={index} 
+                                className="relative aspect-[4/3] w-full bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-200 border border-gray-100 cursor-pointer"
+                                onClick={() => setSelectedImage(cert.image)}
+                            >
+                                <Image 
+                                    src={cert.image} 
+                                    alt={`Sertifikat ${index + 1}`} 
+                                    fill 
+                                    className="object-cover hover:opacity-90 transition-opacity"
+                                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                                />
                             </div>
                         ))}
                     </div>
@@ -68,23 +50,24 @@ export default function SertifikatPage() {
 
             {selectedImage && (
                 <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 transition-opacity duration-300"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 transition-opacity duration-300"
                     onClick={() => setSelectedImage(null)}
                 >
                     <div className="relative" onClick={(e) => e.stopPropagation()}>
                         <button
-                            className="absolute -top-4 -right-4 z-10 bg-white rounded-full p-1 text-gray-700 hover:text-black shadow-lg"
+                            className="absolute -top-12 right-0 z-10 bg-white/20 hover:bg-white/30 rounded-full p-2 text-white transition-colors"
                             onClick={() => setSelectedImage(null)}
+                            aria-label="Tutup"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                         <div className="bg-white p-1 rounded-lg shadow-xl inline-block">
                             <img 
                                 src={selectedImage} 
-                                alt="Certificate" 
-                                className="block max-w-[85vw] max-h-[85vh] rounded-md" 
+                                alt="Sertifikat" 
+                                className="block max-w-[90vw] max-h-[90vh] object-contain rounded-md" 
                             />
                         </div>
                     </div>
