@@ -186,12 +186,12 @@ export default function ProductDetail() {
                         <div className="mt-6 w-full text-center">
                             <button 
                                 onClick={() => router.push('/produk')}
-                                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-sm sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                                className="inline-flex items-center px-6 py-3 bg-[#FF0000] hover:bg-[#cc0000] text-white text-sm sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                             >
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
                                 </svg>
-                                Lihat Semua Produk
+                                {t('viewAllProducts')}
                             </button>
                         </div>
                     </div>
