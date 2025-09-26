@@ -260,7 +260,7 @@ export default function DetailBerita() {
                                 {formatDate(berita.created_at, (i18n.language === 'id' || i18n.language === 'en' ? i18n.language : 'id') as 'id' | 'en')}
                             </time>
                             <span className="text-gray-300 hidden sm:inline">•</span>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-[#FEF6E6] text-[#F2AC59] border border-[#FEE9C7]">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-white text-[#FF0000] border-2 border-[#FF0000]">
                                 {berita.kategori || 'Informasi Umum'}
                             </span>
                         </div>
@@ -308,9 +308,9 @@ export default function DetailBerita() {
                         <div className="mt-8 sm:mt-10 pt-6 border-t border-gray-200 w-full">
                             <div className="flex flex-row justify-between items-center mb-6 sm:mb-8 gap-2 sm:gap-4">
                                 <div className="relative flex-shrink">
-                                    <h3 className="text-lg sm:text-2xl font-bold text-gray-900 inline-block relative pb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
+                                    <h3 className="text-lg sm:text-2xl font-bold text-[#080031] inline-block relative pb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
                                         {tInfo('latest_information')}
-                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></span>
+                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#FF0000] rounded-full"></span>
                                     </h3>
                                 </div>
                                 <button 
@@ -318,7 +318,7 @@ export default function DetailBerita() {
                                         const lang = i18n.language || 'id';
                                         router.push(`/${lang}/umum/informasi`);
                                     }}
-                                    className="px-3 py-1.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-xs sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap flex-shrink-0"
+                                    className="px-3 py-1.5 sm:px-6 sm:py-3 bg-[#FF0000] hover:bg-[#E60000] text-white text-xs sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap flex-shrink-0"
                                 >
                                     <svg className="w-3 h-3 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
@@ -367,14 +367,14 @@ export default function DetailBerita() {
                                                         </div>
                                                         <div className="p-5 flex-1 flex flex-col">
                                                             <div className="mb-2">
-                                                                <div className="text-xs font-medium text-[#F2AC59] mb-1">
+                                                                <div className="text-xs font-medium text-[#FF0000] mb-1">
                                                                     {item.kategori || 'Informasi'}
                                                                 </div>
                                                                 <div className="text-xs text-gray-500">
                                                                     {formatDate(item.created_at, (i18n.language === 'id' || i18n.language === 'en' ? i18n.language : 'id') as 'id' | 'en')}
                                                                 </div>
                                                             </div>
-                                                            <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors line-clamp-2" style={{
+                                                            <h4 className="text-lg font-semibold text-[#080031] mb-3 group-hover:text-[#FF0000] transition-colors line-clamp-2" style={{
                                                                 display: '-webkit-box',
                                                                 WebkitLineClamp: 2,
                                                                 WebkitBoxOrient: 'vertical',
