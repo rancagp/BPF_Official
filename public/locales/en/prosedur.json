@@ -1,4 +1,66 @@
 {
+  "registrasiOnline": {
+    "title": "Online Registration",
+    "pageTitle": "ACCOUNT OPENING PROCEDURE (ONLINE REGISTRATION)",
+    "description": "Register your trading account easily and quickly online through PT. KONTAKPERKASA FUTURES. Follow these registration steps:",
+    "steps": [
+      {
+        "title": "Open Company Website"
+      },
+      {
+        "title": "Register Demo Account",
+        "items": [
+          "Input Data",
+          "Demo Account",
+          "Perform Transaction Simulation"
+        ]
+      },
+      {
+        "title": "Fill in Agreement Documents",
+        "items": [
+          "Application Form",
+          "Risk Disclosure Document (DPAR)",
+          "Power of Attorney Agreement (PPA)",
+          "Trading Mechanism (Trading Rules)",
+          "Supporting documents (ID Card, etc.)"
+        ]
+      },
+      {
+        "title": "Verification by Appointed Broker",
+        "items": [
+          "Prospective Client's Personal Data",
+          "Prospective Client's Fund Deposit to Segregated Account"
+        ]
+      },
+      {
+        "title": "Segregated Account",
+        "description": "Segregated Account is required to ensure that client funds cannot be used for any other purpose except for transaction purposes"
+      },
+      {
+        "title": "Broker Processes the Registration"
+      },
+      {
+        "title": "Broker Activates the Account for the Prospective Client"
+      },
+      {
+        "title": "Client Can Perform Transactions"
+      }
+    ],
+    "documentsRequired": {
+      "title": "Required Documents",
+      "items": [
+        "ID Card (Indonesian Citizens) or Passport (Foreigners)",
+        "Tax ID (NPWP)",
+        "Proof of address (if different from ID card)",
+        "Other supporting documents as required"
+      ]
+    },
+    "notes": [
+      "Ensure all data matches the original documents",
+      "Verification process takes 1-2 business days",
+      "You will receive a confirmation email once your account is activated"
+    ]
+  },
   "registrationFlow": {
     "title": "Online Registration",
     "stepsDescription": "The following are the steps to register an online trading account on our platform.",
@@ -57,32 +119,6 @@
       }
     ]
   },
-  
-  "registrasiOnline": {
-    "title": "Online Registration Procedure",
-    "description": "Register your trading account easily and quickly online through PT. KONTAKPERKASA FUTURES. Follow these registration steps:",
-    "steps": [
-      "Fill out the online registration form with valid personal data",
-      "Upload required documents (ID Card/Passport, Tax ID, etc.)",
-      "Data and document verification by our team",
-      "Account opening completed and you will receive account details"
-    ],
-    "documentsRequired": {
-      "title": "Required Documents",
-      "items": [
-        "ID Card (Indonesian Citizens) or Passport (Foreigners)",
-        "Tax ID (NPWP)",
-        "Proof of address (if different from ID card)",
-        "Other supporting documents as required"
-      ]
-    },
-    "notes": [
-      "Ensure all data matches the original documents",
-      "Verification process takes 1-2 business days",
-      "You will receive a confirmation email once your account is activated"
-    ]
-  },
-  
   "ilustrasiTransaksi": {
     "title": "Transaction Illustration",
     "description": "For those of you who want to invest in products from PT. KONTAKPERKASA FUTURES, you can see the transaction illustration below to further consider whether you are sure about this:",
