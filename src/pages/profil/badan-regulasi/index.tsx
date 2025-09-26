@@ -49,38 +49,44 @@ export default function Legalitas() {
             <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
                 <ProfilContainer title={t('pageTitle')}>
                     <div className="space-y-16">
-                        <div className="mb-8">
-                            <h2 className="text-2xl font-bold text-[#4C4C4C] mb-4">Profil Badan Regulasi</h2>
-                            <p className="text-[#4C4C4C] leading-relaxed">
+                        <div className="mb-10 text-center">
+                            <h2 className="text-3xl font-bold text-[#080031] mb-4">Profil Badan Regulasi</h2>
+                            <div className="w-20 h-1 bg-gradient-to-r from-[#080031] to-[#FF0000] mx-auto mb-6 rounded-full"></div>
+                            <p className="text-[#000000] leading-relaxed max-w-4xl mx-auto">
                                 {t('profile_description')}
                             </p>
                         </div>
                         
-                        {legalitasData.map((item) => (
-                            <div key={item.id} className="flex flex-col md:flex-row items-center gap-8">
-                                {/* Image Container */}
-                                <div className="md:w-1/3 flex-shrink-0 w-full">
-                                    <div className={`relative ${item.key === 'sitna' ? 'aspect-square' : 'aspect-video'} bg-white rounded-lg overflow-hidden shadow-md p-4`}>
-                                        <Image
-                                            src={item.image}
-                                            alt={t(`${item.key}.title`)}
-                                            fill
-                                            className="object-contain"
-                                            sizes="(max-width: 768px) 100vw, 33vw"
-                                        />
+                        <div className="space-y-12">
+                            {legalitasData.map((item, index) => (
+                                <div key={item.id} className={`group flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100`}>
+                                    {/* Image Container */}
+                                    <div className="md:w-2/5 flex-shrink-0 w-full">
+                                        <div className={`relative ${item.key === 'sitna' ? 'aspect-square' : 'aspect-video'} bg-white rounded-lg overflow-hidden shadow-sm p-6 border border-gray-100 transition-all duration-300 group-hover:border-[#FF0000]/20`}>
+                                            <Image
+                                                src={item.image}
+                                                alt={t(`${item.key}.title`)}
+                                                fill
+                                                className="object-contain p-2"
+                                                sizes="(max-width: 768px) 100vw, 40vw"
+                                            />
+                                        </div>
+                                    </div>
+                                    {/* Text Content */}
+                                    <div className="md:w-3/5">
+                                        <div className="flex items-center mb-3">
+                                            <div className="h-8 w-1 bg-[#FF0000] rounded-full mr-3"></div>
+                                            <h3 className="text-2xl font-bold text-[#080031] group-hover:text-[#FF0000] transition-colors duration-300">
+                                                {t(`${item.key}.title`)}
+                                            </h3>
+                                        </div>
+                                        <p className="text-[#000000]/90 text-base leading-relaxed text-justify">
+                                            {t(`${item.key}.description`)}
+                                        </p>
                                     </div>
                                 </div>
-                                {/* Text Content */}
-                                <div className="md:w-2/3">
-                                    <h3 className="text-2xl font-bold text-[#4C4C4C] mb-3 flex items-center gap-2">
-                                        {t(`${item.key}.title`)}
-                                    </h3>
-                                    <p className="text-[#4C4C4C] text-base leading-relaxed text-justify">
-                                        {t(`${item.key}.description`)}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </ProfilContainer>
             </div>
