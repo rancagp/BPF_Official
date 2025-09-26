@@ -28,12 +28,12 @@ export default function PetunjukTransaksi() {
     <PageTemplate title={t('petunjukTransaksi.title', 'Petunjuk Transaksi')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={t('petunjukTransaksi.title', 'Petunjuk Transaksi')}>
-          <div className="space-y-6 text-[#4B5563] text-sm sm:text-base leading-relaxed">
+          <div className="space-y-6 text-black text-sm sm:text-base leading-relaxed">
             <p className="text-justify">{t('petunjukTransaksi.description')}</p>
             <p className="text-justify">{t('petunjukTransaksi.description2')}</p>
             
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-[#4C4C4C]">
+              <h3 className="text-lg font-semibold text-black">
                 {t('petunjukTransaksi.onlineRequirements')}
               </h3>
               

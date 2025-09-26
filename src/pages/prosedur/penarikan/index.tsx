@@ -20,7 +20,7 @@ export default function Penarikan() {
     <PageTemplate title={t('penarikanDana.title', 'Prosedur Penarikan')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={t('penarikanDana.title', 'Prosedur Penarikan')}>
-          <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed">
+          <div className="space-y-6 text-black text-sm sm:text-base leading-relaxed">
             <div 
               className="text-justify"
               dangerouslySetInnerHTML={{ 
@@ -29,7 +29,7 @@ export default function Penarikan() {
             />
 
             <div 
-              className="font-semibold text-gray-800"
+              className="font-semibold text-black"
               dangerouslySetInnerHTML={{ 
                 __html: t('penarikanDana.prosesTitle', 'Proses Penarikan Dana (<span class="italic">Withdrawal</span>)') 
               }} 
