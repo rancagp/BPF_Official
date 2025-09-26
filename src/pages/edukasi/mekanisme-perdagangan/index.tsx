@@ -23,18 +23,18 @@ const MekanismePerdaganganPage = () => {
                         {/* Explanation Section */}
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                                <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">
+                                <h2 className="text-2xl font-bold text-[#000000] mb-4">
                                     {t('multilateral.title')}
                                 </h2>
-                                <p className="text-[#4C4C4D] leading-relaxed">
+                                <p className="text-[#000000] leading-relaxed">
                                     {t('multilateral.description')}
                                 </p>
                             </div>
                             <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                                <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">
+                                <h2 className="text-2xl font-bold text-[#000000] mb-4">
                                     {t('bilateral.title')}
                                 </h2>
-                                <p className="text-[#4C4C4D] leading-relaxed">
+                                <p className="text-[#000000] leading-relaxed">
                                     {t('bilateral.description')}
                                 </p>
                             </div>
@@ -42,18 +42,18 @@ const MekanismePerdaganganPage = () => {
 
                         {/* Table Section */}
                         <div className="pt-4">
-                            <h2 className="text-2xl font-bold text-center text-[#4C4C4D] mb-2">
+                            <h2 className="text-2xl font-bold text-center text-[#000000] mb-2">
                                 {t('comparison.title')}
                             </h2>
-                            <div className="w-20 h-1 bg-[#F2AC59] mx-auto mb-8"></div>
+                            <div className="w-20 h-1 bg-[#FF0000] mx-auto mb-10"></div>
                             <div className="overflow-x-auto">
                                 <table className="w-full border-collapse">
                                     <thead>
-                                        <tr className="bg-[#F9FAFB]">
-                                            <th className="border border-[#E5E7EB] p-4 font-semibold text-[#4C4C4D] text-center">
+                                        <tr>
+                                            <th className="border border-[#E5E7EB] p-4 font-semibold text-white text-center bg-[#080031]">
                                                 {t('multilateral.tableHeader')}
                                             </th>
-                                            <th className="border border-[#E5E7EB] p-4 font-semibold text-[#4C4C4D] text-center">
+                                            <th className="border border-[#E5E7EB] p-4 font-semibold text-white text-center bg-[#080031]">
                                                 {t('bilateral.tableHeader')}
                                             </th>
                                         </tr>
@@ -61,8 +61,8 @@ const MekanismePerdaganganPage = () => {
                                     <tbody>
                                         {Array.isArray(tableData) && tableData.map((row: any, index: number) => (
                                             <tr key={index} className="hover:bg-[#F9FAFB] transition-colors">
-                                                <td className="border border-[#E5E7EB] p-4 text-[#4C4C4D]">{row.multilateral}</td>
-                                                <td className="border border-[#E5E7EB] p-4 text-[#4C4C4D]">{row.bilateral}</td>
+                                                <td className="border border-[#E5E7EB] p-4 text-[#000000]">{row.multilateral}</td>
+                                                <td className="border border-[#E5E7EB] p-4 text-[#000000]">{row.bilateral}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -72,36 +72,36 @@ const MekanismePerdaganganPage = () => {
 
                         {/* Flowchart Section */}
                         <div className="pt-4">
-                            <h2 className="text-2xl font-bold text-center text-[#4C4C4D] mb-2">
+                            <h2 className="text-2xl font-bold text-center text-[#000000] mb-2">
                                 {t('flow.title')}
                             </h2>
-                            <div className="w-20 h-1 bg-[#F2AC59] mx-auto mb-10"></div>
+                            <div className="w-20 h-1 bg-[#FF0000] mx-auto mb-10"></div>
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                                    <h3 className="text-xl font-bold text-center text-[#4C4C4D] mb-6">
+                                    <h3 className="text-xl font-bold text-center text-[#000000] mb-6">
                                         {t('multilateral.flowTitle')}
                                     </h3>
                                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-[#E5E7EB]">
                                         <Image 
                                             src="/assets/alur-perdagangan-multi.jpg" 
                                             alt={t('multilateral.flowTitle')} 
-                                            layout="fill"
-                                            objectFit="cover"
-                                            className="transition-transform duration-300 hover:scale-105"
+                                            width={600}
+                                            height={450}
+                                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                                         />
                                     </div>
                                 </div>
                                 <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                                    <h3 className="text-xl font-bold text-center text-[#4C4C4D] mb-6">
+                                    <h3 className="text-xl font-bold text-center text-[#000000] mb-6">
                                         {t('bilateral.flowTitle')}
                                     </h3>
                                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-[#E5E7EB]">
                                         <Image 
-                                            src="/assets/alur-perdagangan-bila.jpg" 
-                                            alt={t('bilateral.flowTitle')} 
-                                            layout="fill"
-                                            objectFit="cover"
-                                            className="transition-transform duration-300 hover:scale-105"
+                                            src="/assets/alur-perdagangan-bila.jpg"
+                                            alt={t('bilateral.flowTitle')}
+                                            width={600}
+                                            height={450}
+                                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                                         />
                                     </div>
                                 </div>
