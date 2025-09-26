@@ -177,7 +177,7 @@ export default function BeritaDetail() {
                             <div className="mt-6">
                                 <a 
                                     href="/analisis/berita" 
-                                    className='inline-block bg-[#F2AC59] hover:bg-[#e09c4a] px-6 py-2 rounded-md text-white transition-all duration-300'
+                                    className='inline-block bg-[#FF0000] hover:bg-[#e60000] px-6 py-2 rounded-md text-white transition-all duration-300'
                                 >
                                     &#129032; Kembali ke Halaman Berita
                                 </a>
@@ -212,7 +212,7 @@ export default function BeritaDetail() {
                                 <span className="mx-2">•</span>
                             )}
                             {berita.kategori?.name && (
-                                <span className="text-[#F2AC59] font-medium">
+                                <span className="text-[#080031] font-medium">
                                     {berita.kategori.name}
                                 </span>
                             )}
@@ -243,8 +243,8 @@ export default function BeritaDetail() {
                                         .replace(/<h3/g, '<h3 class="text-xl font-semibold mt-8 mb-3 text-gray-800"')
                                         .replace(/<ul/g, '<ul class="list-disc pl-6 space-y-2 my-6"')
                                         .replace(/<ol/g, '<ol class="list-decimal pl-6 space-y-2 my-6"')
-                                        .replace(/<a/g, '<a class="text-[#F2AC59] hover:text-[#e09c4a] hover:underline"')
-                                        .replace(/<blockquote/g, '<blockquote class="border-l-4 border-[#F2AC59] pl-4 italic my-6 text-gray-600"')
+                                        .replace(/<a/g, '<a class="text-[#FF0000] hover:text-[#e60000] hover:underline"')
+                                        .replace(/<blockquote/g, '<blockquote class="border-l-4 border-[#080031] pl-4 italic my-6 text-gray-600"')
                                         .replace(/<img/g, '<img class="my-6 rounded-lg shadow-md w-full h-auto"')
                                         .replace(/<table/g, '<table class="min-w-full divide-y divide-gray-200 my-6"')
                                         .replace(/<th/g, '<th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"')
@@ -259,7 +259,7 @@ export default function BeritaDetail() {
                                 <div className="relative flex-shrink">
                                     <h3 className="text-lg sm:text-2xl font-bold text-gray-900 inline-block relative pb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
                                         {t('latest_news', 'Latest News')}
-                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] rounded-full"></span>
+                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#FF0000] rounded-full"></span>
                                     </h3>
                                 </div>
                                 <button 
@@ -267,7 +267,7 @@ export default function BeritaDetail() {
                                         const lang = i18n.language || router.locale || 'id';
                                         router.push(`/${lang}/analisis/berita`);
                                     }}
-                                    className="px-3 py-1.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#F2AC59] to-[#e09c4a] hover:from-[#e09c4a] hover:to-[#d08b3a] text-white text-xs sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap flex-shrink-0"
+                                    className="px-3 py-1.5 sm:px-6 sm:py-3 bg-[#FF0000] hover:bg-[#e60000] text-white text-xs sm:text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center whitespace-nowrap flex-shrink-0"
                                 >
                                     <svg className="w-3 h-3 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
@@ -289,7 +289,7 @@ export default function BeritaDetail() {
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                     {relatedBerita.map((item) => (
-                                        <div key={item.id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 hover:border-[#F2AC59]/30">
+                                        <div key={item.id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 hover:border-[#FF0000]/30">
                                             <Link 
                                                 href={`/analisis/berita/${item.slug}`}
                                                 className="block h-full flex flex-col"
@@ -315,7 +315,7 @@ export default function BeritaDetail() {
                                                 <div className="p-5 flex-1 flex flex-col">
                                                     <div className="mb-2">
                                                         {item.kategori?.name && (
-                                                            <div className="text-xs font-medium text-[#F2AC59] mb-1">
+                                                            <div className="text-xs font-medium text-[#080031] mb-1">
                                                                 {item.kategori.name}
                                                             </div>
                                                         )}
@@ -323,7 +323,7 @@ export default function BeritaDetail() {
                                                             {formatDate(item.created_at)}
                                                         </div>
                                                     </div>
-                                                    <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-[#F2AC59] transition-colors line-clamp-2" style={{
+                                                    <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-[#FF0000] transition-colors line-clamp-2" style={{
                                                         display: '-webkit-box',
                                                         WebkitLineClamp: 2,
                                                         WebkitBoxOrient: 'vertical',
