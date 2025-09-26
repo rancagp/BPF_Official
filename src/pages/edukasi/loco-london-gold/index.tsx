@@ -202,7 +202,7 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
     return (
       <PageTemplate title="Loading...">
         <div className="flex flex-col items-center justify-center min-h-screen bg-white">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-500 mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#FF0000] mb-4"></div>
           <p className="text-gray-600">Memuat halaman...</p>
         </div>
       </PageTemplate>
@@ -218,7 +218,7 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
             <p className="mt-2">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              className="mt-4 bg-[#FF0000] hover:bg-[#E60000] text-white font-bold py-2 px-4 rounded transition-colors duration-300"
             >
               Muat Ulang Halaman
             </button>
@@ -245,29 +245,31 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
     <PageTemplate title={data.pageTitle}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title={data.title}>
-          <div className="space-y-8">
+          <div className="space-y-10 text-[#000000]">
             {/* Intro Section */}
-            <div className="bg-[#F9FAFB] p-8 rounded-xl border border-[#E5E7EB] text-[#4C4C4D] space-y-4 text-justify leading-relaxed">
+            <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] text-[#000000] space-y-4 text-justify leading-relaxed shadow-sm hover:shadow-md transition-shadow duration-300">
               <p className="text-lg">{data.intro.p1}</p>
               <p className="text-lg">{data.intro.p2}</p>
             </div>
 
             {/* Sejarah Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">{data.sejarah.title}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-8"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{data.sejarah.title}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <div className="space-y-6 text-[#4C4C4D]">
                 <p>{data.sejarah.p1}</p>
                 <p>{data.sejarah.p2}</p>
                 
-                <div className="bg-white p-8 rounded-xl shadow-sm border border-[#E5E7EB] mt-8">
-                  <h3 className="text-xl font-semibold text-[#4C4C4D] mb-4">{data.sejarah.otc.title}</h3>
+                <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] mt-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <h3 className="text-xl font-semibold text-[#000000] mb-4 flex items-center">{data.sejarah.otc.title}</h3>
                   <p>{data.sejarah.otc.content}</p>
                 </div>
 
-                <div className="bg-[#FFF8F0] p-8 rounded-xl border border-[#F2AC59] mt-8">
-                  <h3 className="text-xl font-semibold text-[#4C4C4D] mb-4">{data.sejarah.investasi.title}</h3>
-                  <ul className="list-disc list-inside space-y-3 text-[#4C4C4D] pl-5 text-justify">
+                <div className="bg-white p-8 rounded-xl border-2 border-[#FF0000] mt-8 shadow-sm hover:shadow-md transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-[#000000] mb-4 flex items-center">{data.sejarah.investasi.title}</h3>
+                  <ul className="list-disc list-inside space-y-3 text-[#000000] pl-5 text-justify">
                     {data.sejarah.investasi.points.map((point, index) => (
                       <li key={index}>{point}</li>
                     ))}
@@ -278,11 +280,13 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
 
             {/* Mekanisme Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">{data.mekanisme.title}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-8"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{data.mekanisme.title}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <div className="space-y-6">
-                <p className="text-[#4C4C4D]">{data.mekanisme.p1}</p>
-                <p className="text-[#4C4C4D]">{data.mekanisme.p2}</p>
+                <p className="text-[#000000]">{data.mekanisme.p1}</p>
+                <p className="text-[#000000]">{data.mekanisme.p2}</p>
                 <ul className="list-disc list-inside space-y-3 text-[#4C4C4D] pl-5 text-justify">
                   {data.mekanisme.points.map((point, index) => (
                     <li key={index}>{point}</li>
@@ -293,8 +297,10 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
 
             {/* Keuntungan Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">{data.keuntungan.title}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-8"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{data.keuntungan.title}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <ul className="list-disc list-inside space-y-3 text-[#4C4C4D] pl-5 text-justify">
                 {data.keuntungan.points.map((point, index) => (
                   <li key={index}>{point}</li>
@@ -304,10 +310,12 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
 
             {/* Resiko Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">{data.resiko.title}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-8"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{data.resiko.title}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <div className="space-y-4">
-                <p className="text-[#4C4C4D]">{data.resiko.content}</p>
+                <p className="text-[#000000]">{data.resiko.content}</p>
                 <ul className="list-disc list-inside space-y-3 text-[#4C4C4D] pl-5 text-justify">
                   {data.resiko.points.map((point, index) => (
                     <li key={index}>{point}</li>
@@ -318,14 +326,16 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
 
             {/* Analisis Harga Emas Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">{data.analisis.title}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-8"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{data.analisis.title}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <p className="text-[#4C4C4D] mb-6">{data.analisis.intro}</p>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 {data.analisis.factors.map((factor, index) => (
-                  <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-[#E5E7EB] hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-                    <h4 className="font-bold text-lg mb-3 text-[#4C4C4D]">{factor.title}</h4>
-                    <p className="text-[#4C4C4D] flex-grow">{factor.content}</p>
+                  <div key={index} className="bg-white p-6 rounded-xl border border-[#E5E7EB] hover:border-[#FF0000] hover:shadow-md transition-all duration-300 h-full flex flex-col">
+                    <h4 className="font-bold text-lg mb-3 text-[#000000] flex items-center">{factor.title}</h4>
+                    <p className="text-[#000000] flex-grow">{factor.content}</p>
                   </div>
                 ))}
               </div>
@@ -333,14 +343,16 @@ const LocoLondonGoldPage: React.FC<PageProps> = ({ ns }) => {
 
             {/* Kontrak Derivatif Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-4">{data.derivatif.title}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-8"></div>
-              <div className="bg-white p-8 rounded-xl border border-[#E5E7EB]">
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{data.derivatif.title}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
+              <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] hover:shadow-md transition-shadow duration-300">
                 <p className="text-[#4C4C4D] leading-relaxed">{data.derivatif.content}</p>
               </div>
             </section>
 
-            <p className="text-sm italic text-[#9B9FA7] text-center pt-8 border-t border-[#E5E7EB] mt-12 pt-8">
+            <p className="text-sm italic text-[#666666] text-center border-t border-[#E5E7EB] mt-12 pt-8">
               {data.footerNote}
             </p>
           </div>
