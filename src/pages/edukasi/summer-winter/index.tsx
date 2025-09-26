@@ -108,7 +108,7 @@ const SummerWinterPage = () => {
     return (
       <PageTemplate title={translate('title')}>
         <div className="flex justify-center items-center min-h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF0000]"></div>
         </div>
       </PageTemplate>
     );
@@ -118,18 +118,20 @@ const SummerWinterPage = () => {
     <PageTemplate title={translate('title')}>
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
         <ProfilContainer title="Summer & Winter">
-          <div className="space-y-10 text-[#4C4C4D]">
+          <div className="space-y-10 text-[#000000]">
             {/* UK Time Section */}
             <section>
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-2">{translate('ukTime.title')}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-6"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{translate('ukTime.title')}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <p className="mb-4 leading-relaxed">{translate('ukTime.description')}</p>
               <p className="mb-6 leading-relaxed">{translate('ukTime.intro')}</p>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
                 {/* Summer Begin */}
-                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <h3 className="text-xl font-semibold text-[#4C4C4D] mb-4">{translate('ukTime.sections.summerStart.title')}</h3>
+                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] hover:border-[#FF0000] shadow-sm hover:shadow-md transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-[#000000] mb-4">{translate('ukTime.sections.summerStart.title')}</h3>
                   <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden mb-4">
                     <img 
                       src="/assets/musim-panas-mulai.png" 
@@ -137,12 +139,12 @@ const SummerWinterPage = () => {
                       className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="text-[#4C4C4D] leading-relaxed">{translate('ukTime.sections.summerStart.description')}</p>
+                  <p className="text-[#000000] leading-relaxed">{translate('ukTime.sections.summerStart.description')}</p>
                 </div>
 
                 {/* Summer End */}
-                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <h3 className="text-xl font-semibold text-[#4C4C4D] mb-4">{translate('ukTime.sections.summerEnd.title')}</h3>
+                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] hover:border-[#FF0000] shadow-sm hover:shadow-md transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-[#000000] mb-4">{translate('ukTime.sections.summerEnd.title')}</h3>
                   <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden mb-4">
                     <img 
                       src="/assets/musim-panas-berakhir.png" 
@@ -150,44 +152,44 @@ const SummerWinterPage = () => {
                       className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="text-[#4C4C4D] leading-relaxed">{translate('ukTime.sections.summerEnd.description')}</p>
+                  <p className="text-[#000000] leading-relaxed">{translate('ukTime.sections.summerEnd.description')}</p>
                 </div>
               </div>
 
               <div className="mt-10 overflow-x-auto">
-                <h4 className="font-bold text-lg text-[#4C4C4D] mb-4">{translate('ukTime.sections.beforeAfterForward')}</h4>
+                <h4 className="font-bold text-lg text-[#000000] mb-4">{translate('ukTime.sections.beforeAfterForward')}</h4>
                 <div className="rounded-xl border border-[#E5E7EB] overflow-hidden">
                   <table className="min-w-full">
                     <thead>
                       <tr className="bg-[#F9FAFB]">
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.date')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.time')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.dst')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.offset')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.timezone')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.date')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.time')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.dst')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.offset')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.timezone')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#E5E7EB]">
                       <tr className="hover:bg-[#F9FAFB] transition-colors">
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 2, 25))}</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">00:59:59</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.no')}</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">GMT</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 2, 25))}</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">00:59:59</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.no')}</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">UTC</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">GMT</td>
                       </tr>
-                      <tr className="bg-[#FFF8F0] font-semibold">
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">01:00:00 → 02:00:00</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">BST</td>
+                      <tr className="bg-[#FFEEEE] font-semibold">
+                        <td className="py-3 px-4 text-sm text-[#000000]">01:00:00 → 02:00:00</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">UTC+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">BST</td>
                       </tr>
                       <tr className="hover:bg-[#F9FAFB] transition-colors">
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 2, 25))}</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">02:00:01</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">BST</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 2, 25))}</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">02:00:01</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">UTC+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">BST</td>
                       </tr>
                     </tbody>
                   </table>
@@ -195,48 +197,48 @@ const SummerWinterPage = () => {
               </div>
 
               <div className="mt-8 overflow-x-auto">
-                <h4 className="font-bold text-lg text-[#4C4C4D] mb-4">{translate('ukTime.sections.beforeAfterBackward')}</h4>
+                <h4 className="font-bold text-lg text-[#000000] mb-4">{translate('ukTime.sections.beforeAfterBackward')}</h4>
                 <div className="rounded-xl border border-[#E5E7EB] overflow-hidden">
                   <table className="min-w-full">
                     <thead>
                       <tr className="bg-[#F9FAFB]">
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.date')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.time')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.dst')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.offset')}</th>
-                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.timezone')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.date')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.time')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.dst')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.offset')}</th>
+                        <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.timezone')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#E5E7EB]">
                       <tr className="hover:bg-[#F9FAFB] transition-colors">
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 9, 28))}</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">00:59:59</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC+1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">BST</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 9, 28))}</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">00:59:59</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">UTC+1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">BST</td>
                       </tr>
-                      <tr className="bg-[#FFF8F0] font-semibold">
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">02:00:00 → 01:00:00</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">-1h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">0h</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">GMT</td>
+                      <tr className="bg-[#FFEEEE] font-semibold">
+                        <td className="py-3 px-4 text-sm text-[#000000]">02:00:00 → 01:00:00</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">-1h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">0h</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">UTC</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">GMT</td>
                       </tr>
                       <tr className="hover:bg-[#F9FAFB] transition-colors">
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 9, 28))}</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">01:00:01</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.no')}</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC</td>
-                        <td className="py-3 px-4 text-sm text-[#4C4C4D]">GMT</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 9, 28))}</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">01:00:01</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.no')}</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">UTC</td>
+                        <td className="py-3 px-4 text-sm text-[#000000]">GMT</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <div className="bg-[#FFF8F0] p-6 rounded-xl border border-[#F2AC59]/20 mt-10">
-                <h4 className="font-semibold text-lg text-[#4C4C4D] mb-4">{translate('ukTime.sections.europeanFormula.title')}</h4>
-                <div className="space-y-2 text-[#4C4C4D]">
+              <div className="bg-white p-6 rounded-xl border-2 border-[#FF0000] mt-10">
+                <h4 className="font-semibold text-lg text-[#000000] mb-4">{translate('ukTime.sections.europeanFormula.title')}</h4>
+                <div className="space-y-2 text-[#000000]">
                   <p className="flex items-start">
                     <span className="font-medium w-32 flex-shrink-0">{translate('common.timeForward')}:</span>
                     <span>{translate('ukTime.sections.europeanFormula.start')}</span>
@@ -245,28 +247,28 @@ const SummerWinterPage = () => {
                     <span className="font-medium w-32 flex-shrink-0">{translate('common.timeBackward')}:</span>
                     <span>{translate('ukTime.sections.europeanFormula.end')}</span>
                   </p>
-                  <p className="text-sm text-[#9B9FA7] mt-4 italic">{translate('ukTime.sections.europeanFormula.note')}</p>
+                  <p className="text-sm text-[#666666] mt-4 italic">{translate('ukTime.sections.europeanFormula.note')}</p>
                 </div>
               </div>
 
               <div className="mt-10">
-                <h4 className="font-bold text-lg text-[#4C4C4D] mb-4">{translate('ukTime.sections.scheduleTitle')}</h4>
+                <h4 className="font-bold text-lg text-[#000000] mb-4">{translate('ukTime.sections.scheduleTitle')}</h4>
                 <div className="overflow-x-auto">
                   <div className="rounded-xl border border-[#E5E7EB] overflow-hidden">
                     <table className="min-w-full">
                       <thead>
                         <tr className="bg-[#F9FAFB]">
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.year')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.startDate')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('ukTime.sections.tableHeaders.endDate')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.year')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.startDate')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('ukTime.sections.tableHeaders.endDate')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#E5E7EB]">
                         {bstSchedule.map((item, index) => (
                           <tr key={index} className="hover:bg-[#F9FAFB] transition-colors">
-                            <td className="py-3 px-4 text-sm text-center text-[#4C4C4D]">{item.year}</td>
-                            <td className="py-3 px-4 text-sm text-[#4C4C4D]">{item.start}</td>
-                            <td className="py-3 px-4 text-sm text-[#4C4C4D]">{item.end}</td>
+                            <td className="py-3 px-4 text-sm text-center text-[#000000]">{item.year}</td>
+                            <td className="py-3 px-4 text-sm text-[#000000]">{item.start}</td>
+                            <td className="py-3 px-4 text-sm text-[#000000]">{item.end}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -280,15 +282,17 @@ const SummerWinterPage = () => {
 
                         {/* US Time Section */}
             <section className="mt-12 pt-8 border-t border-[#E5E7EB]">
-              <h2 className="text-2xl font-bold text-[#4C4C4D] mb-2">{translate('usTime.title')}</h2>
-              <div className="w-20 h-1 bg-[#F2AC59] mb-6"></div>
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[#000000] mr-2">{translate('usTime.title')}</h2>
+                <div className="w-10 h-1 bg-[#FF0000]"></div>
+              </div>
               <p className="mb-6 text-[#4C4C4D] leading-relaxed">{translate('usTime.description')}</p>
               <p className="mb-4">{translate('usTime.intro')}</p>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
                 {/* Daylight Start */}
-                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <h3 className="text-xl font-semibold text-[#4C4C4D] mb-4">{translate('usTime.sections.daylightStart.title')}</h3>
+                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] hover:border-[#FF0000] shadow-sm hover:shadow-md transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-[#000000] mb-4">{translate('usTime.sections.daylightStart.title')}</h3>
                   <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden mb-4">
                     <img 
                       src="/assets/musim-panas-mulai.png" 
@@ -296,12 +300,12 @@ const SummerWinterPage = () => {
                       className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="text-[#4C4C4D] leading-relaxed">{translate('usTime.sections.daylightStart.description')}</p>
+                  <p className="text-[#000000] leading-relaxed">{translate('usTime.sections.daylightStart.description')}</p>
                 </div>
 
                 {/* Daylight End */}
-                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <h3 className="text-xl font-semibold text-[#4C4C4D] mb-4">{translate('usTime.sections.daylightEnd.title')}</h3>
+                <div className="bg-white p-6 rounded-xl border border-[#E5E7EB] hover:border-[#FF0000] shadow-sm hover:shadow-md transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-[#000000] mb-4">{translate('usTime.sections.daylightEnd.title')}</h3>
                   <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden mb-4">
                     <img 
                       src="/assets/musim-panas-berakhir.png" 
@@ -309,7 +313,7 @@ const SummerWinterPage = () => {
                       className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="text-[#4C4C4D] leading-relaxed">{translate('usTime.sections.daylightEnd.description')}</p>
+                  <p className="text-[#000000] leading-relaxed">{translate('usTime.sections.daylightEnd.description')}</p>
                 </div>
               </div>
 
@@ -320,34 +324,34 @@ const SummerWinterPage = () => {
                     <table className="min-w-full">
                       <thead>
                         <tr className="bg-[#F9FAFB]">
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.date')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.time')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.dst')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.offset')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.timezone')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.date')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.time')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.dst')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.offset')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.timezone')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#E5E7EB]">
                         <tr className="hover:bg-[#F9FAFB] transition-colors">
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 2, 11))}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">01:59:59</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.no')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC-5h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">EST</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 2, 11))}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">01:59:59</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.no')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">UTC-5h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">EST</td>
                         </tr>
-                        <tr className="bg-[#FFF8F0] font-semibold">
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">02:00:00 → 03:00:00</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">+1h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.yes')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC-4h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">EDT</td>
+                        <tr className="bg-[#FFEEEE] font-semibold">
+                          <td className="py-3 px-4 text-sm text-[#000000]">02:00:00 → 03:00:00</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">+1h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.yes')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">UTC-4h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">EDT</td>
                         </tr>
                         <tr className="hover:bg-[#F9FAFB] transition-colors">
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 2, 11))}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">03:00:01</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.yes')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC-4h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">EDT</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 2, 11))}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">03:00:01</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.yes')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">UTC-4h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">EDT</td>
                         </tr>
                       </tbody>
                     </table>
@@ -362,34 +366,34 @@ const SummerWinterPage = () => {
                     <table className="min-w-full">
                       <thead>
                         <tr className="bg-[#F9FAFB]">
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.date')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.time')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.dst')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.offset')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.timezone')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.date')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.time')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.dst')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.offset')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.timezone')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#E5E7EB]">
                         <tr className="hover:bg-[#F9FAFB] transition-colors">
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 10, 4))}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">01:59:59</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.yes')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC-4h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">EDT</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 10, 4))}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">01:59:59</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.yes')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">UTC-4h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">EDT</td>
                         </tr>
-                        <tr className="bg-[#FFF8F0] font-semibold">
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">02:00:00 → 01:00:00</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.no')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.no')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC-5h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">EST</td>
+                        <tr className="bg-[#FFEEEE] font-semibold">
+                          <td className="py-3 px-4 text-sm text-[#000000]">02:00:00 → 01:00:00</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.no')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.no')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">UTC-5h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">EST</td>
                         </tr>
                         <tr className="hover:bg-[#F9FAFB] transition-colors">
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{formatDateTime(new Date(2012, 10, 4))}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">01:00:01</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">{translate('common.no')}</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">UTC-5h</td>
-                          <td className="py-3 px-4 text-sm text-[#4C4C4D]">EST</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{formatDateTime(new Date(2012, 10, 4))}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">01:00:01</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">{translate('common.no')}</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">UTC-5h</td>
+                          <td className="py-3 px-4 text-sm text-[#000000]">EST</td>
                         </tr>
                       </tbody>
                     </table>
@@ -397,9 +401,9 @@ const SummerWinterPage = () => {
                 </div>
               </div>
 
-              <div className="bg-[#F0F7FF] p-6 rounded-xl border border-[#E5F0FF] mt-10">
-                <h4 className="font-semibold text-lg text-[#4C4C4D] mb-4">{translate('usTime.sections.usFormula.title')}</h4>
-                <div className="space-y-2 text-[#4C4C4D]">
+              <div className="bg-white p-6 rounded-xl border-2 border-[#080031] mt-10">
+                <h4 className="font-semibold text-lg text-[#000000] mb-4">{translate('usTime.sections.usFormula.title')}</h4>
+                <div className="space-y-2 text-[#000000]">
                   <p className="flex items-start">
                     <span className="font-medium w-32 flex-shrink-0">{translate('common.timeForward')}:</span>
                     <span>{translate('usTime.sections.usFormula.start')}</span>
@@ -418,17 +422,17 @@ const SummerWinterPage = () => {
                     <table className="min-w-full">
                       <thead>
                         <tr className="bg-[#F9FAFB]">
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.year')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.startDate')}</th>
-                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#4C4C4D]">{translate('usTime.sections.tableHeaders.endDate')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.year')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.startDate')}</th>
+                          <th className="py-3 px-4 text-left text-sm font-semibold text-[#000000] bg-[#F9FAFB]">{translate('usTime.sections.tableHeaders.endDate')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#E5E7EB]">
                         {usDstSchedule.map((item, index) => (
                           <tr key={index} className="hover:bg-[#F9FAFB] transition-colors">
-                            <td className="py-3 px-4 text-sm text-center text-[#4C4C4D]">{item.year}</td>
-                            <td className="py-3 px-4 text-sm text-[#4C4C4D]">{item.start}</td>
-                            <td className="py-3 px-4 text-sm text-[#4C4C4D]">{item.end}</td>
+                            <td className="py-3 px-4 text-sm text-center text-[#000000]">{item.year}</td>
+                            <td className="py-3 px-4 text-sm text-[#000000]">{item.start}</td>
+                            <td className="py-3 px-4 text-sm text-[#000000]">{item.end}</td>
                           </tr>
                         ))}
                       </tbody>
