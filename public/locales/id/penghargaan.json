@@ -3,31 +3,55 @@
   "awards": [
     {
       "image": "/assets/penghargaan1.png",
-      "description": "PT. KontakPerkasa Futures Mendapatkan Penghargaan dari Majalah Investor untuk Kategori Pialang Berjangka Terbaik 2013 - Teraktif untuk Kontrak Emas"
+      "description": "4th Highest Volume Broker Category"
     },
     {
       "image": "/assets/penghargaan2.png",
-      "description": "Partisipasi dalam Kompetisi Trading BBJ produk OLE01 & GOL10 - 2022"
+      "description": "Terbaik ke-2 Ketaatan Penempatan Margin 2024"
     },
     {
       "image": "/assets/penghargaan3.png",
-      "description": "Ketaatan Penempatan Margin 2024 - Terbaik ke 4"
+      "description": "TOP 2nd Achievers Award 2022 (Kategori Volume Bilateral)"
     },
     {
       "image": "/assets/penghargaan4.png",
-      "description": "Penghargaan Kinerja Keuangan Terbaik"
+      "description": "TOP 2nd Dalam Kategori Pemenuhan Kewajiban Keuangan Atas Kepatuhan Pemenuhan Margin 2021"
     },
     {
       "image": "/assets/penghargaan5.png",
-      "description": "Penghargaan Inovasi Teknologi"
+      "description": "TOP 3rd Pialang Dengan Volume Transaksi Multilateral Terbanyak Tahun 2014"
     },
     {
       "image": "/assets/penghargaan6.png",
-      "description": "Penghargaan Layanan Pelanggan Terbaik"
+      "description": "TOP 2nd (Rata-Rata Penempatan Dana Margin Terbanyak Tahun 2022)"
     },
     {
       "image": "/assets/penghargaan7.png",
-      "description": "Penghargaan Perusahaan Berkelanjutan"
+      "description": "Peringkat 2 Dalam Transaksi Bilateral Tahun 2021"
+    },
+    {
+      "image": "/assets/penghargaan8.png",
+      "description": "Anggota Kliring Pialang Terbaik II 2018 (Kategori Pemenuhan Kewajiban Keuangan)"
+    },
+    {
+      "image": "/assets/penghargaan9.png",
+      "description": "Transaksi Bilateral 1 Tahun 2017"
+    },
+    {
+      "image": "/assets/penghargaan10.png",
+      "description": "Kliring Pialang Terbaik II Tahun 2017"
+    },
+    {
+      "image": "/assets/penghargaan11.png",
+      "description": "Transaksi Bilateral Tahun 2016 Terbanyak II"
+    },
+    {
+      "image": "/assets/penghargaan12.png",
+      "description": "Pialang Terbaik II"
+    },
+    {
+      "image": "/assets/penghargaan13.png",
+      "description": "Transaksi Bilateral Tahun 2015 Terbanyak III"
     }
   ]
 }

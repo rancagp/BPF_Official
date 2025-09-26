@@ -3,31 +3,55 @@
   "awards": [
     {
       "image": "/assets/penghargaan1.png",
-      "description": "PT. KontakPerkasa Futures Receives Award from Investor Magazine for Best Futures Broker Category 2013 - Most Active in Gold Contracts"
+      "description": "4th Highest Volume Broker Category"
     },
     {
       "image": "/assets/penghargaan2.png",
-      "description": "Participation in BBJ Trading Competition for OLE01 & GOL10 Products - 2022"
+      "description": "2nd Best in Margin Placement Compliance 2024"
     },
     {
       "image": "/assets/penghargaan3.png",
-      "description": "Margin Placement Compliance 2024 - 4th Best"
+      "description": "TOP 2nd Achievers Award 2022 (Bilateral Volume Category)"
     },
     {
       "image": "/assets/penghargaan4.png",
-      "description": "Best Financial Performance Award"
+      "description": "TOP 2nd in Financial Obligation Fulfillment Category for Margin Compliance 2021"
     },
     {
       "image": "/assets/penghargaan5.png",
-      "description": "Technology Innovation Award"
+      "description": "TOP 3rd Broker with Highest Multilateral Transaction Volume 2014"
     },
     {
       "image": "/assets/penghargaan6.png",
-      "description": "Best Customer Service Award"
+      "description": "TOP 2nd (Highest Average Margin Fund Placement 2022)"
     },
     {
       "image": "/assets/penghargaan7.png",
-      "description": "Sustainable Company Award"
+      "description": "2nd Rank in Bilateral Transactions 2021"
+    },
+    {
+      "image": "/assets/penghargaan8.png",
+      "description": "2nd Best Clearing Member 2018 (Financial Obligation Fulfillment Category)"
+    },
+    {
+      "image": "/assets/penghargaan9.png",
+      "description": "1st in Bilateral Transactions 2017"
+    },
+    {
+      "image": "/assets/penghargaan10.png",
+      "description": "2nd Best Clearing Broker 2017"
+    },
+    {
+      "image": "/assets/penghargaan11.png",
+      "description": "2nd Highest Bilateral Transactions 2016"
+    },
+    {
+      "image": "/assets/penghargaan12.png",
+      "description": "2nd Best Broker"
+    },
+    {
+      "image": "/assets/penghargaan13.png",
+      "description": "3rd Highest Bilateral Transactions 2015"
     }
   ]
 }

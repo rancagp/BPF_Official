@@ -50,9 +50,7 @@ export default function Legalitas() {
                 <ProfilContainer title={t('pageTitle')}>
                     <div className="space-y-16">
                         <div className="mb-10 text-center">
-                            <h2 className="text-3xl font-bold text-[#080031] mb-4">Profil Badan Regulasi</h2>
-                            <div className="w-20 h-1 bg-gradient-to-r from-[#080031] to-[#FF0000] mx-auto mb-6 rounded-full"></div>
-                            <p className="text-[#000000] leading-relaxed max-w-4xl mx-auto">
+                            <p className="text-[#000000] leading-relaxed max-w-4xl mx-auto text-left">
                                 {t('profile_description')}
                             </p>
                         </div>

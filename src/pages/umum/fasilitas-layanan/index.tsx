@@ -6,8 +6,42 @@ import PageTemplate from "@/components/templates/PageTemplate";
 type ServiceItem = {
   title: string;
   description: string;
-  icon?: string;
 };
+
+const services: ServiceItem[] = [
+  {
+    title: 'Wakil Pialang Berjangka Profesional',
+    description: 'Perusahaan memiliki Wakil Pialang Berjangka profesional yang selalu siap memberikan pelayanan kepada calon nasabah / nasabah, berupa edukasi, prosedur administrasi dan mekanisme transaksi Sistem Perdagangan Alternatif di Bursa Berjangka Jakarta.'
+  },
+  {
+    title: 'Fasilitas Online Trading & Demo Account',
+    description: 'Fasilitas ini akan memberikan kemudahan bagi setiap nasabah dalam bertransaksi secara tersedia jaringan internet. Kami juga menyediakan Demo Account atau Simulasi Transaksi agar calon nasabah dapat lebih memahami dan menguasai fungsi-fungsi transaksi Anda cukup menghubungi customer care kami.'
+  },
+  {
+    title: 'Pelaporan Transaksi Setiap Hari',
+    description: 'Setiap hari nasabah akan mendapat Laporan Transaksi Nasabah yang berisikan catatan transaksi dan perkembangan investasi yang telah dilakukan oleh nasabah, baik via e-mail, fax, maupun melalui surat/pos. Catatan atau rekam transaksi tersebut juga dapat diakses langsung melalui online trading platform dengan memilih menu utama Temporary Statement / Daily Statement.'
+  },
+  {
+    title: 'Penarikan Dana (Withdrawal)',
+    description: 'Penarikan dana dapat dilakukan sewaktu-waktu oleh nasabah apabila nasabah menghendakinya. PT. Bestprofit Futures mengupayakan agar penarikan dana dapat diproses satu hari kerja (T+1).'
+  },
+  {
+    title: 'Rekening Terpisah (Segregated Account)',
+    description: 'Semua dana investor ditempatkan pada Segregated Account pialang yang ada di Bank Penyimpanan yang disetujui oleh Bappebti yaitu Bank BCA, Bank CIMB Niaga, Bank Mandiri, Bank BNI dan Artha Graha dan terpisah dengan aset-aset perusahaan. Dana tersebut hanya dipergunakan untuk keperluan transaksi nasabah bersangkutan seperti perpindahan dana ke Segregated Account KBI sebagai margin atas posisi terbuka nasabah.'
+  },
+  {
+    title: 'Fleksibilitas Transaksi',
+    description: 'Transaksi dua arah memungkinkan bagi para investor untuk mendapatkan keuntungan pada saat market bergerak naik maupun turun. Apalagi likuiditas produk ini sangat tinggi, sehingga memungkinkan mengambil keuntungan optimal.'
+  },
+  {
+    title: 'Sarana Penyelesaian Perselisihan',
+    description: 'Sarana penyelesaian yang dipergunakan apabila terjadi perselisihan dalam kegiatan perdagangan berjangka:\n1. Musyawarah untuk Mufakat, adalah suatu bentuk penyelesaian yang dilandasi rasa kekeluargaan,\n2. Badan Arbitrase Perdagangan Berjangka Komoditi (BAKTI), atau\n3. Pengadilan Negeri Jakarta Selatan'
+  },
+  {
+    title: 'Program Sitna',
+    description: 'Dalam rangka transparansi transaksi kami menyediakan program Sitna kepada setiap nasabah untuk melihat transaksi tersebut pada Bursa Berjangka Jakarta (BBJ) dan Kliring Berjangka Indonesia.'
+  }
+];
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -19,74 +53,37 @@ export async function getStaticProps({ locale }: { locale: string }) {
 
 export default function FasilitasLayanan() {
   const { t } = useTranslation('fasilitas_layanan');
-  const services = t('services', { returnObjects: true }) as ServiceItem[];
-  const servicesList = Array.isArray(services) ? services : [];
 
   return (
-    <PageTemplate title={t('pageTitle')} description={t('pageDescription')}>
+    <PageTemplate title="Fasilitas & Layanan" description="Fasilitas dan layanan terbaik dari PT Bestprofit Futures">
       <div className="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-52 my-10">
-        <ProfilContainer title={t('pageTitle')}>
+        <ProfilContainer title="Fasilitas & Layanan">
           <div className="space-y-12">
-            <div className="max-w-4xl mx-auto text-center">
-              <p className="text-[#4C4C4C] leading-relaxed">
+            <div className="text-center">
+              <p className="text-[#000000] leading-relaxed max-w-4xl mx-auto text-left">
                 {t('pageDescription')}
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-              {servicesList.map((service: ServiceItem, index: number) => (
+            <div className="grid gap-8 md:grid-cols-2">
+              {services.map((service, index) => (
                 <div 
                   key={index}
-                  className="bg-white p-6 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-shadow"
+                  className="group bg-white p-6 rounded-xl border border-gray-100 hover:border-[#FF0000]/20 hover:shadow-md transition-all duration-300"
                 >
-                  {service.icon && (
-                    <div className="w-12 h-12 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-xl text-[#F2AC59] mb-4">
-                      {service.icon}
+                  <div className="flex items-start">
+                    <div className="h-8 w-1 bg-[#FF0000] rounded-full mr-3 mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h3 className="text-lg font-bold text-[#080031] group-hover:text-[#FF0000] transition-colors duration-300 mb-3">
+                        {service.title}
+                      </h3>
+                      <p className="text-[#000000]/90 text-justify whitespace-pre-line">
+                        {service.description}
+                      </p>
                     </div>
-                  )}
-                  <h3 className="text-lg font-semibold text-[#4C4C4C] mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-[#4C4C4C] text-opacity-80 text-sm">
-                    {service.description}
-                  </p>
+                  </div>
                 </div>
               ))}
-            </div>
-
-            <div className="bg-[#F9FAFB] p-8 rounded-lg mt-12">
-              <h2 className="text-xl font-semibold text-[#4C4C4C] mb-6 text-center">
-                {t('whyChooseUs', 'Mengapa Memilih Kami?')}
-              </h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-4">
-                  <div className="w-16 h-16 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-2xl text-[#F2AC59] mx-auto mb-3">
-                    🔒
-                  </div>
-                  <h3 className="font-medium text-[#4C4C4C] mb-2">{t('secure', 'Aman & Terpercaya')}</h3>
-                  <p className="text-sm text-[#4C4C4C] text-opacity-80">
-                    {t('secureDesc', 'Diawasi oleh BAPPEBTI')}
-                  </p>
-                </div>
-                <div className="text-center p-4">
-                  <div className="w-16 h-16 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-2xl text-[#F2AC59] mx-auto mb-3">
-                    ⚡
-                  </div>
-                  <h3 className="font-medium text-[#4C4C4C] mb-2">{t('fast', 'Proses Cepat')}</h3>
-                  <p className="text-sm text-[#4C4C4C] text-opacity-80">
-                    {t('fastDesc', 'Transaksi dan penarikan dana yang cepat')}
-                  </p>
-                </div>
-                <div className="text-center p-4">
-                  <div className="w-16 h-16 rounded-full bg-[#F2AC59] bg-opacity-10 flex items-center justify-center text-2xl text-[#F2AC59] mx-auto mb-3">
-                    👨‍💼
-                  </div>
-                  <h3 className="font-medium text-[#4C4C4C] mb-2">{t('support', 'Dukungan 24/7')}</h3>
-                  <p className="text-sm text-[#4C4C4C] text-opacity-80">
-                    {t('supportDesc', 'Tim profesional siap membantu')}
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </ProfilContainer>
