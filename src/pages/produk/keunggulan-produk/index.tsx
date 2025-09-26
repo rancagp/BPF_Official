@@ -22,11 +22,16 @@ interface InvestmentTypes {
   floatingRate: InvestmentType;
 }
 
+interface ProductAdvantage {
+  title: string;
+  description: string;
+}
+
 interface ProductAdvantages {
   title: string;
   description: string;
   advantagesTitle: string;
-  advantages: Advantage[];
+  advantages: ProductAdvantage[];
   investmentTypes: InvestmentTypes;
 }
 
@@ -71,53 +76,19 @@ const InvestmentTypeCard = ({ title, points }: { title: string; points: string[]
 export default function KeunggulanProduk() {
   const { t } = useTranslation('produk');
   
-  // Define the content directly since we have the exact content
-  const content = {
-    description: "Dalam bertransaksi menggunakan Margin Trading (dana jaminan), dengan demikian para investor dapat melakukan transaksi yang besar dengan modal yang relatif kecil. Dengan dana minimal sebesar 10% dari nilai total transaksi, tidak perlu dana 100%.",
-    advantages: [
-      {
-        title: "Efisiensi Modal",
-        description: "Dalam bertransaksi menggunakan Margin Trading (dana jaminan), dengan demikian para investor dapat melakukan transaksi yang besar dengan modal yang relatif kecil. Dengan dana minimal sebesar 10% dari nilai total transaksi, tidak perlu dana 100%."
-      },
-      {
-        title: "Fleksibilitas Transaksi",
-        description: "Transaksi dua arah yang memungkinkan para investor untuk mendapatkan peluang pada saat pasar bergerak naik maupun turun."
-      },
-      {
-        title: "Pergerakan Harga Sangat Fluktuatif",
-        description: "Pergerakan harga harian yang besar dengan range berkisar 100 - 500 poin memberikan peluang keuntungan yang besar dengan kontrak size US $ 5 / point dan hanya dibebankan biaya transaksi / Fee sebesar 3 (Tiga) poin ditambah PPN 11%."
-      },
-      {
-        title: "Likuiditas Tinggi",
-        description: "Produk ini memiliki tingkat likuiditas yang sangat tinggi, dengan begitu para investor dapat melakukan transaksi beli dan jual kapan saja selama market berjalan, tanpa harus ada antrian di harga pasar."
-      }
-    ],
-    investmentTypes: {
-      title: "Jenis Investasi",
-      description: "Ada dua jenis investasi yaitu:",
-      fixedRate: {
-        title: "Fixed Rate / Kurs Tetap",
-        points: [
-          "US $ 1 = Rp. 10.000 (kurs tetap)",
-          "Terhindar dari resiko kerugian akibat fluktuasi USD/Rp"
-        ]
-      },
-      floatingRate: {
-        title: "Floating Rate / Kurs Berjalan",
-        points: [
-          "US $ 1 = US $ 1 (sesuai kurs USD terhadap Rupiah)",
-          "Tidak dikenakan fee dari pembukaan dan penarikan dana USD baik sebagian/seluruh"
-        ]
-      }
-    }
-  };
-
+  // Get translations from the productAdvantages namespace
+  const content = t('productAdvantages', { returnObjects: true }) as ProductAdvantages;
+  
+  // Get the advantages array with fallback to empty array
+  const advantages: ProductAdvantage[] = Array.isArray(content.advantages) ? content.advantages : [];
+  
+  // Get the advantage icons
   const advantageIcons = [FaDollarSign, FaExchangeAlt, FaChartLine, FaCheckCircle];
 
   return (
-    <PageTemplate title="Keunggulan Produk">
+    <PageTemplate title={t('pageTitle')}>
       <div className="max-w-4xl mx-auto px-4 sm:px-4 my-6">
-        <ProfilContainer title="Keunggulan Produk">
+        <ProfilContainer title={content.title}>
           <div className="space-y-6">
             <div className="bg-[#080031]/5 rounded-lg p-4 border border-[#080031]/10">
               <p className="text-[#080031] text-sm leading-relaxed text-justify">
@@ -127,10 +98,10 @@ export default function KeunggulanProduk() {
 
             <div className="space-y-4">
               <h2 className="text-lg font-bold text-[#080031] border-b-2 border-[#FF0000] pb-1.5 inline-block">
-                Keunggulan Kami
+                {content.advantagesTitle}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {content.advantages.map((advantage, index) => (
+                {advantages.map((advantage, index) => (
                   <AdvantageCard
                     key={index}
                     title={advantage.title}
